@@ -1,64 +1,69 @@
-<!doctype html>
-<!-- The Time Machine GitHub pages theme was designed and developed by Jon Rohan, on Feb 7, 2012. -->
-<!-- Follow him for fun. http://twitter.com/jonrohan. Tail his code on https://github.com/jonrohan -->
-<html>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-  <link rel="stylesheet" href="stylesheets/stylesheet.css" media="screen">
-  <link rel="stylesheet" href="stylesheets/github-dark.css">
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="javascripts/script.js"></script>
-
-  <title>Shianqi.GitHub.io</title>
-  <meta name="description" content="史安琪的个人网站">
-
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>shianqi'website</title>
+  <meta name="description" content="">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="css/website.css">
+  <link rel="stylesheet" href="view3/default.css">
 </head>
+<body ng-app="myApp" id="mainPage">
+  <div style="height: 67px"></div>
+  <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+  <![endif]-->
+  <div id="container">
+    <div ng-view></div>
+  </div>
 
-<body>
+  <audio controls="controls" autoplay="autoplay" loop="loop">
+    <source src="img/1.mp3" type="audio/mp3" />
+  </audio>
+  <div class="tail">
+    <p>Copyright © 2015 Archie Shi.</p>
+    <p>website-version:<span app-version></span></p>
+  </div>
 
-  <div class="wrapper">
-    <header>
-      <h1 class="title">Shianqi.GitHub.io</h1>
-    </header>
-    <div id="container">
-      <p class="tagline">史安琪的个人网站</p>
-      <div id="main" role="main">
-        <div class="download-bar">
-        <div class="inner">
-          <a href="https://github.com/shianqi" class="code">View Shianqi.GitHub.io on GitHub</a>
-        </div>
-        <span class="blc"></span><span class="trc"></span>
-        </div>
-        <article class="markdown-body">
-          <h1>
-<a id="shianqigithubio" class="anchor" href="#shianqigithubio" aria-hidden="true"><span class="octicon octicon-link"></span></a>shianqi.github.io</h1>
-
-<p>史安琪的个人网站
-Power By AngularJs &amp; GitHub</p>
-        </article>
+  <div ng-controller="title">
+    <div class="navigation">
+      <img src="img/catSmall.jpg" height="60px" id="icon_img" style="float: left;" />
+      <div ng-click="changeColor_1()" class="navigation-button-{{onOffState1||'On'}}">
+        <a href="">Home</a>
       </div>
+      <div  ng-click="changeColor_2()" class="navigation-button-{{onOffState2||'Off'}}">
+        <a href="">About Me</a>
+      </div>
+      <div ng-click="changeColor_3()" class="navigation-button-{{onOffState3||'Off'}}">
+        <a href="">Else</a>
+      </div>
+      <!-- <div style="height: 1px; width: 100%; margin-top: 3px; background: #aa6666"></div> -->
     </div>
-    <footer>
-      <div class="owner">
-
-      <p><a href="https://github.com/shianqi" class="avatar"><img src="https://avatars0.githubusercontent.com/u/13609675?v=3&amp;s=60" width="48" height="48"></a>View <a href="https://github.com/shianqi">shianqi</a> on <a href="https://www.github.com">GitHub</a></p>
-
-      </div>
-      <div class="creds">
-        <small>This page generated using <a href="https://pages.github.com/">GitHub Pages</a><br>theme by <a href="https://twitter.com/jonrohan/">Jon Rohan</a></small>
-      </div>
-    </footer>
-  </div>
-  <div class="current-section">
-    <a href="#top">Scroll to top</a>
-    <a href="https://github.com/shianqi/shianqi.github.io/tarball/master" class="tar">tar</a><a href="https://github.com/shianqi/shianqi.github.io/zipball/master" class="zip">zip</a><a href="" class="code">source code</a>
-    <p class="name"></p>
   </div>
 
-  
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script src="view1/view1.js"></script>
+  <script src="view2/view2.js"></script>
+  <script src="view3/view3.js"></script>
+  <script src="view1/Chart.js"></script>
+  <script src="components/version/version.js"></script>
+  <script src="components/version/version-directive.js"></script>
+  <script src="components/version/interpolate-filter.js"></script>
+  <script src="app.js"></script>
+  <script src="view3/functions.js"></script>
 </body>
-</html>
+</html>   
