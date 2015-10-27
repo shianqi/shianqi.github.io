@@ -1,2 +1,3 @@
 # shianqi.github.io
-史安琪的个人网站
+Shianqi's Personal Website
+power by AngularJs
