@@ -9,6 +9,15 @@ angular.module('myApp.view2', ['ngRoute'])
     });
   }])
 
-  .controller('View2Ctrl', [function($scope) {
+  .controller('View2Ctrl', ["$scope","$http",function($scope,$http) {
+      $.ajax({
+        type: "GET",
+        url: "http://115.28.72.26/visitNumber.php",
+        success:function(msg){
+           $scope.visitNumber=1;
+        },
+        error:function(){
+        }
+      });
 
   }]);
