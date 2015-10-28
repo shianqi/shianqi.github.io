@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ccb8b5a4-6a69-4902-964f-5d36d818e896" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CNAME" afterPath="$PROJECT_DIR$/CNAME" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view2/view2.js" afterPath="$PROJECT_DIR$/view2/view2.js" />
-    </list>
+    <list default="true" id="ccb8b5a4-6a69-4902-964f-5d36d818e896" name="Default" comment="" />
     <ignored path="shianqi.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -417,15 +414,15 @@
       <created>1446039905356</created>
       <option name="number" value="Default" />
       <updated>1446039905356</updated>
-      <workItem from="1446039906790" duration="4517000" />
+      <workItem from="1446039906790" duration="4678000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4517000" />
+    <option name="totallyTimeSpent" value="4678000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
