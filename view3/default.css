@@ -144,7 +144,7 @@ body {
     color: #ffffff
 }
 
-#inputSubmit{
+.inputSubmit{
     height: 32px;
     width: 50px;
     font-size: 15px;
@@ -152,6 +152,17 @@ body {
     border: none;
     color: #ffffff;
     background: #C9394A;
+    border-radius: 6px;
+}
+
+.inputSubmit:hover{
+    height: 32px;
+    width: 50px;
+    font-size: 15px;
+    padding: 0px;
+    border: none;
+    color: #ffffff;
+    background: #E9CDCF;
     border-radius: 6px;
 }
 

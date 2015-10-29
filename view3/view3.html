@@ -1,6 +1,6 @@
 <div>
   <input id="inputText" type="text" ng-model="hh" ng-keypress="enter($event)"/>
-  <input type="button" id="inputSubmit" ng-click="show()" value="Run"/>
+  <input type="button" class="inputSubmit" id="inputSubmit" ng-click="show()" value="Run"/>
 </div>
 
 <div id="content" ng-switch on="showSecret">
@@ -89,5 +89,10 @@
   <br/>
   <input id="fail" type="button" ng-click="isFail()" value="No"/>
   <canvas id="garden"></canvas>
+</div>
+<div>
+  <h2>留言板</h2>
+  <textarea id="LeaveMessage" ></textarea><br>
+  <input type="button" class="inputSubmit" id="messageSubmit" value="留言">
 </div>
 
