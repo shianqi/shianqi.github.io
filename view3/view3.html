@@ -92,7 +92,7 @@
 </div>
 <div>
   <h2>留言板</h2>
-  <textarea id="LeaveMessage" ></textarea><br>
-  <input type="button" class="inputSubmit" id="messageSubmit" value="留言">
+  <textarea id="LeaveMessage" ng-model="message"></textarea><br>
+  <input type="button" class="inputSubmit" id="messageSubmit" value="留言" ng-click="submitLeaveMessage()">
 </div>
 
