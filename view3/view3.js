@@ -19,10 +19,9 @@ angular.module("myApp.view3", ["ngRoute"]).config(["$routeProvider", function($s
         } else {}
         $scope.enter = function(c) {
             if (c.keyCode == 13) {
-                a.show();
+                $scope.show();
             }
         };
-        var myData = { leaveMessage : "hello", name : "shianqi" };
         $scope.submitLeaveMessage=function(){
             $http.get("http://115.28.72.26/leaveMessage.php?leaveMessage="+$scope.message+" & name=shianqi")
                 .success(function(){
@@ -35,14 +34,14 @@ angular.module("myApp.view3", ["ngRoute"]).config(["$routeProvider", function($s
         $scope.show = function() {
             $("#inputText").css("display", "none");
             $("#inputSubmit").css("display", "none");
-            if (a.hh == kee1 + "e " + kex + " sure?") {
+            if ($scope.hh == kee1 + "e " + kex + " sure?") {
                 setTimeout("$('#success').css('display','block');", 88000);
                 setTimeout("$('#fail').css('display','block');", 88000);
-                a.showSecret = "true";
+                $scope.showSecret = "true";
                 setTimeout("$('#code').typewriter()", 0);
                 setTimeout("$('#code').css('display','block')", 0)
             } else {
-                a.showSecret = "true2";
+                $scope.showSecret = "true2";
                 setTimeout("$('#code2').typewriter()", 0);
                 setTimeout("$('#code2').css('display','block')", 0)
             }
@@ -98,5 +97,5 @@ angular.module("myApp.view3", ["ngRoute"]).config(["$routeProvider", function($s
         $scope.killer23 = unescape("//%20%u6211%u8BA4%u4E3A%u8FD9%u662F%u4E00%u4E2A%u91CD%u8981%u7684%u51B3%u5B9A%u3002");
         $scope.killer24 = unescape("//%20%u4F60%u53EF%u4EE5%u5728%u4EFB%u4F55%u65F6%u5019%u51B3%u5B9A%u3002");
         $scope.killer25 = unescape("%u6211%u975E%u5E38%u9AD8%u5174%u80FD%u591F%u9047%u5230%u4F60");
-        $scope.killer26 = unescape("%u60F3%u4F60")
+        $scope.killer26 = unescape("%u60F3%u4F60");
     }]);
