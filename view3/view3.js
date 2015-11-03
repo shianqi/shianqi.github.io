@@ -23,7 +23,7 @@ angular.module("myApp.view3", ["ngRoute"]).config(["$routeProvider", function($s
             }
         };
         $scope.submitLeaveMessage=function(){
-            $http.get("http://115.28.72.26/leaveMessage.php?leaveMessage="+$scope.message+" & name=shianqi")
+            $http.get("http://115.28.72.26/my website/leaveMessage.php?leaveMessage="+$scope.message+" & name=shianqi")
                 .success(function(){
                     alert("留言发送成功");
                 })
@@ -53,7 +53,7 @@ angular.module("myApp.view3", ["ngRoute"]).config(["$routeProvider", function($s
             var data = "flag=1";
             $.ajax({
                 type: "POST",
-                url: "http://www.hupeng.wang:8080/shianqi/index.php",
+                url: "http://115.28.72.26/my website/heart.php",
                 data: data,
                 success: function(msg) {
                     location.reload();
@@ -64,7 +64,7 @@ angular.module("myApp.view3", ["ngRoute"]).config(["$routeProvider", function($s
             var data = "flag=0";
             $.ajax({
                 type: "POST",
-                url: "http://www.hupeng.wang:8080/shianqi/index.php",
+                url: "http://115.28.72.26/my website/heart.php",
                 data: data,
                 success: function(msg) {
                     alert("没关系");

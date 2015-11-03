@@ -43,7 +43,7 @@ angular.module('myApp', ['ngRoute', 'myApp.view1', 'myApp.view2', 'myApp.view3',
 
       $.ajax({
         type: "POST",
-        url: "http://115.28.72.26/addVisit.php"
+        url: "http://115.28.72.26/my website/addVisit.php"
       })
     });
 
