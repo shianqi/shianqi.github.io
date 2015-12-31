@@ -19,7 +19,8 @@ angular.module("myApp.view3", ["ngRoute"]).config(["$routeProvider", function($s
         } else {}
         $scope.enter = function(c) {
             if (c.keyCode == 13) {
-                $scope.show();
+                alert("错过便不再等待。。");
+                //$scope.show();
             }
         };
         $scope.submitLeaveMessage=function(){
