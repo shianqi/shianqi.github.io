@@ -26,7 +26,7 @@
         
     
     
-        <meta property="og:image" content="http://cdn.shianqi.com/20171110000513_Kdn51P_cat_sm.jpeg"/>
+        <meta property="og:image" content="http://cdn.shianqi.com/20171110003439_iub77X_cat_sm.png"/>
     
     
     
@@ -75,7 +75,7 @@
         
             <div class="sidebar-profile">
                 <a href="../../../../#about">
-                    <img class="sidebar-profile-picture" src="http://cdn.shianqi.com/20171110000513_Kdn51P_cat_sm.jpeg" alt="作者的图片"/>
+                    <img class="sidebar-profile-picture" src="http://cdn.shianqi.com/20171110003439_iub77X_cat_sm.png" alt="作者的图片"/>
                 </a>
                 <h4 class="sidebar-profile-name">Archie Shi</h4>
                 
@@ -1205,17 +1205,17 @@
 <p>现在我们在这个分支做一些修改，然后生成两个提交(commit).</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vi file.txt</span><br><span class="line">$ git commit</span><br><span class="line">$ vi otherfile.txt</span><br><span class="line">$ git commit</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>但是与此同时，有些人也在”origin”分支上做了一些修改并且做了提交了. 这就意味着”origin”和”mywork”这两个分支各自”前进”了，它们之间”分叉”了。</p>
-<p><img src="http://cdn.shianqi.com/20171109231926_CxI2vG_rebase1.jpeg" alt="rebase1"></p>
+<p><img src="http://cdn.shianqi.com/20171110002636_TWXHxj_rebase1.png" alt="rebase1"></p>
 <p>在这里，你可以用”pull”命令把”origin”分支上的修改拉下来并且和你的修改合并； 结果看起来就像一个新的”合并的提交”(merge commit):</p>
-<p><img src="http://cdn.shianqi.com/20171109232309_4ve5SQ_rebase2.jpeg" alt="rebase2"></p>
+<p><img src="http://cdn.shianqi.com/20171110002707_fUyhWT_rebase2.png" alt="rebase2"></p>
 <p>但是，如果你想让”mywork”分支历史看起来像没有经过任何合并一样，你也许可以用 git rebase:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout mywork</span><br><span class="line">$ git rebase origin</span><br></pre></td></tr></table></figure>
 <p>这些命令会把你的”mywork”分支里的每个提交(commit)取消掉，并且把它们临时 保存为补丁(patch)(这些补丁放到”.git/rebase”目录中),然后把”mywork”分支更新 到最新的”origin”分支，最后把保存的这些补丁应用到”mywork”分支上。</p>
-<p><img src="http://cdn.shianqi.com/20171109232343_P14vt0_rebase3.jpeg" alt="rebase3"></p>
+<p><img src="http://cdn.shianqi.com/20171110002727_8ZsAia_rebase3.png" alt="rebase3"></p>
 <p>当’mywork’分支更新之后，它会指向这些新创建的提交(commit),而那些老的提交会被丢弃。 如果运行垃圾收集命令(pruning garbage collection), 这些被丢弃的提交就会删除. （请查看 git gc)</p>
-<p><img src="http://cdn.shianqi.com/20171109232413_iFi5j0_rebase4.jpeg" alt="rebase4"></p>
+<p><img src="http://cdn.shianqi.com/20171110002749_SSQxfW_rebase4.png" alt="rebase4"></p>
 <p>现在我们可以看一下用合并(merge)和用rebase所产生的历史的区别：</p>
-<p><img src="http://cdn.shianqi.com/20171109232450_GsWeCi_rebase5.jpeg" alt="rebase5"></p>
+<p><img src="http://cdn.shianqi.com/20171110002813_aCygyZ_rebase5.png" alt="rebase5"></p>
 <p>在rebase的过程中，也许会出现冲突(conflict). 在这种情况，Git会停止rebase并会让你去解决 冲突；在解决完冲突后，用”git-add”命令去更新这些内容的索引(index), 然后，你无需执行 git-commit,只要执行:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase --continue</span><br></pre></td></tr></table></figure>
 <p>这样git会继续应用(apply)余下的补丁。</p>
@@ -1585,7 +1585,7 @@
             <i class="fa fa-remove"></i>
         </div>
         
-            <img id="about-card-picture" src="http://cdn.shianqi.com/20171110000513_Kdn51P_cat_sm.jpeg" alt="作者的图片"/>
+            <img id="about-card-picture" src="http://cdn.shianqi.com/20171110003439_iub77X_cat_sm.png" alt="作者的图片"/>
         
             <h4 id="about-card-name">Archie Shi</h4>
         
@@ -1827,7 +1827,7 @@
 </div>
 
         
-<div id="cover" style="background-image:url('http://cdn.shianqi.com/20171110000550_JmkbOP_cover.jpeg');"></div>
+<div id="cover" style="background-image:url('http://cdn.shianqi.com/20171110003641_r1OAaa_cover.jpeg');"></div>
         <!--SCRIPTS-->
 <script src="../../../../assets/js/jquery.js"></script>
 <script src="../../../../assets/js/jquery.fancybox.js"></script>
