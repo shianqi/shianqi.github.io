@@ -287,6 +287,7 @@
 <h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>这次比赛最大的收获其实不是技术上的，如果单从技术上说也不比他们差很多，前端和后端本来也没什么好比的。但是这次真的感觉到了环境对人的重要性，还有一个就是英语真的该好好加强一下了，简直太糟糕了。</p>
 <h1 id="作品"><a href="#作品" class="headerlink" title="作品"></a>作品</h1><h2 id="Emotion-Journal"><a href="#Emotion-Journal" class="headerlink" title="Emotion-Journal"></a>Emotion-Journal</h2><p>憋了一肚子负面情绪却没处释放？还在到处寻找管理、控制情绪的工具？快来emotion-journal吧</p>
 <p><img src="logo.gif" alt="Emotion-Journal"></p>
+<img src="/2017/05/07/Activity/HACKxSJTU/logo.gif" title="hello">
 <h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p><a href="https://github.com/shianqi/Hackx-Emotion-Journal" target="_blank" rel="external">Hackx-Emotion-Journal</a></p>
 <h2 id="创意来源"><a href="#创意来源" class="headerlink" title="创意来源"></a>创意来源</h2><p>情绪是一把双刃剑，良好的情绪控制有助于我们健康的生活。很多时候，我们因为外界各种各样的事情产生许许多多的情绪。“病由心生”由此而来。人不可能永远有好心情，生活中既然有挫折、有失败，就会有消极的情绪。所以我们希望推出一款简单，及时，便捷的产品帮助你放松心情以及随时随地监测自己的情绪变化。</p>
 <h2 id="详情描述"><a href="#详情描述" class="headerlink" title="详情描述"></a>详情描述</h2><p>得益于人工智能的发展，我们使用微软认知服务和IBM Watson文本情绪分析，多方面感知用户当前的情绪状态。并在屏幕上实时反馈。由此我们实现了监控单天和单月的情绪控制情况。用户有2种可以选择的模式，下面将分别介绍</p>
@@ -615,7 +616,7 @@
                 <div class="postShorten-content" itemprop="articleBody">
                     <p>首先本文书写遵守以下约定：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">    // 私有属性</span><br><span class="line">    var val = 1;        // 私有基本属性</span><br><span class="line">    var arr = [1];      // 私有引用属性</span><br><span class="line">    function fun()&#123;&#125;    // 私有函数（引用属性）</span><br><span class="line"> </span><br><span class="line">    // 实例属性</span><br><span class="line">    this.val = 1;               // 实例基本属性</span><br><span class="line">    this.arr = [1];             // 实例引用属性</span><br><span class="line">    this.fun = function()&#123;&#125;;    // 实例函数（引用属性）</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 原型属性</span><br><span class="line">A.prototype.val = 1;              // 原型基本属性</span><br><span class="line">A.prototype.arr = [1];            // 原型引用属性</span><br><span class="line">A.prototype.fun = function()&#123;&#125;;   // 原型函数（引用属性）</span><br><span class="line"></span><br><span class="line">A.f = function()&#123;</span><br><span class="line">    //....                        // 类方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>其中：A 为被继承的父类， B 为继承 A 的子类。</p>
-<h2 id="六种继承简单介绍"><a href="#六种继承简单介绍" class="headerlink" title="六种继承简单介绍"></a>六种继承简单介绍</h2><h3 id="简单原型继承"><a href="#简单原型继承" class="headerlink" title="简单原型继承"></a>简单原型继承</h3><p><img src="JavaScript六种继承方式/1.png" alt="简单原型继承"><br>这是最简单的继承方式，就一行代码可以完成</p>
+<h2 id="六种继承简单介绍"><a href="#六种继承简单介绍" class="headerlink" title="六种继承简单介绍"></a>六种继承简单介绍</h2><h3 id="简单原型继承"><a href="#简单原型继承" class="headerlink" title="简单原型继承"></a>简单原型继承</h3><p><img src="http://cdn.shianqi.com/20171109232738_ks7cDb_1.jpeg" alt="简单原型继承"><br>这是最简单的继承方式，就一行代码可以完成</p>
 <ul>
 <li><p>代码实现：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">    this.arr = [1];</span><br><span class="line">&#125;</span><br><span class="line">function B()&#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line">B.prototype = new A();    // 核心</span><br><span class="line"> </span><br><span class="line">var b1 = new B();</span><br><span class="line">var b2 = new B();</span><br><span class="line"></span><br><span class="line">sub1.arr.push(2);</span><br><span class="line">alert(sub1.arr);    // 1, 2</span><br><span class="line">alert(sub2.arr);    // 1, 2</span><br></pre></td></tr></table></figure>
@@ -632,7 +633,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="借用构造函数"><a href="#借用构造函数" class="headerlink" title="借用构造函数"></a>借用构造函数</h3><p><img src="JavaScript六种继承方式/2.png" alt="借用构造函数"></p>
+<h3 id="借用构造函数"><a href="#借用构造函数" class="headerlink" title="借用构造函数"></a>借用构造函数</h3><p><img src="http://cdn.shianqi.com/20171109232803_9l0VT8_2.jpeg" alt="借用构造函数"></p>
 <ul>
 <li><p>代码实现</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function A(val)&#123;</span><br><span class="line">    this.arr = [1];</span><br><span class="line"> </span><br><span class="line">    this.fun = function()&#123;</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function B(val)&#123;</span><br><span class="line">    Super.call(this, val);   // 核心</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">var b1 = new B(1);</span><br><span class="line">var b2 = new B(2);</span><br><span class="line">b1.arr.push(2);</span><br><span class="line"></span><br><span class="line">alert(sub1.arr);    // 1, 2</span><br><span class="line">alert(sub2.arr);    // 1</span><br><span class="line"></span><br><span class="line">alert(sub1.fun === sub2.fun);   // false</span><br></pre></td></tr></table></figure>
@@ -649,7 +650,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="组合继承（最常用）"><a href="#组合继承（最常用）" class="headerlink" title="组合继承（最常用）"></a>组合继承（最常用）</h3><p><img src="JavaScript六种继承方式/3.png" alt="组合继承"></p>
+<h3 id="组合继承（最常用）"><a href="#组合继承（最常用）" class="headerlink" title="组合继承（最常用）"></a>组合继承（最常用）</h3><p><img src="http://cdn.shianqi.com/20171109232830_ki7mAk_3.jpeg" alt="组合继承"></p>
 <ul>
 <li><p>代码实现</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function A(val)&#123;</span><br><span class="line">    // 只在此处声明基本属性和引用属性</span><br><span class="line">    this.val = val;</span><br><span class="line">&#125;</span><br><span class="line">//  在此处声明函数</span><br><span class="line">A.prototype.fun1 = function()&#123;&#125;;</span><br><span class="line">A.prototype.fun2 = function()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">function B(val)&#123;</span><br><span class="line">    A.call(this, val);   // 核心</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line">B.prototype = new A(1);    // 核心，此处的 1 被覆盖</span><br><span class="line"> </span><br><span class="line">var b1 = new B(2);</span><br><span class="line">var b2 = new B(3);</span><br><span class="line">alert(b1.fun === b2.fun);   // true</span><br><span class="line">b1.val                      //2</span><br><span class="line">b2.val                      //3</span><br></pre></td></tr></table></figure>
@@ -666,7 +667,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="寄生组合继承-（最佳方式）"><a href="#寄生组合继承-（最佳方式）" class="headerlink" title="寄生组合继承 （最佳方式）"></a>寄生组合继承 （最佳方式）</h3><p><img src="JavaScript六种继承方式/4.png" alt="寄生组合继承"></p>
+<h3 id="寄生组合继承-（最佳方式）"><a href="#寄生组合继承-（最佳方式）" class="headerlink" title="寄生组合继承 （最佳方式）"></a>寄生组合继承 （最佳方式）</h3><p><img src="http://cdn.shianqi.com/20171109232850_pAYSyj_4.jpeg" alt="寄生组合继承"></p>
 <ul>
 <li><p>代码实现</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 返回一个继承自原型对象p的属性的新对象。</span><br><span class="line"> * 本函数出自 《JavaScript权威指南 第6版》 P122，例6-1</span><br><span class="line"> */</span><br><span class="line">function inherit(p)&#123;</span><br><span class="line">    if(p==null) throw TypeError();</span><br><span class="line">    if(Object.create)</span><br><span class="line">        return Object.create(p);</span><br><span class="line">    var t = typeof p;</span><br><span class="line">    if(t !== &apos;object&apos; &amp;&amp; t!== &apos;function&apos;) throw TypeError();</span><br><span class="line">    var f = function()&#123;&#125;;</span><br><span class="line">    f.prototype = p;</span><br><span class="line">    return new f();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function A()&#123;</span><br><span class="line">    // 只在此处声明基本属性和引用属性</span><br><span class="line">    this.val = 1;</span><br><span class="line">&#125;</span><br><span class="line">//  在此处声明函数</span><br><span class="line">A.prototype.fun1 = function()&#123;&#125;;</span><br><span class="line">A.prototype.fun2 = function()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">function B()&#123;</span><br><span class="line">    A.call(this);                       // 核心</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line">var proto = inherit(Super.prototype);   // 核心</span><br><span class="line">proto.constructor = Sub;                // 核心</span><br><span class="line">Sub.prototype = proto;                  // 核心，完善原型链</span><br><span class="line"> </span><br><span class="line">var b = new B();</span><br><span class="line">alert(b.val);</span><br></pre></td></tr></table></figure>
@@ -682,7 +683,7 @@
 </ul>
 </li>
 </ul>
-<h3 id="原型式"><a href="#原型式" class="headerlink" title="原型式"></a>原型式</h3><p><img src="JavaScript六种继承方式/5.png" alt="原型式"></p>
+<h3 id="原型式"><a href="#原型式" class="headerlink" title="原型式"></a>原型式</h3><p><img src="http://cdn.shianqi.com/20171109232912_Oai1tj_5.jpeg" alt="原型式"></p>
 <ul>
 <li><p>代码实现</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 返回一个继承自原型对象p的属性的新对象。</span><br><span class="line"> * 本函数出自 《JavaScript权威指南 第6版》 P122，例6-1</span><br><span class="line"> */</span><br><span class="line">function inherit(p)&#123;</span><br><span class="line">    if(p==null) throw TypeError();</span><br><span class="line">    if(Object.create)</span><br><span class="line">        return Object.create(p);</span><br><span class="line">    var t = typeof p;</span><br><span class="line">    if(t !== &apos;object&apos; &amp;&amp; t!== &apos;function&apos;) throw TypeError();</span><br><span class="line">    var f = function()&#123;&#125;;</span><br><span class="line">    f.prototype = p;</span><br><span class="line">    return new f();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function A()&#123;</span><br><span class="line">    this.val = 1;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 拿到父类对象</span><br><span class="line">var a = new A();</span><br><span class="line">var b = inherit(a);   // 核心</span><br><span class="line">// 增强</span><br><span class="line">b.attr1 = 1;</span><br><span class="line">b.attr2 = 2;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">alert(b.val);     // 1</span><br></pre></td></tr></table></figure>
@@ -703,7 +704,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 返回一个继承自原型对象p的属性的新对象。</span><br><span class="line"> * 本函数出自 《JavaScript权威指南 第6版》 P122，例6-1</span><br><span class="line"> */</span><br><span class="line">function inherit(p)&#123;</span><br><span class="line">    if(p==null) throw TypeError();</span><br><span class="line">    if(Object.create)</span><br><span class="line">        return Object.create(p);</span><br><span class="line">    var t = typeof p;</span><br><span class="line">    if(t !== &apos;object&apos; &amp;&amp; t!== &apos;function&apos;) throw TypeError();</span><br><span class="line">    var f = function()&#123;&#125;;</span><br><span class="line">    f.prototype = p;</span><br><span class="line">    return new f();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function A()&#123;</span><br><span class="line">    this.val = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function getSubObject(obj)&#123;</span><br><span class="line">    // 创建新对象</span><br><span class="line">    var clone = inherit(obj); // 核心</span><br><span class="line">    // 增强</span><br><span class="line">    clone.attr1 = 1;</span><br><span class="line">    clone.attr2 = 2;</span><br><span class="line"> </span><br><span class="line">    return clone;</span><br><span class="line">&#125;</span><br><span class="line">var b = getSubObject(new A());</span><br><span class="line">alert(b.val);     // 1</span><br><span class="line">alert(sub.attr1);   // 1</span><br></pre></td></tr></table></figure>
 <p>给原型式继承穿了个马甲而已<br>优缺点同上</p>
-<h2 id="六种继承之间的关系"><a href="#六种继承之间的关系" class="headerlink" title="六种继承之间的关系"></a>六种继承之间的关系</h2><p><img src="JavaScript六种继承方式/6.png" alt="关系"></p>
+<h2 id="六种继承之间的关系"><a href="#六种继承之间的关系" class="headerlink" title="六种继承之间的关系"></a>六种继承之间的关系</h2><p><img src="http://cdn.shianqi.com/20171109232942_tyG2yH_6.jpeg" alt="关系"></p>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.cnblogs.com/ayqy/p/4471638.html" target="_blank" rel="external">重新理解JS的6种继承方式</a></p>
 
                     
@@ -915,55 +916,6 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="../../../../2017/04/24/NodeJs/fs/">
-                            NodeJs fs 模块基本使用方法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-24T13:30:44+08:00">
-	
-		    4月 24, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="fs-文件系统"><a href="#fs-文件系统" class="headerlink" title="fs(文件系统)"></a>fs(文件系统)</h2><p>通过 require(‘fs’) 使用该模块。 所有的方法都有异步和同步的形式。</p>
-<p> 异步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlink(&apos;/tmp/hello&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>同步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlinkSync(&apos;/tmp/hello&apos;);</span><br><span class="line">console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br></pre></td></tr></table></figure></p>
-<h2 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h2><p>readFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(file[, options], callback)</span><br><span class="line"></span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = null</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;r&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(&apos;/etc/passwd&apos;, (err, data) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>writeFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(file, data\[, options], callback)</span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">data &lt;String&gt; | &lt;Buffer&gt;</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = &apos;utf8&apos;</span><br><span class="line">mode &lt;Integer&gt; 默认 = 0o666</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;w&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(&apos;message.txt&apos;, &apos;Hello Node.js&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;It\&apos;s saved!&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>不建议在调用 fs.open() 、 fs.readFile() 或 fs.writeFile()<br> 之前使用 fs.access() 检查一个文件的可访问性。 如此处理会造成紊乱情况，<br> 因为其他进程可能在两个调用之间改变该文件的状态。 作为替代，<br> 用户代码应该直接打开/读取/写入文件，当文件无法访问时再处理错误。</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="../../../../2017/04/24/NodeJs/fs/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
                         <a class="link-unstyled" href="../../../../2017/04/24/NodeJs/node-canvas/">
                             Node-Canvas 将 Canvas 异步保存成图片
                         </a>
@@ -1005,6 +957,55 @@
                     
                         <p>
                             <a href="../../../../2017/04/24/NodeJs/node-canvas/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="../../../../2017/04/24/NodeJs/fs/">
+                            NodeJs fs 模块基本使用方法
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-04-24T13:30:44+08:00">
+	
+		    4月 24, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="fs-文件系统"><a href="#fs-文件系统" class="headerlink" title="fs(文件系统)"></a>fs(文件系统)</h2><p>通过 require(‘fs’) 使用该模块。 所有的方法都有异步和同步的形式。</p>
+<p> 异步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlink(&apos;/tmp/hello&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>同步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlinkSync(&apos;/tmp/hello&apos;);</span><br><span class="line">console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h2><p>readFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(file[, options], callback)</span><br><span class="line"></span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = null</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;r&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(&apos;/etc/passwd&apos;, (err, data) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>writeFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(file, data\[, options], callback)</span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">data &lt;String&gt; | &lt;Buffer&gt;</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = &apos;utf8&apos;</span><br><span class="line">mode &lt;Integer&gt; 默认 = 0o666</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;w&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(&apos;message.txt&apos;, &apos;Hello Node.js&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;It\&apos;s saved!&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>不建议在调用 fs.open() 、 fs.readFile() 或 fs.writeFile()<br> 之前使用 fs.access() 检查一个文件的可访问性。 如此处理会造成紊乱情况，<br> 因为其他进程可能在两个调用之间改变该文件的状态。 作为替代，<br> 用户代码应该直接打开/读取/写入文件，当文件无法访问时再处理错误。</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="../../../../2017/04/24/NodeJs/fs/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -1204,8 +1205,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1261,8 +1262,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">

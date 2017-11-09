@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="Tron Blog!">
 <meta property="og:description" content="深入了解闭包定义闭包的定义比较混乱，不同人和不同的书籍有不同的理解。严格来说，闭包需要满足三个条件：【1】访问所在作用域；【2】函数嵌套；【3】在所在作用域外被调用 经典定义： 函数对象可以通过作用域链相互关联起来，函数体内的变量都可以保存在函数作用域内，这种特性在计算机科学文献中称为“闭包”（函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量“包裹”了起来） 从技术角度讲: 所有 Java">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="https://shianqi.github.io/2017/09/24/JavaScript/Closure/Closure/img1.png">
-<meta property="og:updated_time" content="2017-09-24T05:54:30.000Z">
+<meta property="og:image" content="http://cdn.shianqi.com/20171109232540_onNWyR_img1.jpeg">
+<meta property="og:updated_time" content="2017-11-09T15:26:13.431Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深入了解闭包">
 <meta name="twitter:description" content="深入了解闭包定义闭包的定义比较混乱，不同人和不同的书籍有不同的理解。严格来说，闭包需要满足三个条件：【1】访问所在作用域；【2】函数嵌套；【3】在所在作用域外被调用 经典定义： 函数对象可以通过作用域链相互关联起来，函数体内的变量都可以保存在函数作用域内，这种特性在计算机科学文献中称为“闭包”（函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量“包裹”了起来） 从技术角度讲: 所有 Java">
-<meta name="twitter:image" content="https://shianqi.github.io/2017/09/24/JavaScript/Closure/Closure/img1.png">
+<meta name="twitter:image" content="http://cdn.shianqi.com/20171109232540_onNWyR_img1.jpeg">
     
     
         
@@ -230,7 +230,7 @@
 <p><strong>变量作用域</strong>： 是成语选代码中定义这个变量的区域。</p>
 <p><strong>作用域链</strong>： 每一段 <code>JavaScript</code> 代码都有一个与之关联的作用域链。这个作用域链是一个对象列表或者链表，这组对象定义了这段代码“作用域中”的变量。当 <code>JavaScript</code> 需要查找变量 <code>x</code> 值的时候(<code>变量解析</code>) 它会从链的第一个对象开始查找，如果这个对象有一个名为 <code>x</code> 的属性，则会直接使用这个属性的值，如果不存在，<code>JavaScript</code> 会继续查找链上的下一个对象。以此类推。如果作用域链上不存在 <code>x</code> ，就认为这段代码作用域链上不存在 <code>x</code>，并最终跑出一个引用错误(<code>ReferenceError</code>)的异常。</p>
 <p>理解了这些相关概念后，理解闭包就容易多了。我们通过一个例子来说明闭包的原理。</p>
-<p><img src="./Closure/img1.png" alt="img1"></p>
+<p><img src="http://cdn.shianqi.com/20171109232540_onNWyR_img1.jpeg" alt="img1"></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz();</span><br></pre></td></tr></table></figure>
 <p>【1】代码执行流进入全局执行环境，并对全局执行环境中的代码进行声明提升(<code>hoisting</code>)</p>
 <p>【2】执行流执行第9行代码 <code>var baz = foo();</code>，调用 <code>foo()</code> 函数，此时执行流进入 <code>foo()</code> 函数执行环境中，对该执行环境中的代码进行声明提升过程。此时执行环境栈中存在两个执行环境，<code>foo()</code> 函数为当前执行流所在执行环境</p>
@@ -270,7 +270,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../../23/Babel/babel/" data-tooltip="webpack配置文件ES6写法">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../../23/Babel/babel/" data-tooltip="深入了解 Babel">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -352,7 +352,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="../../../23/Babel/babel/" data-tooltip="webpack配置文件ES6写法">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="../../../23/Babel/babel/" data-tooltip="深入了解 Babel">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -529,8 +529,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -586,8 +586,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">

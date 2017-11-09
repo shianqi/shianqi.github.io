@@ -19,13 +19,13 @@
 <meta property="og:site_name" content="Tron Blog!">
 <meta property="og:description" content="效果图 分析其实这个效果不是线条本身就是这个形状的，而是下面这样的  之所以会出现这个效果，是因为 Canvas 在画下一帧的时候并没有将上一帧的画面全部擦除，而是用一个和背景一样的透明度非常低的颜色填充了绘图区域，导致上一帧的点比下一帧明度低，所以多次叠加就变成了上面的效果。 关键代码12ctx.fillStyle = &apos;rgba(0,0,0,.1)&apos;;ctx.fillRect(0,0,cw,c">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="https://shianqi.github.io/2017/06/30/Canvas/CanvasMeteor/CanvasMeteor/line.png">
-<meta property="og:image" content="https://shianqi.github.io/2017/06/30/Canvas/CanvasMeteor/CanvasMeteor/point.png">
-<meta property="og:updated_time" content="2017-06-30T08:33:02.000Z">
+<meta property="og:image" content="http://cdn.shianqi.com/20171109230922_22s1RC_line.jpeg">
+<meta property="og:image" content="http://cdn.shianqi.com/20171109230651_zKTzlq_point.jpeg">
+<meta property="og:updated_time" content="2017-11-09T15:10:05.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Canvas 线条长拖尾效果">
 <meta name="twitter:description" content="效果图 分析其实这个效果不是线条本身就是这个形状的，而是下面这样的  之所以会出现这个效果，是因为 Canvas 在画下一帧的时候并没有将上一帧的画面全部擦除，而是用一个和背景一样的透明度非常低的颜色填充了绘图区域，导致上一帧的点比下一帧明度低，所以多次叠加就变成了上面的效果。 关键代码12ctx.fillStyle = &apos;rgba(0,0,0,.1)&apos;;ctx.fillRect(0,0,cw,c">
-<meta name="twitter:image" content="https://shianqi.github.io/2017/06/30/Canvas/CanvasMeteor/CanvasMeteor/line.png">
+<meta name="twitter:image" content="http://cdn.shianqi.com/20171109230922_22s1RC_line.jpeg">
     
     
         
@@ -218,9 +218,9 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="./CanvasMeteor/line.png" alt="效果图"></p>
+            <h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://cdn.shianqi.com/20171109230922_22s1RC_line.jpeg" alt="效果图"></p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>其实这个效果不是线条本身就是这个形状的，而是下面这样的</p>
-<p><img src="./CanvasMeteor/point.png" alt="point"></p>
+<p><img src="http://cdn.shianqi.com/20171109230651_zKTzlq_point.jpeg" alt="point"></p>
 <p>之所以会出现这个效果，是因为 <code>Canvas</code> 在画下一帧的时候并没有将上一帧的画面全部擦除，而是用一个和背景一样的透明度非常低的颜色填充了绘图区域，导致上一帧的点比下一帧明度低，所以多次叠加就变成了上面的效果。</p>
 <h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.fillStyle = <span class="string">'rgba(0,0,0,.1)'</span>;</span><br><span class="line">ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,cw,ch);</span><br></pre></td></tr></table></figure>
 
@@ -509,8 +509,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -566,8 +566,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
