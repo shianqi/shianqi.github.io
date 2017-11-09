@@ -28,7 +28,9 @@ tags:
 ## Emotion-Journal
 憋了一肚子负面情绪却没处释放？还在到处寻找管理、控制情绪的工具？快来emotion-journal吧
 
-![Emotion-Journal](HACKxSJTU/logo.gif)
+![Emotion-Journal](logo.gif)
+
+{% asset_img logo.gif hello %}
 
 ## 项目地址
 [Hackx-Emotion-Journal](https://github.com/shianqi/Hackx-Emotion-Journal)
@@ -48,8 +50,8 @@ tags:
 
 ## 图片展示
 
-![人脸表情识别](HACKxSJTU/a.gif)
-![语音聊天](HACKxSJTU/b.gif)
+![人脸表情识别](a.gif)
+![语音聊天](b.gif)
 
 ## 使用的服务与API
 * 微软认知服务(情绪识别api)

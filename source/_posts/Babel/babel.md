@@ -1,5 +1,5 @@
 ---
-title: webpack配置文件ES6写法
+title: 深入了解 Babel
 date: 2017-9-23 11:31:44
 tags:
     - webpack
