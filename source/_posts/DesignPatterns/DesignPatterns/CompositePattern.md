@@ -12,7 +12,8 @@ tags:
 结构类模式
 
 ## 类图
-![Composite Pattern](./CompositePattern/CompositePattern.png)
+
+![Composite Pattern](http://cdn.shianqi.com/20171110094658_FhCGBw_CompositePattern.png)
 
 ## 代码实现
 ```java

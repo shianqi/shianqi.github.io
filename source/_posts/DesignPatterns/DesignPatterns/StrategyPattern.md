@@ -12,7 +12,8 @@ tags:
 行为类模式
 
 ## 类图
-![Strategy Pattern](./StrategyPattern/StrategyPattern.png)
+
+![Strategy Pattern](http://cdn.shianqi.com/20171110095551_TQZqze_StrategyPattern.png)
 
 ## 策略模式的结构
 * *封装类*：也叫上下文，对策略进行二次封装，目的是避免高层模块对策略的直接调用。

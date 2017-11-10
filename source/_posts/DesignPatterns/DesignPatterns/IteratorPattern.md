@@ -12,7 +12,8 @@ tags:
 行为类模式
 
 ## 类图
-![Iterator Pattern](./IteratorPattern/IteratorPattern.png)
+
+![Iterator Pattern](http://cdn.shianqi.com/20171110095209_Wfzb35_IteratorPattern.png)
 
 ## 迭代器模式的结构
 * 抽象容器：一般是一个接口，提供一个iterator()方法，例如java中的Collection接口，List接口，Set接口等。

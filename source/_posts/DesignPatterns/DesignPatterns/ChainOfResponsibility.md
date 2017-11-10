@@ -12,7 +12,8 @@ tags:
 行为类模式
 
 ## 类图
-![Chain Of Responsibility](./ChainOfResponsibility/ChainOfResponsibility.png)
+
+![Chain Of Responsibility](http://cdn.shianqi.com/20171110094543_6mgH7B_ChainOfResponsibility.png)
 
 ##　责任连模式的结构
 * 抽象处理类：抽象处理类中主要包含一个指向下一处理类的成员变量nextHandler和一个处理请求的方法handRequest，handRequest方法的主要主要思想是，如果满足处理的条件，则有本处理类来进行处理，否则由nextHandler来处理。

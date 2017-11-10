@@ -12,7 +12,8 @@ tags:
 行为类模式
 
 ## 类图
-![Mediator Pattern](./MediatorPattern/MediatorPattern.png)
+
+![Mediator Pattern](http://cdn.shianqi.com/20171110095234_nzLHoN_MediatorPattern.png)
 
 ## 为什么要使用中介者模式
 不使用中介者，各个类的关系就像 `p2p` 网络，是一种星形的的，采用了中介者模式后，就像变成了 `CS` 架构。任何一个类的变动，只会影响的类本身，以及中介者，这样就减小了系统的耦合

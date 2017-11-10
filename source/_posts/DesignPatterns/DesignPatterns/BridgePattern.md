@@ -12,7 +12,8 @@ tags:
 结构类模式
 
 ## 类图
-![Bridge Pattern](./BridgePattern/BridgePattern.png)
+
+![Bridge Pattern](http://cdn.shianqi.com/20171110094424_0uXiCI_BridgePattern.png)
 
 ## 角色
 * *Abstraction*——抽象化角色

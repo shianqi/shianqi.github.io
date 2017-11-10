@@ -13,7 +13,8 @@ tags:
 结构类模式
 
 ## 类图
-![Flyweight Pattern](./FlyweightPattern/FlyweightPattern.png)
+
+![Flyweight Pattern](http://cdn.shianqi.com/20171110095023_4aICt4_FlyweightPattern.png)
 
 ## 代码实现
 ```java

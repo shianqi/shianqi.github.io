@@ -12,7 +12,8 @@ tags:
 结构类模式
 
 ## 类图
-![Decorator Pattern](./DecoratorPattern/DecoratorPattern.png)
+
+![Decorator Pattern](http://cdn.shianqi.com/20171110094716_DOiB8o_DecoratorPattern.png)
 
 ## 代码实现
 ```java

@@ -12,7 +12,8 @@ tags:
 行为类模式
 
 ## 类图
-![Template Method Pattern](./TemplateMethodPattern/TemplateMethodPattern.png)
+
+![Template Method Pattern](http://cdn.shianqi.com/20171110095608_97pcsW_TemplateMethodPattern.png)
 
 模版方法是编程中一个经常用到的模式。
 

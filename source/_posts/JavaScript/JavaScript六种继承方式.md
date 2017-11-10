@@ -33,7 +33,9 @@ A.f = function(){
 ## 六种继承简单介绍
 
 ### 简单原型继承
-![简单原型继承](JavaScript六种继承方式/1.png)
+
+![简单原型继承](http://cdn.shianqi.com/20171110002954_nmIU7s_1.png)
+
 这是最简单的继承方式，就一行代码可以完成
 
 * 代码实现：
@@ -64,7 +66,8 @@ alert(sub2.arr);    // 1, 2
 
 
 ### 借用构造函数
-![借用构造函数](JavaScript六种继承方式/2.png)
+
+![借用构造函数](http://cdn.shianqi.com/20171110003033_yAUJ8v_2.png)
 
 * 代码实现
 ```
@@ -97,7 +100,8 @@ alert(sub1.fun === sub2.fun);   // false
     * 无法实现函数复用，每个子类实例都持有一个新的函数实例，影响性能
 
 ### 组合继承（最常用）
-![组合继承](JavaScript六种继承方式/3.png)
+
+![组合继承](http://cdn.shianqi.com/20171110003055_KaVrop_3.png)
 
 * 代码实现
 ```
@@ -129,7 +133,8 @@ b2.val                      //3
     * 父类构造函数被调用了两次，子类原型上的属性被覆盖，形成浪费。（图中 O 处）
 
 ### 寄生组合继承 （最佳方式）
-![寄生组合继承](JavaScript六种继承方式/4.png)
+
+![寄生组合继承](http://cdn.shianqi.com/20171110003152_fg8zRi_4.png)
 
 * 代码实现
 ```
@@ -174,7 +179,9 @@ alert(b.val);
     * 写法较麻烦
 
 ### 原型式
-![原型式](JavaScript六种继承方式/5.png)
+
+![原型式](http://cdn.shianqi.com/20171110003210_cZK86B_5.png)
+
 * 代码实现
 ```
 /**
@@ -255,7 +262,8 @@ alert(sub.attr1);   // 1
 
 
 ## 六种继承之间的关系
-![关系](JavaScript六种继承方式/6.png)
+
+![关系](http://cdn.shianqi.com/20171110003322_EszpgV_6.png)
 
 ## 参考文章
 [重新理解JS的6种继承方式](http://www.cnblogs.com/ayqy/p/4471638.html)

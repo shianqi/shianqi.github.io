@@ -12,7 +12,8 @@ tags:
 结构类模式
 
 ## 类图
-![Proxy Pattern](./ProxyPattern/ProxyPattern.png)
+
+![Proxy Pattern](http://cdn.shianqi.com/20171110095408_XvLQ6y_ProxyPattern.png)
 
 ## 角色
 

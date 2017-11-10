@@ -2,14 +2,15 @@
 title: Node-Canvas 将 Canvas 异步保存成图片
 date: 2017-04-24 13:30:44
 tags: 
-    - NodeJs
+    - Node.js
     - Canvas
 ---
 
-![黑白棋](node-canvas/hbq.png)
+![黑白棋](http://cdn.shianqi.com/20171110092850_LcT0rC_hbq.png)
+
 ## 背景
 在开发[Reversi_process](https://github.com/shianqi/Reversi_process)
-（ 用NodeJS 将黑白棋对局的每一步保存成本地图片的）的时候，遇到这样的需求：
+（ 用Node.js 将黑白棋对局的每一步保存成本地图片的）的时候，遇到这样的需求：
 先在 Node-Canvas 画出每一步的图片，然后保存下来。
 在绘制下一张图片的时候，要保证前一张图片被保存下来。不然保存的图片可能会乱。
 
@@ -17,14 +18,15 @@ tags:
 生成一个有60步的对局大约需要 12000ms 。于是有了下面这个解决办法。
 
 ## 环境
-* NodeJs: v7.9.0
+* Node.js: v7.9.0
 * node-canvas: 1.6.5
 
 阅读前需要对 Promise 和 async/await 有一定了解 
 
 ## 异步进行 Canvas 保存成图片
 首先，将异步 fs.writeFile 封装成一个 [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) 方法。
-```NodeJs
+
+```javascript
 /**
  * 将buffer数据保存到指定的文件夹下
  * @param name 新图片的名字
@@ -41,6 +43,7 @@ DrawChessboard.prototype.saveImg = function(name, dataBuffer){
 	});
 };
 ```
+
 之后，我们用一个数组来存每一步的 Promise 对象，在保存每一步 Canvas 图像的时候
 我们创建一个当前 Canvas 的副本。如果直接传入当前 Canvas 的时候，会导致保存后的图片乱掉。
 
@@ -63,7 +66,8 @@ canvas.toDataURL('image/png', function(err, png){ });
 
 
 代码如下（使用了 async/await 新特性，NodeJs v7.4.0 后正式加入）
-```NodeJs
+
+```javascript
 DrawChessboard.prototype.draw = async function (/*string*/chessString) {
     //---
     //省略若干步

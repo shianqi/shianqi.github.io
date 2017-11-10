@@ -12,7 +12,8 @@ tags:
 行为类模式
 
 ## 类图
-![Command Pattern](./CommandPattern/CommandPattern.png)
+
+![Command Pattern](http://cdn.shianqi.com/20171110094609_Ancuq0_CommandPattern.png)
 
 ## 命令模式的结构
 * *Command类*：是一个抽象类，类中对需要执行的命令进行声明，一般来说要对外公布一个execute方法用来执行命令。

@@ -55,7 +55,8 @@ Webkit内核的浏览器，必须加上-webkit前缀。
 属性将失效。
 
 ## 概念
-![概念](flex/flex.png)
+
+![概念](http://cdn.shianqi.com/20171110002511_INOZXI_flex.png)
 
 ## container 属性
 <h3 id="1.1">flex-direction</h3>

@@ -13,7 +13,7 @@ tags:
 
 【箭头指向】：带三角箭头的实线，箭头指向父类
 
-![泛化](./UML类图几种关系总结/fanhua.png)
+![泛化](http://cdn.shianqi.com/20171110093119_aWwxF4_fanhua.png)
 
 ## 实现（Realization）
 
@@ -21,7 +21,7 @@ tags:
 
 【箭头指向】：带三角箭头的虚线，箭头指向接口
 
-![泛化](./UML类图几种关系总结/shixian.png)
+![泛化](http://cdn.shianqi.com/20171110093251_tdgfn8_shixian.png)
 
 ## 关联（Association)
 
@@ -31,7 +31,7 @@ tags:
 
 【箭头及指向】：带普通箭头的实心线，指向被拥有者
 
-![泛化](./UML类图几种关系总结/guanlian.png)
+![关联](http://cdn.shianqi.com/20171110093215_1OgAUm_guanlian.png)
 
 上图中，老师与学生是双向关联，老师有多名学生，学生也可能有多名老师。但学生与某课程间的关系为单向关联，一名学生可能要上多门课程，课程是个抽象的东西他不拥有学生。 
 
@@ -45,7 +45,7 @@ tags:
 
 【箭头及指向】：带空心菱形的实心线，菱形指向整体
 
-![泛化](./UML类图几种关系总结/juhe.png)
+![聚合](http://cdn.shianqi.com/20171110093321_wLY5lK_juhe.png)
 
 ##  组合(Composition)
 
@@ -57,7 +57,7 @@ tags:
 
 【箭头及指向】：带实心菱形的实线，菱形指向整体
 
-![泛化](./UML类图几种关系总结/zuhe.png)
+![泛化](http://cdn.shianqi.com/20171110093352_kyBieM_zuhe.png)
 
 ## 依赖(Dependency)
 
@@ -67,7 +67,7 @@ tags:
 
 【箭头及指向】：带箭头的虚线，指向被使用者
 
-![泛化](./UML类图几种关系总结/yilai.png)
+![泛化](http://cdn.shianqi.com/20171110093406_Tqe2wK_yilai.png)
 
 ## 各种关系的强弱顺序
 

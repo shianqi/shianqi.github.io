@@ -12,7 +12,8 @@ tags:
 创建类模式
 
 ## 类图
-![State Pattern](./StatePattern/StatePattern.png)
+
+![State Pattern](http://cdn.shianqi.com/20171110095526_Q3BPLp_StatePattern.png)
 
 ## 要素
 * *State*——抽象状态角色

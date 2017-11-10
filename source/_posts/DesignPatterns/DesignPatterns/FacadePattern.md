@@ -13,7 +13,8 @@ tags:
 结构类模式
 
 ## 类图
-![Facade Pattern](./FacadePattern/FacadePattern.png)
+
+![Facade Pattern](http://cdn.shianqi.com/20171110094735_I9n3up_FacadePattern.png)
 
 ## 代码实现
 ```java

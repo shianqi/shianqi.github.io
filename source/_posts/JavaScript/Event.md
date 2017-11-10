@@ -18,7 +18,8 @@ addEventListener(type, listener, {
 [addEventListener 第三个参数](https://shianqi.github.io/2017/05/24/JavaScript/Touch_Passive/)
 
 ## 触发规则
-![event](./Event/Event.png)
+
+![event](http://cdn.shianqi.com/20171110002906_Xz9fLr_Event.png)
 
 在多个嵌套情况下，捕获的触发是从外到内的，冒泡则相反。先进行捕获，然后是冒泡。
 

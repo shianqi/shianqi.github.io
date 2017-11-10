@@ -83,7 +83,7 @@ $ git clone git://git.kernel.org/pub/scm/git/git.git
 |`master`|稳定，仅用来发布新版本，不能在上面干活|
 |`dev`|不稳定，到达新版本合并到`master`上|
 
-![分支](./git/git.png)
+![分支](http://cdn.shianqi.com/20171110002609_OvluW5_git.png)
 
 每人都有自己的分支，时不时地往dev分支上合并就可以了。
 

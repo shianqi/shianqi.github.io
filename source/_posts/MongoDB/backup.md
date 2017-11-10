@@ -87,6 +87,8 @@ mongodump -d <database-name> -c <collection-name> -o <directory-path>
 * `<database-name>.bson` 存放数据
 * `<database-name>.metadata.json` 存放表结构
 
+<!-- more -->
+
 ## mongorestore
 
 同 `mongodump` 是用来恢复的

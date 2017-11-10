@@ -12,7 +12,8 @@ tags:
 行为类模式
 
 ## 类图
-![Memento Pattern](./MementoPattern/MementoPattern.png)
+
+![Memento Pattern](http://cdn.shianqi.com/20171110095300_TstQIw_MementoPattern.png)
 
 ## 备忘录模式的结构
 * 发起人：记录当前时刻的内部状态，负责定义哪些属于备份范围的状态，负责创建和恢复备忘录数据。

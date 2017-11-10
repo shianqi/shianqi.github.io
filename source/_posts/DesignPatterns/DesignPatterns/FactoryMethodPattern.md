@@ -14,7 +14,7 @@ tags:
 
 ## 类图
 
-![Factory Method Pattern](./FactoryMethodPattern/FactoryMethodPattern.png)
+![Factory Method Pattern](http://cdn.shianqi.com/20171110094943_QJHh2b_FactoryMethodPattern.png)
 
 ## 模板代码
 ```java

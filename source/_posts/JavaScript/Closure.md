@@ -38,7 +38,7 @@ tags:
 
 理解了这些相关概念后，理解闭包就容易多了。我们通过一个例子来说明闭包的原理。
 
-![img1](./Closure/img1.png)
+![img1](http://cdn.shianqi.com/20171110002842_9KxQlx_img1.png)
 
 ```javascript
 function foo(){

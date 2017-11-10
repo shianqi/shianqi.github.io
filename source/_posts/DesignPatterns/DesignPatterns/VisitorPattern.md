@@ -12,7 +12,8 @@ tags:
 行为类模式
 
 ## 类图
-![Visitor Pattern](./VisitorPattern/VisitorPattern.png)
+
+![Visitor Pattern](http://cdn.shianqi.com/20171110095642_2YY99x_VisitorPattern.png)
 
 ## 要素
 

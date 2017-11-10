@@ -12,7 +12,8 @@ tags:
 创建类模式
 
 ## 类图
-![Prototype Pattern](./PrototypePattern/PrototypePattern.png)
+
+![Prototype Pattern](http://cdn.shianqi.com/20171110095348_JbDOLV_PrototypePattern.png)
 
 原型模式主要用于对象的复制，它的核心是就是类图中的原型类Prototype。Prototype类需要具备以下两个条件：
 * 实现 `Cloneable` 接口。在java语言有一个` Cloneable` 接口，它的作用只有一个，就是在运行时通知虚拟机可以安全地在实现了此接口的类上使用 `clone` 方法。在java虚拟机中，只有实现了这个接口的类才可以被拷贝，否则在运行时会出 `CloneNotSupportedException`异常。

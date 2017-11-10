@@ -6,13 +6,16 @@ tags:
 ---
 
 ## 定义
+
 讲一个类的接口变换成客户端所期待的另一种接口，从而使原本因接口不匹配而无法在一起工作的两个类能够一起工作
 
 ## 类型
+
 结构类模式
 
 ## 类图
-![Adapter Pattern](./AdapterPattern/AdapterPattern.png)
+
+![Adapter Pattern](http://cdn.shianqi.com/20171110094350_0CRUBV_AdapterPattern.png)
 
 ## 要素
 * *Target*——目标角色

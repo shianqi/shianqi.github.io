@@ -12,7 +12,8 @@ tags:
 行为类模式
 
 ## 类图
-![Observer Pattern](./ObserverPattern/ObserverPattern.png)
+
+![Observer Pattern](http://cdn.shianqi.com/20171110095324_bQmPPE_ObserverPattern.png)
 
 ## 代码实现
 ```java

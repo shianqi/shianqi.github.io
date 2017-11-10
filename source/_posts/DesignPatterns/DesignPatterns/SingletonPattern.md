@@ -12,7 +12,8 @@ tags:
 创建类模式
 
 ## 类图
-![Singleton](./SingletonPattern/Singleton.png)
+
+![Singleton](http://cdn.shianqi.com/20171110095442_FQlZOS_Singleton.png)
 
 ## 要素
 * 私有的构造方法

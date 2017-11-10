@@ -11,7 +11,8 @@ tags:
 行为类模式
 
 ## 类图
-![Interpreter Pattern](./InterpreterPattern/InterpreterPattern.png)
+
+![Interpreter Pattern](http://cdn.shianqi.com/20171110095139_cnNeqF_InterpreterPattern.png)
 
 ## 结构
 * *抽象解释器*：声明一个所有具体表达式都要实现的抽象接口（或者抽象类），接口中主要是一个interpret()方法，称为解释操作。具体解释任务由它的各个实现类来完成，具体的解释器分别由终结符解释器TerminalExpression和非终结符解释器NonterminalExpression完成。
