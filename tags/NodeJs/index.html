@@ -247,64 +247,6 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="../../2017/04/24/NodeJs/node-canvas/">
-                            Node-Canvas 将 Canvas 异步保存成图片
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-24T13:30:44+08:00">
-	
-		    4月 24, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p><img src="node-canvas/hbq.png" alt="黑白棋"></p>
-<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在开发<a href="https://github.com/shianqi/Reversi_process" target="_blank" rel="external">Reversi_process</a><br>（ 用NodeJS 将黑白棋对局的每一步保存成本地图片的）的时候，遇到这样的需求：<br>先在 Node-Canvas 画出每一步的图片，然后保存下来。<br>在绘制下一张图片的时候，要保证前一张图片被保存下来。不然保存的图片可能会乱。</p>
-<p>但是如果用同步的方法保存，整个过程下来是相当的费时。<br>生成一个有60步的对局大约需要 12000ms 。于是有了下面这个解决办法。</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li>NodeJs: v7.9.0</li>
-<li>node-canvas: 1.6.5</li>
-</ul>
-<p>阅读前需要对 Promise 和 async/await 有一定了解 </p>
-<h2 id="异步进行-Canvas-保存成图片"><a href="#异步进行-Canvas-保存成图片" class="headerlink" title="异步进行 Canvas 保存成图片"></a>异步进行 Canvas 保存成图片</h2><p>首先，将异步 fs.writeFile 封装成一个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">Promise</a> 方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 将buffer数据保存到指定的文件夹下</span><br><span class="line"> * @param name 新图片的名字</span><br><span class="line"> * @param dataBuffer 图片数据</span><br><span class="line"> * @returns &#123;Promise&#125;</span><br><span class="line"> */</span><br><span class="line">DrawChessboard.prototype.saveImg = function(name, dataBuffer)&#123;</span><br><span class="line">	&quot;use strict&quot;;</span><br><span class="line">	return new Promise((resolve, reject)=&gt;&#123;</span><br><span class="line">		fs.writeFile(this.path + &apos;/&apos; + name + &quot;.png&quot;,dataBuffer, function (err) &#123;</span><br><span class="line">			if(err) reject(err);</span><br><span class="line">			resolve();</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>之后，我们用一个数组来存每一步的 Promise 对象，在保存每一步 Canvas 图像的时候<br>我们创建一个当前 Canvas 的副本。如果直接传入当前 Canvas 的时候，会导致保存后的图片乱掉。</p>
-<p>在这里我们使用了 <code>toDataURL()</code> 的异步使用方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">canvas.toDataURL(&apos;image/png&apos;, function(err, png)&#123; &#125;);</span><br></pre></td></tr></table></figure>
-<p>因为 <code>toDataURL()</code> 将非常耗时，在本例中，平均保存一步对局需要 600ms</p>
-<p>在 <code>toDataURL()</code> 回调中，我们调用上面封装成 Promise 方法的 <code>saveImg(name, dataBuffer)</code><br>方法，并将返回的 Promise 对象添加到 promises 数组中。</p>
-<p>之后我们只要保证 promises 中的 Promise 全部执行完成就可以了。</p>
-<p>只要调用 <code>Promise.all( iterable )</code>; 将 promises 传入即可，等待 promises 方法全部执行完后<br>返回一个新的 Promise 对象，处理之后便可以进行之后的工作了。</p>
-<p>代码如下（使用了 async/await 新特性，NodeJs v7.4.0 后正式加入）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">DrawChessboard.prototype.draw = async function (/*string*/chessString) &#123;</span><br><span class="line">    //---</span><br><span class="line">    //省略若干步</span><br><span class="line">    //---</span><br><span class="line">    </span><br><span class="line">    //保存每一步的Promise对象</span><br><span class="line">    let promises = [];</span><br><span class="line">    </span><br><span class="line">    for(let i=0;i&lt;length;i++)&#123;</span><br><span class="line">        //计算这一步的棋局</span><br><span class="line">        this.computeChess(chessArray[i*2],chessArray[i*2+1]);</span><br><span class="line">        //在Canvas上绘制这一步棋局</span><br><span class="line">        this.drawChess();</span><br><span class="line">    </span><br><span class="line">        //为了在异步操作不导致两次 toDataURl() 有影响，这里创建了一个当前 canvas 副本。</span><br><span class="line">        let newCanvas = new Canvas(this.size_x, this.size_y);</span><br><span class="line">        let newCtx = newCanvas.getContext(&apos;2d&apos;);</span><br><span class="line">        let imageDate = this.ctx.getImageData(0,0,this.size_x,this.size_y);</span><br><span class="line">        newCtx.putImageData(imageDate,0,0);</span><br><span class="line">    </span><br><span class="line">        //此处 toDataURL() 为异步操作，如果同步操作则非常耗时，此处约600ms执行完成。</span><br><span class="line">        newCanvas.toDataURL(&quot;image/png&quot;,(err,png)=&gt;&#123;</span><br><span class="line">            let base64Data = png.replace(/^data:image\/\w+;base64,/, &quot;&quot;);</span><br><span class="line">            let dataBuffer = new Buffer(base64Data, &apos;base64&apos;);</span><br><span class="line">            promises.push(this.saveImg(i,dataBuffer));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    try &#123;</span><br><span class="line">        await Promise.all(promises);</span><br><span class="line">    &#125;catch (err)&#123;</span><br><span class="line">        console.log(err);</span><br><span class="line">    &#125;</span><br><span class="line">    return this.canvas.toDataURL();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="../../2017/04/24/NodeJs/node-canvas/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
                         <a class="link-unstyled" href="../../2017/04/23/JavaScript/async/">
                             async/await 的基本用法
                         </a>

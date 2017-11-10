@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="Tron Blog!">
 <meta property="og:description" content="定义定义对象间一种一对多的依赖关系，使得当每一个对象改变状态，则所有依赖于它的对象都会得到通知并自动更新。 类型行为类模式 类图 代码实现12345678910111213141516abstract class Subject &amp;#123;      private Vector&amp;lt;Observer&amp;gt; obs = new Vector&amp;lt;Observer&amp;gt;();      p">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="https://shianqi.github.io/2017/06/27/DesignPatterns/DesignPatterns/ObserverPattern/ObserverPattern/ObserverPattern.png">
-<meta property="og:updated_time" content="2017-06-27T09:20:12.000Z">
+<meta property="og:image" content="http://cdn.shianqi.com/20171110095324_bQmPPE_ObserverPattern.png">
+<meta property="og:updated_time" content="2017-11-10T01:53:34.963Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式：观察者模式（Observer Pattern）">
 <meta name="twitter:description" content="定义定义对象间一种一对多的依赖关系，使得当每一个对象改变状态，则所有依赖于它的对象都会得到通知并自动更新。 类型行为类模式 类图 代码实现12345678910111213141516abstract class Subject &amp;#123;      private Vector&amp;lt;Observer&amp;gt; obs = new Vector&amp;lt;Observer&amp;gt;();      p">
-<meta name="twitter:image" content="https://shianqi.github.io/2017/06/27/DesignPatterns/DesignPatterns/ObserverPattern/ObserverPattern/ObserverPattern.png">
+<meta name="twitter:image" content="http://cdn.shianqi.com/20171110095324_bQmPPE_ObserverPattern.png">
     
     
         
@@ -219,7 +219,7 @@
         <div class="main-content-wrap">
             <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>定义对象间一种一对多的依赖关系，使得当每一个对象改变状态，则所有依赖于它的对象都会得到通知并自动更新。</p>
 <h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>行为类模式</p>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="./ObserverPattern/ObserverPattern.png" alt="Observer Pattern"></p>
+<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110095324_bQmPPE_ObserverPattern.png" alt="Observer Pattern"></p>
 <h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Subject</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> Vector&lt;Observer&gt; obs = <span class="keyword">new</span> Vector&lt;Observer&gt;();  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addObserver</span><span class="params">(Observer obs)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.obs.add(obs);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delObserver</span><span class="params">(Observer obs)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.obs.remove(obs);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">notifyObserver</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        <span class="keyword">for</span>(Observer o: obs)&#123;  </span><br><span class="line">            o.update();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>观察者模式的优点</p>
 <ul>

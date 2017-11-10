@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="Tron Blog!">
 <meta property="og:description" content="定义给定一种语言，定义他的文法的一种表示，并定义一个解释器，该解释器使用该表示来解释语言中句子。 类型行为类模式 类图 结构 抽象解释器：声明一个所有具体表达式都要实现的抽象接口（或者抽象类），接口中主要是一个interpret()方法，称为解释操作。具体解释任务由它的各个实现类来完成，具体的解释器分别由终结符解释器TerminalExpression和非终结符解释器NonterminalExpr">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="https://shianqi.github.io/2017/06/27/DesignPatterns/DesignPatterns/InterpreterPattern/InterpreterPattern/InterpreterPattern.png">
-<meta property="og:updated_time" content="2017-06-27T13:02:18.000Z">
+<meta property="og:image" content="http://cdn.shianqi.com/20171110095139_cnNeqF_InterpreterPattern.png">
+<meta property="og:updated_time" content="2017-11-10T01:51:49.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式：解释器模式（Interpreter Pattern）">
 <meta name="twitter:description" content="定义给定一种语言，定义他的文法的一种表示，并定义一个解释器，该解释器使用该表示来解释语言中句子。 类型行为类模式 类图 结构 抽象解释器：声明一个所有具体表达式都要实现的抽象接口（或者抽象类），接口中主要是一个interpret()方法，称为解释操作。具体解释任务由它的各个实现类来完成，具体的解释器分别由终结符解释器TerminalExpression和非终结符解释器NonterminalExpr">
-<meta name="twitter:image" content="https://shianqi.github.io/2017/06/27/DesignPatterns/DesignPatterns/InterpreterPattern/InterpreterPattern/InterpreterPattern.png">
+<meta name="twitter:image" content="http://cdn.shianqi.com/20171110095139_cnNeqF_InterpreterPattern.png">
     
     
         
@@ -219,7 +219,7 @@
         <div class="main-content-wrap">
             <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>给定一种语言，定义他的文法的一种表示，并定义一个解释器，该解释器使用该表示来解释语言中句子。</p>
 <h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>行为类模式</p>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="./InterpreterPattern/InterpreterPattern.png" alt="Interpreter Pattern"></p>
+<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110095139_cnNeqF_InterpreterPattern.png" alt="Interpreter Pattern"></p>
 <h2 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h2><ul>
 <li><em>抽象解释器</em>：声明一个所有具体表达式都要实现的抽象接口（或者抽象类），接口中主要是一个interpret()方法，称为解释操作。具体解释任务由它的各个实现类来完成，具体的解释器分别由终结符解释器TerminalExpression和非终结符解释器NonterminalExpression完成。</li>
 <li><em>终结符表达式</em>：实现与文法中的元素相关联的解释操作，通常一个解释器模式中只有一个终结符表达式，但有多个实例，对应不同的终结符。终结符一半是文法中的运算单元，比如有一个简单的公式R=R1+R2，在里面R1和R2就是终结符，对应的解析R1和R2的解释器就是终结符表达式。                                </li>
