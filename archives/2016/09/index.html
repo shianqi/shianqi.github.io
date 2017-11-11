@@ -32,7 +32,7 @@
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="../../../assets/css/style-ywijujnc71acsrrxuejmomiuckrww8ghivq5n28telwc6cwsucrwjgq26ffz.min.css">
+    <link rel="stylesheet" href="/assets/css/style-ywijujnc71acsrrxuejmomiuckrww8ghivq5n28telwc6cwsucrwjgq26ffz.min.css">
     <!--STYLES END-->
     
     
@@ -46,7 +46,7 @@
 <header id="header" data-behavior="1">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
-        <a class="header-title-link" href="../../../ ">Tron Blog!</a>
+        <a class="header-title-link" href="/ ">Tron Blog!</a>
     </div>
     
         
@@ -71,7 +71,7 @@
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
-                <a href="../../../#about">
+                <a href="/#about">
                     <img class="sidebar-profile-picture" src="http://cdn.shianqi.com/20171110003439_iub77X_cat_sm.png" alt="作者的图片"/>
                 </a>
                 <h4 class="sidebar-profile-name">Archie Shi</h4>
@@ -87,7 +87,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="../../../ "
+                             href="/ "
                             
                         >
                     
@@ -99,7 +99,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="../../../all-tags"
+                             href="/all-tags"
                             
                         >
                     
@@ -111,7 +111,7 @@
                 <li class="sidebar-button">
                     
                         <a  class="sidebar-button-link "
-                             href="../../../all-archives"
+                             href="/all-archives"
                             
                         >
                     
@@ -195,7 +195,71 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="//2016/09/04/JavaScript/Javascript/">
+                        <a class="link-unstyled" href="/2016/09/04/MongoDB/基本语法/">
+                            MongoDB 基本语法
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
+	
+		    9月 04, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h5 id="开启服务："><a href="#开启服务：" class="headerlink" title="开启服务："></a><strong>开启服务：</strong></h5><ul>
+<li><figure class="highlight plain"><figcaption><span>--dbpath D:\mongodb\db```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **Shell 启动：**</span><br><span class="line">- ```mongo</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="查看集合："><a href="#查看集合：" class="headerlink" title="查看集合："></a><strong>查看集合：</strong></h5><ul>
+<li><figure class="highlight plain"><figcaption><span>dbs```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **删除集合：**</span><br><span class="line">- ```db.rumoob.drop()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="选择集合："><a href="#选择集合：" class="headerlink" title="选择集合："></a><strong>选择集合：</strong></h5><ul>
+<li><figure class="highlight plain"><figcaption><span>test```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##### **查看文档：**</span><br><span class="line">- ```show collections</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="删除文档："><a href="#删除文档：" class="headerlink" title="删除文档："></a><strong>删除文档：</strong></h5><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##### **插入元组：**</span><br><span class="line">- ```db.mydb.insert(&#123;&apos;name&apos;:&apos;killer&apos;&#125;,&#123;&apos;password&apos;:&apos;121021&apos;&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="查找元组："><a href="#查找元组：" class="headerlink" title="查找元组："></a><strong>查找元组：</strong></h5><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- ```db.mydb.find().pretty()    //整齐排列</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **修改元组：**</span><br><span class="line">- ```db.col.update(&#123;&apos;title&apos;:&apos;test&apos;&#125;,&#123;$set:&#123;&apos;likes&apos;:100&#125;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><figcaption><span>"_id" : ObjectId("56064f89ade2f21f36b03136","name":"kill master")&#125;);```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **删除元组：**</span><br><span class="line">- ```db.col.remove(&#123;&apos;name&apos;:&apos;killer&apos;&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/09/04/MongoDB/基本语法/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/09/04/JavaScript/Javascript/">
                             JavaScript 简介
                         </a>
                     
@@ -272,7 +336,7 @@
                     
                     
                         <p>
-                            <a href="//2016/09/04/JavaScript/Javascript/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="/2016/09/04/JavaScript/Javascript/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -290,7 +354,104 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="//2016/09/04/JavaScript/Event/">
+                        <a class="link-unstyled" href="/2016/09/04/BrowserSync/BrowserSync/">
+                            BrowserSync 使用手册
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
+	
+		    9月 04, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p></p><h2 id="1">全局安装</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g browser-sync</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h2 id="2">项目中安装</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev browser-sync</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h2 id="3">启动 BrowserSync</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//监听一个文件</span><br><span class="line">browser-sync start --server --files &quot;css/*.css&quot;</span><br><span class="line"></span><br><span class="line">//监听多个文件</span><br><span class="line">// 如果你的文件层级比较深，您可以考虑使用 **（表示任意目录）匹配，任意目录下任意.css 或 .html文件。 </span><br><span class="line">browser-sync start --server --files &quot;**/*.css, **/*.html&quot;</span><br><span class="line"></span><br><span class="line">//指定端口</span><br><span class="line">browser-sync start --server --port &quot;3031&quot; --files &quot;**/*.css, **/*.html&quot;</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h2 id="4">中文官网文档</h2><br><a href="http://www.browsersync.cn/docs/" target="_blank">www.browsersync.cn<a><p></p>
+</a></a>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/09/04/BrowserSync/BrowserSync/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/09/04/Windows/CMD快速配置IP/">
+                            CMD快速配置IP地址和DNS
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
+	
+		    9月 04, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p>将IP和DNS配置为静态</p>
+<ul>
+<li><code>netsh interface ip set address 以太网 static 123.123.123.123 255.255.255.192  123.123.123.1</code></li>
+<li><code>netsh interface ip set dns &quot;以太网&quot; static 202.207.0.1</code></li>
+</ul>
+<p>将IP和DNS配置为动态</p>
+<ul>
+<li><code>netsh interface ip set address &quot;以太网&quot; dhcp</code></li>
+<li><code>netsh interface ip set dns &quot;以太网&quot; dhcp</code></li>
+</ul>
+<p>也可以写入到 <code>.bat</code> 批处理脚本中</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/09/04/Windows/CMD快速配置IP/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/09/04/JavaScript/Event/">
                             JavaScript 事件捕获和冒泡
                         </a>
                     
@@ -332,7 +493,7 @@
                     
                     
                         <p>
-                            <a href="//2016/09/04/JavaScript/Event/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="/2016/09/04/JavaScript/Event/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -350,168 +511,7 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="//2016/09/04/Windows/CMD快速配置IP/">
-                            CMD快速配置IP地址和DNS
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
-	
-		    9月 04, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>将IP和DNS配置为静态</p>
-<ul>
-<li><code>netsh interface ip set address 以太网 static 123.123.123.123 255.255.255.192  123.123.123.1</code></li>
-<li><code>netsh interface ip set dns &quot;以太网&quot; static 202.207.0.1</code></li>
-</ul>
-<p>将IP和DNS配置为动态</p>
-<ul>
-<li><code>netsh interface ip set address &quot;以太网&quot; dhcp</code></li>
-<li><code>netsh interface ip set dns &quot;以太网&quot; dhcp</code></li>
-</ul>
-<p>也可以写入到 <code>.bat</code> 批处理脚本中</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="//2016/09/04/Windows/CMD快速配置IP/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="//2016/09/04/BrowserSync/BrowserSync/">
-                            BrowserSync 使用手册
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
-	
-		    9月 04, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p></p><h2 id="1">全局安装</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g browser-sync</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h2 id="2">项目中安装</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev browser-sync</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h2 id="3">启动 BrowserSync</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//监听一个文件</span><br><span class="line">browser-sync start --server --files &quot;css/*.css&quot;</span><br><span class="line"></span><br><span class="line">//监听多个文件</span><br><span class="line">// 如果你的文件层级比较深，您可以考虑使用 **（表示任意目录）匹配，任意目录下任意.css 或 .html文件。 </span><br><span class="line">browser-sync start --server --files &quot;**/*.css, **/*.html&quot;</span><br><span class="line"></span><br><span class="line">//指定端口</span><br><span class="line">browser-sync start --server --port &quot;3031&quot; --files &quot;**/*.css, **/*.html&quot;</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h2 id="4">中文官网文档</h2><br><a href="http://www.browsersync.cn/docs/" target="_blank">www.browsersync.cn<a><p></p>
-</a></a>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="//2016/09/04/BrowserSync/BrowserSync/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="//2016/09/04/MongoDB/基本语法/">
-                            MongoDB 基本语法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
-	
-		    9月 04, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h5 id="开启服务："><a href="#开启服务：" class="headerlink" title="开启服务："></a><strong>开启服务：</strong></h5><ul>
-<li><figure class="highlight plain"><figcaption><span>--dbpath D:\mongodb\db```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **Shell 启动：**</span><br><span class="line">- ```mongo</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="查看集合："><a href="#查看集合：" class="headerlink" title="查看集合："></a><strong>查看集合：</strong></h5><ul>
-<li><figure class="highlight plain"><figcaption><span>dbs```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **删除集合：**</span><br><span class="line">- ```db.rumoob.drop()</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="选择集合："><a href="#选择集合：" class="headerlink" title="选择集合："></a><strong>选择集合：</strong></h5><ul>
-<li><figure class="highlight plain"><figcaption><span>test```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##### **查看文档：**</span><br><span class="line">- ```show collections</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="删除文档："><a href="#删除文档：" class="headerlink" title="删除文档："></a><strong>删除文档：</strong></h5><ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##### **插入元组：**</span><br><span class="line">- ```db.mydb.insert(&#123;&apos;name&apos;:&apos;killer&apos;&#125;,&#123;&apos;password&apos;:&apos;121021&apos;&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="查找元组："><a href="#查找元组：" class="headerlink" title="查找元组："></a><strong>查找元组：</strong></h5><ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- ```db.mydb.find().pretty()    //整齐排列</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **修改元组：**</span><br><span class="line">- ```db.col.update(&#123;&apos;title&apos;:&apos;test&apos;&#125;,&#123;$set:&#123;&apos;likes&apos;:100&#125;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><figcaption><span>"_id" : ObjectId("56064f89ade2f21f36b03136","name":"kill master")&#125;);```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **删除元组：**</span><br><span class="line">- ```db.col.remove(&#123;&apos;name&apos;:&apos;killer&apos;&#125;)</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="//2016/09/04/MongoDB/基本语法/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="//2016/09/04/WebSocket/SocketIo/">
+                        <a class="link-unstyled" href="/2016/09/04/WebSocket/SocketIo/">
                             用 Express,Socket.io 搭建 WebSocket 服务器
                         </a>
                     
@@ -551,7 +551,7 @@
                     
                     
                         <p>
-                            <a href="//2016/09/04/WebSocket/SocketIo/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="/2016/09/04/WebSocket/SocketIo/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -637,7 +637,7 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/09/04/WebSocket/SocketIo/">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/WebSocket/SocketIo/">
                             <h3 class="media-heading">用 Express,Socket.io 搭建 WebSocket 服务器</h3>
                         </a>
                         <span class="media-meta">
@@ -656,83 +656,7 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/09/04/BrowserSync/BrowserSync/">
-                            <h3 class="media-heading">BrowserSync 使用手册</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/09/04/MongoDB/基本语法/">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
                             <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
@@ -751,7 +675,83 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/11/14/Webpack/Webpack基础/">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
+                            <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/11/14/Webpack/Webpack基础/">
                             <h3 class="media-heading">Webpack 学习笔记</h3>
                         </a>
                         <span class="media-meta">
@@ -770,7 +770,7 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/12/10/PenetrationTest/ARP/ARP/">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/12/10/PenetrationTest/ARP/ARP/">
                             <h3 class="media-heading">嗅探，arp欺骗，会话劫持</h3>
                         </a>
                         <span class="media-meta">
@@ -789,7 +789,7 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
                             <h3 class="media-heading">用 Kali-Linux 进行 Wifi 破解</h3>
                         </a>
                         <span class="media-meta">
@@ -808,7 +808,7 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io//2016/12/22/PenetrationTest/KaliUpdata/">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/12/22/PenetrationTest/KaliUpdata/">
                             <h3 class="media-heading">Kali-Linux 更新、环境配置</h3>
                         </a>
                         <span class="media-meta">
@@ -840,7 +840,7 @@
         
 <div id="cover" style="background-image:url('http://cdn.shianqi.com/20171111132834_TkfCwb_dr.jpeg');"></div>
         <!--SCRIPTS-->
-<script src="../../../assets/js/script-lh5udltchpsfcjgzpmme11bbmvj4k4srd99grgzo0845ualxoy17enpqvhko.min.js"></script>
+<script src="/assets/js/script-lh5udltchpsfcjgzpmme11bbmvj4k4srd99grgzo0845ualxoy17enpqvhko.min.js"></script>
 <!--SCRIPTS END-->
 
 
