@@ -32,7 +32,7 @@
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="../../../../assets/css/style-x8hlhf3wufaib0k9omfruiatuqvcccylzb7dzhxloinmiucljg1jrtvpsclc.min.css">
+    <link rel="stylesheet" href="../../../../assets/css/style-ywijujnc71acsrrxuejmomiuckrww8ghivq5n28telwc6cwsucrwjgq26ffz.min.css">
     <!--STYLES END-->
     
     
@@ -195,8 +195,8 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="../../../../2017/07/10/Project/ProjectGuidelines/">
-                            项目指引
+                        <a class="link-unstyled" href="../../../../2017/07/10/Git/rebase/">
+                            git rebase
                         </a>
                     
                 </h1>
@@ -212,270 +212,33 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="项目指引"><a href="#项目指引" class="headerlink" title="项目指引"></a>项目指引</h1><ul>
-<li><a href="#git">Git</a></li>
-<li><a href="#environments">Environments</a></li>
-<li><a href="#dependencies">Dependencies</a></li>
-<li><a href="#testing">Testing</a></li>
-<li><a href="#structure-and-naming">Structure and Naming</a></li>
-<li><a href="#code-style">Code style</a></li>
-<li><a href="#logging">Logging</a></li>
-<li><a href="#api-design">API Design</a></li>
-<li><a href="#licensing">Licensing</a></li>
-</ul>
-<h2 id="1-Git"><a href="#1-Git" class="headerlink" title="1. Git "></a>1. Git <a name="git"></a></h2><h3 id="1-1-Some-Git-Rules"><a href="#1-1-Some-Git-Rules" class="headerlink" title="1.1 Some Git Rules"></a>1.1 Some Git Rules</h3><p>有一套要牢记的规则：</p>
-<ul>
-<li><p>在 <code>feature</code> branch 进行工作.</p>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>因为这样，所有的工作都是在一个专门的分支而不是主分支上隔离完成的。 它允许您提交多个拉请求而不会混淆。 您可以迭代，而不会污染具有潜在不稳定的未完成代码的主分支。 <a href="https://www.atlassian.com/git/tutorials/comparing-workflows#feature-branch-workflow" target="_blank" rel="external">read more…</a></p>
-</blockquote>
-</li>
-<li><p>从 <code>develop</code> 拓展分支</p>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>这样，您可以确保master中的代码几乎总是无问题地构建，并且可以直接用于发行版（对于某些项目而言，这可能是过度的）。</p>
-</blockquote>
-</li>
-<li><p>不要<code>develop</code>或<code>master</code>上push分支。 做一个拉请求。</p>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>它通知团队成员已完成功能。 它还能够轻松地对代码进行同行评审，并专门讨论论坛讨论所提出的功能</p>
-</blockquote>
-</li>
-<li><p>在 push 你的 <code>feature</code> 并且提交一个 <code>Pull Request</code> 的时候，你应该先更新你本地 <code>develop</code> 分支，并且做一次交互式 <code>rebase</code></p>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>Rebasing将在请求的分支（<code>master</code>或<code>develop</code>）中合并，并将您本地进行的提交应用于历史的顶端，而不创建合并提交（假设没有冲突）。 产生一个漂亮和干净的历史。<a href="https://www.atlassian.com/git/tutorials/merging-vs-rebasing" target="_blank" rel="external">read more …</a></p>
-</blockquote>
-</li>
-<li><p>在 <code>Pull Request</code> 前，解决潜在冲突，并且 <code>rebasing</code></p>
-</li>
-<li><p>合并后删除本地和远程功能分支。</p>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>它会使您的分支列表中的死枝混乱，确保您只将合并到（<code>master</code>或<code>develop</code>）一次。 功能部门只能在工作进行中存在。</p>
-</blockquote>
-</li>
-<li><p>在 <code>Pull Request</code> 前，确保你的 <code>feature</code> 分支可以构建成功并且通过所有测试（包括代码风格）</p>
-</li>
-<li><p>使用 <a href="./.gitignore">.gitignore</a>.</p>
-</li>
-<li><p>保护你的 <code>develop</code> 和 <code>master</code> 分支 .</p>
-</li>
-</ul>
-<h3 id="1-2-书写良好的-commit-messages"><a href="#1-2-书写良好的-commit-messages" class="headerlink" title="1.2 书写良好的 commit messages"></a>1.2 书写良好的 commit messages</h3><ul>
-<li><strong>将主体与身体之间用换行符分开</strong></li>
-<li>用一个空行隔开标题和正文</li>
-<li>限制标题字数在 50 个字符内</li>
-<li>标题行的首字母大写</li>
-<li>不要用句号结束标题行</li>
-<li>在标题行使用祈使语气</li>
-<li>正文在 72 个字符处换行</li>
-<li>使用正文解释是什么和为什么，而不是如何做</li>
-</ul>
-<h2 id="3-环境"><a href="#3-环境" class="headerlink" title="3. 环境"></a>3. 环境<a name="environments"></a></h2><h3 id="3-1-一致的开发环境"><a href="#3-1-一致的开发环境" class="headerlink" title="3.1 一致的开发环境:"></a>3.1 一致的开发环境:</h3><ul>
-<li><p>在 <code>package.json</code> 的 <code>engines</code> 中配置你所用的 <code>node</code> 版本</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &quot;engines&quot; : &#123; &quot;node&quot; : &quot;&gt;=0.10.3 &lt;0.12&quot; &#125; &#125;</span><br></pre></td></tr></table></figure>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>让他人知道你所用的 node.js 版本 <a href="https://docs.npmjs.com/files/package.json#engines" target="_blank" rel="external">read more…</a></p>
-</blockquote>
-</li>
-<li><p>另外，使用 <code>nvm</code> 并在您的项目根目录中创建一个 <code>.nvmrc</code>。 不要忘了在文档中提及它</p>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>所有使用 <code>nvm</code> 的人都可以简单的使用 <code>nvm use</code> 去选择合适的 node 版本 <a href="https://github.com/creationix/nvm" target="_blank" rel="external">read more…</a></p>
-</blockquote>
-</li>
-<li><p>您还可以使用 <code>preinstall</code> 脚本来检查节点和npm版本</p>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>当使用新的版本node时，有些项目可能会失败</p>
-</blockquote>
-</li>
-<li><p>使用 Docker images，只要它不会使事情更复杂</p>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>它可以在整个工作流程中为您提供一致的环境。 没有太多的需要解决libs，依赖或配置。<a href="https://hackernoon.com/how-to-dockerize-a-node-js-application-4fbab45a0c19" target="_blank" rel="external">read more…</a></p>
-</blockquote>
-</li>
-<li><p>使用本地模块，而不是使用全局安装的模块</p>
-<p>  <em>why:</em></p>
-<blockquote>
-<p>让你与你的同事分享你的工具，而不是期望他们在他们的系统上。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="4-依赖"><a href="#4-依赖" class="headerlink" title="4. 依赖 "></a>4. 依赖 <a name="dependencies"></a></h2><p>在使用包之前，请检查它的GitHub。 查找开放问题的数量，每日下载次数和贡献者数量以及上次更新软件包的日期。</p>
-<ul>
-<li>如果不太了解依赖关系，请在使用之前与团队进行讨论。</li>
-<li>跟踪您当前可用的包： e.g： <code>npm ls --depth=0</code>. <a href="https://docs.npmjs.com/cli/ls" target="_blank" rel="external">read more…</a></li>
-<li>看看您的任何包裹是否已被使用或不相关: <code>depcheck</code>. <a href="https://www.npmjs.com/package/depcheck" target="_blank" rel="external">read more…</a></li>
-<li>检查下载统计信息，查看依赖关系是否被社区大量使用: <code>npm-stat</code>. <a href="https://npm-stat.com/" target="_blank" rel="external">read more…</a></li>
-<li>检查依赖关系是否具有良好的成熟版本发布频率与大量的维护者: e.g., <code>npm view async</code>. <a href="https://docs.npmjs.com/cli/view" target="_blank" rel="external">read more…</a></li>
-<li>始终确保您的应用程序适用于最新版本的依赖关系而不会中断: <code>npm outdated</code>. <a href="https://docs.npmjs.com/cli/outdated" target="_blank" rel="external">read more…</a></li>
-<li>检查包是否有已知安全漏洞, e.g, <a href="https://snyk.io/test?utm_source=risingstack_blog" target="_blank" rel="external">Snyk</a>.</li>
-</ul>
-<h3 id="4-1-一致的依赖"><a href="#4-1-一致的依赖" class="headerlink" title="4.1 一致的依赖:"></a>4.1 一致的依赖:</h3><ul>
-<li>在 <code>npm@5</code> 或者更高版本上使用 <code>package-lock.json</code></li>
-<li>对于旧版本的 <code>npm</code>, 当安装新的依赖时使用 <code>--save --save-exact</code> 并且发布前创建一个 <code>npm-shrinkwrap.json</code></li>
-<li>或者你可以使用 <code>Yarn</code> 并且确保在 <code>README.md</code> 中提及. 你的 lock 文件和 <code>package.json</code> 在每次依赖关系更新后应该具有相同的版本。</li>
-<li>多读读这里： <a href="https://docs.npmjs.com/files/package-locks" target="_blank" rel="external">package-locks | npm Documentation</a></li>
-</ul>
-<h2 id="5-测试"><a href="#5-测试" class="headerlink" title="5. 测试 "></a>5. 测试 <a name="testing"></a></h2><ul>
-<li>如果需要，请使用测试模式环境。</li>
-<li>使用 <code>*.test.js</code> 或 <code>*.spec.js</code> 命名约定将测试文件放在测试模块旁边</li>
-<li>将其他测试文件放入一个单独的测试文件夹以避免混淆。</li>
-<li>写可测试代码，避免副作用，提取副作用，写纯函数</li>
-<li>不要写太多的测试来检查类型，而是使用静态类型检查器</li>
-<li>做任何  对 <code>develop</code> 的 <code>pull requests</code> 前进行测试</li>
-<li>文档化您的测试，并附上说明。</li>
-</ul>
-<h2 id="6-结构和命名"><a href="#6-结构和命名" class="headerlink" title="6. 结构和命名 "></a>6. 结构和命名 <a name="structure-and-naming"></a></h2><ul>
-<li>围绕产品功能/页面/组件组织您的文件，而不是角色</li>
-</ul>
-<p><strong>Bad</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── controllers</span><br><span class="line">|   ├── product.js</span><br><span class="line">|   └── user.js</span><br><span class="line">├── models</span><br><span class="line">|   ├── product.js</span><br><span class="line">|   └── user.js</span><br></pre></td></tr></table></figure>
-<p><strong>Good</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── product</span><br><span class="line">|   ├── index.js</span><br><span class="line">|   ├── product.js</span><br><span class="line">|   └── product.test.js</span><br><span class="line">├── user</span><br><span class="line">|   ├── index.js</span><br><span class="line">|   ├── user.js</span><br><span class="line">|   └── user.test.js</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用 <code>./config</code> 文件夹。 配置文件中使用的值由环境变量提供。</li>
-<li>将脚本放在 <code>./scripts</code> 文件夹中。 这包括用于数据库同步，构建和捆绑等的 <code>bash</code> 和 <code>node</code> 脚本。</li>
-<li>将构建输出放在 <code>./build</code> 文件夹中。 将 <code>build/</code> 添加到 <code>.gitignore</code>。</li>
-<li>使用 <code>PascalCase</code>（帕斯卡拼写法） 和 <code>camelCase</code>（驼式命名法） 作为文件名和目录名。 使用 <code>PascalCase</code> 仅用于组件名。</li>
-<li><code>CheckBox/index.js</code> 应该有 <code>CheckBox</code> 组件， 但 <strong>不是</strong> <code>CheckBox/CheckBox.js</code> 或者 <code>checkbox/CheckBox.js</code>，这些是冗余的。</li>
-<li>理想情况下，目录名称应与 <code>index.js</code> 默认导出的名称相匹配。</li>
-</ul>
-<h2 id="7-代码风格"><a href="#7-代码风格" class="headerlink" title="7. 代码风格 "></a>7. 代码风格 <a name="code-style"></a></h2><ul>
-<li>为新项目使用 <code>stage-1</code> 和更高版本的JavaScript（现代）语法。 对于旧项目，与现有语法保持一致，除非您打算使项目现代化。</li>
-<li>在构建过程之前包括代码样式检查</li>
-<li>使用 <a href="http://eslint.org/" target="_blank" rel="external">ESLint - Pluggable JavaScript linter</a> 来强制执行代码样式。</li>
-<li>使用 <a href="https://github.com/airbnb/javascript" target="_blank" rel="external">Airbnb JavaScript Style Guide</a> 的JavaScript样式指南，<a href="https://www.gitbook.com/book/duk/airbnb-javascript-guidelines/details" target="_blank" rel="external">阅读更多</a>。使用项目或您的团队所需的JavaScript风格指南。</li>
-<li>使用 <a href="https://github.com/gajus/eslint-plugin-flowtype" target="_blank" rel="external">Flow type style check rules for ESLint.</a> ，当使用 <a href="https://flow.org/" target="_blank" rel="external">FlowType</a>时</li>
-<li>使用 <code>.eslintignore</code> 从代码样式检查中排除文件或文件夹。</li>
-<li>删除任何 <code>eslint</code> 禁用注释，然后再执行 <code>Pull Request</code> 。</li>
-<li>始终使用 <code>//TODO:</code> 评论来提醒自己和他人关于未完成的工作。</li>
-<li>始终评论并保持与代码更改相关。</li>
-<li>尽可能删除注释的代码块。</li>
-<li>避免生产中的js警报。</li>
-<li>避免不相关或有趣的评论，日志或命名（源代码可能会交给另一家公司/客户，他们可能不会分享同样的笑声）。</li>
-<li>编写可测试代码，避免副作用，提取副作用，写纯函数。</li>
-<li>使您的名字可以搜索到有意义的区别，避免缩短名称。 对于函数使用长的描述性名称。 功能名称应该是一个动词或动词短语，需要传达其意图。</li>
-<li>按照降档规则在文件中组织您的功能。 较高级别的职能应在上下级以上。 这样读取源代码就更为自然了。</li>
-</ul>
-<h2 id="8-日志"><a href="#8-日志" class="headerlink" title="8. 日志 "></a>8. 日志 <a name="logging"></a></h2><ul>
-<li>避免生产中的客户端控制台日志</li>
-<li>生产可读的生产日志。 理想地使用在生产模式下使用的日志记录库（<a href="https://github.com/winstonjs/winston" target="_blank" rel="external">winston</a> 或<br><a href="https://github.com/trentm/node-bunyan" target="_blank" rel="external">node-bunyan</a>）</li>
-</ul>
-<h2 id="9-API-设计"><a href="#9-API-设计" class="headerlink" title="9. API 设计 "></a>9. API 设计 <a name="api-design"></a></h2><p>遵循资源导向的设计。 这有三个主要因素：resources, collection, 和 URLs.</p>
-<ul>
-<li>资源具有数据，与其他资源的关系以及对其进行操作的方法</li>
-<li>一组资源称为集合</li>
-<li>URL标识资源的在线位置</li>
-</ul>
-<h3 id="9-1-API-Naming"><a href="#9-1-API-Naming" class="headerlink" title="9.1 API Naming"></a>9.1 API Naming</h3><h4 id="9-1-1-Naming-URLs"><a href="#9-1-1-Naming-URLs" class="headerlink" title="9.1.1 Naming URLs"></a>9.1.1 Naming URLs</h4><ul>
-<li><code>/users</code> 一组用户（复数名词）。</li>
-<li><code>/users/id</code> 具有特定用户信息的资源。</li>
-<li>资源始终应该是URL中的复数。 将动词从资源网址中删除。</li>
-<li>使用动词非资源。 在这种情况下，您的API不会返回任何资源。 而是执行一个操作并将结果返回给客户机。 因此，您应该在URL中使用动词而不是名词来清楚地区分与资源相关的响应中的非资源响应。</li>
-</ul>
-<p>GET     <code>/translate?text=Hallo</code></p>
-<h4 id="9-1-2-Naming-fields"><a href="#9-1-2-Naming-fields" class="headerlink" title="9.1.2 Naming fields"></a>9.1.2 Naming fields</h4><ul>
-<li>请求体或响应类型是JSON，请遵循 <code>camelCase</code> 来保持一致性。</li>
-<li>公开资源，而不是数据库模式详细信息。 您不必使用您的 <code>table_name</code> 作为资源名称。 与资源属性相同，它们不应与您的列名称相同。</li>
-<li>仅在您的网址命名中使用名词，不要尝试解释其功能，只能解释资源（优雅）</li>
-</ul>
-<h3 id="9-2-Operating-on-resources"><a href="#9-2-Operating-on-resources" class="headerlink" title="9.2 Operating on resources"></a>9.2 Operating on resources</h3><h4 id="9-2-1-Use-HTTP-methods"><a href="#9-2-1-Use-HTTP-methods" class="headerlink" title="9.2.1 Use HTTP methods"></a>9.2.1 Use HTTP methods</h4><p>Only use nouns in your resource URLs, avoid endpoints like <code>/addNewUser</code> or <code>/updateUser</code> .  Also avoid sending resource operations as a parameter. Instead explain the functionalities using HTTP methods:</p>
-<ul>
-<li><strong>GET</strong>        Used to retrieve a representation of a resource.</li>
-<li><strong>POST</strong>    Used to create new resources and sub-resources</li>
-<li><strong>PUT</strong>        Used to update existing resources</li>
-<li><strong>PATCH</strong>    Used to update existing resources.  PATCH only updates the fields that were supplied, leaving the others alone</li>
-<li><strong>DELETE</strong>    Used to delete existing resources</li>
-</ul>
-<h3 id="9-3-Use-sub-resources"><a href="#9-3-Use-sub-resources" class="headerlink" title="9.3 Use sub-resources"></a>9.3 Use sub-resources</h3><p>Sub resources are used to link one resource with another, so use sub resources to represent the relation.<br>An API is supposed to be an interface for developers and this is a natural way to make resources explorable.<br>If there is a relation between resources like  employee to a company, use <code>id</code> in the URL:</p>
-<ul>
-<li><strong>GET</strong>        <code>/schools/2/students</code>    Should get the list of all students from school 2</li>
-<li><strong>GET</strong>        <code>/schools/2/students/31</code>    Should get the details of student 31, which belongs to school 2</li>
-<li><strong>DELETE</strong>    <code>/schools/2/students/31</code>    Should delete student 31, which belongs to school 2</li>
-<li><strong>PUT</strong>        <code>/schools/2/students/31</code>    Should update info of student 31, Use PUT on resource-URL only, not collection</li>
-<li><strong>POST</strong>    <code>/schools</code>                    Should create a new school and return the details of the new school created. Use POST on collection-URLs</li>
-</ul>
-<h3 id="9-4-API-Versioning"><a href="#9-4-API-Versioning" class="headerlink" title="9.4 API Versioning"></a>9.4 API Versioning</h3><p>When your APIs are public for other third parties, upgrading the APIs with some breaking change would also lead to breaking the existing products or services using your APIs. Using versions in your URL can prevent that from happening:<br><code>http://api.domain.com/v1/schools/3/students</code></p>
-<h3 id="9-5-Send-feedbacks"><a href="#9-5-Send-feedbacks" class="headerlink" title="9.5 Send feedbacks"></a>9.5 Send feedbacks</h3><h4 id="9-5-1-Errors"><a href="#9-5-1-Errors" class="headerlink" title="9.5.1 Errors"></a>9.5.1 Errors</h4><p>Response messages must be self descriptive. A good error message response might look something like this:<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"code"</span>: <span class="number">1234</span>,</span><br><span class="line"><span class="attr">"message"</span> : <span class="string">"Something bad happened"</span>,</span><br><span class="line"><span class="attr">"description"</span> : <span class="string">"More details"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>or for validation errors:</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"code"</span> : <span class="number">2314</span>,</span><br><span class="line">  <span class="attr">"message"</span> : <span class="string">"Validation Failed"</span>,</span><br><span class="line">  <span class="attr">"errors"</span> : [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"code"</span> : <span class="number">1233</span>,</span><br><span class="line">      <span class="attr">"field"</span> : <span class="string">"email"</span>,</span><br><span class="line">      <span class="attr">"message"</span> : <span class="string">"Invalid email"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="attr">"code"</span> : <span class="number">1234</span>,</span><br><span class="line">       <span class="attr">"field"</span> : <span class="string">"password"</span>,</span><br><span class="line">       <span class="attr">"message"</span> : <span class="string">"No password provided"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Note: Keep security exception messages as generic as possible. For instance, Instead of saying ‘incorrect password’, you can reply back saying ‘invalid username or password’ so that we don’t unknowingly inform user that username was indeed correct and only password was incorrect.</p>
-<h4 id="9-5-2-Align-your-feedback-with-HTTP-codes"><a href="#9-5-2-Align-your-feedback-with-HTTP-codes" class="headerlink" title="9.5.2 Align your feedback with HTTP codes."></a>9.5.2 Align your feedback with HTTP codes.</h4><h5 id="The-client-and-API-worked-success-–-2xx-response-code"><a href="#The-client-and-API-worked-success-–-2xx-response-code" class="headerlink" title="The client and API worked (success – 2xx response code)"></a>The client and API worked (success – 2xx response code)</h5><ul>
-<li><code>200 OK</code> This HTTP response represents success for <code>GET</code>, <code>PUT</code> or <code>POST</code> requests.</li>
-<li><code>201 Created</code> This status code should be returned whenever a new instance is created. E.g on creating a new instance, using <code>POST</code> method, should always return <code>201</code> status code.</li>
-<li><code>204 No Content</code> represents the request was successfully processed, but has not returned any content. <code>DELETE</code> can be a good example of this. If there is any error, then the response code would be not be of 2xx Success Category but around 4xx Client Error category.</li>
-</ul>
-<h5 id="The-client-application-behaved-incorrectly-client-error-–-4xx-response-code"><a href="#The-client-application-behaved-incorrectly-client-error-–-4xx-response-code" class="headerlink" title="The client application behaved incorrectly (client error – 4xx response code)"></a>The client application behaved incorrectly (client error – 4xx response code)</h5><ul>
-<li><code>400 Bad Request</code> indicates that the request by the client was not processed, as the server could not understand what the client is asking for.</li>
-<li><code>401 Unauthorized</code> indicates that the request lacks valid credentials needed to access the needed resources, and the client should re-request with the required credentials.</li>
-<li><code>403 Forbidden</code> indicates that the request is valid and the client is authenticated, but the client is not allowed access the page or resource for any reason.</li>
-<li><code>404 Not Found</code> indicates that the requested resource was not found.</li>
-<li><code>406 Not Acceptable</code> A response matching the list of acceptable values defined in Accept-Charset and Accept-Language headers cannot be served.</li>
-<li><code>410 Gone</code> indicates that the requested resource is no longer available and has been intentionally and permanently moved.</li>
-</ul>
-<h5 id="The-API-behaved-incorrectly-server-error-–-5xx-response-code"><a href="#The-API-behaved-incorrectly-server-error-–-5xx-response-code" class="headerlink" title="The API behaved incorrectly (server error – 5xx response code)"></a>The API behaved incorrectly (server error – 5xx response code)</h5><ul>
-<li><code>500 Internal Server Error</code> indicates that the request is valid, but the server could not fulfill it due to some unexpected condition.</li>
-<li><code>503 Service Unavailable</code> indicates that the server is down or unavailable to receive and process the request. Mostly if the server is undergoing maintenance or facing a temporary overload.</li>
-</ul>
-<h3 id="9-6-Resource-parameters-and-metadata"><a href="#9-6-Resource-parameters-and-metadata" class="headerlink" title="9.6 Resource parameters and metadata"></a>9.6 Resource parameters and metadata</h3><ul>
-<li>Provide total numbers of resources in your response</li>
-<li><p>The amount of data the resource exposes should also be taken into account. The API consumer doesn’t always need the full representation of a resource.Use a fields query parameter that takes a comma separated list of fields to include:</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET /student?fields=id,name,age,class</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Pagination, filtering and sorting don’t need to be supported by default for all resources. Document those resources that offer filtering and sorting.</p>
-</li>
-</ul>
-<h3 id="9-7-API-security"><a href="#9-7-API-security" class="headerlink" title="9.7 API security"></a>9.7 API security</h3><h4 id="9-7-1-TLS"><a href="#9-7-1-TLS" class="headerlink" title="9.7.1 TLS"></a>9.7.1 TLS</h4><p>To secure your web API authentication, all authentications should use SSL. OAuth2 requires the authorization server and access token credentials to use TLS.<br>Switching between HTTP and HTTPS introduces security weaknesses and best practice is to use TLS by default for all communication. Throw an error for non-secure access to API URLs.</p>
-<h4 id="9-7-2-Rate-limiting"><a href="#9-7-2-Rate-limiting" class="headerlink" title="9.7.2 Rate limiting"></a>9.7.2 Rate limiting</h4><p>If your API is public or have high number of users, any client may be able to call your API thousands of times per hour. You should consider implementing rate limit early on.</p>
-<h4 id="9-7-3-Input-Validation"><a href="#9-7-3-Input-Validation" class="headerlink" title="9.7.3 Input Validation"></a>9.7.3 Input Validation</h4><p>It’s difficult to perform most attacks if the allowed values are limited.</p>
-<ul>
-<li><p>Validate required fields, field types (e.g. string, integer, boolean, etc), and format requirements. Return 400 Bad Request with details about any errors from bad or missing data.</p>
-</li>
-<li><p>Escape parameters that will become part of the SQL statement to protect from SQL injection attacks</p>
-</li>
-<li><p>As also mentioned before, don’t expose your database scheme when naming your resources and defining your responses</p>
-</li>
-</ul>
-<h4 id="9-7-4-URL-validations"><a href="#9-7-4-URL-validations" class="headerlink" title="9.7.4 URL validations"></a>9.7.4 URL validations</h4><p>Attackers can tamper with any part of an HTTP request, including the URL, query string,</p>
-<h4 id="9-7-5-Validate-incoming-content-types"><a href="#9-7-5-Validate-incoming-content-types" class="headerlink" title="9.7.5 Validate incoming content-types."></a>9.7.5 Validate incoming content-types.</h4><p>The server should never assume the Content-Type. A lack of Content-Type header or an unexpected Content-Type header should result in the server rejecting the content with a <code>406</code> Not Acceptable response.</p>
-<h4 id="9-7-6-JSON-encoding"><a href="#9-7-6-JSON-encoding" class="headerlink" title="9.7.6 JSON encoding"></a>9.7.6 JSON encoding</h4><p>A key concern with JSON encoders is preventing arbitrary JavaScript remote code execution within the browser or node.js, on the server. Use a JSON serialiser to entered data to prevent the execution of user input on the browser/server.</p>
-<h3 id="9-8-API-documentation"><a href="#9-8-API-documentation" class="headerlink" title="9.8 API documentation"></a>9.8 API documentation</h3><ul>
-<li>Fill the <code>API Reference</code> section in <a href="./README.sample.md">README.md template</a> for API.</li>
-<li>Describe API authentication methods with a code sample</li>
-<li>Explaining The URL Structure (path only, no root URL) including The request type (Method)</li>
-</ul>
-<p>For each endpoint explain:</p>
-<ul>
-<li><p>URL Params If URL Params exist, specify them in accordance with name mentioned in URL section</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Required: id=[integer]</span><br><span class="line">Optional: photo_id=[alphanumeric]</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>If the request type is POST, provide a working examples. URL Params rules apply here too. Separate the section into Optional and Required.</p>
-</li>
-<li><p>Success Response, What should be the status code and is there any return data? This is useful when people need to know what their callbacks should expect!</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Code: 200</span><br><span class="line">Content: &#123; id : 12 &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Error Response, Most endpoints have many ways to fail. From unauthorised access, to wrongful parameters etc. All of those should be listed here. It might seem repetitive, but it helps prevent assumptions from being made. For example</p>
-  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"code"</span>: <span class="number">403</span>,</span><br><span class="line">    <span class="attr">"message"</span> : <span class="string">"Authentication failed"</span>,</span><br><span class="line">    <span class="attr">"description"</span> : <span class="string">"Invalid username or password"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="9-8-1-API-design-tools"><a href="#9-8-1-API-design-tools" class="headerlink" title="9.8.1 API design tools"></a>9.8.1 API design tools</h4><p>There are lots of open source tools for good documentation such as <a href="https://apiblueprint.org/" target="_blank" rel="external">API Blueprint</a> and <a href="https://swagger.io/" target="_blank" rel="external">Swagger</a>.</p>
-<h2 id="10-Licensing"><a href="#10-Licensing" class="headerlink" title="10. Licensing "></a>10. Licensing <a name="licensing"></a></h2><p>Make sure you use resources that you have the rights to use. If you use libraries, remember to look for MIT, Apache or BSD but if you modify them, then take a look into licence details. Copyrighted images and videos may cause legal problems.</p>
-<hr>
-<p>Sources:<br><a href="https://blog.risingstack.com/" target="_blank" rel="external">RisingStack Engineering</a>,<br><a href="https://developer.mozilla.org/" target="_blank" rel="external">Mozilla Developer Network</a>,<br><a href="https://devcenter.heroku.com" target="_blank" rel="external">Heroku Dev Center</a>,<br><a href="https://github.com/airbnb/javascript" target="_blank" rel="external">Airbnb/javascript</a><br><a href="https://www.atlassian.com/git/tutorials" target="_blank" rel="external">Atlassian Git tutorials</a></p>
+                    <h1 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h1><p>假设你现在基于远程分支”origin”，创建一个叫”mywork”的分支。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b mywork origin</span><br></pre></td></tr></table></figure>
+<p>现在我们在这个分支做一些修改，然后生成两个提交(commit).</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vi file.txt</span><br><span class="line">$ git commit</span><br><span class="line">$ vi otherfile.txt</span><br><span class="line">$ git commit</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>但是与此同时，有些人也在”origin”分支上做了一些修改并且做了提交了. 这就意味着”origin”和”mywork”这两个分支各自”前进”了，它们之间”分叉”了。</p>
+<p><img src="http://cdn.shianqi.com/20171110002636_TWXHxj_rebase1.png" alt="rebase1"></p>
+<p>在这里，你可以用”pull”命令把”origin”分支上的修改拉下来并且和你的修改合并； 结果看起来就像一个新的”合并的提交”(merge commit):</p>
+<p><img src="http://cdn.shianqi.com/20171110002707_fUyhWT_rebase2.png" alt="rebase2"></p>
+<p>但是，如果你想让”mywork”分支历史看起来像没有经过任何合并一样，你也许可以用 git rebase:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout mywork</span><br><span class="line">$ git rebase origin</span><br></pre></td></tr></table></figure>
+<p>这些命令会把你的”mywork”分支里的每个提交(commit)取消掉，并且把它们临时 保存为补丁(patch)(这些补丁放到”.git/rebase”目录中),然后把”mywork”分支更新 到最新的”origin”分支，最后把保存的这些补丁应用到”mywork”分支上。</p>
+<p><img src="http://cdn.shianqi.com/20171110002727_8ZsAia_rebase3.png" alt="rebase3"></p>
+<p>当’mywork’分支更新之后，它会指向这些新创建的提交(commit),而那些老的提交会被丢弃。 如果运行垃圾收集命令(pruning garbage collection), 这些被丢弃的提交就会删除. （请查看 git gc)</p>
+<p><img src="http://cdn.shianqi.com/20171110002749_SSQxfW_rebase4.png" alt="rebase4"></p>
+<p>现在我们可以看一下用合并(merge)和用rebase所产生的历史的区别：</p>
+<p><img src="http://cdn.shianqi.com/20171110002813_aCygyZ_rebase5.png" alt="rebase5"></p>
+<p>在rebase的过程中，也许会出现冲突(conflict). 在这种情况，Git会停止rebase并会让你去解决 冲突；在解决完冲突后，用”git-add”命令去更新这些内容的索引(index), 然后，你无需执行 git-commit,只要执行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase --continue</span><br></pre></td></tr></table></figure>
+<p>这样git会继续应用(apply)余下的补丁。</p>
+<p>在任何时候，你可以用–abort参数来终止rebase的行动，并且”mywork” 分支会回到rebase开始前的状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase --abort</span><br></pre></td></tr></table></figure></p>
 
                     
                         
                     
                     
                         <p>
-                            <a href="../../../../2017/07/10/Project/ProjectGuidelines/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="../../../../2017/07/10/Git/rebase/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -1104,44 +867,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Event/">
                             <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
@@ -1161,8 +886,46 @@
                 <div class="media">
                     
                     <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/Windows/CMD快速配置IP/">
                             <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1288,7 +1051,7 @@
         
 <div id="cover" style="background-image:url('http://cdn.shianqi.com/20171111132834_TkfCwb_dr.jpeg');"></div>
         <!--SCRIPTS-->
-<script src="../../../../assets/js/script-bipbscs9upsaxshf9usjzrxjolf7itcsylpdpg6agfkfklsnwum0bviajzud.min.js"></script>
+<script src="../../../../assets/js/script-lh5udltchpsfcjgzpmme11bbmvj4k4srd99grgzo0845ualxoy17enpqvhko.min.js"></script>
 <!--SCRIPTS END-->
 
 
