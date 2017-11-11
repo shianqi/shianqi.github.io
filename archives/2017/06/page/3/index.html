@@ -502,6 +502,51 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/OCP/">
+                            设计原则：开闭原则（OCP）
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-06-26T11:07:36+08:00">
+	
+		    6月 26, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h1><p>开闭原则（Open Closed Principle）简称OCP</p>
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p><em>一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。</em></p>
+<p>开闭原则无非就是想表达这样一层意思：<em>用抽象构建框架，用实现扩展细节</em>。因为抽象灵活性好，适应性广，只要抽象的合理，可以基本保持软件架构的稳定。而软件中易变的细节，我们用从抽象派生的实现类来进行扩展，当软件需要发生变化时，我们只需要根据需求重新派生一个实现类来扩展就可以了。当然前提是我们的抽象要合理，要对需求的变更有前瞻性和预见性才行。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>当软件需要变化时，尽量通过扩展软件实体的行为来实现变化，而不是通过修改已有的代码来实现变化。</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/OCP/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/LoD/">
                             设计原则：迪米特法则（LoD）
                         </a>
@@ -546,13 +591,13 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/OCP/">
-                            设计原则：开闭原则（OCP）
+                        <a class="link-unstyled" href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/LSP/">
+                            设计原则：里氏替换原则（SRP）
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-26T11:07:36+08:00">
+    <time itemprop="datePublished" datetime="2017-06-26T09:16:36+08:00">
 	
 		    6月 26, 2017
     	
@@ -563,17 +608,22 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h1><p>开闭原则（Open Closed Principle）简称OCP</p>
-<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p><em>一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。</em></p>
-<p>开闭原则无非就是想表达这样一层意思：<em>用抽象构建框架，用实现扩展细节</em>。因为抽象灵活性好，适应性广，只要抽象的合理，可以基本保持软件架构的稳定。而软件中易变的细节，我们用从抽象派生的实现类来进行扩展，当软件需要发生变化时，我们只需要根据需求重新派生一个实现类来扩展就可以了。当然前提是我们的抽象要合理，要对需求的变更有前瞻性和预见性才行。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>当软件需要变化时，尽量通过扩展软件实体的行为来实现变化，而不是通过修改已有的代码来实现变化。</p>
+                    <h1 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h1><p>里氏替换原则（Liskov Substitution Principle）简称 SRP</p>
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p><em>所有引用基类的地方必须能透明地使用其子类的对象。</em></p>
+<ul>
+<li>子类可以实现父类的抽象方法，但不能覆盖父类的非抽象方法。</li>
+<li>子类中可以增加自己特有的方法。</li>
+<li>当子类的方法重载父类的方法时，方法的前置条件（即方法的形参）要比父类方法的输入参数更宽松。</li>
+<li>当子类的方法实现父类的抽象方法时，方法的后置条件（即方法的返回值）要比父类更严格。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><em>子类可以扩展父类的功能，但不能改变父类原有的功能。</em></p>
 
                     
                         
                     
                     
                         <p>
-                            <a href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/OCP/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/LSP/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -628,56 +678,6 @@
                     
                         <p>
                             <a href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/DIP/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/LSP/">
-                            设计原则：里氏替换原则（SRP）
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-26T09:16:36+08:00">
-	
-		    6月 26, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h1><p>里氏替换原则（Liskov Substitution Principle）简称 SRP</p>
-<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p><em>所有引用基类的地方必须能透明地使用其子类的对象。</em></p>
-<ul>
-<li>子类可以实现父类的抽象方法，但不能覆盖父类的非抽象方法。</li>
-<li>子类中可以增加自己特有的方法。</li>
-<li>当子类的方法重载父类的方法时，方法的前置条件（即方法的形参）要比父类方法的输入参数更宽松。</li>
-<li>当子类的方法实现父类的抽象方法时，方法的后置条件（即方法的返回值）要比父类更严格。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><em>子类可以扩展父类的功能，但不能改变父类原有的功能。</em></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="../../../../../2017/06/26/DesignPatterns/DesignPrinciples/LSP/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -849,25 +849,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
                             <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
@@ -906,8 +887,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/BrowserSync/BrowserSync/">
+                            <h3 class="media-heading">BrowserSync 使用手册</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -925,8 +906,27 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/BrowserSync/BrowserSync/">
-                            <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
