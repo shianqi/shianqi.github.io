@@ -248,6 +248,56 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="../../2017/06/26/DesignPatterns/DesignPrinciples/LSP/">
+                            设计原则：里氏替换原则（SRP）
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-06-26T09:16:36+08:00">
+	
+		    6月 26, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h1><p>里氏替换原则（Liskov Substitution Principle）简称 SRP</p>
+<h2 id="解释"><a href="#解释" class="headerlink" title="解释"></a>解释</h2><p><em>所有引用基类的地方必须能透明地使用其子类的对象。</em></p>
+<ul>
+<li>子类可以实现父类的抽象方法，但不能覆盖父类的非抽象方法。</li>
+<li>子类中可以增加自己特有的方法。</li>
+<li>当子类的方法重载父类的方法时，方法的前置条件（即方法的形参）要比父类方法的输入参数更宽松。</li>
+<li>当子类的方法实现父类的抽象方法时，方法的后置条件（即方法的返回值）要比父类更严格。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><em>子类可以扩展父类的功能，但不能改变父类原有的功能。</em></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="../../2017/06/26/DesignPatterns/DesignPrinciples/LSP/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="../../2017/06/24/DesignPatterns/DesignPrinciples/SRP/">
                             设计原则：单一职责原则（SRP）
                         </a>
@@ -1006,54 +1056,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="../../2017/06/02/Redux/Object_Spread_Operator/">
-                            Redux 中使用 Object Spread Operator （...）
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-02T22:00:11+08:00">
-	
-		    6月 02, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="Redux-中使用-Object-Spread-Operator-（…）"><a href="#Redux-中使用-Object-Spread-Operator-（…）" class="headerlink" title="Redux 中使用 Object Spread Operator （…）"></a>Redux 中使用 Object Spread Operator （…）</h1><p><strong>ES7 Stage 3 阶段</strong></p>
-<p>不直接修改 <code>state</code> 是 <code>Redux</code> 的核心理念之一, 所以你会发现自己总是在使用 <code>Object.assign()</code> 创建对象拷贝, 而拷贝中会包含新创建或更新过的属性值。在下面的 todoApp 示例中, <code>Object.assign()</code> 将会返回一个新的 <code>state</code> 对象, 而其中的 <code>visibilityFilter</code> 属性被更新了:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function todoApp(state = initialState, action) &#123;</span><br><span class="line">  switch (action.type) &#123;</span><br><span class="line">    case SET_VISIBILITY_FILTER:</span><br><span class="line">      return Object.assign(&#123;&#125;, state, &#123;</span><br><span class="line">        visibilityFilter: action.filter</span><br><span class="line">      &#125;)</span><br><span class="line">    default:</span><br><span class="line">      return state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>尽管这样可行, 但 <code>Object.assign()</code> 冗长的写法会迅速降低 <code>reducer</code> 的可读性。</p>
-<p>一个可行的替代方案是使用ES7的<a href="https://github.com/sebmarkbage/ecmascript-rest-spread" target="_blank" rel="external">对象展开语法</a>提案。该提案让你可以通过展开运算符 <code>(...)</code> , 以更加简洁的形式将一个对象的可枚举属性拷贝至另一个对象。对象展开运算符在概念上与<code>ES6</code>的<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator" target="_blank" rel="external">数组展开运算符</a>相似</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function todoApp(state = initialState, action) &#123;</span><br><span class="line">  switch (action.type) &#123;</span><br><span class="line">    case SET_VISIBILITY_FILTER:</span><br><span class="line">      return &#123; ...state, visibilityFilter: action.filter &#125;</span><br><span class="line">    default:</span><br><span class="line">      return state</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>目前对象展开运算符提案还处于 ES7 Stage 2 草案阶段, 若你想在产品中使用它得依靠转换编译器, 如 Babel。 你可以使用 es2015 预设值, 安装 <code>babel-plugin-transform-object-rest-spread</code> 并将其单独添加到位于 <code>.babelrc</code> 的 <code>plugins</code> 数组中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;presets&quot;: [&quot;es2015&quot;],</span><br><span class="line">  &quot;plugins&quot;: [&quot;transform-object-rest-spread&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="../../2017/06/02/Redux/Object_Spread_Operator/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1074,7 +1076,7 @@
             </a>
         </li>
         
-        <li class="pagination-number">第 6 页 共 10 页</li>
+        <li class="pagination-number">第 6 页 共 11 页</li>
     </ul>
 </div>
 
@@ -1163,8 +1165,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1182,8 +1184,27 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1222,25 +1243,6 @@
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/BrowserSync/BrowserSync/">
                             <h3 class="media-heading">BrowserSync 使用手册</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1338,7 +1340,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 100 篇文章
+                找到 101 篇文章
             </p>
         </div>
     </div>
