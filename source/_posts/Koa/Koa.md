@@ -30,7 +30,8 @@ app.listen(3000);
 
 其中 `ctx` 就是 `Context` 对象
 
-## request
+### request
+
 最基本的一个 `request` 对象如下
 
 ```json
@@ -50,8 +51,10 @@ app.listen(3000);
 }
 ```
 
-### request.accepts('xml')
+#### request.accepts('xml')
+
 这个函数用来判断客户端想要接受的数据类型，例如
+
 ```javascript
 const main = ctx => {
   if (ctx.request.accepts('json')) {
@@ -64,10 +67,12 @@ const main = ctx => {
 };
 ```
 
-## response
+### response
 
-### ctx.response.body
+#### ctx.response.body
+
 直接给 `response.body` 赋值即可返回给数据给客户端
+
 ```javascript
 const main = ctx => {
   ctx.response.type = 'json';
@@ -75,8 +80,10 @@ const main = ctx => {
 };
 ```
 
-## 网页模版
+### 网页模版
+
 先读取 `html` 页面，然后返回给客户端
+
 ```javascript
 const fs = require('fs');
 
@@ -86,12 +93,14 @@ const main = ctx => {
 };
 ```
 
-# 路由
+## 路由
 
-## 原生路由
+### 原生路由
+
 可以通过 `ctx.request.path` 获取到用户的请求
 
-## koa-route
+### koa-route
+
 ```javascript
 const route = require('koa-route');
 
@@ -108,8 +117,10 @@ app.use(route.get('/', main));
 app.use(route.get('/about', about));
 ```
 
-## 静态资源
+### 静态资源
+
 如果网站提供静态资源（图片、字体、样式表、脚本......），为它们一个个写路由就很麻烦，也没必要。`koa-static` 模块封装了这部分的请求
+
 ```javascript
 const path = require('path');
 const serve = require('koa-static');
@@ -118,10 +129,11 @@ const main = serve(path.join(__dirname));
 app.use(main);
 ```
 
-## 重定向
+### 重定向
+
 `ctx.response.redirect('/');`
 
-# 中间件
+## 中间件
 
 ```javascript
 const logger = (ctx, next) => {
@@ -130,12 +142,15 @@ const logger = (ctx, next) => {
 }
 app.use(logger);
 ```
+
 像上面代码中的 `logger` 函数就叫做"中间件" `（middleware）`，因为它处在 `HTTP Request` 和 `HTTP Response` 中间，用来实现某种中间功能。`app.use()` 用来加载中间件。
 
 **基本上，`Koa` 所有的功能都是通过中间件实现的，前面例子里面的 `main` 也是中间件。每个中间件默认接受两个参数，第一个参数是 `Context` 对象，第二个参数是 `next` 函数。只要调用 `next` 函数，就可以把执行权转交给下一个中间件。**
 
-## 中间件栈
+### 中间件栈
+
 多个中间件会形成一个栈结构（`middle stack`），以"先进后出"（`first-in-last-out`）的顺序执行。
+
 ```javascript
 const one = (ctx, next) => {
   console.log('>> one');
@@ -161,7 +176,8 @@ app.use(three);
 ```
 
 运行结果：
-```
+
+```text
 >> one
 >> two
 >> three
@@ -172,15 +188,18 @@ app.use(three);
 
 **如果中间件内部没有调用 `next` 函数，那么执行权就不会传递下去**
 去掉上面 `two` 函数中的 `next()` ，结果如下：
-```
+
+```text
 >> one
 >> two
 << two
 << one
 ```
 
-## 异步中间件
+### 异步中间件
+
 如果有异步操作（比如读取数据库），中间件就必须写成 async 函数
+
 ```javascript
 const fs = require('fs.promised');
 const Koa = require('koa');
@@ -194,10 +213,13 @@ const main = async (ctx, next)=> {
 app.use(main);
 app.listen(3000);
 ```
+
 上面代码中，`fs.readFile` 是一个异步操作，必须写成 `await fs.readFile()` ，然后中间件必须写成 `async` 函数。
 
-## 中间件的合成
+### 中间件的合成
+
 `koa-compose` 模块可以将多个中间件合成为一个。请看下面的例子
+
 ```javascript
 const compose = require('koa-compose');
 
@@ -223,17 +245,22 @@ const middlewares = compose([one, two, three]);
 app.use(middlewares);
 ```
 
-# 错误处理
-## 500 错误
+## 错误处理
+
+### 500 错误
+
 `Koa` 提供了 `ctx.throw()` 方法，用来抛出错误，ctx.throw(500)就是抛出500错误
-```
+
+```javascript
 const main = ctx => {
   ctx.throw(500);
 };
 ```
 
-## 处理错误中间件
+### 处理错误中间件
+
 为了方便处理错误，最好使用 `try...catch` 将其捕获。但是，为每个中间件都写 `try...catch` 太麻烦，我们可以让最外层的中间件
+
 ```javascript
 const handler = async (ctx, next) => {
   try {
@@ -254,8 +281,10 @@ app.use(handler);
 app.use(main);
 ```
 
-## error 事件的监听
+### error 事件的监听
+
 运行过程中一旦出错，`Koa` 会触发一个 `error` 事件。监听这个事件，也可以处理错误
+
 ```javascript
 const main = ctx => {
   ctx.throw(500);
@@ -266,18 +295,8 @@ app.on('error', (err, ctx) =>
 );
 ```
 
-## error 事件的监听
-```javascript
-const main = ctx => {
-  ctx.throw(500);
-};
+### 释放 error 事件
 
-app.on('error', (err, ctx) =>
-  console.error('server error', err);
-);
-```
-
-## 释放 error 事件
 如果错误被 `try...catch` 捕获，就不会触发 `error` 事件。这时，必须调用 `ctx.app.emit()`，手动释放`error`事件，才能让监听函数生效。
 
 # Cookies
