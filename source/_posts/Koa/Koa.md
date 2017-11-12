@@ -299,8 +299,10 @@ app.on('error', (err, ctx) =>
 
 如果错误被 `try...catch` 捕获，就不会触发 `error` 事件。这时，必须调用 `ctx.app.emit()`，手动释放`error`事件，才能让监听函数生效。
 
-# Cookies
-ctx.cookies用来读写 Cookie
+## Cookies
+
+`ctx.cookies` 用来读写 Cookie
+
 ```javascript
 const main = function(ctx) {
   const n = Number(ctx.cookies.get('view') || 0) + 1;
@@ -309,8 +311,10 @@ const main = function(ctx) {
 }
 ```
 
-# 表单
+## 表单
+
 `koa-body` 模块可以用来从 POST 请求的数据体里面提取键值对
+
 ```javascript
 const koaBody = require('koa-body');
 
@@ -322,7 +326,8 @@ const main = async function(ctx) {
 app.use(koaBody());
 ```
 
-## get 请求
+### get 请求
+
 ```javascript
 const main = async function(ctx) {
   const { name='' } = ctx.query;
@@ -332,7 +337,8 @@ const main = async function(ctx) {
 
 **`get` 请求不需要 `koa-body` 依赖，`post` 则需要**
 
-## 文件上传
+### 文件上传
+
 ```javascript
 const os = require('os');
 const path = require('path');
