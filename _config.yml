@@ -17,7 +17,7 @@ timezone:
 url: https://shianqi.github.io
 root: /
 permalink: :year/:month/:day/:title/
-permalink_defaults:
+permalink_defaults: 
 
 # Directory
 source_dir: source
@@ -37,7 +37,7 @@ external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
-relative_link: true
+relative_link: false
 future: true
 highlight:
   enable: true
@@ -95,7 +95,7 @@ algolia:
   fields:
     - title
     - date
-    - excerpt
-    - excerpt:strip
+    - categories
+    - tags
     - permalink
     - thumbnailImageUrl
