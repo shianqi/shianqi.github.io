@@ -1,12 +1,14 @@
 ---
-title: Koa 框架学习笔记
+title: Koa2 基本使用
 date: 2017-09-20 17:15:44
 tags:
     - Node
     - Koa
 ---
+# Koa2 基本使用
 
-# hello world
+## hello world
+
 ```javascript
 const Koa = require('koa');
 const app = new Koa();
@@ -14,7 +16,8 @@ const app = new Koa();
 app.listen(3000);
 ```
 
-# Context 对象
+## Context 对象
+
 ```javascript
 const Koa = require('koa');
 const app = new Koa();
@@ -29,6 +32,7 @@ app.listen(3000);
 
 ## request
 最基本的一个 `request` 对象如下
+
 ```json
 {
     "method": "GET",
