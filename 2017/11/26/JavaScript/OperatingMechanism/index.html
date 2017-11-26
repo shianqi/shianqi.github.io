@@ -6,25 +6,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Tron Blog!">
-    <title>设计模式：建造者模式（Builder Pattern） - Tron Blog!</title>
+    <title> - Tron Blog!</title>
     <meta name="author" content="Archie Shi">
     
     
     
-    <meta name="description" content="定义将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 类型创建类模式 类图 四个要素 产品类：一般是一个较为复杂的对象，也就是说创建对象的过程比较复杂，一般会有比较多的代码量。在本类图中，产品类是一个具体的类，而非抽象类。实际编程中，产品类可以是由一个抽象类与它的不同实现组成，也可以是由多个抽象类与他们的实现组成。 抽象建造者：引入抽象建造者的目的，是为了将建造的具体过程">
-<meta name="keywords" content="Design-Patterns">
+    <meta name="description" content="JavaScript 运行机制事件循环  同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入 Event Table 并注册函数。 当指定的事情完成时，Event Table 会将这个函数移入 Event Queue。 主线程内的任务执行完毕为空，会去 Event Queue 读取对应的函数，进入主线程执行。 上述过程会不断重复，也就是常说的 Event Loop (事件循环)">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="设计模式：建造者模式（Builder Pattern）">
-<meta property="og:url" content="https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/index.html">
+<meta property="og:title" content="Tron Blog!">
+<meta property="og:url" content="https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/index.html">
 <meta property="og:site_name" content="Tron Blog!">
-<meta property="og:description" content="定义将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 类型创建类模式 类图 四个要素 产品类：一般是一个较为复杂的对象，也就是说创建对象的过程比较复杂，一般会有比较多的代码量。在本类图中，产品类是一个具体的类，而非抽象类。实际编程中，产品类可以是由一个抽象类与它的不同实现组成，也可以是由多个抽象类与他们的实现组成。 抽象建造者：引入抽象建造者的目的，是为了将建造的具体过程">
+<meta property="og:description" content="JavaScript 运行机制事件循环  同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入 Event Table 并注册函数。 当指定的事情完成时，Event Table 会将这个函数移入 Event Queue。 主线程内的任务执行完毕为空，会去 Event Queue 读取对应的函数，进入主线程执行。 上述过程会不断重复，也就是常说的 Event Loop (事件循环)">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:image" content="http://cdn.shianqi.com/20171110094511_tvWOM6_BuilderPattern.png">
-<meta property="og:updated_time" content="2017-11-10T01:45:23.176Z">
+<meta property="og:image" content="http://cdn.shianqi.com/20171126230612_rKQKQd_Screenshot.png">
+<meta property="og:image" content="http://cdn.shianqi.com/20171126231323_oeLxNy_Screenshot.png">
+<meta property="og:updated_time" content="2017-11-26T15:21:10.999Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式：建造者模式（Builder Pattern）">
-<meta name="twitter:description" content="定义将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 类型创建类模式 类图 四个要素 产品类：一般是一个较为复杂的对象，也就是说创建对象的过程比较复杂，一般会有比较多的代码量。在本类图中，产品类是一个具体的类，而非抽象类。实际编程中，产品类可以是由一个抽象类与它的不同实现组成，也可以是由多个抽象类与他们的实现组成。 抽象建造者：引入抽象建造者的目的，是为了将建造的具体过程">
-<meta name="twitter:image" content="http://cdn.shianqi.com/20171110094511_tvWOM6_BuilderPattern.png">
+<meta name="twitter:title" content="Tron Blog!">
+<meta name="twitter:description" content="JavaScript 运行机制事件循环  同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入 Event Table 并注册函数。 当指定的事情完成时，Event Table 会将这个函数移入 Event Queue。 主线程内的任务执行完毕为空，会去 Event Queue 读取对应的函数，进入主线程执行。 上述过程会不断重复，也就是常说的 Event Loop (事件循环)">
+<meta name="twitter:image" content="http://cdn.shianqi.com/20171126230612_rKQKQd_Screenshot.png">
     
     
         
@@ -196,14 +196,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            设计模式：建造者模式（Builder Pattern）
+            (无标题)
         </h1>
     
     
         <div class="post-meta">
-    <time itemprop="datePublished" datetime="2017-06-26T20:10:23+08:00">
+    <time itemprop="datePublished" datetime="2017-11-26T23:04:29+08:00">
 	
-		    6月 26, 2017
+		    11月 26, 2017
     	
     </time>
     
@@ -214,39 +214,24 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
-<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>创建类模式</p>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110094511_tvWOM6_BuilderPattern.png" alt="Builder Pattern"></p>
-<h2 id="四个要素"><a href="#四个要素" class="headerlink" title="四个要素"></a>四个要素</h2><ul>
-<li>产品类：一般是一个较为复杂的对象，也就是说创建对象的过程比较复杂，一般会有比较多的代码量。在本类图中，产品类是一个具体的类，而非抽象类。实际编程中，产品类可以是由一个抽象类与它的不同实现组成，也可以是由多个抽象类与他们的实现组成。</li>
-<li>抽象建造者：引入抽象建造者的目的，是为了将建造的具体过程交与它的子类来实现。这样更容易扩展。一般至少会有两个抽象方法，一个用来建造产品，一个是用来返回产品。</li>
-<li>建造者：实现抽象类的所有未实现的方法，具体来说一般是两项任务：组建产品；返回组建好的产品。</li>
-<li>导演类：负责调用适当的建造者来组建产品，导演类一般不与产品类发生依赖关系，与导演类直接交互的是建造者类。一般来说，导演类被用来封装程序中易变的部分。</li>
+            <h1 id="JavaScript-运行机制"><a href="#JavaScript-运行机制" class="headerlink" title="JavaScript 运行机制"></a>JavaScript 运行机制</h1><h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p><img src="http://cdn.shianqi.com/20171126230612_rKQKQd_Screenshot.png" alt="事件循环"></p>
+<ul>
+<li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入 <code>Event Table</code> 并注册函数。</li>
+<li>当指定的事情完成时，<code>Event Table</code> 会将这个函数移入 <code>Event Queue</code>。</li>
+<li>主线程内的任务执行完毕为空，会去 <code>Event Queue</code> 读取对应的函数，进入主线程执行。</li>
+<li>上述过程会不断重复，也就是常说的 <code>Event Loop</code> (事件循环)。</li>
 </ul>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Product</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> String type;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">showProduct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"名称："</span>+name);</span><br><span class="line">        System.out.println(<span class="string">"型号："</span>+type);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.name = name;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setType</span><span class="params">(String type)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.type = type;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Builder</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">setPart</span><span class="params">(String arg1, String arg2)</span></span>;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Product <span class="title">getProduct</span><span class="params">()</span></span>;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteBuilder</span> <span class="keyword">extends</span> <span class="title">Builder</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> Product product = <span class="keyword">new</span> Product();  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">getProduct</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> product;  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPart</span><span class="params">(String arg1, String arg2)</span> </span>&#123;  </span><br><span class="line">        product.setName(arg1);  </span><br><span class="line">        product.setType(arg2);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Director</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> Builder builder = <span class="keyword">new</span> ConcreteBuilder();  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">getAProduct</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        builder.setPart(<span class="string">"宝马汽车"</span>,<span class="string">"X7"</span>);  </span><br><span class="line">        <span class="keyword">return</span> builder.getProduct();  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Product <span class="title">getBProduct</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        builder.setPart(<span class="string">"奥迪汽车"</span>,<span class="string">"Q5"</span>);  </span><br><span class="line">        <span class="keyword">return</span> builder.getProduct();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </span><br><span class="line">        Director director = <span class="keyword">new</span> Director();  </span><br><span class="line">        Product product1 = director.getAProduct();  </span><br><span class="line">        product1.showProduct();  </span><br><span class="line"></span><br><span class="line">        Product product2 = director.getBProduct();  </span><br><span class="line">        product2.showProduct();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="建造者模式的优点"><a href="#建造者模式的优点" class="headerlink" title="建造者模式的优点"></a>建造者模式的优点</h2><ul>
-<li>首先，建造者模式的封装性很好。使用建造者模式可以有效的封装变化，在使用建造者模式的场景中，一般产品类和建造者类是比较稳定的，因此，将主要的业务逻辑封装在导演类中对整体而言可以取得比较好的稳定性。</li>
-<li>其次，建造者模式很容易进行扩展。如果有新的需求，通过实现一个新的建造者类就可以完成，基本上不用修改之前已经测试通过的代码，因此也就不会对原有功能引入风险。</li>
+<h2 id="宏任务与微任务"><a href="#宏任务与微任务" class="headerlink" title="宏任务与微任务"></a>宏任务与微任务</h2><ul>
+<li><code>macro-task</code> (宏任务)：包括整体代码 <code>script</code>，<code>setTimeout</code>，<code>setInterval</code></li>
+<li><code>micro-task</code>(微任务)：<code>Promise</code>，<code>process.nextTick</code></li>
 </ul>
-<h2 id="建造者模式与工厂模式的区别"><a href="#建造者模式与工厂模式的区别" class="headerlink" title="建造者模式与工厂模式的区别"></a>建造者模式与工厂模式的区别</h2><ul>
-<li>我们可以看到，建造者模式与工厂模式是极为相似的，总体上，建造者模式仅仅只比工厂模式多了一个“导演类”的角色。在建造者模式的类图中，假如把这个导演类看做是最终调用的客户端，那么图中剩余的部分就可以看作是一个简单的工厂模式了。</li>
-<li>与工厂模式相比，建造者模式一般用来创建更为复杂的对象，因为对象的创建过程更为复杂，因此将对象的创建过程独立出来组成一个新的类——导演类。也就是说，工厂模式是将对象的全部创建过程封装在工厂类中，由工厂类向客户端提供最终的产品；而建造者模式中，建造者类一般只提供产品类中各个组件的建造，而将具体建造过程交付给导演类。由导演类负责将各个组件按照特定的规则组建为产品，然后将组建好的产品交付给客户端。</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>建造者模式与工厂模式类似，他们都是建造者模式，适用的场景也很相似。一般来说，如果产品的建造很复杂，那么请用工厂模式；如果产品的建造更复杂，那么请用建造者模式。</li>
-</ul>
+<p>不同类型的任务会进入对应的 <code>Event Queue</code>，比如 <code>setTimeout</code> 和 <code>setInterval</code> 会进入相同的 <code>Event Queue</code>。</p>
+<p><img src="http://cdn.shianqi.com/20171126231323_oeLxNy_Screenshot.png" alt="宏任务与微任务"></p>
 
             
         </div>
     </div>
     <div id="post-footer" class="post-footer main-content-wrap">
-        
-            <div class="post-footer-tags">
-                <span class="text-color-light text-small">标签</span><br/>
-                
-    <a class="tag tag--primary tag--small t-link" href="/tags/Design-Patterns/">Design-Patterns</a>
-
-            </div>
         
         
             <div class="post-actions-wrap">
@@ -254,7 +239,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/26/DesignPatterns/DesignPatterns/PrototypePattern/"  data-tooltip="设计模式：原形模式（Prototype Pattern）">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -262,7 +247,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/26/DesignPatterns/DesignPatterns/AbstractFactoryPattern/" data-tooltip="设计模式：抽象工厂模式（Abstract Factory Pattern）">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/11/MacOS/MacOS使用分享/" data-tooltip="MacOS使用分享">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -280,7 +265,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -288,7 +273,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -296,7 +281,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -336,7 +321,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/26/DesignPatterns/DesignPatterns/PrototypePattern/"  data-tooltip="设计模式：原形模式（Prototype Pattern）">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -344,7 +329,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/06/26/DesignPatterns/DesignPatterns/AbstractFactoryPattern/" data-tooltip="设计模式：抽象工厂模式（Abstract Factory Pattern）">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/11/11/MacOS/MacOS使用分享/" data-tooltip="MacOS使用分享">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -362,7 +347,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -370,7 +355,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -378,7 +363,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -403,7 +388,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/">
                     <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
                 </a>
             </li>
@@ -411,7 +396,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/">
                     <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
                 </a>
             </li>
@@ -419,7 +404,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/06/26/DesignPatterns/DesignPatterns/BuilderPattern/">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/11/26/JavaScript/OperatingMechanism/">
                     <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
                 </a>
             </li>

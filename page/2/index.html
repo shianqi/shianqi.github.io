@@ -194,6 +194,55 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/09/13/Webpack/Webpack踩坑/">
+                            webpack 踩坑
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-09-13T10:58:44+08:00">
+	
+		    9月 13, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="不同平台设置node环境变量的差异"><a href="#不同平台设置node环境变量的差异" class="headerlink" title="不同平台设置node环境变量的差异"></a>不同平台设置node环境变量的差异</h2><p>在Mac上，可以在package.json中配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">     &quot;build&quot;：&quot;NODE_ENV=production &amp;&amp; ...&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但在Windows中是不行的。要解决这个问题，需要用到cross-env模块。</p>
+<p>先安装它：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i cross-env --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>然后把上面的配置可以改成：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">     &quot;build&quot;：&quot;node ./node_modules/.bin/cross-env NODE_ENV=production &amp;&amp; ...&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="处理未模块化的库，如-Zepto"><a href="#处理未模块化的库，如-Zepto" class="headerlink" title="处理未模块化的库，如 Zepto"></a>处理未模块化的库，如 Zepto</h2><p>对于未模块化的库，如果直接import，在webpack打包的时候会报错的。详见：<a href="https://juejin.im/entry/588ca3018d6d81006c237c85" target="_blank" rel="external">如何在 webpack 中引入未模块化的库，如 Zepto</a></p>
+<p>解决的办法就是在module的rules下增加如下配置项：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    test: require.resolve(&apos;zepto&apos;),</span><br><span class="line">    loader: &apos;exports-loader?window.Zepto!script-loader&apos;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中，<code>require.resolve()</code> 是 <code>nodejs</code> 用来查找模块位置的方法，返回模块的入口文件，如 zepto 为 <code>./node_modules/zepto/dist/zepto.js</code>。</p>
+<p>此外，这里还用到了两个loader，我们需要先安装他们：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm i --save-dev script-loader exports-loader</span><br></pre></td></tr></table></figure></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/09/13/Webpack/Webpack踩坑/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/09/13/Babel/webpack_config_js_ES6/">
                             webpack配置文件ES6写法
                         </a>
@@ -1223,67 +1272,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/07/10/Git/rebase/">
-                            git rebase
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-07-10T19:57:36+08:00">
-	
-		    7月 10, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h1><p>假设你现在基于远程分支”origin”，创建一个叫”mywork”的分支。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b mywork origin</span><br></pre></td></tr></table></figure>
-<p>现在我们在这个分支做一些修改，然后生成两个提交(commit).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vi file.txt</span><br><span class="line">$ git commit</span><br><span class="line">$ vi otherfile.txt</span><br><span class="line">$ git commit</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>但是与此同时，有些人也在”origin”分支上做了一些修改并且做了提交了. 这就意味着”origin”和”mywork”这两个分支各自”前进”了，它们之间”分叉”了。</p>
-<p><img src="http://cdn.shianqi.com/20171110002636_TWXHxj_rebase1.png" alt="rebase1"></p>
-<p>在这里，你可以用”pull”命令把”origin”分支上的修改拉下来并且和你的修改合并； 结果看起来就像一个新的”合并的提交”(merge commit):</p>
-<p><img src="http://cdn.shianqi.com/20171110002707_fUyhWT_rebase2.png" alt="rebase2"></p>
-<p>但是，如果你想让”mywork”分支历史看起来像没有经过任何合并一样，你也许可以用 git rebase:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout mywork</span><br><span class="line">$ git rebase origin</span><br></pre></td></tr></table></figure>
-<p>这些命令会把你的”mywork”分支里的每个提交(commit)取消掉，并且把它们临时 保存为补丁(patch)(这些补丁放到”.git/rebase”目录中),然后把”mywork”分支更新 到最新的”origin”分支，最后把保存的这些补丁应用到”mywork”分支上。</p>
-<p><img src="http://cdn.shianqi.com/20171110002727_8ZsAia_rebase3.png" alt="rebase3"></p>
-<p>当’mywork’分支更新之后，它会指向这些新创建的提交(commit),而那些老的提交会被丢弃。 如果运行垃圾收集命令(pruning garbage collection), 这些被丢弃的提交就会删除. （请查看 git gc)</p>
-<p><img src="http://cdn.shianqi.com/20171110002749_SSQxfW_rebase4.png" alt="rebase4"></p>
-<p>现在我们可以看一下用合并(merge)和用rebase所产生的历史的区别：</p>
-<p><img src="http://cdn.shianqi.com/20171110002813_aCygyZ_rebase5.png" alt="rebase5"></p>
-<p>在rebase的过程中，也许会出现冲突(conflict). 在这种情况，Git会停止rebase并会让你去解决 冲突；在解决完冲突后，用”git-add”命令去更新这些内容的索引(index), 然后，你无需执行 git-commit,只要执行:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase --continue</span><br></pre></td></tr></table></figure>
-<p>这样git会继续应用(apply)余下的补丁。</p>
-<p>在任何时候，你可以用–abort参数来终止rebase的行动，并且”mywork” 分支会回到rebase开始前的状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase --abort</span><br></pre></td></tr></table></figure></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/07/10/Git/rebase/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1393,46 +1381,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1469,8 +1419,46 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1568,7 +1556,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 101 篇文章
+                找到 102 篇文章
             </p>
         </div>
     </div>
