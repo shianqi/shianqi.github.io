@@ -195,6 +195,60 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/11/27/JavaScript/OperatingMechanism/">
+                            JavaScript 运行机制
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-11-27T12:54:16+08:00">
+	
+		    11月 27, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="JavaScript-运行机制"><a href="#JavaScript-运行机制" class="headerlink" title="JavaScript 运行机制"></a>JavaScript 运行机制</h1><h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p><img src="http://cdn.shianqi.com/20171126230612_rKQKQd_Screenshot.png" alt="事件循环"></p>
+<ul>
+<li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入 <code>Event Table</code> 并注册函数。</li>
+<li>当指定的事情完成时，<code>Event Table</code> 会将这个函数移入 <code>Event Queue</code>。</li>
+<li>主线程内的任务执行完毕为空，会去 <code>Event Queue</code> 读取对应的函数，进入主线程执行。</li>
+<li>上述过程会不断重复，也就是常说的 <code>Event Loop</code> (事件循环)。</li>
+</ul>
+<h2 id="宏任务与微任务"><a href="#宏任务与微任务" class="headerlink" title="宏任务与微任务"></a>宏任务与微任务</h2><ul>
+<li><code>macro-task</code> (宏任务)：包括整体代码 <code>script</code>，<code>setTimeout</code>，<code>setInterval</code></li>
+<li><code>micro-task</code>(微任务)：<code>Promise</code>，<code>process.nextTick</code></li>
+</ul>
+<p>不同类型的任务会进入对应的 <code>Event Queue</code>，比如 <code>setTimeout</code> 和 <code>setInterval</code> 会进入相同的 <code>Event Queue</code>。</p>
+<p><img src="http://cdn.shianqi.com/20171126231323_oeLxNy_Screenshot.png" alt="宏任务与微任务"></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/11/27/JavaScript/OperatingMechanism/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/09/24/JavaScript/Closure/">
                             深入了解闭包
                         </a>
@@ -1293,66 +1347,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/23/JavaScript/async/">
-                            async/await 的基本用法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-23T17:30:44+08:00">
-	
-		    4月 23, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="终极异步方案"><a href="#终极异步方案" class="headerlink" title="终极异步方案"></a>终极异步方案</h2><p>JavaScript异步编程一直是一件很麻烦的事，从最早的回调函数，到 Promise 对象，<br>再到 Generator 函数，每次都有所改进。但总感觉缺点什么。</p>
-<p>直到 async/await 出现，很多人认为它是异步操作的终极解决方案。</p>
-<p>async 应该会在 ECMAScript 7 引入。在 NodeJs v7.4.0 正式加入 NodeJs 大家庭。</p>
-<h2 id="async-是-Generator-函数的语法糖"><a href="#async-是-Generator-函数的语法糖" class="headerlink" title="async 是 Generator 函数的语法糖"></a>async 是 Generator 函数的语法糖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">var readFile = function (fileName)&#123;</span><br><span class="line">    return new Promise(function (resolve, reject)&#123;</span><br><span class="line">        fs.readFile(fileName, function(error, data)&#123;</span><br><span class="line">            if (error) reject(error);</span><br><span class="line">            resolve(data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>Generator 写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var co = require(&apos;co&apos;);</span><br><span class="line">var gen = function* ()&#123;</span><br><span class="line">    var f1 = yield readFile(&apos;/etc/fstab&apos;);</span><br><span class="line">    var f2 = yield readFile(&apos;/etc/shells&apos;);</span><br><span class="line">    console.log(f1.toString());</span><br><span class="line">    console.log(f2.toString());</span><br><span class="line">&#125;;</span><br><span class="line">co(gen);</span><br></pre></td></tr></table></figure></p>
-<p>写成 async 函数，就像下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var asyncReadFile = async function ()&#123;</span><br><span class="line">    var f1 = await readFile(&apos;/etc/fstab&apos;);</span><br><span class="line">    var f2 = await readFile(&apos;/etc/shells&apos;);</span><br><span class="line">    console.log(f1.toString());</span><br><span class="line">    console.log(f2.toString());</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>其实就是把 * 替换成 async ，把 yield 换成 await。而且自带执行器<br>（Generator 函数的执行必须依靠执行器，所以才有了 co 函数库）。</p>
-<h2 id="async-函数用法"><a href="#async-函数用法" class="headerlink" title="async 函数用法"></a>async 函数用法</h2><ul>
-<li><p>同 Generator 函数一样，async 函数返回一个 Promise 对象。<br>所以调用 async 函数的函数也要处理 Promise 对象。</p>
-</li>
-<li><p>用 try…catch 来处理 Promise 对象 rejected</p>
-</li>
-<li><p>await 命令只能用在 async 函数之中，如果用在普通函数，就会报错。</p>
-</li>
-<li><p>将 forEach 方法的参数改成 async 函数不能够实现继发执行。应该采用 for 循环。</p>
-</li>
-<li><p>希望多个请求并发执行，可以使用 Promise.all 方法。</p>
-</li>
-</ul>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/04/23/JavaScript/async/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1453,8 +1447,27 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
+                            <h3 class="media-heading">BrowserSync 使用手册</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1510,27 +1523,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
-                            <h3 class="media-heading">BrowserSync 使用手册</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
