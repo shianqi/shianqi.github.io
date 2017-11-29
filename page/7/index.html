@@ -194,6 +194,59 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/06/11/React-router/history/">
+                            react-router history
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-06-11T10:57:56+08:00">
+	
+		    6月 11, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="histroy-属性"><a href="#histroy-属性" class="headerlink" title="histroy 属性"></a>histroy 属性</h1><p>Router组件的history属性，用来监听浏览器地址栏的变化，并将URL解析成一个地址对象，供 <code>React Router</code> 匹配。<br>history属性，一共可以设置三种值。</p>
+<ul>
+<li><code>browserHistory</code></li>
+<li><code>hashHistory</code></li>
+<li><code>createMemoryHistory</code><br>如果设为 <code>hashHistory</code>，路由将通过URL的hash部分（#）切换，URL的形式类似 <code>example.com/#/some/path</code>。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; hashHistory &#125; from &apos;react-router&apos;</span><br><span class="line"></span><br><span class="line">render(</span><br><span class="line">  &lt;Router history=&#123;hashHistory&#125; routes=&#123;routes&#125; /&gt;,</span><br><span class="line">  document.getElementById(&apos;app&apos;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>如果设为 <code>browserHistory</code>，浏览器的路由就不再通过Hash完成了，而显示正常的路径 <code>example.com/some/path</code>，背后调用的是浏览器的 <code>History API</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import &#123; browserHistory &#125; from &apos;react-router&apos;</span><br><span class="line"></span><br><span class="line">render(</span><br><span class="line">  &lt;Router history=&#123;browserHistory&#125; routes=&#123;routes&#125; /&gt;,</span><br><span class="line">  document.getElementById(&apos;app&apos;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
+<p>但是，这种情况需要对服务器改造。否则用户直接向服务器请求某个子路由，会显示网页找不到的404错误。<br>如果开发服务器使用的是 <code>webpack-dev-server</code>，加上 <code>--history-api-fallback</code>参数就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ webpack-dev-server --inline --content-base . --history-api-fallback</span><br></pre></td></tr></table></figure>
+<p>或者在 <code>webpack.config.js</code> 配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">devServer: &#123;</span><br><span class="line">    historyApiFallback: true,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p>createMemoryHistory主要用于服务器渲染。它创建一个内存中的history对象，不与浏览器URL互动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const history = createMemoryHistory(location)</span><br></pre></td></tr></table></figure>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/06/11/React-router/history/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/06/05/UML/UML类图几种关系总结/">
                             UML类图几种关系总结
                         </a>
@@ -1175,65 +1228,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/05/11/CSS/css-performance-optimization/">
-                            CSS-Modules
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-05-11T20:10:16+08:00">
-	
-		    5月 11, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="根据浏览器CSS渲染原理写出高性能的CSS代码"><a href="#根据浏览器CSS渲染原理写出高性能的CSS代码" class="headerlink" title="根据浏览器CSS渲染原理写出高性能的CSS代码"></a>根据浏览器CSS渲染原理写出高性能的CSS代码</h1><p>注意：<strong>CSS 引擎查找样式表，对每条规则都按从右到左的顺序去匹配。</strong></p>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#nav</span> <span class="selector-tag">li</span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>CSS选择符是从右到左进行匹配的，浏览器必须遍历页面上每个li元素并确定其父元素的id是否为nav。</p>
-<h3 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>这种效率是差到极点的做法，因为 <code>*</code> 通配符将匹配所有元素，所以浏览器必须去遍历每一个元素，这样的计算次数可能是上万次</p>
-<h3 id="示例3"><a href="#示例3" class="headerlink" title="示例3"></a>示例3</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ul</span><span class="selector-id">#nav</span>&#123;&#125; <span class="selector-tag">ul</span><span class="selector-class">.nav</span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>在页面中一个指定的ID只能对应一个元素，所以没有必要添加额外的限定符，而且这会使它更低效。同时也不要用具体的标签限定类选择符，而是要根据实际的情况对类名进行扩展。例如把 <code>ul.nav</code> 改成 <code>.main_nav</code> 更好。</p>
-<h2 id="优化方案"><a href="#优化方案" class="headerlink" title="优化方案"></a>优化方案</h2><ol>
-<li>避免使用通配规则。如 <code>*{}</code> 计算次数惊人！只对需要用到的元素进行选择</li>
-<li><p>尽量少的去对标签进行选择，而是用 <code>class</code>。如： <code>#nav li{}</code> ,可以为 <code>li</code> 加上 <code>nav_item</code> 的类名，如下选择 <code>.nav_item{}</code></p>
-</li>
-<li><p>不要去用标签限定ID或者类选择符。如：<code>ul#nav</code> ,应该简化为 <code>#nav</code></p>
-</li>
-<li><p>尽量少的去使用后代选择器，降低选择器的权重值。后代选择器的开销是最高的，尽量将选择器的深度降到最低，最高不要超过三层，更多的使用类来关联每一个标签元素。</p>
-</li>
-<li><p>考虑继承。了解哪些属性是可以通过继承而来的，然后避免对这些属性重复指定规则</p>
-</li>
-</ol>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/05/11/CSS/css-performance-optimization/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1343,8 +1337,27 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1381,27 +1394,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1518,7 +1512,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 102 篇文章
+                找到 103 篇文章
             </p>
         </div>
     </div>
