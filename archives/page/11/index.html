@@ -195,6 +195,66 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/09/04/JavaScript/Event/">
+                            JavaScript 事件捕获和冒泡
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
+	
+		    9月 04, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="规范"><a href="#规范" class="headerlink" title="规范"></a>规范</h2><p>在最新的 DOM 规范中，事件的捕获与冒泡是通过 <code>addEventListener(...arg)</code> 的第三个参数的 <code>capture</code>来指定的。默认为 <code>false</code>,也就是默认冒泡。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener, &#123;</span><br><span class="line">    capture: false,</span><br><span class="line">    passive: false,</span><br><span class="line">    once: false</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://shianqi.github.io/2017/05/24/JavaScript/Touch_Passive/">addEventListener 第三个参数</a></p>
+<h2 id="触发规则"><a href="#触发规则" class="headerlink" title="触发规则"></a>触发规则</h2><p><img src="http://cdn.shianqi.com/20171110002906_Xz9fLr_Event.png" alt="event"></p>
+<p>在多个嵌套情况下，捕获的触发是从外到内的，冒泡则相反。先进行捕获，然后是冒泡。</p>
+<p><strong>这里要注意一点，在最后的一层中，先触发冒泡或捕获决定于代码中出现的先后，先出现的先执行。</strong></p>
+<p><strong>不是所有的事件都能冒泡，例如：<code>blur</code>、<code>focus</code>、<code>load</code>、<code>unload</code></strong></p>
+<h2 id="DOM事件流"><a href="#DOM事件流" class="headerlink" title="DOM事件流"></a>DOM事件流</h2><p>同时支持两种事件模型：捕获型事件和冒泡型事件，但是，捕获型事件先发生。两种事件流会触及DOM中的所有对象，从document对象开始，也在document对象结束。</p>
+<p>DOM事件模型最独特的性质是，文本节点也触发事件</p>
+<h2 id="绑定事件方式"><a href="#绑定事件方式" class="headerlink" title="绑定事件方式"></a>绑定事件方式</h2><p>在一个支持W3C DOM的浏览器中，像这样一般的绑定事件方式，是采用的<strong>事件冒泡</strong>方式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ele.onclick = <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//doSomething</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="IE浏览器"><a href="#IE浏览器" class="headerlink" title="IE浏览器"></a>IE浏览器</h2><p>IE只支持事件冒泡，不支持事件捕获，它也不支持 <code>addEventListener</code> 函数，不会用第三个参数来表示是冒泡还是捕获，它提供了另一个函数 <code>attachEvent</code>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ele.attachEvent(<span class="string">"onclick"</span>, ()=&gt;&#123;</span><br><span class="line">    <span class="comment">//doSomething</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="阻止事件传播："><a href="#阻止事件传播：" class="headerlink" title="阻止事件传播："></a>阻止事件传播：</h2><ul>
+<li>在W3c中，使用 <code>stopPropagation()</code> 方法</li>
+<li>在IE下设置 <code>cancelBubble = true</code><br>在捕获的过程中 <code>stopPropagation();</code> 后，后面的冒泡过程也不会发生了</li>
+</ul>
+<h2 id="阻止事件的默认行为"><a href="#阻止事件的默认行为" class="headerlink" title="阻止事件的默认行为"></a>阻止事件的默认行为</h2><ul>
+<li>在W3c中，使用 <code>preventDefault();</code> 方法；</li>
+<li>在IE下设置 <code>window.event.returnValue = false;</code></li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/09/04/JavaScript/Event/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/09/04/BrowserSync/BrowserSync/">
                             BrowserSync 使用手册
                         </a>
@@ -223,101 +283,6 @@
                     
                         <p>
                             <a href="/2016/09/04/BrowserSync/BrowserSync/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/04/JavaScript/Javascript/">
-                            JavaScript 简介
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
-	
-		    9月 04, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <ul>
-<li><a href="#1">1.JavaScript简介</a><ul>
-<li><a href="#1.1">JavaScript简史</a></li>
-<li><a href="#1.2">JavaScript实现</a></li>
-</ul>
-</li>
-<li><a href="#2">2.在HTML中使用JavaScript</a><ul>
-<li><a href="#2.1">\<script\>元素</script\></a></li>
-<li><a href="#2.2">嵌入代码与外部文件</a></li>
-<li><a href="#2.3">\<noscript\>元素</noscript\></a></li>
-</ul>
-</li>
-</ul>
-<h2 id="1">JavaScript简介</h2>
-
-<h3 id="1.1">JavaScript简史</h3><br><em> Netscape公司的布兰登·艾奇（Brendan Eich），1995年开发LiveScript为了搭上被媒体超热的Java的热潮，改名为JavaScript。
-</em> 微软在Internet Explorer 3 中加入JScript<br><em> 1997年，以 JavaScript 1.1 为蓝本的由欧洲计算机制造商协会（ECMA，European Computer Manufacturers Association）完成ECMA-262 定义名为ECMAScript
-</em> 1998年，ISO/IEC（国标标准化组织和国际电工委员会）也采用了ECMAScript 作为标准（即ISO/IEC-16262）<br><br><h3 id="1.2">JavaScript实现</h3><br><em> JavaScript包括 ECMAScript ，DOM ，BOM
-</em> 核心（ECMAScript）<br>    <em> ECMA-262 第1版：本质上与Netscape的JavaScript 1.1 相同——只不过删除了所有针对浏览器的代码并作了一些较小的改动。
-    </em> ECMA-262 第2版：这一版中内容的更新是为了与ISO/IEC-16262 保持严格一致，没有作任何新增、修改或删节处理。<br>    <em> ECMA-262 第3版：才是对该标准第一次真正的修改。修改的内容涉及字符串处理、错误定义和数值输出。这一版还新增了对正则表达式、新控制语句、try-catch 异常处理的支持，并围绕标准的国际化做出了一些小的修改。
-    </em> ECMA-262 第4版：不仅包含了强类型变量、新语句和新数据结构、真正的类和经典继承，还定义了与数据交互的新方式。<br>            与此同时，TC39 下属的一个小组也提出了一个名为ECMAScript 3.1 的替代性建议，该建议只对这<br>            门语言进行了较少的改进。<br>    <em> ECMA-262 第5版：ECMAScript 3.1 成为ECMA-262 第5 版，并于2009 年12 月3 日正式发布。第五版澄清第三版中已知的歧义并添加了原生JSON解析，<br>            继承的方法和高级属性定义，严格模式。
-</em> 文档对象模型（DOM）（提供访问和操作网页内容的方法和接口）<br>    <em> 文档对象模型（DOM，Document Object Model）是针对XML 但经过扩展用于HTML 的应用程序编<br>      程接口（API，Application Programming Interface）。
-    </em> 其他DOM 标准<br>        <em> SVG（Scalable Vector Graphic，可伸缩矢量图）1.0；
-        </em> MathML（Mathematical Markup Language，数学标记语言）1.0；<br>        <em> SMIL（Synchronized Multimedia Integration Language，同步多媒体集成语言）。
-
-</em> 浏览器对象模型（BOM）（提供与浏览器交互的方法和接口）<br>    <em> 出新浏览器窗口的功能；
-    </em> 移动、缩放和关闭浏览器窗口的功能；<br>    <em> 提供浏览器详细信息的navigator 对象；
-    </em> 提供浏览器所加载页面的详细信息的location 对象；<br>    <em> 提供用户显示器分辨率详细信息的screen 对象；
-    </em> 对cookies 的支持；<br>    * 像XMLHttpRequest 和IE 的ActiveXObject 这样的自定义对象。<br><br><h2 id="2">在HTML 中使用JavaScript
-
-<h3 id="2.1">script元素</h3><br><em> 6个属性
-    </em> async：可选。表示应该立即下载脚本，但不应妨碍页面中的其他操作，比如下载其他资源或<br>      等待加载其他脚本。只对外部脚本文件有效。<br>    <em> charset：可选。表示通过src 属性指定的代码的字符集。由于大多数浏览器会忽略它的值，<br>      因此这个属性很少有人用。
-    </em> defer：可选。表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本文件有<br>      效。<br>    <em> language：已废弃。原来用于表示编写代码使用的脚本语言（如JavaScript、JavaScript1.2<br>      或VBScript）。大多数浏览器会忽略这个属性，因此也没有必要再用了。
-    </em> src：可选。表示包含要执行代码的外部文件。<br>    <em> type：可选。可以看成是language 的替代属性(默认值为text/javascript)
-
-</em> 注意转义<br>    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">sayScript</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">"&lt;\/script&gt;"</span>);</span></span><br><span class="line"><span class="javascript">        <span class="comment">//此处要加转义符</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><em> 注意不可省略<br>    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="xml"><span class="tag">&lt;<span class="name">script</span>/&gt;</span></span></span><br><span class="line"><span class="undefined">&lt;!--注意：此处不能写成</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>/&gt;</span><span class="undefined"></span></span></span><br><span class="line"><span class="undefined">--&gt;</span></span><br></pre></td></tr></table></figure>
-
-</em> 带有src 属性的\<script\>元素不应该在其\<script\>和\</script\>标签之间再<br>      包含额外的JavaScript 代码。如果包含了嵌入的代码，则只会下载并执行外部<br>      脚本文件，嵌入的代码会被忽略。<br><br><em> 无论如何包含代码，只要不存在defer 和async 属性，浏览器都会按照\<script\>元素在页面中<br>  出现的先后顺序对它们依次进行解析。（解析完第一个才会解析第二个）
-
-</script\></em> 由于浏览器会先解析完不使用defer 属性的\<script\>元素中的代码，然后再解析后面的内容，<br>  所以一般应该把\<script\>元素放在页面最后，即主要内容后面，\标签前面。<br><br><h3 id="2.2">嵌入代码与外部文件</h3>
-
-<ul>
-<li>外部文件的优点：<ul>
-<li>可维护性</li>
-<li>可缓存（如果有两个页面都使用同一个文件，那么这个文件只需下载一次。）</li>
-<li>适应未来（不存在上面提到的转义问题）</li>
-</ul>
-</li>
-</ul>
-<h3 id="2.3">noscript元素</h3>
-
-<ul>
-<li>浏览器不支持脚本,或者浏览器支持脚本，但脚本被禁用时会显示标签中的文本。</li>
-</ul>
-</script\></script\></script\></h2>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/09/04/JavaScript/Javascript/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -489,25 +454,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
                             <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
@@ -529,6 +475,25 @@
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
                             <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">

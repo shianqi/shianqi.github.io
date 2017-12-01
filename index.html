@@ -252,13 +252,21 @@
 <li><code>combineLatest</code>，取各来源数据流最后一个值合并为数组</li>
 </ul>
 <h2 id="在RxJS中，存在这么几种东西："><a href="#在RxJS中，存在这么几种东西：" class="headerlink" title="在RxJS中，存在这么几种东西："></a>在RxJS中，存在这么几种东西：</h2><ul>
-<li><code>Observable</code> 可观察序列，只出不进</li>
-<li><code>Observer</code> 观察者，只进不出</li>
-<li><code>Subject</code> 可出可进的可观察序列，可作为观察者</li>
-<li><code>ReplaySubject</code> 带回放</li>
-<li><code>Subscription</code> 订阅关系</li>
+<li><code>Observable</code> (可观察对象): 表示一个概念，这个概念是一个可调用的未来值或事件的集合。</li>
+<li><code>Observer</code> (观察者): 一个回调函数的集合，它知道如何去监听由 <code>Observable</code> 提供的值。</li>
+<li><code>Subscription</code> (订阅): 表示 <code>Observable</code> 的执行，主要用于取消 <code>Observable</code> 的执行。</li>
+<li><code>Operators</code> (操作符): 采用函数式编程风格的纯函数 (pure function)，使用像 <code>map</code>、<code>filter</code>、<code>concat</code>、<code>flatMap</code> 等这样的操作符来处理集合。</li>
+<li><code>Subject</code> (主体): 相当于 <code>EventEmitter</code>，并且是将值或事件多路推送给多个 <code>Observer</code> 的唯一方式。<ul>
+<li><code>BehaviorSubject</code>:  保存了发送给消费者的最新值。并且当有新的观察者订阅时，会立即从 <code>BehaviorSubject</code> 那接收到“当前值”。</li>
+<li><code>ReplaySubject</code>: 类似于 <code>BehaviorSubject</code>，它可以发送一定时间内多个旧值给新的订阅者，可以传入两个参数，数量和过期时间。</li>
+<li><code>AsyncSubject</code>: 只有当 <code>Observable</code> 执行完成时(执行 <code>complete()</code>)，它才会将执行的最后一个值发送给观察者。</li>
 </ul>
+</li>
+<li><code>Schedulers</code> (调度器): 用来控制并发并且是中央集权的调度员，允许我们在发生计算时进行协调，例如 <code>setTimeout</code> 或 <code>requestAnimationFrame</code> 或其他。</li>
+</ul>
+<h2 id="弹珠图"><a href="#弹珠图" class="headerlink" title="弹珠图"></a>弹珠图</h2><p><img src="http://cdn.shianqi.com/20171201165821_OuNFtM_Screenshot.png" alt="弹珠图"></p>
 <h2 id="例子：赚钱是为了买房，买房是为了赚钱。"><a href="#例子：赚钱是为了买房，买房是为了赚钱。" class="headerlink" title="例子：赚钱是为了买房，买房是为了赚钱。"></a>例子：赚钱是为了买房，买房是为了赚钱。</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Rx = <span class="built_in">require</span>(<span class="string">'rxjs/Rx'</span>)</span><br><span class="line"><span class="keyword">const</span> &#123; Observable, Subject &#125; = Rx</span><br><span class="line"></span><br><span class="line"><span class="comment">// 挣钱是为了买房，买房是为了赚钱</span></span><br><span class="line"><span class="keyword">const</span> house$ = <span class="keyword">new</span> Subject()</span><br><span class="line"><span class="keyword">const</span> houseCount$ = house$.scan(<span class="function">(<span class="params">acc, num</span>) =&gt;</span> acc + num, <span class="number">0</span>).startWith(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 工资始终不涨</span></span><br><span class="line"><span class="keyword">const</span> salary$ = Observable.interval(<span class="number">100</span>).mapTo(<span class="number">2</span>)</span><br><span class="line"><span class="keyword">const</span> rent$ = Observable.interval(<span class="number">3000</span>)</span><br><span class="line">  .withLatestFrom(houseCount$)</span><br><span class="line">  .map(<span class="function"><span class="params">arr</span> =&gt;</span> arr[<span class="number">1</span>] * <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一买了房，就没现金了……</span></span><br><span class="line"><span class="keyword">const</span> income$ = Observable.merge(salary$, rent$)</span><br><span class="line"><span class="keyword">const</span> cash$ = income$</span><br><span class="line">  .scan(<span class="function">(<span class="params">acc, num</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> newSum = acc + num</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> newHouse = <span class="built_in">Math</span>.floor(newSum / <span class="number">100</span>)</span><br><span class="line">    <span class="keyword">if</span> (newHouse &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      house$.next(newHouse)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newSum % <span class="number">100</span></span><br><span class="line">  &#125;, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">houseCount$.subscribe(<span class="function"><span class="params">num</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">`houseCount: <span class="subst">$&#123;num&#125;</span>`</span>))</span><br><span class="line">cash$.subscribe(<span class="function"><span class="params">num</span> =&gt;</span> <span class="built_in">console</span>.log(<span class="string">`cash: <span class="subst">$&#123;num&#125;</span>`</span>))</span><br></pre></td></tr></table></figure>
+<p>RxJS 中文文档：<a href="http://cn.rx.js.org/manual/overview.htm" target="_blank" rel="external">http://cn.rx.js.org/manual/overview.htm</a></p>
 <p>RxJS 函数可视化：<a href="http://rxmarbles.com/" target="_blank" rel="external">http://rxmarbles.com/</a></p>
 
                     
@@ -1048,25 +1056,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
                             <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
@@ -1088,6 +1077,25 @@
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
                             <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
