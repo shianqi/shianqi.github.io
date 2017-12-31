@@ -194,6 +194,173 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/01/07/Network/networkLayer/">
+                            计算机网络——网络层基本概念
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-01-07T12:36:41+08:00">
+	
+		    1月 07, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h1><h2 id="网络层提供的两种服务"><a href="#网络层提供的两种服务" class="headerlink" title="网络层提供的两种服务"></a>网络层提供的两种服务</h2><p><strong>网络层向上只提供简单灵活的、无连接的、尽最大努力交付的数据报服务。</strong>网络在发送分组时不需要先建立连接。每一个分组（也就是IP数据报）独立发送，与其后面的分组无关（不进行编号）。<strong>网络层不提供服务质量的承诺</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>对比的方面</th>
+<th>虚电路服务</th>
+<th>数据服务</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>思路</td>
+<td>可靠通信应当由网络来保证</td>
+<td>可靠通信应当由用户主机来保证</td>
+</tr>
+<tr>
+<td>链接的建立</td>
+<td>必须有</td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>终点地址</td>
+<td>仅在链接建立阶段使用，每个分组使用短的虚电路号</td>
+<td>每个分组都有终点的完整地址</td>
+</tr>
+<tr>
+<td>分组的转发</td>
+<td>属于同一条虚电路的分组均按照同一路由进行转发</td>
+<td>每个分组独立选择路由进行转发</td>
+</tr>
+<tr>
+<td>当结点出故障时</td>
+<td>所有通过故障的虚电路均不能工作</td>
+<td>出故障的节点可能会丢失分组，一些路由可能发生变化</td>
+</tr>
+<tr>
+<td>分组的顺序</td>
+<td>总是按发送顺序到达终点</td>
+<td>到达时间不一定按照发送顺序</td>
+</tr>
+<tr>
+<td>端到端差错处理和流量控制</td>
+<td>可以由网络负责，也可以由用户主机负责</td>
+<td>由用户主机负责</td>
+</tr>
+</tbody>
+</table>
+<h2 id="网际协议IP"><a href="#网际协议IP" class="headerlink" title="网际协议IP"></a>网际协议IP</h2><p>网际协议IP是TCP/IP体系中两个最主要的协议之一，与之配套使用的还有三个协议：</p>
+<ul>
+<li>地址解析协议 ARP（Address Resolution Protocol）</li>
+<li>网际控制报文协议 ICMP （Internet Control Message Protocol）</li>
+<li>网络组管理协议 IGMP（Internet Group Management Protocol）</li>
+</ul>
+<h3 id="虚拟互联网络"><a href="#虚拟互联网络" class="headerlink" title="虚拟互联网络"></a>虚拟互联网络</h3><p>将网络互相链接起来要使用一些中间设备。根据中间设备所在的层次，可以有以下四种不同的中间设备。</p>
+<ul>
+<li>物理层：<strong>转发器</strong></li>
+<li>数据链路层：<strong>网桥</strong>或<strong>桥接器</strong></li>
+<li>网络层：<strong>路由器</strong></li>
+<li>网络层以上：<strong>网关</strong>，用网关链接连个不兼容的系统需要在高层进行协议转换。</li>
+</ul>
+<h3 id="分类的IP地址"><a href="#分类的IP地址" class="headerlink" title="分类的IP地址"></a>分类的IP地址</h3><p>IP地址：给因特网上的每一个主机（或路由器）的每一个接口分配一个在全世界范围是唯一的32位的标识符。<br>IP地址的编址方法：</p>
+<ol>
+<li>分类的IP地址</li>
+<li>子网的划分</li>
+<li>构成超网</li>
+</ol>
+<p>分类IP地址：每一类地址都是由两个固定长度的字段组成，其中一个字段是<strong>网络号</strong>，它标志主机（或路由器）所链接到的网络。第二个字段是<strong>主机号</strong>，它标志该主机（或路由器）。主机号在前面网络号所指明的范围是唯一的。</p>
+<table>
+<thead>
+<tr>
+<th>地址类别</th>
+<th>地址前缀</th>
+<th>网络号长度</th>
+<th>可指派网络号</th>
+<th>每个网路号可指派的地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A类地址</td>
+<td>0</td>
+<td>8</td>
+<td>126 (2<sup>7</sup>-2)包括全0和127(环回地址)</td>
+<td>16777214 (2<sup>14</sup>-1)</td>
+</tr>
+<tr>
+<td>B类地址</td>
+<td>10</td>
+<td>16</td>
+<td>16383 (2<sup>14</sup>-1)</td>
+<td>65534 (2<sup>16</sup>-2)</td>
+</tr>
+<tr>
+<td>C类地址</td>
+<td>110</td>
+<td>24</td>
+<td>2097151 (2<sup>21</sup>-1)</td>
+<td>254 (2<sup>8</sup>-1)</td>
+</tr>
+<tr>
+<td>D类地址</td>
+<td>1110</td>
+<td>多播地址</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>E类地址</td>
+<td>1111</td>
+<td>保留为今后使用</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><strong>IP地址放在IP数据的首部，而硬件地址则放在MAC帧的首部。在网络层和网络层以上使用的是IP地址，而数据链路层及以上使用的是硬件地址。</strong></p>
+<h3 id="地址解析协议ARP"><a href="#地址解析协议ARP" class="headerlink" title="地址解析协议ARP"></a>地址解析协议ARP</h3><p>为了解决：已经知道一个机器（主机或路由器）的IP地址，需要找出其相应的硬件地址。</p>
+<p>解决方法：在主机ARP高速缓存中存放一个从IP地址到硬件地址的映射表，并且这个映射表还经常动态更新（新增或动态删除）。</p>
+<p>过程：</p>
+<ol>
+<li>广播发送ARP请求分组</li>
+<li>在本局域网上的所有主机上运行的ARP进程都收到此ARP请求分组</li>
+<li>如果有一个主机的IP与查询IP一致，则就收下这个ARP请求，并发送ARP响应分组。不一致则不理睬，所以ARP响应是单播。</li>
+<li>源主机收到ARP响应分组后，在ARP高速缓存中写下主机B的IP地址到硬件地址的映射。</li>
+</ol>
+<h3 id="IP数据报的格式"><a href="#IP数据报的格式" class="headerlink" title="IP数据报的格式"></a>IP数据报的格式</h3><p>一个IP数据报由首部和数据两部分组成。首部前一部分是<strong>固定长度</strong>，共20字节，是所有IP数据报必须具有的。首部的后面一部分是可选字段，长度可变。</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/01/07/Network/networkLayer/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/01/04/JavaEE/JavaEE中重点/">
                             JavaEE 考点
                         </a>
@@ -1070,101 +1237,6 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2016/09/04/JavaScript/Javascript/">
-                            JavaScript 简介
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
-	
-		    9月 04, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <ul>
-<li><a href="#1">1.JavaScript简介</a><ul>
-<li><a href="#1.1">JavaScript简史</a></li>
-<li><a href="#1.2">JavaScript实现</a></li>
-</ul>
-</li>
-<li><a href="#2">2.在HTML中使用JavaScript</a><ul>
-<li><a href="#2.1">\<script\>元素</script\></a></li>
-<li><a href="#2.2">嵌入代码与外部文件</a></li>
-<li><a href="#2.3">\<noscript\>元素</noscript\></a></li>
-</ul>
-</li>
-</ul>
-<h2 id="1">JavaScript简介</h2>
-
-<h3 id="1.1">JavaScript简史</h3><br><em> Netscape公司的布兰登·艾奇（Brendan Eich），1995年开发LiveScript为了搭上被媒体超热的Java的热潮，改名为JavaScript。
-</em> 微软在Internet Explorer 3 中加入JScript<br><em> 1997年，以 JavaScript 1.1 为蓝本的由欧洲计算机制造商协会（ECMA，European Computer Manufacturers Association）完成ECMA-262 定义名为ECMAScript
-</em> 1998年，ISO/IEC（国标标准化组织和国际电工委员会）也采用了ECMAScript 作为标准（即ISO/IEC-16262）<br><br><h3 id="1.2">JavaScript实现</h3><br><em> JavaScript包括 ECMAScript ，DOM ，BOM
-</em> 核心（ECMAScript）<br>    <em> ECMA-262 第1版：本质上与Netscape的JavaScript 1.1 相同——只不过删除了所有针对浏览器的代码并作了一些较小的改动。
-    </em> ECMA-262 第2版：这一版中内容的更新是为了与ISO/IEC-16262 保持严格一致，没有作任何新增、修改或删节处理。<br>    <em> ECMA-262 第3版：才是对该标准第一次真正的修改。修改的内容涉及字符串处理、错误定义和数值输出。这一版还新增了对正则表达式、新控制语句、try-catch 异常处理的支持，并围绕标准的国际化做出了一些小的修改。
-    </em> ECMA-262 第4版：不仅包含了强类型变量、新语句和新数据结构、真正的类和经典继承，还定义了与数据交互的新方式。<br>            与此同时，TC39 下属的一个小组也提出了一个名为ECMAScript 3.1 的替代性建议，该建议只对这<br>            门语言进行了较少的改进。<br>    <em> ECMA-262 第5版：ECMAScript 3.1 成为ECMA-262 第5 版，并于2009 年12 月3 日正式发布。第五版澄清第三版中已知的歧义并添加了原生JSON解析，<br>            继承的方法和高级属性定义，严格模式。
-</em> 文档对象模型（DOM）（提供访问和操作网页内容的方法和接口）<br>    <em> 文档对象模型（DOM，Document Object Model）是针对XML 但经过扩展用于HTML 的应用程序编<br>      程接口（API，Application Programming Interface）。
-    </em> 其他DOM 标准<br>        <em> SVG（Scalable Vector Graphic，可伸缩矢量图）1.0；
-        </em> MathML（Mathematical Markup Language，数学标记语言）1.0；<br>        <em> SMIL（Synchronized Multimedia Integration Language，同步多媒体集成语言）。
-
-</em> 浏览器对象模型（BOM）（提供与浏览器交互的方法和接口）<br>    <em> 出新浏览器窗口的功能；
-    </em> 移动、缩放和关闭浏览器窗口的功能；<br>    <em> 提供浏览器详细信息的navigator 对象；
-    </em> 提供浏览器所加载页面的详细信息的location 对象；<br>    <em> 提供用户显示器分辨率详细信息的screen 对象；
-    </em> 对cookies 的支持；<br>    * 像XMLHttpRequest 和IE 的ActiveXObject 这样的自定义对象。<br><br><h2 id="2">在HTML 中使用JavaScript
-
-<h3 id="2.1">script元素</h3><br><em> 6个属性
-    </em> async：可选。表示应该立即下载脚本，但不应妨碍页面中的其他操作，比如下载其他资源或<br>      等待加载其他脚本。只对外部脚本文件有效。<br>    <em> charset：可选。表示通过src 属性指定的代码的字符集。由于大多数浏览器会忽略它的值，<br>      因此这个属性很少有人用。
-    </em> defer：可选。表示脚本可以延迟到文档完全被解析和显示之后再执行。只对外部脚本文件有<br>      效。<br>    <em> language：已废弃。原来用于表示编写代码使用的脚本语言（如JavaScript、JavaScript1.2<br>      或VBScript）。大多数浏览器会忽略这个属性，因此也没有必要再用了。
-    </em> src：可选。表示包含要执行代码的外部文件。<br>    <em> type：可选。可以看成是language 的替代属性(默认值为text/javascript)
-
-</em> 注意转义<br>    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">sayScript</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        alert(<span class="string">"&lt;\/script&gt;"</span>);</span></span><br><span class="line"><span class="javascript">        <span class="comment">//此处要加转义符</span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure><br><br><em> 注意不可省略<br>    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>&gt;</span><span class="xml"><span class="tag">&lt;<span class="name">script</span>/&gt;</span></span></span><br><span class="line"><span class="undefined">&lt;!--注意：此处不能写成</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"example.js"</span>/&gt;</span><span class="undefined"></span></span></span><br><span class="line"><span class="undefined">--&gt;</span></span><br></pre></td></tr></table></figure>
-
-</em> 带有src 属性的\<script\>元素不应该在其\<script\>和\</script\>标签之间再<br>      包含额外的JavaScript 代码。如果包含了嵌入的代码，则只会下载并执行外部<br>      脚本文件，嵌入的代码会被忽略。<br><br><em> 无论如何包含代码，只要不存在defer 和async 属性，浏览器都会按照\<script\>元素在页面中<br>  出现的先后顺序对它们依次进行解析。（解析完第一个才会解析第二个）
-
-</script\></em> 由于浏览器会先解析完不使用defer 属性的\<script\>元素中的代码，然后再解析后面的内容，<br>  所以一般应该把\<script\>元素放在页面最后，即主要内容后面，\标签前面。<br><br><h3 id="2.2">嵌入代码与外部文件</h3>
-
-<ul>
-<li>外部文件的优点：<ul>
-<li>可维护性</li>
-<li>可缓存（如果有两个页面都使用同一个文件，那么这个文件只需下载一次。）</li>
-<li>适应未来（不存在上面提到的转义问题）</li>
-</ul>
-</li>
-</ul>
-<h3 id="2.3">noscript元素</h3>
-
-<ul>
-<li>浏览器不支持脚本,或者浏览器支持脚本，但脚本被禁用时会显示标签中的文本。</li>
-</ul>
-</script\></script\></script\></h2>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/09/04/JavaScript/Javascript/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
                         <a class="link-unstyled" href="/2016/09/04/JavaScript/Event/">
                             JavaScript 事件捕获和冒泡
                         </a>
@@ -1327,46 +1399,8 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
-                            <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1403,8 +1437,46 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
+                            <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1502,7 +1574,7 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 104 篇文章
+                找到 105 篇文章
             </p>
         </div>
     </div>
