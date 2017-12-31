@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Tron Blog!">
-    <title>标签: Git - Tron Blog!</title>
+    <title>标签: git - Tron Blog!</title>
     <meta name="author" content="Archie Shi">
     
     
@@ -14,7 +14,7 @@
     <meta name="description" content="Archie&apos;s Blog">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Tron Blog!">
-<meta property="og:url" content="https://shianqi.github.io/tags/Git/index.html">
+<meta property="og:url" content="https://shianqi.github.io/tags/git/index.html">
 <meta property="og:site_name" content="Tron Blog!">
 <meta property="og:description" content="Archie&apos;s Blog">
 <meta property="og:locale" content="zh-cn">
@@ -195,15 +195,15 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2017/07/10/Git/rebase/">
-                            git rebase
+                        <a class="link-unstyled" href="/2017/06/20/Git/GithubEmoji/">
+                            Github 提交代码 Emoji
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-07-10T19:57:36+08:00">
+    <time itemprop="datePublished" datetime="2017-06-20T18:57:13+08:00">
 	
-		    7月 10, 2017
+		    6月 20, 2017
     	
     </time>
     
@@ -212,33 +212,260 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="rebase"><a href="#rebase" class="headerlink" title="rebase"></a>rebase</h1><p>假设你现在基于远程分支”origin”，创建一个叫”mywork”的分支。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b mywork origin</span><br></pre></td></tr></table></figure>
-<p>现在我们在这个分支做一些修改，然后生成两个提交(commit).</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ vi file.txt</span><br><span class="line">$ git commit</span><br><span class="line">$ vi otherfile.txt</span><br><span class="line">$ git commit</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-<p>但是与此同时，有些人也在”origin”分支上做了一些修改并且做了提交了. 这就意味着”origin”和”mywork”这两个分支各自”前进”了，它们之间”分叉”了。</p>
-<p><img src="http://cdn.shianqi.com/20171110002636_TWXHxj_rebase1.png" alt="rebase1"></p>
-<p>在这里，你可以用”pull”命令把”origin”分支上的修改拉下来并且和你的修改合并； 结果看起来就像一个新的”合并的提交”(merge commit):</p>
-<p><img src="http://cdn.shianqi.com/20171110002707_fUyhWT_rebase2.png" alt="rebase2"></p>
-<p>但是，如果你想让”mywork”分支历史看起来像没有经过任何合并一样，你也许可以用 git rebase:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout mywork</span><br><span class="line">$ git rebase origin</span><br></pre></td></tr></table></figure>
-<p>这些命令会把你的”mywork”分支里的每个提交(commit)取消掉，并且把它们临时 保存为补丁(patch)(这些补丁放到”.git/rebase”目录中),然后把”mywork”分支更新 到最新的”origin”分支，最后把保存的这些补丁应用到”mywork”分支上。</p>
-<p><img src="http://cdn.shianqi.com/20171110002727_8ZsAia_rebase3.png" alt="rebase3"></p>
-<p>当’mywork’分支更新之后，它会指向这些新创建的提交(commit),而那些老的提交会被丢弃。 如果运行垃圾收集命令(pruning garbage collection), 这些被丢弃的提交就会删除. （请查看 git gc)</p>
-<p><img src="http://cdn.shianqi.com/20171110002749_SSQxfW_rebase4.png" alt="rebase4"></p>
-<p>现在我们可以看一下用合并(merge)和用rebase所产生的历史的区别：</p>
-<p><img src="http://cdn.shianqi.com/20171110002813_aCygyZ_rebase5.png" alt="rebase5"></p>
-<p>在rebase的过程中，也许会出现冲突(conflict). 在这种情况，Git会停止rebase并会让你去解决 冲突；在解决完冲突后，用”git-add”命令去更新这些内容的索引(index), 然后，你无需执行 git-commit,只要执行:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase --continue</span><br></pre></td></tr></table></figure>
-<p>这样git会继续应用(apply)余下的补丁。</p>
-<p>在任何时候，你可以用–abort参数来终止rebase的行动，并且”mywork” 分支会回到rebase开始前的状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase --abort</span><br></pre></td></tr></table></figure></p>
+                    <p>An emoji guide for your commit messages: <a href="https://gitmoji.carloscuesta.me/" target="_blank" rel="external">gitmoji</a></p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Emoji</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>:art:</code></td>
+<td>:art:</td>
+<td>改进代码的结构/格式</td>
+</tr>
+<tr>
+<td><code>:zap:</code></td>
+<td>:zap:</td>
+<td>提高性能</td>
+</tr>
+<tr>
+<td><code>:fire:</code></td>
+<td>:fire:</td>
+<td>删除代码或文件</td>
+</tr>
+<tr>
+<td><code>:bug:</code></td>
+<td>:bug:</td>
+<td>修复bug</td>
+</tr>
+<tr>
+<td><code>:ambulance:</code></td>
+<td>:ambulance:</td>
+<td>关键修补程序</td>
+</tr>
+<tr>
+<td><code>:sparkles:</code></td>
+<td>:sparkles:</td>
+<td>引入新功能</td>
+</tr>
+<tr>
+<td><code>:memo:</code></td>
+<td>:memo:</td>
+<td>写文档</td>
+</tr>
+<tr>
+<td><code>:rocket:</code></td>
+<td>:rocket:</td>
+<td>部署项目</td>
+</tr>
+<tr>
+<td><code>:lipstick:</code></td>
+<td>:lipstick:</td>
+<td>更新UI和样式文件</td>
+</tr>
+<tr>
+<td><code>:tada:</code></td>
+<td>:tada:</td>
+<td>初始提交</td>
+</tr>
+<tr>
+<td><code>:white_check_mark:</code></td>
+<td>:white_check_mark:</td>
+<td>添加测试</td>
+</tr>
+<tr>
+<td><code>:lock:</code></td>
+<td>:lock:</td>
+<td>解决安全问题</td>
+</tr>
+<tr>
+<td><code>:apple:</code></td>
+<td>:apple:</td>
+<td>修改 macOS 下的一些问题</td>
+</tr>
+<tr>
+<td><code>:penguin:</code></td>
+<td>:penguin:</td>
+<td>修改 Linux 下的一些问题</td>
+</tr>
+<tr>
+<td><code>:checkered_flag:</code></td>
+<td>:checkered_flag:</td>
+<td>修改 Windows 下的一些问题</td>
+</tr>
+<tr>
+<td><code>:robot:</code></td>
+<td>:robot:</td>
+<td>修改 Android 下的一些问题</td>
+</tr>
+<tr>
+<td><code>:green_apple:</code></td>
+<td>:green_apple:</td>
+<td>修改 IOS 下的一些问题</td>
+</tr>
+<tr>
+<td><code>:bookmark:</code></td>
+<td>:bookmark:</td>
+<td>发布版本标签</td>
+</tr>
+<tr>
+<td><code>:rotating_light:</code></td>
+<td>:rotating_light:</td>
+<td>移除 linter 警告</td>
+</tr>
+<tr>
+<td><code>:construction:</code></td>
+<td>:construction:</td>
+<td>工作正在进行中</td>
+</tr>
+<tr>
+<td><code>:green_heart:</code></td>
+<td>:green_heart:</td>
+<td>修复CI构建</td>
+</tr>
+<tr>
+<td><code>:arrow_down:</code></td>
+<td>:arrow_down:</td>
+<td>降级依赖</td>
+</tr>
+<tr>
+<td><code>:arrow_up:</code></td>
+<td>:arrow_up:</td>
+<td>更新依赖</td>
+</tr>
+<tr>
+<td><code>:construction_worker:</code></td>
+<td>:construction_worker:</td>
+<td>添加CI构建系统</td>
+</tr>
+<tr>
+<td><code>:chart_with_upwards_trend:</code></td>
+<td>:chart_with_upwards_trend:</td>
+<td>添加分析或跟踪代码</td>
+</tr>
+<tr>
+<td><code>:hammer:</code></td>
+<td>:hammer:</td>
+<td>重构代码</td>
+</tr>
+<tr>
+<td><code>:heavy_minus_sign:</code></td>
+<td>:heavy_minus_sign:</td>
+<td>删除依赖关系</td>
+</tr>
+<tr>
+<td><code>:whale:</code></td>
+<td>:whale:</td>
+<td>关于Docker的工作</td>
+</tr>
+<tr>
+<td><code>:heavy_plus_sign:</code></td>
+<td>:heavy_plus_sign:</td>
+<td>添加依赖关系</td>
+</tr>
+<tr>
+<td><code>:wrench:</code></td>
+<td>:wrench:</td>
+<td>更改配置文件</td>
+</tr>
+<tr>
+<td><code>:globe_with_meridians:</code></td>
+<td>:globe_with_meridians:</td>
+<td>国际化和本地化</td>
+</tr>
+<tr>
+<td><code>:pencil2:</code></td>
+<td>:pencil2:</td>
+<td>修正打字错误</td>
+</tr>
+<tr>
+<td><code>:hankey:</code></td>
+<td>:hankey:</td>
+<td>编写不好的代码，需要改进</td>
+</tr>
+<tr>
+<td><code>:rewind:</code></td>
+<td>:rewind:</td>
+<td>还原更改</td>
+</tr>
+<tr>
+<td><code>:twisted_rightwards_arrows:</code></td>
+<td>:twisted_rightwards_arrows:</td>
+<td>合并分支</td>
+</tr>
+<tr>
+<td><code>:package:</code></td>
+<td>:package:</td>
+<td>更新已编译的文件或包</td>
+</tr>
+<tr>
+<td><code>:alien:</code></td>
+<td>:alien:</td>
+<td>由于外部API更改而更新代码</td>
+</tr>
+<tr>
+<td><code>:truck:</code></td>
+<td>:truck:</td>
+<td>移动或重命名文件</td>
+</tr>
+<tr>
+<td><code>:page_facing_up:</code></td>
+<td>:page_facing_up:</td>
+<td>添加或更新许可证</td>
+</tr>
+<tr>
+<td><code>:boom:</code></td>
+<td>:boom:</td>
+<td>引入爆炸改变</td>
+</tr>
+<tr>
+<td><code>:bento:</code></td>
+<td>:bento:</td>
+<td>添加或更新资源</td>
+</tr>
+<tr>
+<td><code>:ok_hand:</code></td>
+<td>:ok_hand:</td>
+<td>由于代码审查更改而更新代码</td>
+</tr>
+<tr>
+<td><code>:wheelchair:</code></td>
+<td>:wheelchair:</td>
+<td>改善无障碍</td>
+</tr>
+<tr>
+<td><code>:bulb:</code></td>
+<td>:bulb:</td>
+<td>文档化源代码</td>
+</tr>
+<tr>
+<td><code>:beers:</code></td>
+<td>:beers:</td>
+<td>沉迷写代码</td>
+</tr>
+<tr>
+<td><code>:speech_balloon:</code></td>
+<td>:speech_balloon:</td>
+<td>更新文本和常量</td>
+</tr>
+<tr>
+<td><code>:card_file_box:</code></td>
+<td>:card_file_box:</td>
+<td>执行数据库相关更改</td>
+</tr>
+</tbody>
+</table>
 
                     
                         
                     
                     
                         <p>
-                            <a href="/2017/07/10/Git/rebase/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="/2017/06/20/Git/GithubEmoji/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -249,297 +476,263 @@
         
     </article>
     
-    <div class="pagination-bar">
-    <ul class="pagination">
-        
-        
-        <li class="pagination-number">第 1 页 共 1 页</li>
-    </ul>
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/05/22/Git/git/">
+                            Git 常用命令
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-05-22T15:17:24+08:00">
+	
+		    5月 22, 2017
+    	
+    </time>
+    
 </div>
-
-</section>
-
-
-                <footer id="footer" class="main-content-wrap">
-    <span class="copyrights">
-        Copyrights &copy; 2017 Archie Shi. All Rights Reserved.
-    </span>
-</footer>
 
             </div>
             
-        </div>
-        
+                <div class="postShorten-content" itemprop="articleBody">
+                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=32717985&auto=0&height=66"></iframe>
 
-
-    
-        
-    
-
-<div id="about">
-    <div id="about-card">
-        <div id="about-btn-close">
-            <i class="fa fa-remove"></i>
-        </div>
-        
-            <img id="about-card-picture" src="http://cdn.shianqi.com/20171110003439_iub77X_cat_sm.png" alt="作者的图片"/>
-        
-            <h4 id="about-card-name">Archie Shi</h4>
-        
-            <div id="about-card-bio"><p>Nothing to say</p>
-</div>
-        
-        
-            <div id="about-card-job">
-                <i class="fa fa-briefcase"></i>
-                <br/>
-                <p>Front-End Development Engineer</p>
-
-            </div>
-        
-        
-    </div>
-</div>
-
-        <div id="algolia-search-modal" class="modal-container">
-    <div class="modal">
-        <div class="modal-header">
-            <span class="close-button"><i class="fa fa-close"></i></span>
-            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-                <span class="searchby-algolia-text text-color-light text-small">by</span>
-                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-            </a>
-            <i class="search-icon fa fa-search"></i>
-            <form id="algolia-search-form">
-                <input type="text" id="algolia-search-input" name="search"
-                    class="form-control input--large search-input" placeholder="Search "
-                    />
-            </form>
-        </div>
-        <div class="modal-body">
-            <div class="no-result text-color-light text-center">没有找到文章</div>
-            <div class="results">
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/WebSocket/SocketIo/">
-                            <h3 class="media-heading">用 Express,Socket.io 搭建 WebSocket 服务器</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
-                            <h3 class="media-heading">BrowserSync 使用手册</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/11/14/Webpack/Webpack基础/">
-                            <h3 class="media-heading">Webpack 学习笔记</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年11月14日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/12/10/PenetrationTest/ARP/ARP/">
-                            <h3 class="media-heading">嗅探，arp欺骗，会话劫持</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年12月10日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
-                            <h3 class="media-heading">用 Kali-Linux 进行 Wifi 破解</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年12月20日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/12/22/PenetrationTest/KaliUpdata/">
-                            <h3 class="media-heading">Kali-Linux 更新、环境配置</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年12月22日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-            </div>
-        </div>
-        <div class="modal-footer">
-            <p class="results-count text-medium"
-                data-message-zero="没有找到文章"
-                data-message-one="找到 1 篇文章"
-                data-message-other="找到 {n} 篇文章">
-                找到 105 篇文章
-            </p>
-        </div>
-    </div>
-</div>
-
-        
-<div id="cover" style="background-image:url('http://cdn.shianqi.com/20171111132834_TkfCwb_dr.jpeg');"></div>
-        <!--SCRIPTS-->
-<script src="/assets/js/script-lh5udltchpsfcjgzpmme11bbmvj4k4srd99grgzo0845ualxoy17enpqvhko.min.js"></script>
-<!--SCRIPTS END-->
-
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
-    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-    <script>
-        var algoliaClient = algoliasearch('DIJHXM8BEG', '65699e0c957896b498d3cf67daac9c0f');
-        var algoliaIndex = algoliaClient.initIndex('blog');
-    </script>
-
-    </body>
-</html>
-e></td>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h4 id="源码安装："><a href="#源码安装：" class="headerlink" title="源码安装："></a>源码安装：</h4><p>先安装依赖库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install curl-devel expat-devel gettext-devel \</span><br><span class="line">   openssl-devel zlib-devel</span><br><span class="line">$ sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext \</span><br><span class="line">   libz-dev libssl-dev</span><br></pre></td></tr></table></figure></p>
+<p>为了能够添加更多格式的文档（如 doc, html, info），安装依赖包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install asciidoc xmlto docbook2x</span><br><span class="line">$ sudo apt-get install asciidoc xmlto docbook2x</span><br></pre></td></tr></table></figure></p>
+<p>编译安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ tar -zxf git-2.0.0.tar.gz</span><br><span class="line">$ cd git-2.0.0</span><br><span class="line">$ make configure</span><br><span class="line">$ ./configure --prefix=/usr</span><br><span class="line">$ make all doc info</span><br><span class="line">$ sudo make install install-doc install-html install-info</span><br></pre></td></tr></table></figure></p>
+<p>更新 git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://git.kernel.org/pub/scm/git/git.git</span><br></pre></td></tr></table></figure></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git init</code></td>
+<td>创建版本库</td>
+</tr>
+<tr>
+<td><code>git add &lt;file&gt;</code></td>
+<td>把文件添加到仓库</td>
+</tr>
+<tr>
+<td><code>git add -A</code></td>
+<td>全部添加到仓库</td>
+</tr>
+<tr>
+<td><code>git commit -m &quot;message&quot;</code></td>
+<td>提交到仓库，并添加描述</td>
+</tr>
+<tr>
+<td><code>git status</code></td>
+<td>查看当前仓库状态</td>
+</tr>
+<tr>
+<td><code>git diff</code></td>
+<td>工作区(work dict)和暂存区(stage)的比较</td>
+</tr>
+<tr>
+<td><code>git diff --cached</code></td>
+<td>暂存区(stage)和分支(master)的比较</td>
+</tr>
+<tr>
+<td><code>git diff HEAD -- &lt;file&gt;</code></td>
+<td>查看工作区和版本库里面最新版本的区别</td>
+</tr>
+<tr>
+<td><code>git log</code></td>
+<td>查看提交历史</td>
+</tr>
+<tr>
+<td><code>git reflog</code></td>
+<td>记录操作命令</td>
+</tr>
+<tr>
+<td><code>git reset --hard HEAD~n</code></td>
+<td>回退n个版本</td>
+</tr>
+<tr>
+<td><code>git reset --hard $id</code></td>
+<td>回到 $id 版本</td>
+</tr>
+<tr>
+<td><code>git checkout -- &lt;file&gt;</code></td>
+<td>丢弃工作区的修改</td>
+</tr>
+<tr>
+<td><code>git reset HEAD &lt;file&gt;</code></td>
+<td>把暂存区的修改撤销掉</td>
+</tr>
+</tbody>
+</table>
+<h2 id="远程命令"><a href="#远程命令" class="headerlink" title="远程命令"></a>远程命令</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git remote add origin &lt;git@address&gt;</code></td>
+<td>关联远程库</td>
+</tr>
+<tr>
+<td><code>git push -u origin master</code></td>
+<td>把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来</td>
+</tr>
+<tr>
+<td><code>git push origin master</code></td>
+<td>推送到远程</td>
+</tr>
+<tr>
+<td><code>git clone &lt;git@address&gt;</code></td>
+<td>克隆远程库到本地</td>
+</tr>
+<tr>
+<td><code>git fetch</code></td>
+<td>将远程分支信息获取到本地</td>
+</tr>
+</tbody>
+</table>
+<h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git branch</code></td>
+<td>查看分支信息，带*为当前</td>
+</tr>
+<tr>
+<td><code>git checkout -b &lt;branch-name&gt;</code></td>
+<td>创建并切换到新分支</td>
+</tr>
+<tr>
+<td><code>git checkout -b dev origin/dev</code></td>
+<td>创建远程 <code>origin</code> 的 <code>dev</code> 分支到本地</td>
+</tr>
+<tr>
+<td><code>git branch --set-upstream dev origin/dev</code></td>
+<td>设置dev和origin/dev的链接</td>
+</tr>
+<tr>
+<td><code>git branch &lt;branch-name&gt;</code></td>
+<td>创建分支</td>
+</tr>
+<tr>
+<td><code>git checkout &lt;branch-name&gt;</code></td>
+<td>切换分支</td>
+</tr>
+<tr>
+<td><code>git merge &lt;branch-name&gt;</code></td>
+<td>合并某分支到当前分支</td>
+</tr>
+<tr>
+<td><code>git merge --no-ff -m &quot;&lt;message&gt;&quot; &lt;branch-name&gt;</code></td>
+<td>禁用<code>Fast forward</code>合并，可以看到合并历史</td>
+</tr>
+<tr>
+<td><code>git branch -d &lt;branch-name&gt;</code></td>
+<td>删除分支</td>
+</tr>
+<tr>
+<td><code>git branch -D &lt;branch-name&gt;</code></td>
+<td>丢弃一个没有合并的分支</td>
+</tr>
+<tr>
+<td><code>git log --graph</code></td>
+<td>查看分支合并图</td>
+</tr>
+</tbody>
+</table>
+<h2 id="分支策略"><a href="#分支策略" class="headerlink" title="分支策略"></a>分支策略</h2><table>
+<thead>
+<tr>
+<th>分支</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>master</code></td>
+<td>稳定，仅用来发布新版本，不能在上面干活</td>
+</tr>
+<tr>
+<td><code>dev</code></td>
+<td>不稳定，到达新版本合并到<code>master</code>上</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://cdn.shianqi.com/20171110002609_OvluW5_git.png" alt="分支"></p>
+<p>每人都有自己的分支，时不时地往dev分支上合并就可以了。</p>
+<p><code>master</code> 分支是主分支，因此要时刻与远程同步；</p>
+<p><code>dev</code> 分支是开发分支，团队所有成员都需要在上面工作，所以也需要与远程同步；</p>
+<p><code>bug</code> 分支只用于在本地修复bug，就没必要推到远程了，除非老板要看看你每周到底修复了几个bug；</p>
+<p><code>feature</code> 分支是否推到远程，取决于你是否和你的小伙伴合作在上面开发。</p>
+<h2 id="fork的项目与原作者同步"><a href="#fork的项目与原作者同步" class="headerlink" title="fork的项目与原作者同步"></a>fork的项目与原作者同步</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git remote add ecmadao git@github.com:ecmadao/react-times.git</span><br><span class="line"></span><br><span class="line">git fetch ecmadao</span><br><span class="line"></span><br><span class="line">git merge ecmadao/master</span><br><span class="line"></span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<h2 id="bug分支"><a href="#bug分支" class="headerlink" title="bug分支"></a>bug分支</h2><p>commit 时关闭 <code>issues</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;fix #&lt;issues-id&gt;&quot;</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git stash</code></td>
+<td>保存当前工作现场</td>
+</tr>
+<tr>
+<td><code>git stash list</code></td>
+<td>查看所有工作现场</td>
+</tr>
+<tr>
+<td><code>git stash apply</code></td>
+<td>恢复工作现场，但不删除</td>
+</tr>
+<tr>
+<td><code>git stash drop</code></td>
+<td>删除工作现场</td>
+</tr>
+<tr>
+<td><code>git stash pop</code></td>
+<td>恢复工作现场并删除</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>在 <code>dev</code> 下正常开发中，说有1个bug要解决，首先我需要把 <code>dev</code> 分支封存 <code>stash</code></li>
+<li>在 <code>master</code> 下新建一个<code>issue-101</code>分支，解决bug，成功后</li>
+<li>在 <code>master</code> 下合并 <code>issue-101</code>，并 <code>fix #1</code></li>
+<li>在 <code>dev</code> 下合并 <code>master</code>，这样才同步了里面的bug解决方案</li>
+<li>恢复<code>dev</code>封存 <code>stash pop</code>，系统自动合并 &amp; 提示有冲突，因为封存前 <code>dev</code> 写了东西，此时去文件里手动改冲突</li>
+<li>继续开发<code>dev</code>，最后 <code>add</code> ，<code>commit</code></li>
+<li>在 <code>master</code> 下合并最后完成的<code>dev</code></li>
+</ol>
+<h2 id="Feature分支"><a href="#Feature分支" class="headerlink" title="Feature分支"></a>Feature分支</h2><p>开发一个新feature，最好新建一个分支；</p>
+<h2 id="多人协作"><a href="#多人协作" class="headerlink" title="多人协作"></a>多人协作</h2><p>从远程库 <code>clone</code> 时，默认情况下，只能看到本地的 <code>master</code> 分支</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git remote</code></td>
 <td>查看远程库信息</td>
 </tr>
 <tr>
@@ -761,25 +954,6 @@ e></td>
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
                             <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
@@ -839,6 +1013,25 @@ e></td>
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
                             <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">

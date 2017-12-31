@@ -381,6 +381,55 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/04/24/NodeJs/fs/">
+                            NodeJs fs 模块基本使用方法
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-04-24T13:30:44+08:00">
+	
+		    4月 24, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="fs-文件系统"><a href="#fs-文件系统" class="headerlink" title="fs(文件系统)"></a>fs(文件系统)</h2><p>通过 require(‘fs’) 使用该模块。 所有的方法都有异步和同步的形式。</p>
+<p> 异步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlink(&apos;/tmp/hello&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>同步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlinkSync(&apos;/tmp/hello&apos;);</span><br><span class="line">console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h2><p>readFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(file[, options], callback)</span><br><span class="line"></span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = null</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;r&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(&apos;/etc/passwd&apos;, (err, data) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>writeFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(file, data\[, options], callback)</span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">data &lt;String&gt; | &lt;Buffer&gt;</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = &apos;utf8&apos;</span><br><span class="line">mode &lt;Integer&gt; 默认 = 0o666</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;w&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(&apos;message.txt&apos;, &apos;Hello Node.js&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;It\&apos;s saved!&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>不建议在调用 fs.open() 、 fs.readFile() 或 fs.writeFile()<br> 之前使用 fs.access() 检查一个文件的可访问性。 如此处理会造成紊乱情况，<br> 因为其他进程可能在两个调用之间改变该文件的状态。 作为替代，<br> 用户代码应该直接打开/读取/写入文件，当文件无法访问时再处理错误。</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/04/24/NodeJs/fs/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/04/24/NodeJs/node-canvas/">
                             Node-Canvas 将 Canvas 异步保存成图片
                         </a>
@@ -423,55 +472,6 @@
                     
                         <p>
                             <a href="/2017/04/24/NodeJs/node-canvas/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/24/NodeJs/fs/">
-                            NodeJs fs 模块基本使用方法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-24T13:30:44+08:00">
-	
-		    4月 24, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="fs-文件系统"><a href="#fs-文件系统" class="headerlink" title="fs(文件系统)"></a>fs(文件系统)</h2><p>通过 require(‘fs’) 使用该模块。 所有的方法都有异步和同步的形式。</p>
-<p> 异步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlink(&apos;/tmp/hello&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>同步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlinkSync(&apos;/tmp/hello&apos;);</span><br><span class="line">console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br></pre></td></tr></table></figure></p>
-<h2 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h2><p>readFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(file[, options], callback)</span><br><span class="line"></span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = null</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;r&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(&apos;/etc/passwd&apos;, (err, data) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>writeFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(file, data\[, options], callback)</span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">data &lt;String&gt; | &lt;Buffer&gt;</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = &apos;utf8&apos;</span><br><span class="line">mode &lt;Integer&gt; 默认 = 0o666</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;w&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(&apos;message.txt&apos;, &apos;Hello Node.js&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;It\&apos;s saved!&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>不建议在调用 fs.open() 、 fs.readFile() 或 fs.writeFile()<br> 之前使用 fs.access() 检查一个文件的可访问性。 如此处理会造成紊乱情况，<br> 因为其他进程可能在两个调用之间改变该文件的状态。 作为替代，<br> 用户代码应该直接打开/读取/写入文件，当文件无法访问时再处理错误。</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/04/24/NodeJs/fs/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -759,25 +759,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
                             <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
@@ -837,6 +818,25 @@
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
                             <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
