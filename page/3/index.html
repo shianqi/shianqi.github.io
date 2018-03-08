@@ -194,6 +194,49 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/08/27/JavaScript/事件委托/">
+                            JavaScript事件委托
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-08-27T20:28:16+08:00">
+	
+		    8月 27, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"oDiv"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span>&gt;</span>点我<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"hh"</span>&gt;</span>awd<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ============ 简单的事件委托</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">delegateEvent</span>(<span class="params">interfaceEle, selector, type, fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(interfaceEle.addEventListener)&#123;</span><br><span class="line">        interfaceEle.addEventListener(type, eventfn);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        interfaceEle.attachEvent(<span class="string">"on"</span>+type, eventfn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">eventfn</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> e = e || <span class="built_in">window</span>.event;    </span><br><span class="line">        <span class="keyword">var</span> target = e.target || e.srcElement;</span><br><span class="line">        <span class="keyword">if</span> (matchSelector(target, selector)) &#123;</span><br><span class="line">            <span class="keyword">if</span>(fn) &#123;</span><br><span class="line">                fn.call(target, e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * only support #id, tagName, .className</span></span><br><span class="line"><span class="comment"> * and it's simple single, no combination</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">matchSelector</span>(<span class="params">ele, selector</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// if use id</span></span><br><span class="line">    <span class="keyword">if</span> (selector.charAt(<span class="number">0</span>) === <span class="string">'#'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ele.id === selector.slice(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// if use class</span></span><br><span class="line">    <span class="keyword">if</span> (selector.charAt(<span class="number">0</span>) === <span class="string">'.'</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="string">' '</span> + ele.className + <span class="string">' '</span>).indexOf(<span class="string">' '</span> + selector.slice(<span class="number">1</span>) + <span class="string">' '</span>) != <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// if use tagName</span></span><br><span class="line">    <span class="keyword">return</span> ele.tagName.toLowerCase() === selector.toLowerCase();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line"><span class="keyword">var</span> odiv = <span class="built_in">document</span>.getElementById(<span class="string">'oDiv'</span>);</span><br><span class="line">delegateEvent(odiv,<span class="string">'a'</span>,<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">'1'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">delegateEvent(odiv,<span class="string">'#hh'</span>,<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">'2'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/08/27/JavaScript/事件委托/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/08/08/Android/ListView_in_ScrollView/">
                             解决 ScrollView 嵌套 ListView 问题
                         </a>
@@ -1295,7 +1338,7 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://cdn.shianqi.com/20171110002414_MQAGeo_line.png" alt="效果图"></p>
+                    <h1 id="Canvas-线条长拖尾效果"><a href="#Canvas-线条长拖尾效果" class="headerlink" title="Canvas 线条长拖尾效果"></a>Canvas 线条长拖尾效果</h1><h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://cdn.shianqi.com/20171110002414_MQAGeo_line.png" alt="效果图"></p>
 <h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>其实这个效果不是线条本身就是这个形状的，而是下面这样的</p>
 <p><img src="http://cdn.shianqi.com/20171110002437_DJw4p0_point.png" alt="point"></p>
 <p>之所以会出现这个效果，是因为 <code>Canvas</code> 在画下一帧的时候并没有将上一帧的画面全部擦除，而是用一个和背景一样的透明度非常低的颜色填充了绘图区域，导致上一帧的点比下一帧明度低，所以多次叠加就变成了上面的效果。</p>
@@ -1307,62 +1350,6 @@
                     
                         <p>
                             <a href="/2017/06/30/Canvas/CanvasMeteor/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/06/28/DesignPatterns/DesignPatterns/FacadePattern/">
-                            设计模式：门面模式（Facade Pattern）
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-28T20:21:36+08:00">
-	
-		    6月 28, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="设计模式：门面模式（Facade-Pattern）"><a href="#设计模式：门面模式（Facade-Pattern）" class="headerlink" title="设计模式：门面模式（Facade Pattern）"></a>设计模式：门面模式（Facade Pattern）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>动态地给一个对象添加一些额外的职责。就增加功能来说，它相比生成子类更为灵活</p>
-<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>结构类模式</p>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110094735_I9n3up_FacadePattern.png" alt="Facade Pattern"></p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomethingA</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassB</span>　</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomethingB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassC</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomethingC</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Facade</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ClassA a = <span class="keyword">new</span> ClassA();</span><br><span class="line">    <span class="keyword">private</span> ClassB b = <span class="keyword">new</span> ClassB();</span><br><span class="line">    <span class="keyword">private</span> ClassC c = <span class="keyword">new</span> ClassC();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.a.doSomethingA();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.b.doSomethingB();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodC</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.c.doSomethingC();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li>减少系统的互相依赖</li>
-<li>提高了灵活性</li>
-<li>提高安全性</li>
-</ul>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>不符合开闭原则</p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
-<li>为一个复杂的模块或子系统提供一个供外界访问的接口</li>
-<li>子系统相对独立——外界对子系统的访问只要黑箱操作即可</li>
-<li>预防低水平人员带来的风险扩散</li>
-</ul>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/06/28/DesignPatterns/DesignPatterns/FacadePattern/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -1432,13 +1419,13 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2017/06/28/DesignPatterns/DesignPatterns/DecoratorPattern/">
-                            设计模式：装饰模式（Decorator Pattern）
+                        <a class="link-unstyled" href="/2017/06/28/DesignPatterns/DesignPatterns/FacadePattern/">
+                            设计模式：门面模式（Facade Pattern）
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-28T17:35:36+08:00">
+    <time itemprop="datePublished" datetime="2017-06-28T20:21:36+08:00">
 	
 		    6月 28, 2017
     	
@@ -1449,23 +1436,28 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>动态地给一个对象添加一些额外的职责。就增加功能来说，它相比生成子类更为灵活</p>
+                    <h1 id="设计模式：门面模式（Facade-Pattern）"><a href="#设计模式：门面模式（Facade-Pattern）" class="headerlink" title="设计模式：门面模式（Facade Pattern）"></a>设计模式：门面模式（Facade Pattern）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>动态地给一个对象添加一些额外的职责。就增加功能来说，它相比生成子类更为灵活</p>
 <h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>结构类模式</p>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110094716_DOiB8o_DecoratorPattern.png" alt="Decorator Pattern"></p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"do Something"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Decorator</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Component component = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Decorator</span><span class="params">(Component _component)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.component = _component;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.component.operate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteDecorator1</span> <span class="keyword">extends</span> <span class="title">Decorator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteDecorator1</span><span class="params">(Component _component)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(_component);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//定义自己的修饰方法</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"method1 修饰"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.method1();</span><br><span class="line">        <span class="keyword">super</span>.operate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Component component = <span class="keyword">new</span> ConcreteComponent();</span><br><span class="line">        component = <span class="keyword">new</span> ConcreteDecorator1(component);</span><br><span class="line">        component = <span class="keyword">new</span> ConcreteDecorator2(component);</span><br><span class="line">        component.operate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110094735_I9n3up_FacadePattern.png" alt="Facade Pattern"></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassA</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomethingA</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassB</span>　</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomethingB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassC</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomethingC</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Facade</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> ClassA a = <span class="keyword">new</span> ClassA();</span><br><span class="line">    <span class="keyword">private</span> ClassB b = <span class="keyword">new</span> ClassB();</span><br><span class="line">    <span class="keyword">private</span> ClassC c = <span class="keyword">new</span> ClassC();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.a.doSomethingA();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodB</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.b.doSomethingB();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">methodC</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.c.doSomethingC();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><ul>
-<li>装饰类和被装饰类可以独立发展</li>
-<li>装饰模式是继承关系的代替方案</li>
-<li>装饰模式可以动态地扩展一个实现类的功能</li>
+<li>减少系统的互相依赖</li>
+<li>提高了灵活性</li>
+<li>提高安全性</li>
 </ul>
-<p>##　缺点<br>多层的装饰是比较复杂的，尽量减少装饰类的数量，以便降低系统的复杂度。</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>不符合开闭原则</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>为一个复杂的模块或子系统提供一个供外界访问的接口</li>
+<li>子系统相对独立——外界对子系统的访问只要黑箱操作即可</li>
+<li>预防低水平人员带来的风险扩散</li>
+</ul>
 
                     
                         
                     
                     
                         <p>
-                            <a href="/2017/06/28/DesignPatterns/DesignPatterns/DecoratorPattern/#post-footer" class="postShorten-excerpt_link link">
+                            <a href="/2017/06/28/DesignPatterns/DesignPatterns/FacadePattern/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -1505,7 +1497,7 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2017 Archie Shi. All Rights Reserved.
+        Copyrights &copy; 2018 Archie Shi. All Rights Reserved.
     </span>
 </footer>
 
@@ -1642,8 +1634,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1661,8 +1653,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1760,7 +1752,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 105 篇文章
+                找到 106 篇文章
             </p>
         </div>
     </div>

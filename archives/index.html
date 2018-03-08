@@ -195,6 +195,55 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2018/03/04/WebGL/webgl/">
+                            WebGL 初探
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2018-03-04T08:55:18+08:00">
+	
+		    3月 04, 2018
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="WebGL-初探"><a href="#WebGL-初探" class="headerlink" title="WebGL 初探"></a>WebGL 初探</h1><h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>WebGL 是基于光栅化的 API ,而不是基于 3D 的 API。WebGL 程序的任务就是实现具有投影矩阵坐标和颜色的 WebGL 对象即可。</p>
+<p>无论要实现的图形尺寸有多大，其投影矩阵的坐标的范围始终是从 -1 到 1。</p>
+<p>GPU 有两个基础任务，第一个就是将点处理为投影矩阵。第二部分就是基于第一部分将相应的像素点描绘出来。</p>
+<p><img src="http://cdn.shianqi.com/20180305091210_usgNuq_vertex-shader-anim.gif" alt="顶点着色器"></p>
+<p>上图左侧的是用户自己提供的数据。定点着色器就是用户在 GLSL 中写的函数。处理每个定点时，均会被调用一次。用户可以将投影矩阵的值存储在特定的变量 <code>gl_Position</code> 中。GPU 会处理这些值，并将他们存储在其内部。</p>
+<p>假设用户希望绘制三角形 TRIANGLES, 那么每次绘制时，上述的第一部分就会产生三个顶点，然后 GPU 会使用他们来绘制三角形。首先 GPU 会将三个顶点对应的像素绘制出来，然后将三角形光栅化，或者说是使用像素点绘制出来。对每一个像素点，GPU 都会调用用户定义的片段着色器来确定该像素点该涂成什么颜色。当然，用户定义的片段着色器必须在 <code>gl_FragColor</code> 变量中设置对应的值。</p>
+<p>WebGL 将会连接顶点着色器中的变量和片段着色器中的相同名字和类型的变量。</p>
+<p>我们仅仅计算三个顶点。我们的顶点着色器被调用了三次，因此，仅仅计算了三个颜色。而我们的三角形可以有好多颜色，这就是为何被称为 <code>varying</code>。</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>)</span><br><span class="line"><span class="keyword">const</span> gl = canvas.getContext(<span class="string">"webgl"</span>)</span><br><span class="line"><span class="keyword">if</span> (!gl) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'浏览器不支持 WebGL'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 顶点着色器</span></span><br><span class="line"><span class="keyword">const</span> VSHADER_SOURCE = <span class="string">`</span></span><br><span class="line"><span class="string">attribute vec2 a_position;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">void main() &#123;</span></span><br><span class="line"><span class="string">  gl_Position = vec4(a_position, 0, 1);</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"><span class="comment">// 片元着色器</span></span><br><span class="line"><span class="keyword">const</span> FSHADER_SOURCE = <span class="string">`</span></span><br><span class="line"><span class="string">void main() &#123;</span></span><br><span class="line"><span class="string">  gl_FragColor = vec4(0, 1, 0, 1);  // green</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译着色器</span></span><br><span class="line"><span class="keyword">const</span> vertShader = gl.createShader(gl.VERTEX_SHADER)</span><br><span class="line">gl.shaderSource(vertShader, VSHADER_SOURCE)</span><br><span class="line">gl.compileShader(vertShader)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fragShader = gl.createShader(gl.FRAGMENT_SHADER)</span><br><span class="line">gl.shaderSource(fragShader, FSHADER_SOURCE)</span><br><span class="line">gl.compileShader(fragShader)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并程序</span></span><br><span class="line"><span class="keyword">const</span> shaderProgram = gl.createProgram()</span><br><span class="line"><span class="keyword">this</span>.shaderProgram = shaderProgram</span><br><span class="line">gl.attachShader(shaderProgram, vertShader)</span><br><span class="line">gl.attachShader(shaderProgram, fragShader)</span><br><span class="line">gl.linkProgram(shaderProgram)</span><br><span class="line">gl.useProgram(shaderProgram)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> positionLocation = gl.getAttribLocation(shaderProgram, <span class="string">"a_position"</span>)</span><br><span class="line"><span class="keyword">const</span> buffer = gl.createBuffer()</span><br><span class="line">gl.bindBuffer(gl.ARRAY_BUFFER, buffer)</span><br><span class="line">gl.bufferData(</span><br><span class="line">  gl.ARRAY_BUFFER,</span><br><span class="line">  <span class="keyword">new</span> <span class="built_in">Float32Array</span>([</span><br><span class="line">    <span class="number">-1.0</span>, <span class="number">-1.0</span>,</span><br><span class="line">    <span class="number">1.0</span>, <span class="number">-1.0</span>,</span><br><span class="line">    <span class="number">-1.0</span>,  <span class="number">1.0</span>,</span><br><span class="line">    <span class="number">-1.0</span>,  <span class="number">1.0</span>,</span><br><span class="line">    <span class="number">1.0</span>, <span class="number">-1.0</span>,</span><br><span class="line">    <span class="number">1.0</span>,  <span class="number">1.0</span></span><br><span class="line">  ]),</span><br><span class="line">  gl.STATIC_DRAW</span><br><span class="line">)</span><br><span class="line">gl.enableVertexAttribArray(positionLocation)</span><br><span class="line">gl.vertexAttribPointer(positionLocation, <span class="number">2</span>, gl.FLOAT, <span class="literal">false</span>, <span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// draw</span></span><br><span class="line">gl.drawArrays(gl.TRIANGLES, <span class="number">0</span>, <span class="number">6</span>)</span><br></pre></td></tr></table></figure>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2018/03/04/WebGL/webgl/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/12/31/Posts/2017/">
                             2017 年度总结
                         </a>
@@ -307,60 +356,6 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2017/11/27/JavaScript/OperatingMechanism/">
-                            JavaScript 运行机制
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-11-27T12:54:16+08:00">
-	
-		    11月 27, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="JavaScript-运行机制"><a href="#JavaScript-运行机制" class="headerlink" title="JavaScript 运行机制"></a>JavaScript 运行机制</h1><h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p><img src="http://cdn.shianqi.com/20171126230612_rKQKQd_Screenshot.png" alt="事件循环"></p>
-<ul>
-<li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入 <code>Event Table</code> 并注册函数。</li>
-<li>当指定的事情完成时，<code>Event Table</code> 会将这个函数移入 <code>Event Queue</code>。</li>
-<li>主线程内的任务执行完毕为空，会去 <code>Event Queue</code> 读取对应的函数，进入主线程执行。</li>
-<li>上述过程会不断重复，也就是常说的 <code>Event Loop</code> (事件循环)。</li>
-</ul>
-<h2 id="宏任务与微任务"><a href="#宏任务与微任务" class="headerlink" title="宏任务与微任务"></a>宏任务与微任务</h2><ul>
-<li><code>macro-task</code> (宏任务)：包括整体代码 <code>script</code>，<code>setTimeout</code>，<code>setInterval</code></li>
-<li><code>micro-task</code>(微任务)：<code>Promise</code>，<code>process.nextTick</code></li>
-</ul>
-<p>不同类型的任务会进入对应的 <code>Event Queue</code>，比如 <code>setTimeout</code> 和 <code>setInterval</code> 会进入相同的 <code>Event Queue</code>。</p>
-<p><img src="http://cdn.shianqi.com/20171126231323_oeLxNy_Screenshot.png" alt="宏任务与微任务"></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/11/27/JavaScript/OperatingMechanism/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
                         <a class="link-unstyled" href="/2017/11/27/RxJS/RxJS/">
                             RxJS 基础概念
                         </a>
@@ -442,6 +437,60 @@
                     
                         <p>
                             <a href="/2017/11/27/RxJS/RxJS/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/11/27/JavaScript/OperatingMechanism/">
+                            JavaScript 运行机制
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-11-27T12:54:16+08:00">
+	
+		    11月 27, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="JavaScript-运行机制"><a href="#JavaScript-运行机制" class="headerlink" title="JavaScript 运行机制"></a>JavaScript 运行机制</h1><h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p><img src="http://cdn.shianqi.com/20171126230612_rKQKQd_Screenshot.png" alt="事件循环"></p>
+<ul>
+<li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入 <code>Event Table</code> 并注册函数。</li>
+<li>当指定的事情完成时，<code>Event Table</code> 会将这个函数移入 <code>Event Queue</code>。</li>
+<li>主线程内的任务执行完毕为空，会去 <code>Event Queue</code> 读取对应的函数，进入主线程执行。</li>
+<li>上述过程会不断重复，也就是常说的 <code>Event Loop</code> (事件循环)。</li>
+</ul>
+<h2 id="宏任务与微任务"><a href="#宏任务与微任务" class="headerlink" title="宏任务与微任务"></a>宏任务与微任务</h2><ul>
+<li><code>macro-task</code> (宏任务)：包括整体代码 <code>script</code>，<code>setTimeout</code>，<code>setInterval</code></li>
+<li><code>micro-task</code>(微任务)：<code>Promise</code>，<code>process.nextTick</code></li>
+</ul>
+<p>不同类型的任务会进入对应的 <code>Event Queue</code>，比如 <code>setTimeout</code> 和 <code>setInterval</code> 会进入相同的 <code>Event Queue</code>。</p>
+<p><img src="http://cdn.shianqi.com/20171126231323_oeLxNy_Screenshot.png" alt="宏任务与微任务"></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/11/27/JavaScript/OperatingMechanism/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -776,73 +825,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/09/24/JavaScript/Closure/">
-                            深入了解闭包
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-09-24T09:48:36+08:00">
-	
-		    9月 24, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="深入了解闭包"><a href="#深入了解闭包" class="headerlink" title="深入了解闭包"></a>深入了解闭包</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>闭包的定义比较混乱，不同人和不同的书籍有不同的理解。严格来说，闭包需要满足三个条件：【1】访问所在作用域；【2】函数嵌套；【3】在所在作用域外被调用</p>
-<p><strong>经典定义</strong>： 函数对象可以通过作用域链相互关联起来，函数体内的变量都可以保存在函数作用域内，这种特性在计算机科学文献中称为“闭包”（函数变量可以被隐藏于作用域链之内，因此看起来是函数将变量“包裹”了起来）</p>
-<p><strong>从技术角度讲</strong>: 所有 <code>JavaScript</code> 函数都是闭包：它们都是对象，它们都关联到作用域链。</p>
-<p><strong>定义1</strong>： 闭包是指可以访问其所在作用域的函数</p>
-<p><strong>定义2</strong>： 闭包是指有权访问另一个函数作用域中的变量的函数</p>
-<p><strong>定义3</strong>： 闭包是指在函数声明时的作用域以外的地方被调用的函数</p>
-<p><strong>定义4</strong>： 闭包是保存定义时的变量作用域</p>
-<h2 id="个人理解"><a href="#个人理解" class="headerlink" title="个人理解"></a>个人理解</h2><p>我个人认为，闭包应该是一种思想，不同的人有不同的理解，我们不应该纠结闭包的概念到底是什么，而是应该理解这种思想背后的原理。</p>
-<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>首先要理解闭包必须要理解 <code>词法作用域</code> 和 <code>作用域链</code></p>
-<p><strong>词法作用域</strong>： 函数的执行依赖于变量作用域，这个作用域是在函数定义时决定的，而不是函数运行时决定的。</p>
-<p><strong>变量作用域</strong>： 是成语选代码中定义这个变量的区域。</p>
-<p><strong>作用域链</strong>： 每一段 <code>JavaScript</code> 代码都有一个与之关联的作用域链。这个作用域链是一个对象列表或者链表，这组对象定义了这段代码“作用域中”的变量。当 <code>JavaScript</code> 需要查找变量 <code>x</code> 值的时候(<code>变量解析</code>) 它会从链的第一个对象开始查找，如果这个对象有一个名为 <code>x</code> 的属性，则会直接使用这个属性的值，如果不存在，<code>JavaScript</code> 会继续查找链上的下一个对象。以此类推。如果作用域链上不存在 <code>x</code> ，就认为这段代码作用域链上不存在 <code>x</code>，并最终跑出一个引用错误(<code>ReferenceError</code>)的异常。</p>
-<p>理解了这些相关概念后，理解闭包就容易多了。我们通过一个例子来说明闭包的原理。</p>
-<p><img src="http://cdn.shianqi.com/20171110002842_9KxQlx_img1.png" alt="img1"></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz();</span><br></pre></td></tr></table></figure>
-<p>【1】代码执行流进入全局执行环境，并对全局执行环境中的代码进行声明提升(<code>hoisting</code>)</p>
-<p>【2】执行流执行第9行代码 <code>var baz = foo();</code>，调用 <code>foo()</code> 函数，此时执行流进入 <code>foo()</code> 函数执行环境中，对该执行环境中的代码进行声明提升过程。此时执行环境栈中存在两个执行环境，<code>foo()</code> 函数为当前执行流所在执行环境</p>
-<p>【4】执行流执行第2行代码 <code>var a = 2;</code> ，对a进行 <code>LHS</code> 查询，给 <code>a</code> 赋值2</p>
-<p>【5】执行流执行第7行代码 <code>return bar;</code> ，将 <code>bar()</code> 函数作为返回值返回。按理说，这时 <code>foo()</code> 函数已经执行完毕，应该销毁其执行环境，等待垃圾加收。但因为其返回值是 <code>bar</code> 函数。<code>bar</code> 函数中存在自由变量 <code>a</code>，需要通过作用域链到 <code>foo()</code> 函数的执行环境中找到变量 <code>a</code> 的值，所以虽然 <code>foo</code> 函数的执行环境被销毁了，但其变量对象不能被销毁，只是从活动状态变成非活动状态；而全局执行环境的变量对象则变成活动状态；执行流继续执行第9行代码 <code>var baz = foo();</code> ，把 <code>foo()</code> 函数的返回值 <code>bar</code> 函数赋值给 <code>baz</code></p>
-<p>【6】执行流执行第10行代码 <code>baz();</code> ，通过在全局执行环境中查找 <code>baz</code> 的值，<code>baz</code> 保存着 <code>foo()</code> 函数的返回值 <code>bar</code> 。所以这时执行 <code>baz()</code>，会调用 <code>bar()</code> 函数，此时执行流进入 <code>bar()</code> 函数执行环境中，对该执行环境中的代码进行声明提升过程。此时执行环境栈中存在三个执行环境， <code>bar()</code> 函数为当前执行流所在执行环境</p>
-<p>在声明提升的过程中，由于a是个自由变量，需要通过 <code>bar()</code> 函数的作用域链 <code>bar() -&gt; foo() -&gt; 全局作用域</code> 进行查找，最终在 <code>foo()</code> 函数中也就是代码第2行找到 <code>var a = 2;</code> ，然后在 <code>foo()</code> 函数的执行环境中找到a的值是2，所以给a赋值2</p>
-<p>【7】执行流执行第5行代码 <code>console.log(a);</code> ，调用内部对象 <code>console</code>，并从 <code>console</code> 对象中 <code>log</code> 方法，将a作为参数传递进入。从 <code>bar()</code> 函数的执行环境中找到a的值是2，所以，最终在控制台显示2</p>
-<p>【8】执行流执行第6行代码，<code>bar()</code> 的执行环境被弹出执行环境栈，并被销毁，等待垃圾回收，控制权交还给全局执行环境</p>
-<p>【9】当页面关闭时，所有的执行环境都被销毁</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>从上述说明的第5步可以看出，由于闭包 <code>bar()</code> 函数的原因，虽然 <code>foo()</code> 函数的执行环境销毁了，但其变量对象一直存在于内存中，就是为了能够使得调用 <code>bar()</code> 函数时，可以通过作用域链访问到父函数 <code>foo()</code> ，并得到其变量对象中储存的变量值。直到页面关闭，<code>foo()</code> 函数的变量对象才会和全局的变量对象一起被销毁，从而释放内存空间</p>
-<p>由于闭包占用内存空间，所以要谨慎使用闭包。尽量在使用完闭包后，及时解除引用，以便更早释放内存</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过将baz置为null，解除引用</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(a);<span class="comment">//2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz();</span><br><span class="line">baz = <span class="literal">null</span>;</span><br><span class="line"><span class="comment">//后续代码</span></span><br></pre></td></tr></table></figure>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/09/24/JavaScript/Closure/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -864,7 +846,7 @@
 
                 <footer id="footer" class="main-content-wrap">
     <span class="copyrights">
-        Copyrights &copy; 2017 Archie Shi. All Rights Reserved.
+        Copyrights &copy; 2018 Archie Shi. All Rights Reserved.
     </span>
 </footer>
 
@@ -1001,8 +983,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1020,8 +1002,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1119,7 +1101,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 105 篇文章
+                找到 106 篇文章
             </p>
         </div>
     </div>
