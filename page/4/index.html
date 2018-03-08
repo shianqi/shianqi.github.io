@@ -194,6 +194,58 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/06/28/DesignPatterns/DesignPatterns/FlyweightPattern/">
+                            设计模式：享元模式模式（Flyweight Pattern）
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-06-28T20:21:36+08:00">
+	
+		    6月 28, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="设计模式：享元模式模式（Flyweight-Pattern）"><a href="#设计模式：享元模式模式（Flyweight-Pattern）" class="headerlink" title="设计模式：享元模式模式（Flyweight Pattern）"></a>设计模式：享元模式模式（Flyweight Pattern）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>动态地给一个对象添加一些额外的职责。就增加功能来说，它相比生成子类更为灵活</p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>结构类模式</p>
+<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110095023_4aICt4_FlyweightPattern.png" alt="Flyweight Pattern"></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line">    <span class="comment">//内部状态</span></span><br><span class="line">    <span class="keyword">private</span> String intrinsic;</span><br><span class="line">    <span class="comment">//外部状态</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">final</span> String Extrinsic;</span><br><span class="line">    <span class="comment">//享元角色必须接受外部状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Flyweight</span><span class="params">(String _Extrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.Extrinsic = _Extrinsic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIntrinsic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> intrinsic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIntrinsic</span><span class="params">(String intrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.intrinsic = intrinsic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight1</span> <span class="keyword">extends</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyweight1</span><span class="params">(String _Extrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(_Extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight2</span> <span class="keyword">extends</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyweight2</span><span class="params">(String _Extrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(_Extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyweightFactory</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HashMap&lt;String, Flyweight&gt; pool = <span class="keyword">new</span> HashMap&lt;String, Flyweight&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//享元工厂</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Flyweight <span class="title">getFlyweight</span><span class="params">(String Extrinsic)</span></span>&#123;</span><br><span class="line">        Flyweight flyweight = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(pool.containsKey(Extrinsic))&#123;</span><br><span class="line">            flyweight = pool.get(Extrinsic);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            flyweight = <span class="keyword">new</span> ConcreteFlyweight1(Extrinsic);</span><br><span class="line">            pool.put(Extrinsic, flyweight);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flyweight;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>大大减少应用程序创建的对象，减低程序内的占用，增强程序的性能</p>
+<p>##　缺点<br>提高了系统的复杂性，需要分离出外部状态和内部状态。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>系统中存在大量的相似对象</li>
+<li>细粒度的对象都具备较结晶的外部状态</li>
+<li>需要缓冲池的场景</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/06/28/DesignPatterns/DesignPatterns/FlyweightPattern/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/06/28/DesignPatterns/DesignPatterns/DecoratorPattern/">
                             设计模式：装饰模式（Decorator Pattern）
                         </a>
@@ -719,61 +771,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/06/27/DesignPatterns/DesignPatterns/ChainOfResponsibility/">
-                            设计模式：责任链模式（Chain of Responsibility Pattern）
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-27T20:14:23+08:00">
-	
-		    6月 27, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>使多个对象都有机会处理请求，从而避免了请求的发送者和接收者之间的耦合关系。将这些对象连成一条链，并沿着这条链传递该请求，直到有对象处理它为止。</p>
-<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>行为类模式</p>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110094543_6mgH7B_ChainOfResponsibility.png" alt="Chain Of Responsibility"></p>
-<p>##　责任连模式的结构</p>
-<ul>
-<li>抽象处理类：抽象处理类中主要包含一个指向下一处理类的成员变量nextHandler和一个处理请求的方法handRequest，handRequest方法的主要主要思想是，如果满足处理的条件，则有本处理类来进行处理，否则由nextHandler来处理。</li>
-<li>具体处理类：具体处理类主要是对具体的处理逻辑和处理的适用条件进行实现。</li>
-</ul>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Level</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> level = <span class="number">0</span>;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Level</span><span class="params">(<span class="keyword">int</span> level)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.level = level;  </span><br><span class="line">    &#125;;  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">above</span><span class="params">(Level level)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.level &gt;= level.level)&#123;  </span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Request</span> </span>&#123;  </span><br><span class="line">    Level level;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Request</span><span class="params">(Level level)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.level = level;  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Level <span class="title">getLevel</span><span class="params">()</span></span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> level;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Response</span> </span>&#123;  </span><br><span class="line"></span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Handler</span> </span>&#123;  </span><br><span class="line">    <span class="keyword">private</span> Handler nextHandler;      </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Response <span class="title">handleRequest</span><span class="params">(Request request)</span></span>&#123;  </span><br><span class="line">        Response response = <span class="keyword">null</span>;  </span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.getHandlerLevel().above(request.getLevel()))&#123;  </span><br><span class="line">            response = <span class="keyword">this</span>.response(request);  </span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.nextHandler != <span class="keyword">null</span>)&#123;  </span><br><span class="line">                <span class="keyword">this</span>.nextHandler.handleRequest(request);  </span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;  </span><br><span class="line">                System.out.println(<span class="string">"-----没有合适的处理器-----"</span>);  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> response;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setNextHandler</span><span class="params">(Handler handler)</span></span>&#123;  </span><br><span class="line">        <span class="keyword">this</span>.nextHandler = handler;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">abstract</span> Level <span class="title">getHandlerLevel</span><span class="params">()</span></span>;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> Response <span class="title">response</span><span class="params">(Request request)</span></span>;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler1</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Level <span class="title">getHandlerLevel</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Level(<span class="number">1</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Response <span class="title">response</span><span class="params">(Request request)</span> </span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">"-----请求由处理器1进行处理-----"</span>);  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler2</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Level <span class="title">getHandlerLevel</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Level(<span class="number">3</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Response <span class="title">response</span><span class="params">(Request request)</span> </span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">"-----请求由处理器2进行处理-----"</span>);  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ConcreteHandler3</span> <span class="keyword">extends</span> <span class="title">Handler</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> Level <span class="title">getHandlerLevel</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Level(<span class="number">5</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> Response <span class="title">response</span><span class="params">(Request request)</span> </span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">"-----请求由处理器3进行处理-----"</span>);  </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;  </span><br><span class="line">        Handler handler1 = <span class="keyword">new</span> ConcreteHandler1();  </span><br><span class="line">        Handler handler2 = <span class="keyword">new</span> ConcreteHandler2();  </span><br><span class="line">        Handler handler3 = <span class="keyword">new</span> ConcreteHandler3();  </span><br><span class="line"></span><br><span class="line">        handler1.setNextHandler(handler2);  </span><br><span class="line">        handler2.setNextHandler(handler3);  </span><br><span class="line"></span><br><span class="line">        Response response = handler1.handleRequest(<span class="keyword">new</span> Request(<span class="keyword">new</span> Level(<span class="number">4</span>)));  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>责任链模式与if…else…相比，他的耦合性要低一些，因为它把条件判定都分散到了各个处理类中，并且这些处理类的优先处理顺序可以随意设定</p>
-<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>在找到正确的处理类之前，所有的判定条件都要被执行一遍，当责任链比较长时，性能问题比较严重。</p>
-<h2 id="责任链模式的适用场景"><a href="#责任链模式的适用场景" class="headerlink" title="责任链模式的适用场景"></a>责任链模式的适用场景</h2><p>就像开始的例子那样，假如使用if…else…语句来组织一个责任链时感到力不从心，代码看上去很糟糕时，就可以使用责任链模式来进行重构。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>责任链模式其实就是一个灵活版的if…else…语句，它就是将这些判定条件的语句放到了各个处理类中，这样做的优点是比较灵活了，但同样也带来了风险，比如设置处理类前后关系时，一定要特别仔细，搞对处理类前后逻辑的条件判断关系，并且注意不要在链中出现循环引用的问题。</p>
-<p>责任连模式常常会和模板方法一起使用</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/06/27/DesignPatterns/DesignPatterns/ChainOfResponsibility/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1058,7 +1055,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 106 篇文章
+                找到 107 篇文章
             </p>
         </div>
     </div>

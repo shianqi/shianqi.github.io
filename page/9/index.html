@@ -194,6 +194,140 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/05/01/JavaScript/JavaScript六种继承方式/">
+                            彻底理解 JavaScript 六种继承方式
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-05-01T15:45:21+08:00">
+	
+		    5月 01, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p>首先本文书写遵守以下约定：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">    // 私有属性</span><br><span class="line">    var val = 1;        // 私有基本属性</span><br><span class="line">    var arr = [1];      // 私有引用属性</span><br><span class="line">    function fun()&#123;&#125;    // 私有函数（引用属性）</span><br><span class="line"> </span><br><span class="line">    // 实例属性</span><br><span class="line">    this.val = 1;               // 实例基本属性</span><br><span class="line">    this.arr = [1];             // 实例引用属性</span><br><span class="line">    this.fun = function()&#123;&#125;;    // 实例函数（引用属性）</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 原型属性</span><br><span class="line">A.prototype.val = 1;              // 原型基本属性</span><br><span class="line">A.prototype.arr = [1];            // 原型引用属性</span><br><span class="line">A.prototype.fun = function()&#123;&#125;;   // 原型函数（引用属性）</span><br><span class="line"></span><br><span class="line">A.f = function()&#123;</span><br><span class="line">    //....                        // 类方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中：A 为被继承的父类， B 为继承 A 的子类。</p>
+<h2 id="六种继承简单介绍"><a href="#六种继承简单介绍" class="headerlink" title="六种继承简单介绍"></a>六种继承简单介绍</h2><h3 id="简单原型继承"><a href="#简单原型继承" class="headerlink" title="简单原型继承"></a>简单原型继承</h3><p><img src="http://cdn.shianqi.com/20171110002954_nmIU7s_1.png" alt="简单原型继承"></p>
+<p>这是最简单的继承方式，就一行代码可以完成</p>
+<ul>
+<li><p>代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">function A()&#123;</span><br><span class="line">    this.arr = [1];</span><br><span class="line">&#125;</span><br><span class="line">function B()&#123;</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line">B.prototype = new A();    // 核心</span><br><span class="line"> </span><br><span class="line">var b1 = new B();</span><br><span class="line">var b2 = new B();</span><br><span class="line"></span><br><span class="line">sub1.arr.push(2);</span><br><span class="line">alert(sub1.arr);    // 1, 2</span><br><span class="line">alert(sub2.arr);    // 1, 2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优点</p>
+<ul>
+<li>非常简单</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>来自原型对象的引用属性是所有实例共享的。</li>
+<li>创建子类实例时，无法向父类构造函数传参。</li>
+</ul>
+</li>
+</ul>
+<h3 id="借用构造函数"><a href="#借用构造函数" class="headerlink" title="借用构造函数"></a>借用构造函数</h3><p><img src="http://cdn.shianqi.com/20171110003033_yAUJ8v_2.png" alt="借用构造函数"></p>
+<ul>
+<li><p>代码实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function A(val)&#123;</span><br><span class="line">    this.arr = [1];</span><br><span class="line"> </span><br><span class="line">    this.fun = function()&#123;</span><br><span class="line">        // ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">function B(val)&#123;</span><br><span class="line">    Super.call(this, val);   // 核心</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">var b1 = new B(1);</span><br><span class="line">var b2 = new B(2);</span><br><span class="line">b1.arr.push(2);</span><br><span class="line"></span><br><span class="line">alert(sub1.arr);    // 1, 2</span><br><span class="line">alert(sub2.arr);    // 1</span><br><span class="line"></span><br><span class="line">alert(sub1.fun === sub2.fun);   // false</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优点</p>
+<ul>
+<li>解决了子类实例共享父类引用属性的问题</li>
+<li>创建子类实例时，可以向父类构造函数传参</li>
+<li>（解决了简单原型继承的问题）</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>无法实现函数复用，每个子类实例都持有一个新的函数实例，影响性能</li>
+</ul>
+</li>
+</ul>
+<h3 id="组合继承（最常用）"><a href="#组合继承（最常用）" class="headerlink" title="组合继承（最常用）"></a>组合继承（最常用）</h3><p><img src="http://cdn.shianqi.com/20171110003055_KaVrop_3.png" alt="组合继承"></p>
+<ul>
+<li><p>代码实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function A(val)&#123;</span><br><span class="line">    // 只在此处声明基本属性和引用属性</span><br><span class="line">    this.val = val;</span><br><span class="line">&#125;</span><br><span class="line">//  在此处声明函数</span><br><span class="line">A.prototype.fun1 = function()&#123;&#125;;</span><br><span class="line">A.prototype.fun2 = function()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">function B(val)&#123;</span><br><span class="line">    A.call(this, val);   // 核心</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line">B.prototype = new A(1);    // 核心，此处的 1 被覆盖</span><br><span class="line"> </span><br><span class="line">var b1 = new B(2);</span><br><span class="line">var b2 = new B(3);</span><br><span class="line">alert(b1.fun === b2.fun);   // true</span><br><span class="line">b1.val                      //2</span><br><span class="line">b2.val                      //3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优点</p>
+<ul>
+<li>不存在引用属性共享问题</li>
+<li>可传参</li>
+<li>函数可复用</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>父类构造函数被调用了两次，子类原型上的属性被覆盖，形成浪费。（图中 O 处）</li>
+</ul>
+</li>
+</ul>
+<h3 id="寄生组合继承-（最佳方式）"><a href="#寄生组合继承-（最佳方式）" class="headerlink" title="寄生组合继承 （最佳方式）"></a>寄生组合继承 （最佳方式）</h3><p><img src="http://cdn.shianqi.com/20171110003152_fg8zRi_4.png" alt="寄生组合继承"></p>
+<ul>
+<li><p>代码实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 返回一个继承自原型对象p的属性的新对象。</span><br><span class="line"> * 本函数出自 《JavaScript权威指南 第6版》 P122，例6-1</span><br><span class="line"> */</span><br><span class="line">function inherit(p)&#123;</span><br><span class="line">    if(p==null) throw TypeError();</span><br><span class="line">    if(Object.create)</span><br><span class="line">        return Object.create(p);</span><br><span class="line">    var t = typeof p;</span><br><span class="line">    if(t !== &apos;object&apos; &amp;&amp; t!== &apos;function&apos;) throw TypeError();</span><br><span class="line">    var f = function()&#123;&#125;;</span><br><span class="line">    f.prototype = p;</span><br><span class="line">    return new f();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function A()&#123;</span><br><span class="line">    // 只在此处声明基本属性和引用属性</span><br><span class="line">    this.val = 1;</span><br><span class="line">&#125;</span><br><span class="line">//  在此处声明函数</span><br><span class="line">A.prototype.fun1 = function()&#123;&#125;;</span><br><span class="line">A.prototype.fun2 = function()&#123;&#125;;</span><br><span class="line"></span><br><span class="line">function B()&#123;</span><br><span class="line">    A.call(this);                       // 核心</span><br><span class="line">    // ...</span><br><span class="line">&#125;</span><br><span class="line">var proto = inherit(Super.prototype);   // 核心</span><br><span class="line">proto.constructor = Sub;                // 核心</span><br><span class="line">Sub.prototype = proto;                  // 核心，完善原型链</span><br><span class="line"> </span><br><span class="line">var b = new B();</span><br><span class="line">alert(b.val);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优点</p>
+<ul>
+<li>解决了上面的所有问题</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>写法较麻烦</li>
+</ul>
+</li>
+</ul>
+<h3 id="原型式"><a href="#原型式" class="headerlink" title="原型式"></a>原型式</h3><p><img src="http://cdn.shianqi.com/20171110003210_cZK86B_5.png" alt="原型式"></p>
+<ul>
+<li><p>代码实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 返回一个继承自原型对象p的属性的新对象。</span><br><span class="line"> * 本函数出自 《JavaScript权威指南 第6版》 P122，例6-1</span><br><span class="line"> */</span><br><span class="line">function inherit(p)&#123;</span><br><span class="line">    if(p==null) throw TypeError();</span><br><span class="line">    if(Object.create)</span><br><span class="line">        return Object.create(p);</span><br><span class="line">    var t = typeof p;</span><br><span class="line">    if(t !== &apos;object&apos; &amp;&amp; t!== &apos;function&apos;) throw TypeError();</span><br><span class="line">    var f = function()&#123;&#125;;</span><br><span class="line">    f.prototype = p;</span><br><span class="line">    return new f();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function A()&#123;</span><br><span class="line">    this.val = 1;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// 拿到父类对象</span><br><span class="line">var a = new A();</span><br><span class="line">var b = inherit(a);   // 核心</span><br><span class="line">// 增强</span><br><span class="line">b.attr1 = 1;</span><br><span class="line">b.attr2 = 2;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line">alert(b.val);     // 1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优点</p>
+<ul>
+<li>从已有对象衍生新对象，不需要创建自定义类型（复制）</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>原型引用属性会被所有实例共享</li>
+<li>无法实现代码复用（新对象是现取的，属性是现添的，都没用函数封装，怎么复用）</li>
+</ul>
+</li>
+</ul>
+<h3 id="寄生式"><a href="#寄生式" class="headerlink" title="寄生式"></a>寄生式</h3><ul>
+<li>代码实现</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 返回一个继承自原型对象p的属性的新对象。</span><br><span class="line"> * 本函数出自 《JavaScript权威指南 第6版》 P122，例6-1</span><br><span class="line"> */</span><br><span class="line">function inherit(p)&#123;</span><br><span class="line">    if(p==null) throw TypeError();</span><br><span class="line">    if(Object.create)</span><br><span class="line">        return Object.create(p);</span><br><span class="line">    var t = typeof p;</span><br><span class="line">    if(t !== &apos;object&apos; &amp;&amp; t!== &apos;function&apos;) throw TypeError();</span><br><span class="line">    var f = function()&#123;&#125;;</span><br><span class="line">    f.prototype = p;</span><br><span class="line">    return new f();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function A()&#123;</span><br><span class="line">    this.val = 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function getSubObject(obj)&#123;</span><br><span class="line">    // 创建新对象</span><br><span class="line">    var clone = inherit(obj); // 核心</span><br><span class="line">    // 增强</span><br><span class="line">    clone.attr1 = 1;</span><br><span class="line">    clone.attr2 = 2;</span><br><span class="line"> </span><br><span class="line">    return clone;</span><br><span class="line">&#125;</span><br><span class="line">var b = getSubObject(new A());</span><br><span class="line">alert(b.val);     // 1</span><br><span class="line">alert(sub.attr1);   // 1</span><br></pre></td></tr></table></figure>
+<p>给原型式继承穿了个马甲而已<br>优缺点同上</p>
+<h2 id="六种继承之间的关系"><a href="#六种继承之间的关系" class="headerlink" title="六种继承之间的关系"></a>六种继承之间的关系</h2><p><img src="http://cdn.shianqi.com/20171110003322_EszpgV_6.png" alt="关系"></p>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><p><a href="http://www.cnblogs.com/ayqy/p/4471638.html" target="_blank" rel="external">重新理解JS的6种继承方式</a></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/05/01/JavaScript/JavaScript六种继承方式/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/04/29/React/json-server/">
                             json-server 30s 搭建 REST API
                         </a>
@@ -914,89 +1048,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/03/11/CSS/Flex/flex/">
-                            CSS3 Flex 布局
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-03-11T11:48:41+08:00">
-	
-		    3月 11, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="CSS3-flex-布局"><a href="#CSS3-flex-布局" class="headerlink" title="CSS3 flex 布局"></a>CSS3 flex 布局</h1><ul>
-<li>container 属性<ul>
-<li><a href="#1.1">flex-direction</a> ———/<em> 主轴方向 </em>/</li>
-<li><a href="#1.2">flex-wrap</a> ————–/<em> 主轴不能容纳如何换行 </em>/</li>
-<li><a href="#1.3">flex-flow</a> ————–/<em> 缩写 <flex-direction>||<flex-wrap> </flex-wrap></flex-direction></em>/</li>
-<li><a href="#1.4">justify-content</a>———/<em> Item 在主轴上的排列方式 </em>/</li>
-<li><a href="#1.5">align-items</a>————-/<em> 项目在主轴上如何对齐 </em>/</li>
-<li><a href="#1.6">align-content</a>———–/<em> 多根交叉轴线的对齐方式</em>/</li>
-</ul>
-</li>
-<li>item 属性<ul>
-<li><a href="#2.1">order</a>——————-/<em> 项目排列顺序，值小靠前 </em>/</li>
-<li><a href="#2.2">flex-grow</a>—————/<em> item 有剩余空间缩放比例，默认为0，不缩放 </em>/</li>
-<li><a href="#2.3">flex-shrink</a>————-/<em> item 空间不足时缩小比例，默认为1，该项目将缩小。 </em>/</li>
-<li><a href="#2.4">flex-basis</a>————–/<em> 在分配多余空间之前，项目占据的主轴空间 </em>/</li>
-<li><a href="#2.5">flex</a>——————–/<em> 前三项的缩写，默认为 0 1 auto </em>/</li>
-<li><a href="#2.6">align-self</a>————–/<em> 允许单个项目有与其他项目不一样的对齐方式 覆盖align-items </em>/</li>
-</ul>
-</li>
-</ul>
-<p>Flex 是Flexible Box的缩写，意为”<font color="ffc300">弹性布局</font>“，<br>用来为盒状模型提供最大的灵活性。<br><br>任何一个容器都可以指定为Flex布局。<br><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>行内元素:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: inline-flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>Webkit内核的浏览器，必须加上-webkit前缀。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">  <span class="attribute">display</span>: -webkit-flex; <span class="comment">/* Safari */</span></span><br><span class="line">  <span class="attribute">display</span>: flex;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><font color="#ff6767">注意</font>:设为Flex布局以后，子元素的</p>
-<p><font color="#ffc300">float</font>、</p>
-<p><font color="#ffc300">clear</font> 和</p>
-<p><font color="#ffc300">vertical-align</font><br>属性将失效。</p>
-<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p><img src="http://cdn.shianqi.com/20171110002511_INOZXI_flex.png" alt="概念"></p>
-<h2 id="container-属性"><a href="#container-属性" class="headerlink" title="container 属性"></a>container 属性</h2><p></p><h3 id="1.1">flex-direction</h3><br>决定主轴的方向 ( 项目的排列方向 )<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">row（默认值）：       //主轴为水平方向，起点在左端。</span><br><span class="line">row-reverse：        //主轴为水平方向，起点在右端。</span><br><span class="line">column：             //主轴为垂直方向，起点在上沿。</span><br><span class="line">column-reverse：     //主轴为垂直方向，起点在下沿。</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h3 id="1.2">flex-wrap</h3><br>主轴不能容纳如何换行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nowrap（默认值）：    //不换行。</span><br><span class="line">wrap:                //换行，第一行在上方。</span><br><span class="line">wrap-reverse：       //换行，第一行在下方。</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h3 id="1.3">flex-flow</h3><br><a href="#1.1">flex-direction</a> 属性和 <a href="#1.2">flex-wrap</a> 属性 的简写形式<p></p>
-<p></p><h3 id="1.4">justify-content</h3><br>项目在主轴上的对齐方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flex-start（默认值）：    //左对齐</span><br><span class="line">flex-end：               //右对齐</span><br><span class="line">center：                 //居中</span><br><span class="line">space-between：          //两端对齐，项目之间的间隔都相等。</span><br><span class="line">space-around：           //每个项目两侧的间隔相等</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h3 id="1.5">align-items</h3><br>项目在交叉轴上如何对齐<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flex-start：         //交叉轴的起点对齐。</span><br><span class="line">flex-end：           //交叉轴的终点对齐。</span><br><span class="line">center：             //交叉轴的中点对齐。</span><br><span class="line">baseline:            //项目的第一行文字的基线对齐。</span><br><span class="line">stretch（默认值）：   //如果项目未设置高度或设为auto，将占满整个容器的高度。</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h3 id="1.6">align-content</h3><br>多根轴线的对齐方式，只有一根轴不起作用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">flex-start：         //与交叉轴的起点对齐。</span><br><span class="line">flex-end：           //与交叉轴的终点对齐。</span><br><span class="line">center：             //与交叉轴的中点对齐。</span><br><span class="line">space-between：      //与交叉轴两端对齐，轴线之间的间隔平均分布。</span><br><span class="line">space-around：       //每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。</span><br><span class="line">stretch（默认值）：   //轴线占满整个交叉轴。</span><br></pre></td></tr></table></figure><p></p>
-<h2 id="item-属性"><a href="#item-属性" class="headerlink" title="item 属性"></a>item 属性</h2><p></p><h3 id="2.1">order</h3><br>项目的排列顺序。数值越小，排列越靠前，默认为0。<p></p>
-<p></p><h3 id="2.2">flex-grow</h3><br>项目的放大比例，默认为0，即如果存在剩余空间，也不放大。<p></p>
-<p></p><h3 id="2.3">flex-shrink</h3><br>项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。<p></p>
-<p></p><h3 id="2.4">flex-basis</h3><br>在分配多余空间之前，项目占据的主轴空间<p></p>
-<p></p><h3 id="2.5">flex</h3><br><a href="#2.2">flex-grow</a>, <a href="#2.3">flex-shrink</a> 和 <a href="#2.4">flex-basis</a><br>的简写，默认值为0 1 auto。后两个属性可选。<p></p>
-<p></p><h3 id="2.6">align-self</h3><br>属性允许单个项目有与其他项目不一样的对齐方式<br><br>可覆盖<a href="#1.5">align-items</a>属性。默认值为auto，表示继承父元素的<a href="#1.5">align-items</a>属性，<br>如果没有父元素，则等同于stretch。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">flex-start：         //交叉轴的起点对齐。</span><br><span class="line">flex-end：           //交叉轴的终点对齐。</span><br><span class="line">center：             //交叉轴的中点对齐。</span><br><span class="line">baseline:            //项目的第一行文字的基线对齐。</span><br><span class="line">stretch（默认值）：   //如果项目未设置高度或设为auto，将占满整个容器的高度。</span><br></pre></td></tr></table></figure><p></p>
-<p>文章参考：<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank" rel="external">原文链接</a></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/03/11/CSS/Flex/flex/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1281,7 +1332,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 106 篇文章
+                找到 107 篇文章
             </p>
         </div>
     </div>

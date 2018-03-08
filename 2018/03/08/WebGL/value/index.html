@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Tron Blog!">
-    <title>this.props.children - Tron Blog!</title>
+    <title>WebGL 变量 - Tron Blog!</title>
     <meta name="author" content="Archie Shi">
     
     
     
-    <meta name="description" content="this.props.childrenthis.props 对象的属性与组件的属性一一对应，但是有一个例外，就是 this.props.children 属性。它表示组件的所有子节点 123456789101112131415161718192021const NotesList = React.createClass(&amp;#123;  render: function() &amp;#123;    re">
-<meta name="keywords" content="React">
+    <meta name="description" content="向 shader 中传值 attribute: 属性，存放与顶点相关的数据，只能在顶点着色器中使用。 uniform: 一致变量，每次绘制像素点时都会调用且一直保持一致。传递与顶点无关的数据，在顶点着色器和片元着色器中都可以使用。 varying: 多变变量，从顶点着色器往片段着色器中传递的值，需要在顶点着色器和片段着色器中均设置匹配的多变变量。当 WebGL 绘制像素时，它会 栅格化 该值，然后">
+<meta name="keywords" content="WebGL">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="this.props.children">
-<meta property="og:url" content="https://shianqi.github.io/2017/09/14/React/props_children/index.html">
+<meta property="og:title" content="WebGL 变量">
+<meta property="og:url" content="https://shianqi.github.io/2018/03/08/WebGL/value/index.html">
 <meta property="og:site_name" content="Tron Blog!">
-<meta property="og:description" content="this.props.childrenthis.props 对象的属性与组件的属性一一对应，但是有一个例外，就是 this.props.children 属性。它表示组件的所有子节点 123456789101112131415161718192021const NotesList = React.createClass(&amp;#123;  render: function() &amp;#123;    re">
+<meta property="og:description" content="向 shader 中传值 attribute: 属性，存放与顶点相关的数据，只能在顶点着色器中使用。 uniform: 一致变量，每次绘制像素点时都会调用且一直保持一致。传递与顶点无关的数据，在顶点着色器和片元着色器中都可以使用。 varying: 多变变量，从顶点着色器往片段着色器中传递的值，需要在顶点着色器和片段着色器中均设置匹配的多变变量。当 WebGL 绘制像素时，它会 栅格化 该值，然后">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2017-09-14T09:11:50.000Z">
+<meta property="og:updated_time" content="2018-03-08T08:28:50.046Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="this.props.children">
-<meta name="twitter:description" content="this.props.childrenthis.props 对象的属性与组件的属性一一对应，但是有一个例外，就是 this.props.children 属性。它表示组件的所有子节点 123456789101112131415161718192021const NotesList = React.createClass(&amp;#123;  render: function() &amp;#123;    re">
+<meta name="twitter:title" content="WebGL 变量">
+<meta name="twitter:description" content="向 shader 中传值 attribute: 属性，存放与顶点相关的数据，只能在顶点着色器中使用。 uniform: 一致变量，每次绘制像素点时都会调用且一直保持一致。传递与顶点无关的数据，在顶点着色器和片元着色器中都可以使用。 varying: 多变变量，从顶点着色器往片段着色器中传递的值，需要在顶点着色器和片段着色器中均设置匹配的多变变量。当 WebGL 绘制像素时，它会 栅格化 该值，然后">
     
     
         
@@ -194,14 +194,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            this.props.children
+            WebGL 变量
         </h1>
     
     
         <div class="post-meta">
-    <time itemprop="datePublished" datetime="2017-09-14T17:09:16+08:00">
+    <time itemprop="datePublished" datetime="2018-03-08T13:38:18+08:00">
 	
-		    9月 14, 2017
+		    3月 08, 2018
     	
     </time>
     
@@ -212,10 +212,14 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h1 id="this-props-children"><a href="#this-props-children" class="headerlink" title="this.props.children"></a>this.props.children</h1><p><code>this.props</code> 对象的属性与组件的属性一一对应，但是有一个例外，就是 <code>this.props.children</code> 属性。它表示组件的所有子节点</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> NotesList = React.createClass(&#123;</span><br><span class="line">  render: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;ol&gt;</span><br><span class="line">      &#123;</span><br><span class="line">        React.Children.map(<span class="keyword">this</span>.props.children, <span class="function"><span class="keyword">function</span> (<span class="params">child</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;child&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span>;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">      &lt;<span class="regexp">/ol&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">ReactDOM.render(</span></span><br><span class="line"><span class="regexp">  &lt;NotesList&gt;</span></span><br><span class="line"><span class="regexp">    &lt;span&gt;hello&lt;/</span>span&gt;</span><br><span class="line">    &lt;span&gt;world&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>NotesList&gt;,</span><br><span class="line">  <span class="built_in">document</span>.body</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-<p>这里需要注意， <code>this.props.children</code> 的值有三种可能：如果当前组件没有子节点，它就是 <code>undefined</code> ;如果有一个子节点，数据类型是 <code>object</code> ；如果有多个子节点，数据类型就是 <code>array</code> 。所以，处理 <code>this.props.children</code> 的时候要小心。</p>
-<p><code>React</code> 提供一个工具方法 <code>React.Children</code> 来处理 <code>this.props.children</code> 。我们可以用 <code>React.Children.map</code> 来遍历子节点，而不用担心 <code>this.props.children</code> 的数据类型是 <code>undefined</code> 还是 <code>object</code>。更多的 <code>React.Children</code> 的方法，请参考官方文档。</p>
+            <h1 id="向-shader-中传值"><a href="#向-shader-中传值" class="headerlink" title="向 shader 中传值"></a>向 shader 中传值</h1><ul>
+<li>attribute: 属性，存放与顶点相关的数据，只能在顶点着色器中使用。</li>
+<li>uniform: 一致变量，每次绘制像素点时都会调用且一直保持一致。传递与顶点无关的数据，在顶点着色器和片元着色器中都可以使用。</li>
+<li>varying: 多变变量，从顶点着色器往片段着色器中传递的值，需要在顶点着色器和片段着色器中均设置匹配的多变变量。当 WebGL 绘制像素时，它会 <code>栅格化</code> 该值，然后传递到片段着色器中相对应的片段着色器。</li>
+</ul>
+<h2 id="向-attribute-中传值"><a href="#向-attribute-中传值" class="headerlink" title="向 attribute 中传值"></a>向 attribute 中传值</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a_PointSize = gl.getAttribLocation(shaderProgram, <span class="string">"a_PointSize"</span>);</span><br><span class="line">gl.vertexAttrib1f(a_PointSize, <span class="number">10.0</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="向-uniform-中传值"><a href="#向-uniform-中传值" class="headerlink" title="向 uniform 中传值"></a>向 uniform 中传值</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> u_Width = gl.getUniformLocation(gl.program, <span class="string">"u_Width"</span>);</span><br><span class="line"><span class="comment">// uniform[1234][fi][v]</span></span><br><span class="line">gl.uniform1f(u_Width, gl.drawingBufferWidth);</span><br><span class="line"><span class="comment">// uniformMatrix[234]fv()</span></span><br><span class="line">gl.uniformMatrix2fv(u_Width, <span class="literal">false</span>, [<span class="number">2</span>,<span class="number">1</span>, <span class="number">2</span>,<span class="number">2</span>]);</span><br></pre></td></tr></table></figure>
+<h2 id="使用-varying-变量再着色器间传值"><a href="#使用-varying-变量再着色器间传值" class="headerlink" title="使用 varying 变量再着色器间传值"></a>使用 varying 变量再着色器间传值</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> vertexShaderSrc = <span class="string">`</span></span><br><span class="line"><span class="string">attribute vec4 a_Position;</span></span><br><span class="line"><span class="string">attribute vec4 a_Color;</span></span><br><span class="line"><span class="string">varying vec4 v_Color;</span></span><br><span class="line"><span class="string">void main()&#123;</span></span><br><span class="line"><span class="string">    gl_Position = a_Position;</span></span><br><span class="line"><span class="string">    v_Color = a_Color;</span></span><br><span class="line"><span class="string">&#125;`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> fragmentShaderSrc = <span class="string">`</span></span><br><span class="line"><span class="string">precision mediump float;</span></span><br><span class="line"><span class="string">varying vec4 v_Color;</span></span><br><span class="line"><span class="string">void main()&#123;</span></span><br><span class="line"><span class="string">    gl_FragColor = v_Color;</span></span><br><span class="line"><span class="string">&#125;`</span>;</span><br></pre></td></tr></table></figure>
 
             
         </div>
@@ -225,7 +229,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/React/">React</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/WebGL/">WebGL</a>
 
             </div>
         
@@ -235,7 +239,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/20/Koa/Koa/"  data-tooltip="Koa2 基本使用">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -243,7 +247,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/13/Webpack/Webpack踩坑/" data-tooltip="webpack 踩坑">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/04/WebGL/webgl/" data-tooltip="WebGL 初探">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -261,7 +265,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/09/14/React/props_children/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/03/08/WebGL/value/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -269,7 +273,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/09/14/React/props_children/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/03/08/WebGL/value/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -277,7 +281,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/09/14/React/props_children/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/03/08/WebGL/value/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -317,7 +321,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/20/Koa/Koa/"  data-tooltip="Koa2 基本使用">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -325,7 +329,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/09/13/Webpack/Webpack踩坑/" data-tooltip="webpack 踩坑">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/04/WebGL/webgl/" data-tooltip="WebGL 初探">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -343,7 +347,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/09/14/React/props_children/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/03/08/WebGL/value/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -351,7 +355,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/09/14/React/props_children/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/03/08/WebGL/value/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -359,7 +363,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/09/14/React/props_children/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/03/08/WebGL/value/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -384,7 +388,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/09/14/React/props_children/">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/03/08/WebGL/value/">
                     <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
                 </a>
             </li>
@@ -392,7 +396,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/09/14/React/props_children/">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/03/08/WebGL/value/">
                     <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
                 </a>
             </li>
@@ -400,7 +404,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/09/14/React/props_children/">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/03/08/WebGL/value/">
                     <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
                 </a>
             </li>
