@@ -195,6 +195,73 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/05/24/JavaScript/Touch_Passive/">
+                            addEventListener passive 属性
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-05-24T21:56:14+08:00">
+	
+		    5月 24, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p><strong>如果不阻止默认行为，使用 <code>{passive: true}</code> 能够有效的增加流畅度</strong></p>
+<h2 id="passive-的事件监听器"><a href="#passive-的事件监听器" class="headerlink" title="passive 的事件监听器"></a>passive 的事件监听器</h2><p>很久以前，<code>addEventListener()</code> 的参数约定是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener, useCapture)</span><br></pre></td></tr></table></figure></p>
+<p>后来，最后一个参数，也就是控制监听器是在捕获阶段执行还是在冒泡阶段执行的 <code>useCapture</code> 参数，变成了可选参数（传 true 的情况太少了）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener[, useCapture ])</span><br></pre></td></tr></table></figure>
+<p>2015 年底，DOM 规范做了修订：<code>addEventListener()</code> 的第三个参数可以是个对象值了，也就是说第三个参数现在可以是两种类型的值了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener[, useCapture ])</span><br><span class="line">addEventListener(type, listener[, options ])</span><br></pre></td></tr></table></figure>
+<p>这个修订是为了扩展新的选项，从而自定义更多的行为，目前规范中 <code>options</code> 对象可用的属性有三个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener, &#123;</span><br><span class="line">    capture: false,</span><br><span class="line">    passive: false,</span><br><span class="line">    once: false</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>三个属性都是布尔类型，默认值都为 <code>false</code>。</p>
+<ol>
+<li><code>capture</code> 属性等价于以前的 <code>useCapture</code> 参数</li>
+<li><code>once</code> 属性就是表明该监听器是一次性的，执行一次后就被自动 <code>removeEventListener</code> 掉，还没有浏览器实现它；</li>
+<li><code>passive</code> 属性 Firefox 和 Chrome 已经实现</li>
+</ol>
+<p>浏览器无法预先知道一个监听器会不会调用 <code>preventDefault()</code>，它能做的只有等监听器执行完后再去执行默认行为，而监听器执行是要耗时的，有些甚至耗时很明显，这样就会导致页面卡顿。视频里也说了，即便监听器是个空函数，也会产生一定的卡顿，毕竟空函数的执行也会耗时。</p>
+<p>有 80% 的滚动事件监听器是不会阻止默认行为的，也就是说大部分情况下，浏览器是白等了。所以，<code>passive</code> 监听器诞生了，<code>passive</code> 的意思是“顺从的”，表示它不会对事件的默认行为说 no，浏览器知道了一个监听器是 <code>passive</code> 的，它就可以在两个线程里同时执行监听器中的 <code>JavaScript</code> 代码和浏览器的默认行为了。</p>
+<p><strong>如果不阻止默认行为，使用 <code>{passive: true}</code> 能够有效的增加流畅度</strong></p>
+<p>假如不小心在 <code>passive</code> 的监听器里调用了 <code>preventDefault()</code>，也无妨，因为 <code>preventDefault()</code> 不会产生任何效果，但开发者工具会发出警告。</p>
+<p>Chrome 发现耗时超过 100 毫秒的非 <code>passive</code> 的监听器，警告你加上 <code>{passive: true}</code></p>
+<h2 id="何时调用-removeEventListener"><a href="#何时调用-removeEventListener" class="headerlink" title="何时调用 removeEventListener"></a>何时调用 removeEventListener</h2><p>第三个参数是布尔值的时候，<code>addEventListener(&quot;foo&quot;, listener, true)</code> 添加的监听器，必须用 <code>removeEventListener(&quot;foo&quot;, listener, true)</code> 才能删除掉。因为这个监听器也有可能还注册在了冒泡阶段，那样的话，同一个监听器实际上对应着两个监听器对象</p>
+<ul>
+<li>如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数</li>
+<li>类似 <code>document.removeEventListener(&quot;event&quot;, function(){ myScript });</code> 该事件是无法移除的。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var div1 = document.getElementById(&quot;div1&quot;);</span><br><span class="line"></span><br><span class="line">function listener(e)&#123;</span><br><span class="line">	console.log(&quot;div listener&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div1.addEventListener(&apos;mousedown&apos;, listener, true);</span><br><span class="line"></span><br><span class="line">div1.removeEventListener(&quot;mousedown&quot;, listener, true);</span><br></pre></td></tr></table></figure>
+<p>那现在 <code>addEventListener(&quot;foo&quot;, listener, {passive: true})</code> 添加的监听器只要 <code>removeEventListener(&quot;foo&quot;, listener)</code> 就可以了</p>
+<p>所以说在 removeEventListener 的时候永远不需写 passive 和 once，但 capture 可能要</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/05/24/JavaScript/Touch_Passive/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/05/24/React/React-Touch/">
                             React Touch 事件
                         </a>
@@ -816,116 +883,6 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2017/05/11/Webpack/css-loader/">
-                            CSS-Modules
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-05-11T20:10:16+08:00">
-	
-		    5月 11, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="css-loader-amp-style-loader-的区别"><a href="#css-loader-amp-style-loader-的区别" class="headerlink" title="css-loader &amp; style-loader 的区别"></a>css-loader &amp; style-loader 的区别</h2><p>css-loader以一个字符串的形式读入一个css文件。并返回带导入的CSS，并通过webpack的require功能解决url（…）：</p>
-<p>style-loader会使用这些样式，并在包含这些样式的页面的<head>元素中创建一个<style>标签。</p>
-<h2 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h2><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>root</td>
-<td>{String}</td>
-<td>/</td>
-<td>解析URL的路径，以 <code>/</code> 开头的URL不会被翻译</td>
-</tr>
-<tr>
-<td>url</td>
-<td>{Boolean}</td>
-<td>true</td>
-<td>Enable/Disable url() handling</td>
-</tr>
-<tr>
-<td>alias</td>
-<td>{Object}</td>
-<td>{}</td>
-<td>Create aliases to import certain modules more easily</td>
-</tr>
-<tr>
-<td>import</td>
-<td>{Boolean}</td>
-<td>true</td>
-<td>Enable/Disable @import handling</td>
-</tr>
-<tr>
-<td>modules</td>
-<td>{Boolean}</td>
-<td>false</td>
-<td>Enable/Disable CSS Modules</td>
-</tr>
-<tr>
-<td>minimize</td>
-<td>{Boolean Object}</td>
-<td>false</td>
-<td>Enable/Disable minification</td>
-</tr>
-<tr>
-<td>sourceMap</td>
-<td>{Boolean}</td>
-<td>false</td>
-<td>Enable/Disable Sourcemaps</td>
-</tr>
-<tr>
-<td>camelCase</td>
-<td>{Boolean String}</td>
-<td>false</td>
-<td>Export Classnames in CamelCase</td>
-</tr>
-<tr>
-<td>importLoaders</td>
-<td>{Number}</td>
-<td>0</td>
-<td>Number of loaders applied before CSS loader</td>
-</tr>
-</tbody>
-</table>
-<h3 id="alias"><a href="#alias" class="headerlink" title="alias"></a>alias</h3><p>用别名重写你的URL，当你在另一个包中使用一些css / sass文件（bootstrap，ratchet，font-awesome等）时</p>
-</style></head></p>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/05/11/Webpack/css-loader/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
                         <a class="link-unstyled" href="/2017/05/11/CSS/css-modules/">
                             CSS-Modules
                         </a>
@@ -1031,6 +988,116 @@
                     
                         <p>
                             <a href="/2017/05/11/CSS/css-performance-optimization/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/05/11/Webpack/css-loader/">
+                            CSS-Modules
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-05-11T20:10:16+08:00">
+	
+		    5月 11, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="css-loader-amp-style-loader-的区别"><a href="#css-loader-amp-style-loader-的区别" class="headerlink" title="css-loader &amp; style-loader 的区别"></a>css-loader &amp; style-loader 的区别</h2><p>css-loader以一个字符串的形式读入一个css文件。并返回带导入的CSS，并通过webpack的require功能解决url（…）：</p>
+<p>style-loader会使用这些样式，并在包含这些样式的页面的<head>元素中创建一个<style>标签。</p>
+<h2 id="Options"><a href="#Options" class="headerlink" title="Options"></a>Options</h2><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>root</td>
+<td>{String}</td>
+<td>/</td>
+<td>解析URL的路径，以 <code>/</code> 开头的URL不会被翻译</td>
+</tr>
+<tr>
+<td>url</td>
+<td>{Boolean}</td>
+<td>true</td>
+<td>Enable/Disable url() handling</td>
+</tr>
+<tr>
+<td>alias</td>
+<td>{Object}</td>
+<td>{}</td>
+<td>Create aliases to import certain modules more easily</td>
+</tr>
+<tr>
+<td>import</td>
+<td>{Boolean}</td>
+<td>true</td>
+<td>Enable/Disable @import handling</td>
+</tr>
+<tr>
+<td>modules</td>
+<td>{Boolean}</td>
+<td>false</td>
+<td>Enable/Disable CSS Modules</td>
+</tr>
+<tr>
+<td>minimize</td>
+<td>{Boolean Object}</td>
+<td>false</td>
+<td>Enable/Disable minification</td>
+</tr>
+<tr>
+<td>sourceMap</td>
+<td>{Boolean}</td>
+<td>false</td>
+<td>Enable/Disable Sourcemaps</td>
+</tr>
+<tr>
+<td>camelCase</td>
+<td>{Boolean String}</td>
+<td>false</td>
+<td>Export Classnames in CamelCase</td>
+</tr>
+<tr>
+<td>importLoaders</td>
+<td>{Number}</td>
+<td>0</td>
+<td>Number of loaders applied before CSS loader</td>
+</tr>
+</tbody>
+</table>
+<h3 id="alias"><a href="#alias" class="headerlink" title="alias"></a>alias</h3><p>用别名重写你的URL，当你在另一个包中使用一些css / sass文件（bootstrap，ratchet，font-awesome等）时</p>
+</style></head></p>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/05/11/Webpack/css-loader/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -1198,248 +1265,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/05/01/Atom/Atom常用插件/">
-                            Atom 常用插件
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-05-01T19:44:16+08:00">
-	
-		    5月 01, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h1><h2 id="web开发"><a href="#web开发" class="headerlink" title="web开发"></a>web开发</h2><table>
-<thead>
-<tr>
-<th>插件名</th>
-<th>作用</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>emmet</td>
-<td>HTML代码补全</td>
-<td>emmet代码展开</td>
-</tr>
-<tr>
-<td>autoprefixer</td>
-<td>css自动浏览器前缀适配</td>
-<td>√</td>
-</tr>
-<tr>
-<td>minimap</td>
-<td>类似sublime右侧代码地图</td>
-<td>√</td>
-</tr>
-<tr>
-<td>minimap-linter</td>
-<td>代码地图显示linter</td>
-<td>√</td>
-</tr>
-<tr>
-<td>minimap-pigments</td>
-<td>代码地图显示颜色</td>
-<td>√</td>
-</tr>
-<tr>
-<td>highlight-selected</td>
-<td>高亮选中单词</td>
-<td>√</td>
-</tr>
-<tr>
-<td>open-in-browser</td>
-<td>用默认应用打开文件</td>
-<td>√</td>
-</tr>
-<tr>
-<td>color-picker</td>
-<td>图形界面选取颜色</td>
-<td>√</td>
-</tr>
-<tr>
-<td>regex-railroad-diagram</td>
-<td>图形化正则表达式</td>
-<td>√</td>
-</tr>
-<tr>
-<td>file-icons</td>
-<td>美化默认icons</td>
-<td>√</td>
-</tr>
-<tr>
-<td>atom-beautify</td>
-<td>一键整理代码</td>
-<td></td>
-</tr>
-<tr>
-<td>atom-ternjs</td>
-<td>js代码提示很强大，高度定制化。</td>
-<td></td>
-</tr>
-<tr>
-<td>docblockr</td>
-<td>js注释doc</td>
-<td></td>
-</tr>
-<tr>
-<td>autoclose-html</td>
-<td>自动闭合HTML标签</td>
-<td></td>
-</tr>
-<tr>
-<td>pigments</td>
-<td>颜色显示插件</td>
-<td>必装</td>
-</tr>
-<tr>
-<td>linter</td>
-<td>错误检查工具</td>
-<td></td>
-</tr>
-<tr>
-<td>linter-ui-default</td>
-<td>linter 界面</td>
-<td></td>
-</tr>
-<tr>
-<td>linter-eslint</td>
-<td>es语法检错</td>
-<td></td>
-</tr>
-<tr>
-<td>linter-jslint</td>
-<td>js语法检错</td>
-<td></td>
-</tr>
-<tr>
-<td>linter-htmlhint</td>
-<td>html语法检错</td>
-<td></td>
-</tr>
-<tr>
-<td>linter-stylelint</td>
-<td>css语法检错</td>
-<td></td>
-</tr>
-<tr>
-<td>linter-sass-lint</td>
-<td>sass语法检错</td>
-<td></td>
-</tr>
-<tr>
-<td>simplified-chinese-menu</td>
-<td>汉化插件</td>
-<td></td>
-</tr>
-<tr>
-<td>autocomplete-paths</td>
-<td>路径自动完成插件</td>
-<td></td>
-</tr>
-<tr>
-<td>pretty-json</td>
-<td>json自动整理</td>
-<td></td>
-</tr>
-<tr>
-<td>language-gitignore</td>
-<td>gitignore语法高亮</td>
-<td></td>
-</tr>
-<tr>
-<td>markdown-preview-plus</td>
-<td>markdown预览</td>
-<td></td>
-</tr>
-<tr>
-<td>editorconfig</td>
-<td>支持.editorconfig</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apm install emmet autoprefixer minimap highlight-selected open-in-browser color-picker regex-railroad-diagram file-icons atom-beautify docblockr autoclose-html pigments linter linter-ui-default linter-eslint linter-jslint linter-htmlhint linter-csslint linter-sass-lint simplified-chinese-menu autocomplete-paths pretty-json language-gitignore markdown-preview-plus</span><br></pre></td></tr></table></figure>
-<h2 id="React"><a href="#React" class="headerlink" title="React"></a>React</h2><table>
-<thead>
-<tr>
-<th>插件名</th>
-<th>作用</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>react-snippets</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>react-es6-snippets</td>
-<td>es6写法的react snippet</td>
-<td></td>
-</tr>
-<tr>
-<td>language-babel</td>
-<td>写React必不可少</td>
-<td></td>
-</tr>
-<tr>
-<td>language-javascript-jsx</td>
-<td>JavaScript, ES6, ES7, React JSX, Flow支持</td>
-<td></td>
-</tr>
-<tr>
-<td>atom-react-autocomplete</td>
-<td>项目内，组件名及状态的自动补全</td>
-</tr>
-</tbody>
-</table>
-<h2 id="外观"><a href="#外观" class="headerlink" title="外观"></a>外观</h2><table>
-<thead>
-<tr>
-<th>插件名</th>
-<th>作用</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>atom-material-syntax</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/05/01/Atom/Atom常用插件/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1569,25 +1394,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
-                            <h3 class="media-heading">BrowserSync 使用手册</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
                             <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
@@ -1607,8 +1413,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1626,8 +1432,27 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
+                            <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1725,7 +1550,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 107 篇文章
+                找到 108 篇文章
             </p>
         </div>
     </div>

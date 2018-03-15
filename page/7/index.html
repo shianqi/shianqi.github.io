@@ -194,6 +194,54 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/06/20/Hexo/Hexo支持Emoji/">
+                            Hexo 支持 Emoji
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-06-20T21:02:22+08:00">
+	
+		    6月 20, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p><code>Hexo</code> 默认是采用 <code>hexo-renderer-marked</code> ,这个渲染器不支持插件扩展，当然就不行了，还有一个支持插件扩展的是 <code>hexo-renderer-markdown-it</code> ，所以我们可以使用这个渲染引擎来支持 <code>emoji</code>表情，具体实现过程如下：</p>
+<p>更换渲染器进入blog跟目录，执行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm un hexo-renderer-marked --save</span><br><span class="line">npm i hexo-renderer-markdown-it --save</span><br></pre></td></tr></table></figure></p>
+<p>安装emoji插件，执行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install markdown-it-emoji --save</span><br></pre></td></tr></table></figure></p>
+<p>编辑 <code>_config.yml</code> 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">markdown:</span><br><span class="line">  render:</span><br><span class="line">    html: true</span><br><span class="line">    xhtmlOut: false</span><br><span class="line">    breaks: true</span><br><span class="line">    linkify: true</span><br><span class="line">    typographer: true</span><br><span class="line">    quotes: &apos;“”‘’&apos;</span><br><span class="line">  plugins:</span><br><span class="line">    - markdown-it-abbr</span><br><span class="line">    - markdown-it-footnote</span><br><span class="line">    - markdown-it-ins</span><br><span class="line">    - markdown-it-sub</span><br><span class="line">    - markdown-it-sup</span><br><span class="line">    - markdown-it-emoji  # add emoji</span><br><span class="line">  anchors:</span><br><span class="line">    level: 2</span><br><span class="line">    collisionSuffix: &apos;v&apos;</span><br><span class="line">    permalink: true</span><br><span class="line">    permalinkClass: header-anchor</span><br><span class="line">    permalinkSymbol: ¶</span><br></pre></td></tr></table></figure></p>
+<p>添加emoji表情<br>先安装emoji<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install emoji --save</span><br><span class="line">npm install twemoji --save</span><br></pre></td></tr></table></figure></p>
+<p>编辑node_modules/markdown-it-emoji/index.js文件，最终文件像:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&apos;use strict&apos;;</span><br><span class="line">var emojies_defs      = require(&apos;./lib/data/full.json&apos;);</span><br><span class="line">var emojies_shortcuts = require(&apos;./lib/data/shortcuts&apos;);</span><br><span class="line">var emoji_html        = require(&apos;./lib/render&apos;);</span><br><span class="line">var emoji_replace     = require(&apos;./lib/replace&apos;);</span><br><span class="line">var normalize_opts    = require(&apos;./lib/normalize_opts&apos;);</span><br><span class="line">var twemoji           = require(&apos;twemoji&apos;)  //添加twemoji</span><br><span class="line">module.exports = function emoji_plugin(md, options) &#123;</span><br><span class="line">  var defaults = &#123;</span><br><span class="line">    defs: emojies_defs,</span><br><span class="line">    shortcuts: emojies_shortcuts,</span><br><span class="line">    enabled: []</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  var opts = normalize_opts(md.utils.assign(&#123;&#125;, defaults, options || &#123;&#125;));</span><br><span class="line"></span><br><span class="line">  md.renderer.rules.emoji = emoji_html;</span><br><span class="line">  //使用 twemoji 渲染</span><br><span class="line">  md.renderer.rules.emoji = function(token, idx) &#123;</span><br><span class="line">    return twemoji.parse(token[idx].content);</span><br><span class="line">  &#125;;</span><br><span class="line">  md.core.ruler.push(&apos;emoji&apos;, emoji_replace(md, opts.defs, opts.shortcuts, opts.scanRE, opts.replaceRE));</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>在主题CSS中添加你的CSS代码就行了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.emoji&#123;</span><br><span class="line">   width: 20px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/06/20/Hexo/Hexo支持Emoji/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/06/20/Git/GithubEmoji/">
                             Github 提交代码 Emoji
                         </a>
@@ -1088,73 +1136,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/05/24/JavaScript/Touch_Passive/">
-                            addEventListener passive 属性
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-05-24T21:56:14+08:00">
-	
-		    5月 24, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p><strong>如果不阻止默认行为，使用 <code>{passive: true}</code> 能够有效的增加流畅度</strong></p>
-<h2 id="passive-的事件监听器"><a href="#passive-的事件监听器" class="headerlink" title="passive 的事件监听器"></a>passive 的事件监听器</h2><p>很久以前，<code>addEventListener()</code> 的参数约定是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener, useCapture)</span><br></pre></td></tr></table></figure></p>
-<p>后来，最后一个参数，也就是控制监听器是在捕获阶段执行还是在冒泡阶段执行的 <code>useCapture</code> 参数，变成了可选参数（传 true 的情况太少了）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener[, useCapture ])</span><br></pre></td></tr></table></figure>
-<p>2015 年底，DOM 规范做了修订：<code>addEventListener()</code> 的第三个参数可以是个对象值了，也就是说第三个参数现在可以是两种类型的值了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener[, useCapture ])</span><br><span class="line">addEventListener(type, listener[, options ])</span><br></pre></td></tr></table></figure>
-<p>这个修订是为了扩展新的选项，从而自定义更多的行为，目前规范中 <code>options</code> 对象可用的属性有三个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">addEventListener(type, listener, &#123;</span><br><span class="line">    capture: false,</span><br><span class="line">    passive: false,</span><br><span class="line">    once: false</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>三个属性都是布尔类型，默认值都为 <code>false</code>。</p>
-<ol>
-<li><code>capture</code> 属性等价于以前的 <code>useCapture</code> 参数</li>
-<li><code>once</code> 属性就是表明该监听器是一次性的，执行一次后就被自动 <code>removeEventListener</code> 掉，还没有浏览器实现它；</li>
-<li><code>passive</code> 属性 Firefox 和 Chrome 已经实现</li>
-</ol>
-<p>浏览器无法预先知道一个监听器会不会调用 <code>preventDefault()</code>，它能做的只有等监听器执行完后再去执行默认行为，而监听器执行是要耗时的，有些甚至耗时很明显，这样就会导致页面卡顿。视频里也说了，即便监听器是个空函数，也会产生一定的卡顿，毕竟空函数的执行也会耗时。</p>
-<p>有 80% 的滚动事件监听器是不会阻止默认行为的，也就是说大部分情况下，浏览器是白等了。所以，<code>passive</code> 监听器诞生了，<code>passive</code> 的意思是“顺从的”，表示它不会对事件的默认行为说 no，浏览器知道了一个监听器是 <code>passive</code> 的，它就可以在两个线程里同时执行监听器中的 <code>JavaScript</code> 代码和浏览器的默认行为了。</p>
-<p><strong>如果不阻止默认行为，使用 <code>{passive: true}</code> 能够有效的增加流畅度</strong></p>
-<p>假如不小心在 <code>passive</code> 的监听器里调用了 <code>preventDefault()</code>，也无妨，因为 <code>preventDefault()</code> 不会产生任何效果，但开发者工具会发出警告。</p>
-<p>Chrome 发现耗时超过 100 毫秒的非 <code>passive</code> 的监听器，警告你加上 <code>{passive: true}</code></p>
-<h2 id="何时调用-removeEventListener"><a href="#何时调用-removeEventListener" class="headerlink" title="何时调用 removeEventListener"></a>何时调用 removeEventListener</h2><p>第三个参数是布尔值的时候，<code>addEventListener(&quot;foo&quot;, listener, true)</code> 添加的监听器，必须用 <code>removeEventListener(&quot;foo&quot;, listener, true)</code> 才能删除掉。因为这个监听器也有可能还注册在了冒泡阶段，那样的话，同一个监听器实际上对应着两个监听器对象</p>
-<ul>
-<li>如果要移除事件句柄，addEventListener() 的执行函数必须使用外部函数</li>
-<li>类似 <code>document.removeEventListener(&quot;event&quot;, function(){ myScript });</code> 该事件是无法移除的。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var div1 = document.getElementById(&quot;div1&quot;);</span><br><span class="line"></span><br><span class="line">function listener(e)&#123;</span><br><span class="line">	console.log(&quot;div listener&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div1.addEventListener(&apos;mousedown&apos;, listener, true);</span><br><span class="line"></span><br><span class="line">div1.removeEventListener(&quot;mousedown&quot;, listener, true);</span><br></pre></td></tr></table></figure>
-<p>那现在 <code>addEventListener(&quot;foo&quot;, listener, {passive: true})</code> 添加的监听器只要 <code>removeEventListener(&quot;foo&quot;, listener)</code> 就可以了</p>
-<p>所以说在 removeEventListener 的时候永远不需写 passive 和 once，但 capture 可能要</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/05/24/JavaScript/Touch_Passive/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1283,25 +1264,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
-                            <h3 class="media-heading">BrowserSync 使用手册</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
                             <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
@@ -1321,8 +1283,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1340,8 +1302,27 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
+                            <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1439,7 +1420,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 107 篇文章
+                找到 108 篇文章
             </p>
         </div>
     </div>
