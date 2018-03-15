@@ -194,58 +194,6 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2017/06/28/DesignPatterns/DesignPatterns/FlyweightPattern/">
-                            设计模式：享元模式模式（Flyweight Pattern）
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-28T20:21:36+08:00">
-	
-		    6月 28, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="设计模式：享元模式模式（Flyweight-Pattern）"><a href="#设计模式：享元模式模式（Flyweight-Pattern）" class="headerlink" title="设计模式：享元模式模式（Flyweight Pattern）"></a>设计模式：享元模式模式（Flyweight Pattern）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>动态地给一个对象添加一些额外的职责。就增加功能来说，它相比生成子类更为灵活</p>
-<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>结构类模式</p>
-<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110095023_4aICt4_FlyweightPattern.png" alt="Flyweight Pattern"></p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line">    <span class="comment">//内部状态</span></span><br><span class="line">    <span class="keyword">private</span> String intrinsic;</span><br><span class="line">    <span class="comment">//外部状态</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">final</span> String Extrinsic;</span><br><span class="line">    <span class="comment">//享元角色必须接受外部状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Flyweight</span><span class="params">(String _Extrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.Extrinsic = _Extrinsic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIntrinsic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> intrinsic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIntrinsic</span><span class="params">(String intrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.intrinsic = intrinsic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight1</span> <span class="keyword">extends</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyweight1</span><span class="params">(String _Extrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(_Extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight2</span> <span class="keyword">extends</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyweight2</span><span class="params">(String _Extrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(_Extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyweightFactory</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HashMap&lt;String, Flyweight&gt; pool = <span class="keyword">new</span> HashMap&lt;String, Flyweight&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//享元工厂</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Flyweight <span class="title">getFlyweight</span><span class="params">(String Extrinsic)</span></span>&#123;</span><br><span class="line">        Flyweight flyweight = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(pool.containsKey(Extrinsic))&#123;</span><br><span class="line">            flyweight = pool.get(Extrinsic);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            flyweight = <span class="keyword">new</span> ConcreteFlyweight1(Extrinsic);</span><br><span class="line">            pool.put(Extrinsic, flyweight);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flyweight;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>大大减少应用程序创建的对象，减低程序内的占用，增强程序的性能</p>
-<p>##　缺点<br>提高了系统的复杂性，需要分离出外部状态和内部状态。</p>
-<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
-<li>系统中存在大量的相似对象</li>
-<li>细粒度的对象都具备较结晶的外部状态</li>
-<li>需要缓冲池的场景</li>
-</ul>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/06/28/DesignPatterns/DesignPatterns/FlyweightPattern/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
                         <a class="link-unstyled" href="/2017/06/28/DesignPatterns/DesignPatterns/FacadePattern/">
                             设计模式：门面模式（Facade Pattern）
                         </a>
@@ -285,6 +233,58 @@
                     
                         <p>
                             <a href="/2017/06/28/DesignPatterns/DesignPatterns/FacadePattern/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/06/28/DesignPatterns/DesignPatterns/FlyweightPattern/">
+                            设计模式：享元模式模式（Flyweight Pattern）
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-06-28T20:21:36+08:00">
+	
+		    6月 28, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="设计模式：享元模式模式（Flyweight-Pattern）"><a href="#设计模式：享元模式模式（Flyweight-Pattern）" class="headerlink" title="设计模式：享元模式模式（Flyweight Pattern）"></a>设计模式：享元模式模式（Flyweight Pattern）</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>动态地给一个对象添加一些额外的职责。就增加功能来说，它相比生成子类更为灵活</p>
+<h2 id="类型"><a href="#类型" class="headerlink" title="类型"></a>类型</h2><p>结构类模式</p>
+<h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="http://cdn.shianqi.com/20171110095023_4aICt4_FlyweightPattern.png" alt="Flyweight Pattern"></p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line">    <span class="comment">//内部状态</span></span><br><span class="line">    <span class="keyword">private</span> String intrinsic;</span><br><span class="line">    <span class="comment">//外部状态</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">final</span> String Extrinsic;</span><br><span class="line">    <span class="comment">//享元角色必须接受外部状态</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Flyweight</span><span class="params">(String _Extrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.Extrinsic = _Extrinsic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIntrinsic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> intrinsic;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIntrinsic</span><span class="params">(String intrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.intrinsic = intrinsic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight1</span> <span class="keyword">extends</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyweight1</span><span class="params">(String _Extrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(_Extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyweight2</span> <span class="keyword">extends</span> <span class="title">Flyweight</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyweight2</span><span class="params">(String _Extrinsic)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(_Extrinsic);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//业务逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyweightFactory</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HashMap&lt;String, Flyweight&gt; pool = <span class="keyword">new</span> HashMap&lt;String, Flyweight&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//享元工厂</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Flyweight <span class="title">getFlyweight</span><span class="params">(String Extrinsic)</span></span>&#123;</span><br><span class="line">        Flyweight flyweight = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(pool.containsKey(Extrinsic))&#123;</span><br><span class="line">            flyweight = pool.get(Extrinsic);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            flyweight = <span class="keyword">new</span> ConcreteFlyweight1(Extrinsic);</span><br><span class="line">            pool.put(Extrinsic, flyweight);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flyweight;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>大大减少应用程序创建的对象，减低程序内的占用，增强程序的性能</p>
+<p>##　缺点<br>提高了系统的复杂性，需要分离出外部状态和内部状态。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><ul>
+<li>系统中存在大量的相似对象</li>
+<li>细粒度的对象都具备较结晶的外部状态</li>
+<li>需要缓冲池的场景</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/06/28/DesignPatterns/DesignPatterns/FlyweightPattern/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -873,44 +873,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
                             <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
@@ -932,6 +894,44 @@
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
                             <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
