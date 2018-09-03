@@ -11,18 +11,18 @@
     
     
     
-    <meta name="description" content="Docker 基本命令镜像获取1docker pull [OPTIONS] NAME[:TAG|@DIGEST] 运行1docker run [OPTIONS] IMAGE [COMMAND] [ARG...] 列出已下载镜像1docker image ls [OPTIONS] [REPOSITORY[:TAG]] 常用OPTIONS：|option|描述||—|—||-i -t|两个参数，-i">
+    <meta name="description" content="Docker 基本命令镜像搜索1docker search [OPTIONS] TERM 获取1docker pull [OPTIONS] NAME[:TAG|@DIGEST] 运行1docker run [OPTIONS] IMAGE [COMMAND] [ARG...] 列出已下载镜像1docker image ls [OPTIONS] [REPOSITORY[:TAG]] 常用OPTIONS">
 <meta name="keywords" content="Docker">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Docker 基本命令">
 <meta property="og:url" content="https://shianqi.github.io/2018/09/03/Docker/docker/index.html">
 <meta property="og:site_name" content="Tron Blog!">
-<meta property="og:description" content="Docker 基本命令镜像获取1docker pull [OPTIONS] NAME[:TAG|@DIGEST] 运行1docker run [OPTIONS] IMAGE [COMMAND] [ARG...] 列出已下载镜像1docker image ls [OPTIONS] [REPOSITORY[:TAG]] 常用OPTIONS：|option|描述||—|—||-i -t|两个参数，-i">
+<meta property="og:description" content="Docker 基本命令镜像搜索1docker search [OPTIONS] TERM 获取1docker pull [OPTIONS] NAME[:TAG|@DIGEST] 运行1docker run [OPTIONS] IMAGE [COMMAND] [ARG...] 列出已下载镜像1docker image ls [OPTIONS] [REPOSITORY[:TAG]] 常用OPTIONS">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-09-03T10:51:21.661Z">
+<meta property="og:updated_time" content="2018-09-03T16:23:24.181Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 基本命令">
-<meta name="twitter:description" content="Docker 基本命令镜像获取1docker pull [OPTIONS] NAME[:TAG|@DIGEST] 运行1docker run [OPTIONS] IMAGE [COMMAND] [ARG...] 列出已下载镜像1docker image ls [OPTIONS] [REPOSITORY[:TAG]] 常用OPTIONS：|option|描述||—|—||-i -t|两个参数，-i">
+<meta name="twitter:description" content="Docker 基本命令镜像搜索1docker search [OPTIONS] TERM 获取1docker pull [OPTIONS] NAME[:TAG|@DIGEST] 运行1docker run [OPTIONS] IMAGE [COMMAND] [ARG...] 列出已下载镜像1docker image ls [OPTIONS] [REPOSITORY[:TAG]] 常用OPTIONS">
     
     
         
@@ -212,7 +212,8 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h1 id="Docker-基本命令"><a href="#Docker-基本命令" class="headerlink" title="Docker 基本命令"></a>Docker 基本命令</h1><h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span><br></pre></td></tr></table></figure>
+            <h1 id="Docker-基本命令"><a href="#Docker-基本命令" class="headerlink" title="Docker 基本命令"></a>Docker 基本命令</h1><h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search [OPTIONS] TERM</span><br></pre></td></tr></table></figure>
+<h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span><br></pre></td></tr></table></figure>
 <h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
 <h3 id="列出已下载镜像"><a href="#列出已下载镜像" class="headerlink" title="列出已下载镜像"></a>列出已下载镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image ls [OPTIONS] [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
 <p>常用OPTIONS：<br>|option|描述|<br>|—|—|<br>|<code>-i -t</code>|两个参数，<code>-i</code> 交互式操作，<code>-t</code>终端|<br>|<code>-p</code>|指定端口|<br>|<code>-d</code>|在后台运行容器并打印容器ID|<br>|<code>--name</code>|为容器指定名称|<br>|<code>--rm</code>|退出容器后将其删除|</p>
@@ -223,12 +224,36 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image prune</span><br></pre></td></tr></table></figure>
 <h3 id="占用磁盘空间"><a href="#占用磁盘空间" class="headerlink" title="占用磁盘空间"></a>占用磁盘空间</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker system df [OPTIONS]</span><br></pre></td></tr></table></figure>
 <h3 id="查看历史"><a href="#查看历史" class="headerlink" title="查看历史"></a>查看历史</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">history</span> [OPTIONS] IMAGE</span><br></pre></td></tr></table></figure>
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="查看存储层变化"><a href="#查看存储层变化" class="headerlink" title="查看存储层变化"></a>查看存储层变化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker diff CONTAINER</span><br></pre></td></tr></table></figure>
-<h3 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
+<h3 id="推送镜像"><a href="#推送镜像" class="headerlink" title="推送镜像"></a>推送镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push [OPTIONS] NAME[:TAG]</span><br></pre></td></tr></table></figure>
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="启动已终止容器"><a href="#启动已终止容器" class="headerlink" title="启动已终止容器"></a>启动已终止容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container start [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
+<h3 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container logs [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
+<h3 id="终止容器"><a href="#终止容器" class="headerlink" title="终止容器"></a>终止容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container stop [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
+<h3 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container restart [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
+<h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container rm [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
+<h3 id="清理所有终止状态容器"><a href="#清理所有终止状态容器" class="headerlink" title="清理所有终止状态容器"></a>清理所有终止状态容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container prune [OPTIONS]</span><br></pre></td></tr></table></figure>
+<h3 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h3><h4 id="exec-命令-（推荐）"><a href="#exec-命令-（推荐）" class="headerlink" title="exec 命令 （推荐）"></a>exec 命令 （推荐）</h4><p>从这个 stdin 中 exit 不会导致容器停止</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> [OPTIONS] CONTAINER COMMAND [ARG...]</span><br></pre></td></tr></table></figure>
+<p>常用OPTIONS：<br>|option|描述|<br>|—|—|<br>|<code>-i -t</code>|两个参数，<code>-i</code> 交互式操作，<code>-t</code>终端|<br>|<code>-w</code>|容器的工作目录|<br>|<code>-e</code>|设置 ENV|</p>
+<h4 id="attach-命令"><a href="#attach-命令" class="headerlink" title="attach 命令"></a>attach 命令</h4><p>注意: <strong>如果从这个 stdin 中 exit，会导致容器停止</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
+<h3 id="查看存储层变化"><a href="#查看存储层变化" class="headerlink" title="查看存储层变化"></a>查看存储层变化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker diff CONTAINER</span><br></pre></td></tr></table></figure>
+<h3 id="提交变更"><a href="#提交变更" class="headerlink" title="提交变更"></a>提交变更</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
 <p>eg:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit --author <span class="string">"mail@shianqi.com"</span> --message <span class="string">"Change index.html"</span> webserver nginx:v2</span><br></pre></td></tr></table></figure>
 <p>常用于学习，还可以在被入侵后保存现场。不要使用 <code>docker commit</code> 定制镜像，应该用 <code>Dockerfile</code></p>
 <h3 id="容器和本机文件传输"><a href="#容器和本机文件传输" class="headerlink" title="容器和本机文件传输"></a>容器和本机文件传输</h3><p>docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-</p>
+<h2 id="导入导出"><a href="#导入导出" class="headerlink" title="导入导出"></a>导入导出</h2><h3 id="导出容器快照"><a href="#导出容器快照" class="headerlink" title="导出容器快照"></a>导出容器快照</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
+<p>eg:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> 329a2e380 &gt; ubuntu.tar</span><br></pre></td></tr></table></figure>
+<h3 id="导入容器"><a href="#导入容器" class="headerlink" title="导入容器"></a>导入容器</h3><h4 id="docker-import"><a href="#docker-import" class="headerlink" title="docker import"></a>docker import</h4><p>导入容器快照</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
+<p>eg: 导入容器快照</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ubuntu.tar | docker import - <span class="built_in">test</span>/ubuntu:v1.0</span><br></pre></td></tr></table></figure>
+<p>eg: 指定url或目录导入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import http://shianqi.com/exampleimage.tgz shianqi/imagerepo</span><br></pre></td></tr></table></figure>
+<h4 id="docker-load"><a href="#docker-load" class="headerlink" title="docker load"></a>docker load</h4><p>导入镜像存储文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load [OPTIONS]</span><br></pre></td></tr></table></figure>
+<p><strong>区别</strong>： 导入容器快照将丢弃所有的历史记录和元数据信息，导入镜像存储文件将保存完整记录，体积也要大。从容器快照文件中导入可以重新指定标签等信息。</p>
 
             
         </div>
@@ -248,7 +273,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/03/Docker/introduce/"  data-tooltip="Docker">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/03/Docker/dockerfile/"  data-tooltip="使用 Dockerfile 定制镜像">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -256,7 +281,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/15/Functional/trampoline/" data-tooltip="函数式编程--蹦床">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/03/Docker/introduce/" data-tooltip="Docker">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -330,7 +355,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/03/Docker/introduce/"  data-tooltip="Docker">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/03/Docker/dockerfile/"  data-tooltip="使用 Dockerfile 定制镜像">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -338,7 +363,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/15/Functional/trampoline/" data-tooltip="函数式编程--蹦床">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/03/Docker/introduce/" data-tooltip="Docker">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -496,27 +521,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -553,8 +559,27 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -671,7 +696,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 110 篇文章
+                找到 111 篇文章
             </p>
         </div>
     </div>
