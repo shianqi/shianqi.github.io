@@ -195,6 +195,182 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/09/11/Webpack/HowToWriteAPlugin/">
+                            编写一个 Webpack 插件
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-09-11T14:35:44+08:00">
+	
+		    9月 11, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="组成"><a href="#组成" class="headerlink" title="组成"></a>组成</h1><ul>
+<li>先写一个 JavaScript 构造函数</li>
+<li>在构造函数的原型上添加 <code>apply</code> 方法，传入 <code>compiler</code></li>
+<li>在传入的 <code>compiler</code> 上挂载钩子事件。</li>
+<li>钩子函数中传入 <code>compilation</code> 和一个回调函数。</li>
+<li>功能完成后调用 webpack 提供的回调函数。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 命名函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyExampleWebpackPlugin</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在它的 prototype 上定义一个 `apply` 方法。</span></span><br><span class="line">MyExampleWebpackPlugin.prototype.apply = <span class="function"><span class="keyword">function</span>(<span class="params">compiler</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 指定挂载的webpack事件钩子。</span></span><br><span class="line">  compiler.plugin(<span class="string">'webpacksEventHook'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">compilation <span class="regexp">/* 处理webpack内部实例的特定数据。*/</span>, callback</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"This is an example plugin!!!"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 功能完成后调用webpack提供的回调。</span></span><br><span class="line">    callback();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="compiler"><a href="#compiler" class="headerlink" title="compiler"></a>compiler</h2><p><code>compiler</code> 对象代表了完整的 <code>webpack</code> 环境配置。这个对象在启动 <code>webpack</code> 时被一次性建立，并在所有可操作的设置中被配置，包括原始配置，<code>loader</code> 和插件。当在 <code>webpack</code> 环境中应用一个插件时，插件将收到一个编译器对象的引用。可以使用它来访问 <code>webpack</code> 的主环境。</p>
+<h2 id="compilation"><a href="#compilation" class="headerlink" title="compilation"></a>compilation</h2><p>Compilation 实例继承于 compiler, <code>compilation</code> 对象代表了一次单一的版本构建和生成资源。当运行 <code>webpack</code> 开发环境中间件时，每当检测到一个文件变化，一次新的编译将被创建，从而生成一组新的编译资源。一个编译对象表现了当前的模块资源、编译生成资源、变化的文件、以及被跟踪依赖的状态信息。编译对象也提供了很多关键点回调供插件做自定义处理时选择使用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"errors"</span>:[], <span class="comment">//错误字符串的数组</span></span><br><span class="line">    <span class="string">"warnings"</span>:[],  <span class="comment">//警告字符串的数组</span></span><br><span class="line">    <span class="string">"version"</span>:<span class="string">"1.3.7"</span>, <span class="comment">// 用来编译的 webpack 的版本</span></span><br><span class="line">    <span class="string">"hash"</span>:<span class="string">"b4806b1be53e47fbab31"</span>, <span class="comment">// 编译使用的 hash</span></span><br><span class="line">    <span class="string">"time"</span>:<span class="number">3080</span>, <span class="comment">// 编译耗时 (ms)</span></span><br><span class="line">    <span class="string">"assetsByChunkName"</span>:&#123;</span><br><span class="line">        <span class="comment">// 用作映射的 chunk 的名称</span></span><br><span class="line">        <span class="string">"main"</span>:<span class="string">"b4806b1be53e47fbab31.js"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"assets"</span>:[</span><br><span class="line">        <span class="comment">// asset 对象 (asset objects) 的数组</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span>:<span class="string">"59e68da5e8cbc0ba28bd706801d425ba.jpg"</span>,</span><br><span class="line">            <span class="string">"size"</span>:<span class="number">672</span>,</span><br><span class="line">            <span class="string">"chunks"</span>:[],</span><br><span class="line">            <span class="string">"chunkNames"</span>:[],</span><br><span class="line">            <span class="string">"emitted"</span>:<span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"name"</span>:<span class="string">"b4806b1be53e47fbab31.js"</span>,</span><br><span class="line">            <span class="string">"size"</span>:<span class="number">571644</span>,</span><br><span class="line">            <span class="string">"chunks"</span>:[<span class="number">0</span>],</span><br><span class="line">            <span class="string">"chunkNames"</span>:[<span class="string">"main"</span>],</span><br><span class="line">            <span class="string">"emitted"</span>:<span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"chunks"</span>:[</span><br><span class="line">        <span class="comment">// chunk 对象 (chunk objects) 的数组</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">"id"</span>:<span class="number">0</span>,</span><br><span class="line">            <span class="string">"rendered"</span>:<span class="literal">true</span>,</span><br><span class="line">            <span class="string">"initial"</span>:<span class="literal">true</span>,</span><br><span class="line">            <span class="string">"entry"</span>:<span class="literal">true</span>,</span><br><span class="line">            <span class="string">"size"</span>:<span class="number">539740</span>,</span><br><span class="line">            <span class="string">"names"</span>:[<span class="string">"main"</span>],</span><br><span class="line">            <span class="string">"files"</span>:[<span class="string">"b4806b1be53e47fbab31.js"</span>],</span><br><span class="line">            <span class="string">"parents"</span>:[],</span><br><span class="line">            <span class="string">"origins"</span>:[</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="string">"moduleId"</span>:<span class="number">0</span>,</span><br><span class="line">                    <span class="string">"module"</span>:<span class="string">"..."</span>,</span><br><span class="line">                    <span class="string">"moduleIdentifier"</span>:<span class="string">"..."</span>,</span><br><span class="line">                    <span class="string">"moduleName"</span>:<span class="string">"./app/entry.js"</span>,</span><br><span class="line">                    <span class="string">"loc"</span>:<span class="string">""</span>,</span><br><span class="line">                    <span class="string">"name"</span>:<span class="string">"main"</span>,</span><br><span class="line">                    <span class="string">"reasons"</span>:[</span><br><span class="line"></span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"modules"</span>:[</span><br><span class="line">        <span class="comment">// 模块对象 (module objects) 的数组</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"children"</span>:[]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Asset对象"><a href="#Asset对象" class="headerlink" title="Asset对象"></a>Asset对象</h3><p>每一个 <code>assets</code> 对象都表示一个编译出的 <code>output</code> 文件。 <code>assets</code> 都会有一个共同的结构:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"entry"</span>: <span class="literal">true</span>, <span class="comment">// 表示这个 chunk 是否包含 webpack 的运行时</span></span><br><span class="line">  <span class="string">"files"</span>: [</span><br><span class="line">    <span class="comment">// 一个包含这个 chunk 的文件名的数组</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"filteredModules"</span>: <span class="number">0</span>, <span class="comment">// 当 `exclude`传入`toJson` 函数时，统计被无视的模块的数量</span></span><br><span class="line">  <span class="string">"id"</span>: <span class="number">0</span>, <span class="comment">// 这个 chunk 的id</span></span><br><span class="line">  <span class="string">"initial"</span>: <span class="literal">true</span>, <span class="comment">// 表示这个 chunk 是开始就要加载还是 懒加载(lazy-loading)</span></span><br><span class="line">  <span class="string">"modules"</span>: [</span><br><span class="line">    <span class="comment">// 模块对象 (module objects)的数组</span></span><br><span class="line">    <span class="string">"web.js?h=11593e3b3ac85436984a"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"names"</span>: [</span><br><span class="line">    <span class="comment">// 包含在这个 chunk 内的 chunk 的名字的数组</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"origins"</span>: [</span><br><span class="line">    <span class="comment">// 下文详述</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"parents"</span>: [], <span class="comment">// 父 chunk 的 ids</span></span><br><span class="line">  <span class="string">"rendered"</span>: <span class="literal">true</span>, <span class="comment">// 表示这个 chunk 是否会参与进编译</span></span><br><span class="line">  <span class="string">"size"</span>: <span class="number">188057</span> <span class="comment">// chunk 的大小(byte)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="Chunk对象"><a href="#Chunk对象" class="headerlink" title="Chunk对象"></a>Chunk对象</h3><p>每一个 chunks 表示一组称为 chunk 的模块。每一个对象都满足以下的结构。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"entry"</span>: <span class="literal">true</span>, <span class="comment">// 表示这个 chunk 是否包含 webpack 的运行时</span></span><br><span class="line">  <span class="string">"files"</span>: [</span><br><span class="line">    <span class="comment">// 一个包含这个 chunk 的文件名的数组</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"filteredModules"</span>: <span class="number">0</span>, <span class="comment">// 见上文的 结构</span></span><br><span class="line">  <span class="string">"id"</span>: <span class="number">0</span>, <span class="comment">// 这个 chunk 的id</span></span><br><span class="line">  <span class="string">"initial"</span>: <span class="literal">true</span>, <span class="comment">// 表示这个 chunk 是开始就要加载还是 懒加载(lazy-loading)</span></span><br><span class="line">  <span class="string">"modules"</span>: [</span><br><span class="line">    <span class="comment">// 模块对象 (module objects)的数组</span></span><br><span class="line">    <span class="string">"web.js?h=11593e3b3ac85436984a"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"names"</span>: [</span><br><span class="line">    <span class="comment">// 包含在这个 chunk 内的 chunk 的名字的数组</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"origins"</span>: [</span><br><span class="line">    <span class="comment">// 下文详述</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"parents"</span>: [], <span class="comment">// 父 chunk 的 ids</span></span><br><span class="line">  <span class="string">"rendered"</span>: <span class="literal">true</span>, <span class="comment">// 表示这个 chunk 是否会参与进编译</span></span><br><span class="line">  <span class="string">"size"</span>: <span class="number">188057</span> <span class="comment">// chunk 的大小(byte)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="模块对象"><a href="#模块对象" class="headerlink" title="模块对象"></a>模块对象</h3><p>缺少了对实际参与进编译的模块的描述，这些数据又有什么意义呢。每一个在依赖图表中的模块都可以表示成以下的形式。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"assets"</span>: [</span><br><span class="line">    <span class="comment">// asset对象 (asset objects)的数组</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"built"</span>: <span class="literal">true</span>, <span class="comment">// 表示这个模块会参与 Loaders , 解析, 并被编译</span></span><br><span class="line">  <span class="string">"cacheable"</span>: <span class="literal">true</span>, <span class="comment">// 表示这个模块是否会被缓存</span></span><br><span class="line">  <span class="string">"chunks"</span>: [</span><br><span class="line">    <span class="comment">// 包含这个模块的 chunks 的 id</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"errors"</span>: <span class="number">0</span>, <span class="comment">// 处理这个模块发现的错误的数量</span></span><br><span class="line">  <span class="string">"failed"</span>: <span class="literal">false</span>, <span class="comment">// 编译是否失败</span></span><br><span class="line">  <span class="string">"id"</span>: <span class="number">0</span>, <span class="comment">// 这个模块的ID (类似于 `module.id`)</span></span><br><span class="line">  <span class="string">"identifier"</span>: <span class="string">"(webpack)\\test\\browsertest\\lib\\index.web.js"</span>, <span class="comment">// webpack内部使用的唯一的标识</span></span><br><span class="line">  <span class="string">"name"</span>: <span class="string">"./lib/index.web.js"</span>, <span class="comment">// 实际文件的地址</span></span><br><span class="line">  <span class="string">"optional"</span>: <span class="literal">false</span>, <span class="comment">// 每一个对这个模块的请求都会包裹在 `try... catch` 内 (与ESM无关)</span></span><br><span class="line">  <span class="string">"prefetched"</span>: <span class="literal">false</span>, <span class="comment">// 表示这个模块是否会被 prefetched</span></span><br><span class="line">  <span class="string">"profile"</span>: &#123;</span><br><span class="line">    <span class="comment">// 有关 `--profile` flag 的这个模块特有的编译数据 (ms)</span></span><br><span class="line">    <span class="string">"building"</span>: <span class="number">73</span>, <span class="comment">// 载入和解析</span></span><br><span class="line">    <span class="string">"dependencies"</span>: <span class="number">242</span>, <span class="comment">// 编译依赖</span></span><br><span class="line">    <span class="string">"factory"</span>: <span class="number">11</span> <span class="comment">// 解决依赖</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">"reasons"</span>: [</span><br><span class="line">    <span class="comment">// 见下文描述</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"size"</span>: <span class="number">3593</span>, <span class="comment">// 预估模块的大小 (byte)</span></span><br><span class="line">  <span class="string">"source"</span>: <span class="string">"// Should not break it...\r\nif(typeof..."</span>, <span class="comment">// 字符串化的输入</span></span><br><span class="line">  <span class="string">"warnings"</span>: <span class="number">0</span> <span class="comment">// 处理模块时警告的数量</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>每一个模块都包含一个 理由 (reasons) 对象，这个对象描述了这个模块被加入依赖图表的理由。每一个 理由 (reasons) 都类似于上文 chunk objects中的 来源 (origins):<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"loc"</span>: <span class="string">"33:24-93"</span>, <span class="comment">// 导致这个被加入依赖图标的代码行数</span></span><br><span class="line">  <span class="string">"module"</span>: <span class="string">"./lib/index.web.js"</span>, <span class="comment">// 所基于模块的相对地址 context</span></span><br><span class="line">  <span class="string">"moduleId"</span>: <span class="number">0</span>, <span class="comment">// 模块的 ID</span></span><br><span class="line">  <span class="string">"moduleIdentifier"</span>: <span class="string">"(webpack)\\test\\browsertest\\lib\\index.web.js"</span>, <span class="comment">// 模块的地址</span></span><br><span class="line">  <span class="string">"moduleName"</span>: <span class="string">"./lib/index.web.js"</span>, <span class="comment">// 可读性更好的模块名称 (用于 "更好的打印 (pretty-printing)")</span></span><br><span class="line">  <span class="string">"type"</span>: <span class="string">"require.context"</span>, <span class="comment">// 使用的请求的种类 (type of request)</span></span><br><span class="line">  <span class="string">"userRequest"</span>: <span class="string">"../../cases"</span> <span class="comment">// 用来 `import` 或者 `require` 的源字符串</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="错误与警告"><a href="#错误与警告" class="headerlink" title="错误与警告"></a>错误与警告</h3><p>错误 (errors) 和 警告 (warnings) 会包含一个字符串数组。每个字符串包含了信息和栈的追溯:</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/09/11/Webpack/HowToWriteAPlugin/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/09/01/HTML5/浏览器兼容/">
+                            浏览器兼容问题解决方案·总结
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-09-01T21:17:16+08:00">
+	
+		    9月 01, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="Normalize-css"><a href="#Normalize-css" class="headerlink" title="Normalize.css"></a>Normalize.css</h1><p>不同浏览器的默认样式存在差异，可以使用 Normalize.css 抹平这些差异。当然，你也可以定制属于自己业务的 reset.css</p>
+<ul>
+<li><p>直接放在HTML中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://cdn.bootcss.com/normalize/7.0.0/normalize.min.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用 webpack</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save normalize.css</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//webpack.config.polyfills.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">'normalize.css'</span></span><br></pre></td></tr></table></figure>
+<h1 id="html5shiv-js"><a href="#html5shiv-js" class="headerlink" title="html5shiv.js"></a>html5shiv.js</h1><p>解决 ie9 以下浏览器对 html5 新增标签不识别的问题。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></span><br><span class="line"><span class="comment">  &lt;script type="text/javascript" src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ bower install html5shiv --save-dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--[if lt IE 9]&gt;</span></span><br><span class="line"><span class="comment">    &lt;script src="bower_components/html5shiv/dist/html5shiv.js"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="comment">&lt;![endif]--&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="matchMedia-js"><a href="#matchMedia-js" class="headerlink" title="matchMedia.js"></a>matchMedia.js</h1><p><code>matchMedia()</code> 函数 polyfill<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save matchmedia-polyfill</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'matchmedia-polyfill'</span></span><br></pre></td></tr></table></figure>
+<h1 id="respond-js"><a href="#respond-js" class="headerlink" title="respond.js"></a>respond.js</h1><p>解决 <code>ie9</code> 以下浏览器不支持 <code>CSS3 Media Query</code> 的问题。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install respond.js</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'respond.js'</span></span><br></pre></td></tr></table></figure>
+<h1 id="picturefill-js"><a href="#picturefill-js" class="headerlink" title="picturefill.js"></a>picturefill.js</h1><p>解决 IE 9 10 11 等浏览器不支持 <picture> 标签的问题</picture></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://cdn.bootcss.com/picturefill/3.0.3/picturefill.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="IE-条件注释"><a href="#IE-条件注释" class="headerlink" title="IE 条件注释"></a>IE 条件注释</h1><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lt</code></td>
+<td>小于</td>
+</tr>
+<tr>
+<td><code>gt</code></td>
+<td>大于</td>
+</tr>
+<tr>
+<td><code>lte</code></td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td><code>get</code></td>
+<td>不小于</td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>不等于</td>
+</tr>
+</tbody>
+</table>
+<h1 id="完美解决-Placeholder"><a href="#完美解决-Placeholder" class="headerlink" title="完美解决 Placeholder"></a>完美解决 Placeholder</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">value</span>=<span class="string">"Name *"</span> <span class="attr">onFocus</span>=<span class="string">"this.value = '';"</span> <span class="attr">onBlur</span>=<span class="string">"if (this.value == '') &#123;this.value = 'Name *';&#125;"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="清除浮动-最佳实践"><a href="#清除浮动-最佳实践" class="headerlink" title="清除浮动 最佳实践"></a>清除浮动 最佳实践</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.fl</span> &#123; <span class="attribute">float</span>: left; &#125;</span><br><span class="line"><span class="selector-class">.fr</span> &#123; <span class="attribute">float</span>: right; &#125;</span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123; <span class="attribute">display</span>: block; <span class="attribute">clear</span>: both; <span class="attribute">content</span>: <span class="string">""</span>; <span class="attribute">visibility</span>: hidden; <span class="attribute">height</span>: <span class="number">0</span>; &#125;</span><br><span class="line"><span class="selector-class">.clearfix</span> &#123; <span class="attribute">zoom</span>: <span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
+<h1 id="IE6-双倍边距的问题"><a href="#IE6-双倍边距的问题" class="headerlink" title="IE6 双倍边距的问题"></a>IE6 双倍边距的问题</h1><p>设置 ie6 中设置浮动，同时又设置 margin，会出现双倍边距的问题</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: inline;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="解决-IE9-以下浏览器不能使用-opacity"><a href="#解决-IE9-以下浏览器不能使用-opacity" class="headerlink" title="解决 IE9 以下浏览器不能使用 opacity"></a>解决 IE9 以下浏览器不能使用 opacity</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>: <span class="number">0.5</span>;</span><br><span class="line">    <span class="attribute">filter</span>: <span class="built_in">alpha</span>(opacity = 50);</span><br><span class="line">    <span class="attribute">filter</span>: progid:DXImageTransform.Microsoft.<span class="built_in">Alpha</span>(style = 0, opacity = 50);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="解决-IE6-不支持-fixed-绝对定位以及IE6下被绝对定位的元素在滚动的时候会闪动的问题"><a href="#解决-IE6-不支持-fixed-绝对定位以及IE6下被绝对定位的元素在滚动的时候会闪动的问题" class="headerlink" title="解决 IE6 不支持 fixed 绝对定位以及IE6下被绝对定位的元素在滚动的时候会闪动的问题"></a>解决 IE6 不支持 fixed 绝对定位以及IE6下被绝对定位的元素在滚动的时候会闪动的问题</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* IE6 hack */</span></span><br><span class="line">*<span class="selector-tag">html</span>, *<span class="selector-tag">html</span> <span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(about:blank);</span><br><span class="line">  <span class="attribute">background-attachment</span>: fixed;</span><br><span class="line">&#125;</span><br><span class="line">*<span class="selector-tag">html</span> <span class="selector-id">#menu</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="built_in">expression</span>(((e=document.documentElement.scrollTop) ? e : document.body.scrollTop) + <span class="number">100</span> + <span class="string">'px'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="IE6-背景闪烁的问题"><a href="#IE6-背景闪烁的问题" class="headerlink" title="IE6 背景闪烁的问题"></a>IE6 背景闪烁的问题</h1><p>问题：链接、按钮用 CSSsprites 作为背景，在 ie6 下会有背景图闪烁的现象。原因是 IE6 没有将背景图缓存，每次触发 hover 的时候都会重新加载</p>
+<p>解决：可以用 JavaScript 设置 ie6 缓存这些图片：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.execCommand(<span class="string">"BackgroundImageCache"</span>, <span class="literal">false</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<h1 id="解决在-IE6-下，列表与日期错位的问题"><a href="#解决在-IE6-下，列表与日期错位的问题" class="headerlink" title="解决在 IE6 下，列表与日期错位的问题"></a>解决在 IE6 下，列表与日期错位的问题</h1><p>日期<span> 标签放在标题 <a> 标签之前即可</a></span></p>
+<h1 id="解决-IE6-不支持-min-height-属性的问题"><a href="#解决-IE6-不支持-min-height-属性的问题" class="headerlink" title="解决 IE6 不支持 min-height 属性的问题"></a>解决 IE6 不支持 min-height 属性的问题</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">    <span class="attribute">min-height</span>: <span class="number">350px</span>;</span><br><span class="line">    <span class="attribute">_height</span>: <span class="number">350px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="让-IE7-IE8-支持-CSS3-background-size属性"><a href="#让-IE7-IE8-支持-CSS3-background-size属性" class="headerlink" title="让 IE7 IE8 支持 CSS3 background-size属性"></a>让 IE7 IE8 支持 CSS3 background-size属性</h1><p>由于 background-size 是 CSS3 新增的属性，所以 IE 低版本自然就不支持了，但是老外写了一个 htc 文件，名叫 <a href="https://link.juejin.im/?target=%E6%A0%87%E7%AD%BE" target="_blank" rel="external">background-size polyfill</a>，使用该文件能够让 IE7、IE8 支持 background-size 属性。其原理是创建一个 img 元素插入到容器中，并重新计算宽度、高度、left、top 等值，模拟 background-size 的效果。<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">'img/37.png'</span>);</span><br><span class="line">  <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">  <span class="attribute">background-size</span>: cover;</span><br><span class="line">  <span class="attribute">-ms-behavior</span>: <span class="built_in">url</span>(<span class="string">'css/backgroundsize.min.htc'</span>);</span><br><span class="line">  <span class="attribute">behavior</span>: <span class="built_in">url</span>(<span class="string">'css/backgroundsize.min.htc'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="IE6-7-line-height-失效的问题"><a href="#IE6-7-line-height-失效的问题" class="headerlink" title="IE6-7 line-height 失效的问题"></a>IE6-7 line-height 失效的问题</h1><p>问题：在ie 中 img 与文字放一起时，line-height 不起作用</p>
+<p>解决：都设置成 float</p>
+<p>width:100%</p>
+<p>width:100% 这个东西在 ie 里用很方便，会向上逐层搜索 width 值，忽视浮动层的影响.</p>
+<p>Firefox 下搜索至浮动层结束，如此，只能给中间的所有浮动层加 width:100%才行，累啊。</p>
+<p>opera 这点倒学乖了，跟了 ie</p>
+<p>cursor:hand</p>
+<p>显示手型 cursor: hand，ie6/7/8、opera 都支持，但是safari 、 ff 不支持</p>
+<p>cursor: pointer;</p>
+<h1 id="td-自动换行的问题"><a href="#td-自动换行的问题" class="headerlink" title="td 自动换行的问题"></a>td 自动换行的问题</h1><p>问题：table 宽度固定，td 自动换行</p>
+<p>解决：设置 Table 为 table-layout: fixed，td 为 word-wrap: break-word</p>
+<h1 id="让层显示在-FLASH-之上"><a href="#让层显示在-FLASH-之上" class="headerlink" title="让层显示在 FLASH 之上"></a>让层显示在 FLASH 之上</h1><p>想让层的内容显示在 flash 上，把 FLASH 设置透明即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;param name=&quot; wmode &quot; value=&quot;transparent&quot; /&gt;</span><br><span class="line">&lt;param name=&quot;wmode&quot; value=&quot;opaque&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="键盘事件-keyCode-兼容性写法"><a href="#键盘事件-keyCode-兼容性写法" class="headerlink" title="键盘事件 keyCode 兼容性写法"></a>键盘事件 keyCode 兼容性写法</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> inp = <span class="built_in">document</span>.getElementById(<span class="string">'inp'</span>)</span><br><span class="line"><span class="keyword">var</span> result = <span class="built_in">document</span>.getElementById(<span class="string">'result'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getKeyCode</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  e = e ? e : (<span class="built_in">window</span>.event ? <span class="built_in">window</span>.event : <span class="string">""</span>)</span><br><span class="line">  <span class="keyword">return</span> e.keyCode ? e.keyCode : e.which</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">inp.onkeypress = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">  result.innerHTML = getKeyCode(e)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="求窗口大小的兼容写法"><a href="#求窗口大小的兼容写法" class="headerlink" title="求窗口大小的兼容写法"></a>求窗口大小的兼容写法</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 浏览器窗口可视区域大小（不包括工具栏和滚动条等边线）</span></span><br><span class="line"><span class="comment">// 1600 * 525</span></span><br><span class="line"><span class="keyword">var</span> client_w = <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth;</span><br><span class="line"><span class="keyword">var</span> client_h = <span class="built_in">document</span>.documentElement.clientHeight || <span class="built_in">document</span>.body.clientHeight;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 网页内容实际宽高（包括工具栏和滚动条等边线）</span></span><br><span class="line"><span class="comment">// 1600 * 8</span></span><br><span class="line"><span class="keyword">var</span> scroll_w = <span class="built_in">document</span>.documentElement.scrollWidth || <span class="built_in">document</span>.body.scrollWidth;</span><br><span class="line"><span class="keyword">var</span> scroll_h = <span class="built_in">document</span>.documentElement.scrollHeight || <span class="built_in">document</span>.body.scrollHeight;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 网页内容实际宽高 (不包括工具栏和滚动条等边线）</span></span><br><span class="line"><span class="comment">// 1600 * 8</span></span><br><span class="line"><span class="keyword">var</span> offset_w = <span class="built_in">document</span>.documentElement.offsetWidth || <span class="built_in">document</span>.body.offsetWidth;</span><br><span class="line"><span class="keyword">var</span> offset_h = <span class="built_in">document</span>.documentElement.offsetHeight || <span class="built_in">document</span>.body.offsetHeight;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滚动的高度</span></span><br><span class="line"><span class="keyword">var</span> scroll_Top = <span class="built_in">document</span>.documentElement.scrollTop||<span class="built_in">document</span>.body.scrollTop;</span><br></pre></td></tr></table></figure>
+<h1 id="DOM-事件处理程序的兼容写法（能力检测）"><a href="#DOM-事件处理程序的兼容写法（能力检测）" class="headerlink" title="DOM 事件处理程序的兼容写法（能力检测）"></a>DOM 事件处理程序的兼容写法（能力检测）</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eventshiv = &#123;</span><br><span class="line">    <span class="comment">// event兼容</span></span><br><span class="line">    getEvent: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> event ? event : <span class="built_in">window</span>.event;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// type兼容</span></span><br><span class="line">    getType: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> event.type;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// target兼容</span></span><br><span class="line">    getTarget: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> event.target ? event.target : event.srcelem;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加事件句柄</span></span><br><span class="line">    addHandler: <span class="function"><span class="keyword">function</span>(<span class="params">elem, type, listener</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (elem.addEventListener) &#123;</span><br><span class="line">            elem.addEventListener(type, listener, <span class="literal">false</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (elem.attachEvent) &#123;</span><br><span class="line">            elem.attachEvent(<span class="string">'on'</span> + type, listener);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 在这里由于.与'on'字符串不能链接，只能用 []</span></span><br><span class="line">            elem[<span class="string">'on'</span> + type] = listener;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 移除事件句柄</span></span><br><span class="line">    removeHandler: <span class="function"><span class="keyword">function</span>(<span class="params">elem, type, listener</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (elem.removeEventListener) &#123;</span><br><span class="line">            elem.removeEventListener(type, listener, <span class="literal">false</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (elem.detachEvent) &#123;</span><br><span class="line">            elem.detachEvent(<span class="string">'on'</span> + type, listener);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            elem[<span class="string">'on'</span> + type] = <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加事件代理</span></span><br><span class="line">    addAgent: <span class="function"><span class="keyword">function</span> (<span class="params">elem, type, agent, listener</span>) </span>&#123;</span><br><span class="line">        elem.addEventListener(type, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (e.target.matches(agent)) &#123;</span><br><span class="line">                listener.call(e.target, e); <span class="comment">// this 指向 e.target</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 取消默认行为</span></span><br><span class="line">    preventDefault: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (event.preventDefault) &#123;</span><br><span class="line">            event.preventDefault();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            event.returnValue = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阻止事件冒泡</span></span><br><span class="line">    stopPropagation: <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (event.stopPropagation) &#123;</span><br><span class="line">            event.stopPropagation();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            event.cancelBubble = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/09/01/HTML5/浏览器兼容/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/09/01/WebRTC/SocketIo/">
                             WebRTC 原理
                         </a>
@@ -1356,127 +1532,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/07/04/JavaScript/BrowserJavaScriptTimeline/">
-                            浏览器JavaScript时间线
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-07-04T16:51:36+08:00">
-	
-		    7月 04, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="客户端JavaScript时间线"><a href="#客户端JavaScript时间线" class="headerlink" title="客户端JavaScript时间线"></a>客户端JavaScript时间线</h1><ol>
-<li>浏览器创建 <code>Document</code> 对象，并开始解析Web页面，解析 <code>HTML</code> 元素和它们的文本内容后添加 <code>Element</code> 对象和 <code>Text</code> 节点套文档中。这个阶段 <code>document.readyState</code> 属性的值是 <code>&quot;loading&quot;</code>。</li>
-<li>当 <code>HTML</code> 解释器遇到了没有 <code>async</code> 和 <code>defer</code> 属性的 <code>&lt;script&gt;</code> 元素时，他把这些元素添加到文档中，并且同步执行。在脚本下载（如果需要）和执行时解释器会暂停。这样脚本就可以用 <code>document.write()</code> 来把文本插入到输入流中。</li>
-<li>当遇到 <code>async</code> 属性（<strong>如果 <code>&lt;script&gt;</code> 标签同时有 <code>async</code> 和 <code>defer</code> 属性，会遵从 <code>async</code> 并忽略 <code>defer</code></strong>）的 <code>&lt;script&gt;</code> 元素时，它开始下载脚本文本，并继续解析文档。脚本会在它下载完成后尽快执行。禁止使用 <code>document.write()</code> 方法。</li>
-<li>当文档完成解析，<code>document.readyState</code> 属性变成 <code>&quot;interactive&quot;</code>。</li>
-<li>所有带有 <code>defer</code> 属性的脚本，会按它们在文档里出现的顺序执行。异步脚本可能也会在这个时间执行。延迟脚本能访问完整的文档树，禁止使用 <code>document.write()</code> 方法。</li>
-<li>浏览器在 <code>Document</code> 对象上触发 <code>DOMContentLoaded</code> 事件。这标志着 <strong>程序执行从同步脚本执行阶段转换到了异步事件驱动阶段</strong> 但是，这时可能还有异步脚本没有执行完成。</li>
-<li>这时，文档已经完成解析完成，但是浏览器可能还在等待其他内容载入，如图片。当所有这些内容完全载入时，并且所有异步脚本完全载入和执行，<code>document.readyState</code> 属性改变为 <code>complete</code> ，Web浏览器触发 <code>window</code> 对象上的 <code>load</code> 事件。</li>
-<li>从此刻起，会调用异步事件，以异步响应用户输入事件，网络事件，计时器过期等。</li>
-</ol>
-<h2 id="文档加载事件"><a href="#文档加载事件" class="headerlink" title="文档加载事件"></a>文档加载事件</h2><table>
-<thead>
-<tr>
-<th>事件名称</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>readystatechange</code></td>
-<td>文档还在加载：<code>loading</code>， 文档解析完成：<code>interactive</code>， 文档完全加载完成：<code>complete</code></td>
-</tr>
-<tr>
-<td><code>DOMContentLoaded</code></td>
-<td>程序执行从同步脚本执行阶段转换到了异步事件驱动阶段</td>
-</tr>
-<tr>
-<td><code>load</code></td>
-<td>所有内容完全载入，所有异步脚本完全载入和执行</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'DOMContentLoaded'</span>)</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'load'</span>)</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">document</span>.readyState)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interactive</span><br><span class="line">DOMContentLoaded</span><br><span class="line">complete</span><br><span class="line">load</span><br></pre></td></tr></table></figure></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/07/04/JavaScript/BrowserJavaScriptTimeline/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/06/30/Canvas/CanvasMeteor/">
-                            Canvas 线条长拖尾效果
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-06-30T16:20:36+08:00">
-	
-		    6月 30, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="Canvas-线条长拖尾效果"><a href="#Canvas-线条长拖尾效果" class="headerlink" title="Canvas 线条长拖尾效果"></a>Canvas 线条长拖尾效果</h1><h2 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h2><p><img src="http://cdn.shianqi.com/20171110002414_MQAGeo_line.png" alt="效果图"></p>
-<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>其实这个效果不是线条本身就是这个形状的，而是下面这样的</p>
-<p><img src="http://cdn.shianqi.com/20171110002437_DJw4p0_point.png" alt="point"></p>
-<p>之所以会出现这个效果，是因为 <code>Canvas</code> 在画下一帧的时候并没有将上一帧的画面全部擦除，而是用一个和背景一样的透明度非常低的颜色填充了绘图区域，导致上一帧的点比下一帧明度低，所以多次叠加就变成了上面的效果。</p>
-<h2 id="关键代码"><a href="#关键代码" class="headerlink" title="关键代码"></a>关键代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctx.fillStyle = <span class="string">'rgba(0,0,0,.1)'</span>;</span><br><span class="line">ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,cw,ch);</span><br></pre></td></tr></table></figure>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/06/30/Canvas/CanvasMeteor/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1587,25 +1642,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
                             <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
@@ -1646,6 +1682,25 @@
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
                             <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1762,7 +1817,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 108 篇文章
+                找到 110 篇文章
             </p>
         </div>
     </div>

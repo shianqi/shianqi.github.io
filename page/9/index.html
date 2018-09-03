@@ -194,6 +194,163 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/05/10/HTML5/Media/">
+                            HTML5 获取音频和视频并显示到Canvas上，截图上传
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-05-10T21:57:16+08:00">
+	
+		    5月 10, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> video = <span class="built_in">document</span>.getElementById(<span class="string">'video'</span>);</span><br><span class="line">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span><br><span class="line">    <span class="keyword">var</span> canvasContext = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    <span class="keyword">var</span> audio_context;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__log</span>(<span class="params">e, data</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(e + <span class="string">" "</span> + (data || <span class="string">''</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">createRecorder</span>(<span class="params">stream, handleMessage</span>) </span>&#123;</span><br><span class="line">                <span class="comment">//获取视频数据</span></span><br><span class="line">        <span class="keyword">if</span> (navigator.mozGetUserMedia) &#123;</span><br><span class="line">            video.mozSrcObject = stream;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">var</span> vendorURL = <span class="built_in">window</span>.URL || <span class="built_in">window</span>.webkitURL;</span><br><span class="line">            video.src = vendorURL.createObjectURL(stream);</span><br><span class="line">        &#125;</span><br><span class="line">        video.play();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> input = audio_context.createMediaStreamSource(stream);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> recorder = <span class="keyword">new</span> Recorder(input, &#123;</span><br><span class="line">            serverUrl: <span class="string">"wss://rating.llsstaging.com/llcup/stream/upload"</span>,</span><br><span class="line">            handleMessage: handleMessage</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        __log(<span class="string">'Recorder initialised.'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> recorder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> Page = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">var</span> inited = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">var</span> recorder = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> handleMessage = <span class="function"><span class="keyword">function</span>(<span class="params">resp</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">var</span> respObj = <span class="built_in">JSON</span>.parse(resp);</span><br><span class="line">                <span class="comment">// if(respObj.decoded)&#123;</span></span><br><span class="line">                <span class="comment">//     textToEmotion(respObj.decoded);</span></span><br><span class="line">                <span class="comment">// &#125;</span></span><br><span class="line">                chat(respObj.decoded);</span><br><span class="line">                self.overallScore(respObj.decoded);</span><br><span class="line">                respObj.details.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">wordRate</span>) </span>&#123;</span><br><span class="line">                    self.wordRates.push(&#123;</span><br><span class="line">                        word: wordRate.word,</span><br><span class="line">                        score: wordRate.confidence</span><br><span class="line">                    &#125;)</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">                <span class="comment">//self.hasError(true);</span></span><br><span class="line">                self.errorResp(resp);</span><br><span class="line">                self.errorInfo(e.message);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.inited = ko.observable(<span class="literal">false</span>);</span><br><span class="line">        initAudioSetting(<span class="function"><span class="keyword">function</span>(<span class="params">stream</span>)</span>&#123;</span><br><span class="line">            recorder = createRecorder(stream, handleMessage);</span><br><span class="line">            self.inited(<span class="literal">true</span>);</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.hasError = ko.observable(<span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">this</span>.errorResp = ko.observable(<span class="string">''</span>);</span><br><span class="line">        <span class="keyword">this</span>.errorInfo = ko.observable(<span class="string">''</span>);</span><br><span class="line">        <span class="keyword">this</span>.wordRates = ko.observableArray([]);</span><br><span class="line">        <span class="keyword">this</span>.readingRefText = ko.observable(randomPick(Constants.PreparedTexts));</span><br><span class="line">        <span class="keyword">this</span>.recording = ko.observable(<span class="literal">false</span>);</span><br><span class="line">        <span class="keyword">this</span>.overallScore = ko.observable();</span><br><span class="line">        <span class="keyword">this</span>.recordButtonText = ko.computed(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> self.recording() ? <span class="string">"▧"</span> : <span class="string">"▶"</span>;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">this</span>.toggleRecording = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            self.hasError(<span class="literal">false</span>);</span><br><span class="line">            self.wordRates.removeAll();</span><br><span class="line">            self.recording(!self.recording());</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//this.switchRefText = function() &#123;</span></span><br><span class="line">        <span class="comment">//  self.readingRefText(randomPick(Constants.PreparedTexts));</span></span><br><span class="line">        <span class="comment">//&#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.recording.subscribe(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(self.recording()) &#123;</span><br><span class="line">                <span class="comment">/*</span></span><br><span class="line"><span class="comment">                 algConfig = &#123;</span></span><br><span class="line"><span class="comment">                 type: 'readaloud',</span></span><br><span class="line"><span class="comment">                 quality: -1,</span></span><br><span class="line"><span class="comment">                 //reftext: self.readingRefText().replace(/[,.]/g, '')</span></span><br><span class="line"><span class="comment">                 reference: self.readingRefText().toLowerCase().replace(/[^A-Za-z0-9']/g, ' ').trim()</span></span><br><span class="line"><span class="comment">                 &#125;;</span></span><br><span class="line"><span class="comment">                 */</span></span><br><span class="line">                algConfig = &#123;</span><br><span class="line">                    type: <span class="string">'asr'</span>,</span><br><span class="line">                    quality: <span class="number">-1</span></span><br><span class="line">                &#125;;</span><br><span class="line">                <span class="built_in">console</span>.log(algConfig);</span><br><span class="line">                recorder.record(&#123;</span><br><span class="line">                    algConfig: algConfig</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                recorder.stop();</span><br><span class="line">                recorder.clear();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> initAudioSetting = <span class="function"><span class="keyword">function</span>(<span class="params">startUserMediaCallback</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// webkit shim</span></span><br><span class="line">            <span class="built_in">window</span>.AudioContext = <span class="built_in">window</span>.AudioContext || <span class="built_in">window</span>.webkitAudioContext;</span><br><span class="line">            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;</span><br><span class="line">            <span class="built_in">window</span>.URL = <span class="built_in">window</span>.URL || <span class="built_in">window</span>.webkitURL;</span><br><span class="line"></span><br><span class="line">            audio_context = <span class="keyword">new</span> AudioContext;</span><br><span class="line">            __log(<span class="string">'Audio context set up.'</span>);</span><br><span class="line">            __log(<span class="string">'navigator.getUserMedia '</span> + (navigator.getUserMedia ? <span class="string">'available.'</span> : <span class="string">'not present!'</span>));</span><br><span class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">            alert(<span class="string">'No web audio support in this browser!'</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        navigator.getUserMedia(&#123;</span><br><span class="line">            audio: <span class="literal">true</span>,</span><br><span class="line">            video: &#123;</span><br><span class="line">                mandatory: &#123;</span><br><span class="line">                    maxWidth: <span class="number">320</span>,</span><br><span class="line">                    maxHeight: <span class="number">240</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, startUserMediaCallback, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">            __log(<span class="string">'No live audio input: '</span> + e);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">window</span>.page = <span class="keyword">new</span> Page();</span><br><span class="line">        ko.applyBindings(<span class="built_in">window</span>.page);</span><br><span class="line">        setTimeout(imgToEmotion, <span class="number">1000</span>);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> tabButton = <span class="built_in">document</span>.getElementById(<span class="string">"tab-change"</span>);</span><br><span class="line">    tabButton.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tabButton.checked)&#123;</span><br><span class="line">            tab_change_state = <span class="literal">false</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            tab_change_state = <span class="literal">true</span>;</span><br><span class="line">            imgToEmotion();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">var</span> tabVideo = <span class="built_in">document</span>.getElementById(<span class="string">"tab-video"</span>);</span><br><span class="line">    tabVideo.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(tabVideo.checked)&#123;</span><br><span class="line">            video.style.display = <span class="string">'none'</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            video.style.display = <span class="string">'block'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//聊天API</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">chat</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> data = &#123;<span class="attr">data</span>: str&#125;;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: <span class="string">"https://www.hupeng.wang/PicServer/re_chat.php"</span>,</span><br><span class="line">            type: <span class="string">"POST"</span>,</span><br><span class="line">            data: data</span><br><span class="line">        &#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">document</span>.getElementById(<span class="string">"chat-box"</span>).innerText = data;</span><br><span class="line">            textToEmotion(data);</span><br><span class="line">        &#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Chat Error!'</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//文本分析得到情感json</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">textToEmotion</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> data = &#123;<span class="attr">data</span>:str&#125;;</span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: <span class="string">"https://www.hupeng.wang/PicServer/re_text.php"</span>,</span><br><span class="line">            type: <span class="string">"POST"</span>,</span><br><span class="line">            data: data</span><br><span class="line">        &#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">            data = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">            <span class="built_in">console</span>.log(data);</span><br><span class="line">            <span class="keyword">var</span> res = &#123;<span class="attr">name</span>:<span class="string">"def"</span>,<span class="attr">value</span>:<span class="number">0</span>&#125;;</span><br><span class="line">            <span class="keyword">var</span> emotion = data[<span class="string">"document_tone"</span>][<span class="string">"tone_categories"</span>][<span class="number">0</span>][<span class="string">"tones"</span>];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;emotion.length;i++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(emotion[i][<span class="string">"score"</span>]&gt;res.value)&#123;</span><br><span class="line">                    res.value = emotion[i][<span class="string">"score"</span>];</span><br><span class="line">                    res.name = emotion[i][<span class="string">"tone_id"</span>];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">console</span>.log(res.name);</span><br><span class="line">            changeState(res.name);</span><br><span class="line">        &#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'textToEmotion Error'</span>);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//图片上传得到情感json</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">imgToEmotion</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!tab_change_state) <span class="keyword">return</span>;</span><br><span class="line">        canvasContext.drawImage(video, <span class="number">0</span>, <span class="number">0</span>, <span class="number">320</span>, <span class="number">240</span>);</span><br><span class="line">        <span class="keyword">var</span> element = <span class="built_in">document</span>.createElement(<span class="string">"img"</span>);</span><br><span class="line">        element.src = canvas.toDataURL();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> pic = &#123;<span class="attr">data</span>:element.src&#125;;</span><br><span class="line"></span><br><span class="line">        $.ajax(&#123;</span><br><span class="line">            url: <span class="string">"https://www.hupeng.wang/PicServer/re_pic.php"</span>,</span><br><span class="line">            type: <span class="string">"POST"</span>,</span><br><span class="line">            <span class="comment">// Request body</span></span><br><span class="line">            data: pic,</span><br><span class="line">        &#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">            data = <span class="built_in">JSON</span>.parse(data);</span><br><span class="line">            <span class="keyword">if</span>(data.length!==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">var</span> res = &#123;<span class="attr">name</span>:<span class="string">"def"</span>,<span class="attr">value</span>:<span class="number">0</span>&#125;;</span><br><span class="line">                <span class="keyword">var</span> scores = data[<span class="string">'0'</span>][<span class="string">"scores"</span>];</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">var</span> score <span class="keyword">in</span> scores)&#123;</span><br><span class="line">                    <span class="comment">//console.log(score,scores[score]);</span></span><br><span class="line">                    <span class="keyword">if</span>(scores[score]&gt;res.value)&#123;</span><br><span class="line">                        res.value = scores[score];</span><br><span class="line">                        res.name = score;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                changeState(res.name);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">"未识别到人"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            setTimeout(imgToEmotion,<span class="number">0</span>);</span><br><span class="line">        &#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            setTimeout(imgToEmotion,<span class="number">0</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;).call(<span class="built_in">window</span>);</span><br></pre></td></tr></table></figure>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/05/10/HTML5/Media/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/05/07/Activity/HACKxSJTU/">
+                            HACKxSJTU 比赛总结
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-05-07T12:01:16+08:00">
+	
+		    5月 07, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="队友"><a href="#队友" class="headerlink" title="队友"></a>队友</h1><table>
+<thead>
+<tr>
+<th>名字</th>
+<th>学校</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>胡鹏</td>
+<td>内蒙古大学</td>
+</tr>
+<tr>
+<td>任文頔</td>
+<td>中山大学</td>
+</tr>
+<tr>
+<td>岳磊</td>
+<td>上海理工大学</td>
+</tr>
+<tr>
+<td>额…（我不是故意的 ::&gt;_&lt;::）</td>
+<td>上海理工大学</td>
+</tr>
+</tbody>
+</table>
+<h1 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h1><p>2017-05-05~2017-05-07</p>
+<h1 id="赛况"><a href="#赛况" class="headerlink" title="赛况"></a>赛况</h1><p>参加 HACKxSJTU 比赛，进过和队友的努力奋斗，最终获得 英语流利说黑马奖（企业第二名）。不幸的是英语流利说这个太坑，最后的奖品是9个月的AI英语课程（正好可以学一波英语），但是最气的是没有证书，没有证书！！没有证书！！！连电子版都没有！ Orz 重要的话说三遍。</p>
+<h1 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h1><p>这次比赛最大的收获其实不是技术上的，如果单从技术上说也不比他们差很多，前端和后端本来也没什么好比的。但是这次真的感觉到了环境对人的重要性，还有一个就是英语真的该好好加强一下了，简直太糟糕了。</p>
+<h1 id="作品"><a href="#作品" class="headerlink" title="作品"></a>作品</h1><h2 id="Emotion-Journal"><a href="#Emotion-Journal" class="headerlink" title="Emotion-Journal"></a>Emotion-Journal</h2><p>憋了一肚子负面情绪却没处释放？还在到处寻找管理、控制情绪的工具？快来emotion-journal吧</p>
+<p><img src="http://cdn.shianqi.com/20171110092631_5m8VAC_logo.gif" alt="Emotion-Journal"></p>
+<img src="/2017/05/07/Activity/HACKxSJTU/logo.gif" title="hello">
+<h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p><a href="https://github.com/shianqi/Hackx-Emotion-Journal" target="_blank" rel="external">Hackx-Emotion-Journal</a></p>
+<h2 id="创意来源"><a href="#创意来源" class="headerlink" title="创意来源"></a>创意来源</h2><p>情绪是一把双刃剑，良好的情绪控制有助于我们健康的生活。很多时候，我们因为外界各种各样的事情产生许许多多的情绪。“病由心生”由此而来。人不可能永远有好心情，生活中既然有挫折、有失败，就会有消极的情绪。所以我们希望推出一款简单，及时，便捷的产品帮助你放松心情以及随时随地监测自己的情绪变化。</p>
+<h2 id="详情描述"><a href="#详情描述" class="headerlink" title="详情描述"></a>详情描述</h2><p>得益于人工智能的发展，我们使用微软认知服务和IBM Watson文本情绪分析，多方面感知用户当前的情绪状态。并在屏幕上实时反馈。由此我们实现了监控单天和单月的情绪控制情况。用户有2种可以选择的模式，下面将分别介绍</p>
+<ul>
+<li><p>情绪模仿<br>用户任意做出表情，我们平台利用摄像头采集数据，接入微软认知服务，实时模仿用户的表情，并反馈在页面中。</p>
+</li>
+<li><p>人机交互<br>用户使用英语语音与本平台交流，我们使用流利说语音解析服务分析用户输入，结合IBM Watson文本情感分析服务得到用户表达的情感，传送到我们搭建的图灵机器人API，获得文字输出，结合相应的情绪，显示在页面中。</p>
+</li>
+</ul>
+<h2 id="图片展示"><a href="#图片展示" class="headerlink" title="图片展示"></a>图片展示</h2><p><img src="http://cdn.shianqi.com/20171110092538_zF510n_a.gif" alt="人脸表情识别"><br><img src="http://cdn.shianqi.com/20171110092609_BGWO6t_b.gif" alt="语音聊天"></p>
+<h2 id="使用的服务与API"><a href="#使用的服务与API" class="headerlink" title="使用的服务与API"></a>使用的服务与API</h2><ul>
+<li>微软认知服务(情绪识别api)</li>
+<li>IBM watson 文本情绪识别</li>
+<li>流利说语音识别服务</li>
+<li>青云云服务</li>
+<li>图灵机器人api</li>
+<li>百度翻译api</li>
+</ul>
+<h2 id="解决的问题"><a href="#解决的问题" class="headerlink" title="解决的问题"></a>解决的问题</h2><ul>
+<li>机器人实时模仿用户的表情。</li>
+<li>机器人与用户语言对话，并根据对话内容反馈表情。</li>
+<li>憋了一肚子负面情绪却没处释放？还在到处寻找管理、控制情绪的工具？快来emotion-journal吧 </li>
+</ul>
+<h2 id="项目使用指南"><a href="#项目使用指南" class="headerlink" title="项目使用指南"></a>项目使用指南</h2><p>项目界面有3个可见的交互按钮</p>
+<ul>
+<li>视频框的打开和关闭</li>
+<li>情绪模仿/人机交互的切换</li>
+<li>语音采集<br>用户打开界面后默认进入情绪模仿功能，页面中的动画表情可以根据用户的表情一起变换。当按下按钮2（情绪模仿/人机交互的切换按钮）进入人机交互的功能，用户按下按钮3开始录音，说一段话（暂时只能输入英语）后按下按钮3结束录音，本平台会根据输入做出相应的回答与表情，在页面中反馈出来。</li>
+</ul>
+<h2 id="功能设计说明"><a href="#功能设计说明" class="headerlink" title="功能设计说明"></a>功能设计说明</h2><p>项目整体包含2个功能，下面将具体说明：</p>
+<ul>
+<li>情绪感知与反馈功能<br>整体过程为：情绪图片捕捉、图片情绪分析、情绪模仿展示</li>
+<li>人机交互与情绪反馈功能<br>整体实现步骤为：语音输入、语音转文字、文字情感分析、文字反馈生成、模拟情绪反馈展示<br>在界面上包括辅助的功能：摄像头打开/关闭 、情绪模仿/人机交互切换 、 语音录制开始与结束</li>
+</ul>
+<h2 id="核心记说说明"><a href="#核心记说说明" class="headerlink" title="核心记说说明"></a>核心记说说明</h2><p>本项目的后台部分核心技术主要由：用户脸部图像的情感分析，用户对话文本情感分析，用户对话交互以及CSS3动画展示4个部分组成。</p>
+<ul>
+<li>用户的脸部情感分析：使用了微软的认知服务中的情感部分，由于需要分析的图像的大小较大，为了加快图像识别的速度，我们团队引入了青云的对象存储服务以及CDN加速服务提高了应用服务器到微软的认知服务器之间的访问速度。</li>
+<li>用户对话文本情感分析：使用了流利说的语音识别服务获取了用户的语音的文本结果。在文本结果的情感分析分析，使用了IBM Watson的文本的情感分析Tone Analyzer技术。</li>
+<li>用户对话交互：使用了图灵机器人的对话API以及百度的翻译API完成。</li>
+<li>大量使用 CSS3 动画绘制机器人表情，并使用 HTML5 Media 技术获取用户的音频和视频。</li>
+</ul>
+<h2 id="未来发展规划"><a href="#未来发展规划" class="headerlink" title="未来发展规划"></a>未来发展规划</h2><p>设计并完善用户注册及登录服务，以便更好得管理、分析用户的情绪状况</p>
+<p>将平台移植到移动端，便于用户随时监控情绪，查看统计状态</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/05/07/Activity/HACKxSJTU/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/05/01/Atom/Atom常用插件/">
                             Atom 常用插件
                         </a>
@@ -756,6 +913,55 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/04/24/NodeJs/fs/">
+                            NodeJs fs 模块基本使用方法
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-04-24T13:30:44+08:00">
+	
+		    4月 24, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="fs-文件系统"><a href="#fs-文件系统" class="headerlink" title="fs(文件系统)"></a>fs(文件系统)</h2><p>通过 require(‘fs’) 使用该模块。 所有的方法都有异步和同步的形式。</p>
+<p> 异步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlink(&apos;/tmp/hello&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>同步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlinkSync(&apos;/tmp/hello&apos;);</span><br><span class="line">console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h2><p>readFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(file[, options], callback)</span><br><span class="line"></span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = null</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;r&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(&apos;/etc/passwd&apos;, (err, data) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>writeFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(file, data\[, options], callback)</span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">data &lt;String&gt; | &lt;Buffer&gt;</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = &apos;utf8&apos;</span><br><span class="line">mode &lt;Integer&gt; 默认 = 0o666</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;w&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(&apos;message.txt&apos;, &apos;Hello Node.js&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;It\&apos;s saved!&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>不建议在调用 fs.open() 、 fs.readFile() 或 fs.writeFile()<br> 之前使用 fs.access() 检查一个文件的可访问性。 如此处理会造成紊乱情况，<br> 因为其他进程可能在两个调用之间改变该文件的状态。 作为替代，<br> 用户代码应该直接打开/读取/写入文件，当文件无法访问时再处理错误。</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/04/24/NodeJs/fs/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/04/24/NodeJs/node-canvas/">
                             Node-Canvas 将 Canvas 异步保存成图片
                         </a>
@@ -798,55 +1004,6 @@
                     
                         <p>
                             <a href="/2017/04/24/NodeJs/node-canvas/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/24/NodeJs/fs/">
-                            NodeJs fs 模块基本使用方法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-24T13:30:44+08:00">
-	
-		    4月 24, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="fs-文件系统"><a href="#fs-文件系统" class="headerlink" title="fs(文件系统)"></a>fs(文件系统)</h2><p>通过 require(‘fs’) 使用该模块。 所有的方法都有异步和同步的形式。</p>
-<p> 异步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlink(&apos;/tmp/hello&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>同步版本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const fs = require(&apos;fs&apos;);</span><br><span class="line"></span><br><span class="line">fs.unlinkSync(&apos;/tmp/hello&apos;);</span><br><span class="line">console.log(&apos;successfully deleted /tmp/hello&apos;);</span><br></pre></td></tr></table></figure></p>
-<h2 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h2><p>readFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(file[, options], callback)</span><br><span class="line"></span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = null</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;r&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(&apos;/etc/passwd&apos;, (err, data) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>writeFile<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(file, data\[, options], callback)</span><br><span class="line">file &lt;String&gt; | &lt;Buffer&gt; | &lt;Integer&gt; 文件名或文件描述符</span><br><span class="line">data &lt;String&gt; | &lt;Buffer&gt;</span><br><span class="line">options &lt;Object&gt; | &lt;String&gt;</span><br><span class="line">encoding &lt;String&gt; | &lt;Null&gt; 默认 = &apos;utf8&apos;</span><br><span class="line">mode &lt;Integer&gt; 默认 = 0o666</span><br><span class="line">flag &lt;String&gt; 默认 = &apos;w&apos;</span><br><span class="line">callback &lt;Function&gt;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fs.writeFile(&apos;message.txt&apos;, &apos;Hello Node.js&apos;, (err) =&gt; &#123;</span><br><span class="line">    if (err) throw err;</span><br><span class="line">    console.log(&apos;It\&apos;s saved!&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>不建议在调用 fs.open() 、 fs.readFile() 或 fs.writeFile()<br> 之前使用 fs.access() 检查一个文件的可访问性。 如此处理会造成紊乱情况，<br> 因为其他进程可能在两个调用之间改变该文件的状态。 作为替代，<br> 用户代码应该直接打开/读取/写入文件，当文件无法访问时再处理错误。</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/04/24/NodeJs/fs/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -907,129 +1064,6 @@
                     
                         <p>
                             <a href="/2017/04/23/JavaScript/async/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/21/JavaScript/Modules/">
-                            JavaScript 模块化
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-21T20:10:16+08:00">
-	
-		    4月 21, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h2><p>首先，最先出现的是 <code>CommonJS</code>，  <code>CommonJS API</code> 定义很多普通应用程序（主要指非浏览器的应用）使用的API。它的终极目标是提供一个类似 <code>Python</code>， <code>Ruby</code> 和 <code>Java</code> 标准库。这样的话，开发者可以使用 <code>CommonJS API</code> 编写应用程序，然后这些应用可以运行在不同的 <code>JavaScript</code> 解释器和不同的主机环境中。</p>
-<p>2009年，美国程序员 <code>Ryan Dahl</code> 创造了 <code>node.js</code> 项目，将 <code>javascript</code> 语言用于服务器端编程。这标志 <code>Javascript</code> 模块化编程”正式诞生。</p>
-<p><code>NodeJS</code> 是 <code>CommonJS</code> 规范的实现， <code>webpack</code>  也是以 <code>CommonJS</code> 的形式来书写。<code>NPM</code> 作为 <code>Node</code> 的包管理器，帮助<code>Node</code> 解决依赖包的安装问题，也要遵循 <code>CommonJS</code>。</p>
-<h4 id="Browserify"><a href="#Browserify" class="headerlink" title="Browserify"></a>Browserify</h4><p><a href="http://browserify.org/" target="_blank" rel="external">browserify</a> 是最常用的 <code>CommonJS</code> 转换工具。</p>
-<p>然后看个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// foo.js</span><br><span class="line">module.exports = function(x) &#123;</span><br><span class="line">  console.log(x);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// main.js</span><br><span class="line">var foo = require(&quot;./foo&quot;);</span><br><span class="line">foo(&quot;Hi&quot;);</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ browserify main.js &gt; compiled.js</span><br></pre></td></tr></table></figure>
-<p>即可打包，<code>Browserify</code> 具体做了什么继续向下看即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install browser-unpack -g</span><br></pre></td></tr></table></figure></p>
-<p>然后我们将上面生成的 <code>compiled.js</code> 解包。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ browser-unpack &lt; compiled.js</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;id&quot;:1,</span><br><span class="line">    &quot;source&quot;:&quot;module.exports = function(x) &#123;\n  console.log(x);\n&#125;;&quot;,</span><br><span class="line">    &quot;deps&quot;:&#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;id&quot;:2,</span><br><span class="line">    &quot;source&quot;:&quot;var foo = require(\&quot;./foo\&quot;);\nfoo(\&quot;Hi\&quot;);&quot;,</span><br><span class="line">    &quot;deps&quot;:&#123;&quot;./foo&quot;:1&#125;,</span><br><span class="line">    &quot;entry&quot;:true</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p><code>Browserify</code> 在这里将所有模块放到一个数组里，<code>id</code> 是模块的编号，<code>source</code> 是源码，<code>deps</code> 为依赖，<code>entry</code> 为指定入口。</p>
-<p><code>Browserify</code> 先找到 <code>entry: true</code> 的地方，然后执行 <code>source</code> 中的代码，遇到 <code>require</code> 就去<code>deps</code> 中寻找依赖，并执行所依赖的代码，将结果赋值给 <code>require</code> 前的变量。</p>
-<h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p><code>AMD</code> ( Asynchronous Module Definition )，是为了解决 <code>CommonJS</code> 不能异步加载的问题。<code>AMD</code> 采用异步的方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等加载完成后，这个回调函数才会执行。</p>
-<p><code>AMD</code> 也采用 <code>require()</code> 语句加载模块，但是不同于 <code>CommonJS</code>，它要求两个参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require([module], callback);</span><br></pre></td></tr></table></figure></p>
-<p>第一个参数 <code>[module]</code> ，是一个数组，里面的成员就是要加载的模块；第二个参数 <code>callback</code> ，则是加载成功之后的回调函数。如果将前面的代码改写成 <code>AMD</code> 形式，就是下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">require([&apos;math&apos;], function (math) &#123;</span><br><span class="line">　　math.add(2, 3);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p><code>math.add()</code> 与 <code>math</code> 模块加载不是同步的，浏览器不会发生假死。所以很显然，<code>AMD</code> 比较适合浏览器环境。目前，主要有两个 <code>Javascript</code> 库实现了 <code>AMD</code> 规范： <a href="http://requirejs.org/" target="_blank" rel="external"><code>require.js</code></a> 和 <a href="https://github.com/cujojs/curl" target="_blank" rel="external"><code>curl.js</code></a>。</p>
-<h4 id="require-js"><a href="#require-js" class="headerlink" title="require.js"></a>require.js</h4><p>先去官方网站<a href="http://requirejs.org/docs/download.html" target="_blank" rel="external">下载</a>最新版本。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后将它放到项目中即可</span><br></pre></td></tr></table></figure>
-<p>如果加载这个文件，也可能造成网页失去响应。解决办法有两个，一个是把它放在网页底部加载，另一个是写成下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;js/require.js&quot; defer async=&quot;true&quot; &gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
-<p><code>async</code> 属性表明这个文件需要异步加载，避免网页失去响应。IE不支持这个属性，只支持 <code>defer</code>，所以把 <code>defer</code> 也写上。</p>
-<p>加载 <code>require.js</code> 以后，下一步就要加载我们自己的代码了。假定我们自己的代码文件是 <code>main.js</code> ，也放在 <code>js</code> 目录下面。那么，只需要写成下面这样就行了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;js/require.js&quot; data-main=&quot;js/main&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p><code>data-main</code> 属性的作用是，指定网页程序的主模块。在上例中，就是js目录下面的 <code>main.js</code> ，这个文件会第一个被 <code>require.js</code>加载。由于 <code>require.js</code> 默认的文件后缀名是js，所以可以把 <code>main.js</code> 简写成 <code>main</code>。</p>
-<p>主模块的写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// main.js</span><br><span class="line">require([&apos;moduleA&apos;, &apos;moduleB&apos;, &apos;moduleC&apos;], function (moduleA, moduleB, moduleC)&#123;</span><br><span class="line">　　// some code here</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>默认情况下，<code>require.js</code> 假定这三个模块与 <code>main.js</code> 在同一个目录，文件名分别为 <code>moduleA.js</code>，<code>moduleB.js</code> 和 <code>moduleA.js</code>，然后自动加载。</p>
-<p>使用 <code>require.config()</code> 方法，我们可以对模块的加载行为进行自定义。<code>require.config()</code> 就写在主模块（<code>main.js</code>）的头部。参数就是一个对象，这个对象的 <code>paths</code> 属性指定各个模块的加载路径。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">require.config(&#123;</span><br><span class="line">　　paths: &#123;</span><br><span class="line">　　　　&quot;jquery&quot;: &quot;jquery.min&quot;,</span><br><span class="line">　　　　&quot;underscore&quot;: &quot;underscore.min&quot;,</span><br><span class="line">　　　　&quot;backbone&quot;: &quot;backbone.min&quot;</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h4 id="模块的写法"><a href="#模块的写法" class="headerlink" title="模块的写法"></a>模块的写法</h4><p>模块必须采用特定的 <code>define()</code> 函数来定义。如果一个模块不依赖其他模块，那么可以直接定义在 <code>define()</code> 函数之中。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// math.js</span><br><span class="line">define(function ()&#123;</span><br><span class="line"> 　var add = function (x,y)&#123;</span><br><span class="line">　　　　return x+y;</span><br><span class="line">　　&#125;;</span><br><span class="line">　　return &#123;</span><br><span class="line">　　　　add: add</span><br><span class="line">　　&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="ES6-module"><a href="#ES6-module" class="headerlink" title="ES6 module"></a>ES6 module</h2><p>ES6发布的 <code>module</code> 并没有直接采用 <code>CommonJS</code> ，甚至连 <code>require</code> 都没有采用，也就是说 <code>require</code> 仍然只是 <code>node</code> 的一个私有的全局方法，<code>module.exports</code> 也只是 <code>node</code> 私有的一个全局变量属性，跟标准半毛钱关系都没有。</p>
-<p><a href="https://developer.mozilla.org/en/docs/web/javascript/reference/statements/export" target="_blank" rel="external">export 详细用法</a><br><a href="https://developer.mozilla.org/en/docs/web/javascript/reference/statements/import" target="_blank" rel="external">import 详细用法</a></p>
-<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p><code>require</code> 的使用非常简单，它相当于 <code>module.exports</code> 的传送门，<code>module.exports</code> 后面的内容是什么，<code>require</code> 的结果就是什么，对象、数字、字符串、函数……再把 <code>require</code> 的结果赋值给某个变量，相当于把 <code>require</code> 和 <code>module.exports</code> 进行平行空间的位置重叠，而且 <code>require</code> 理论上可以运用在代码的任何地方，甚至不需要赋值给某个变量之后再使用。在使用时，完全可以忽略模块化这个概念来使用 <code>require</code>，仅仅把它当做一个 <code>node</code> 内置的全局函数，它的参数甚至可以是表达式：</p>
-<p>但是 <code>import</code> 则不同，它是编译时的（<code>require</code>是运行时的），它必须放在文件开头，而且使用格式也是确定的，不容置疑。它不会将整个模块运行后赋值给某个变量，而是只选择 <code>import</code> 的接口进行编译，这样在性能上比 <code>require</code> 好很多。</p>
-<p>从理解上，<code>require</code> 是赋值过程，<code>import</code> 是解构过程，当然，<code>require</code> 也可以将结果解构赋值给一组变量，但是 <code>import</code> 在遇到 <code>default</code> 时，和 <code>require</code> 则完全不同： <code>var $ = require(&#39;jquery&#39;);</code>  和 <code>import $ from &#39;jquery&#39;</code> 是完全不同的两种概念。</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/04/21/JavaScript/Modules/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/04/04/Git/git_init/">
-                            Git 连接 Github
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-04-04T13:30:44+08:00">
-	
-		    4月 04, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h4 id="初始化邮箱用户名"><a href="#初始化邮箱用户名" class="headerlink" title="初始化邮箱用户名"></a>初始化邮箱用户名</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="string">"shianqi@imudges.com"</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"shianqi"</span></span><br></pre></td></tr></table></figure>
-<h4 id="生成SSH密钥"><a href="#生成SSH密钥" class="headerlink" title="生成SSH密钥"></a>生成SSH密钥</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"shianqi@imudges.com"</span></span><br></pre></td></tr></table></figure>
-<p>windows 需要在 GitBush 中添加</p>
-<p>将密钥添加到 Github <a href="https://github.com/settings/keys" target="_blank" rel="external">设置</a>中</p>
-<h4 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
-<p>出现下面的文本，则链接成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi shianqi! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/04/04/Git/git_init/#post-footer" class="postShorten-excerpt_link link">
                                 评论和共享
                             </a>
                         </p>
@@ -1149,25 +1183,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
                             <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
@@ -1208,6 +1223,25 @@
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
                             <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1324,7 +1358,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 108 篇文章
+                找到 110 篇文章
             </p>
         </div>
     </div>

