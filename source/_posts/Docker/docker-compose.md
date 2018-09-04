@@ -24,7 +24,7 @@ services:
 
 ## 参数
 
-### `build`
+### build
 
 指定 `Dockerfile` 的路径（绝对路径或相对路径）
 
@@ -43,7 +43,7 @@ services:
         buildno: 1
 ```
 
-### `cap_add`, `cap_drop`
+### cap_add, cap_drop
 
 指定容器的内核能力
 
@@ -61,7 +61,7 @@ cap_drop:
   - NET_ADMIN
 ```
 
-### `command`
+### command
 
 覆盖容器启动的命令
 
@@ -69,19 +69,19 @@ cap_drop:
 command: echo "hello world"
 ```
 
-### `configs`
+### configs
 
-### `cgroup_parent`
+### cgroup_parent
 
 指定父 `cgroup` 组，继承该组的资源限制。
 
-### `container_name`
+### container_name
 
 指定容器名称，默认使用 `项目名称_服务名称_序号`格式。
 
-### `deploy`
+### deploy
 
-### `devices`
+### devices
 
 指定设备映射关系
 
@@ -111,7 +111,7 @@ services:
     image: mongo
 ```
 
-### `dns`
+### dns
 
 自定义 `DNS` 服务器，可以是一个值，也可以是一个列表。
 
@@ -123,7 +123,7 @@ dns:
   - 114.114.114.114
 ```
 
-### `dns_search`
+### dns_search
 
 配置 `DNS` 搜索域。
 
@@ -135,11 +135,11 @@ dns_search:
   - domain2.example.com
 ```
 
-### `tmpfs`
+### tmpfs
 
 挂载一个 tmpfs 文件系统到容器。
 
-### `env_file`
+### env_file
 
 从文件中获取环境变量
 
@@ -149,7 +149,7 @@ dns_search:
 PROG_ENV=development
 ```
 
-### `environment`
+### environment
 
 设置环境变量，可以使用数据或者字典两种格式，只给定变量名会自动获取主机上的变量值，避免数据泄漏。
 
@@ -165,7 +165,7 @@ environment:
 
 如果变量名称用到 `true` | `false`, `yes` | `no` 等表达布尔含义的值，最好放到引号里。
 
-### `expose`
+### expose
 
 暴露端口，但不映射到宿主机，仅可以指定内部端口为参数
 
