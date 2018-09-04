@@ -26,12 +26,6 @@ docker pull [OPTIONS] NAME[:TAG|@DIGEST]
 docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 ```
 
-### 列出已下载镜像
-
-```bash
-docker image ls [OPTIONS] [REPOSITORY[:TAG]]
-```
-
 常用OPTIONS：
 |option|描述|
 |---|---|
@@ -40,6 +34,24 @@ docker image ls [OPTIONS] [REPOSITORY[:TAG]]
 |`-d`|在后台运行容器并打印容器ID|
 |`--name`|为容器指定名称|
 |`--rm`|退出容器后将其删除|
+
+挂载数据卷：
+
+```docker
+docker run -d -P --name web --mount source=my-vol,target=/webapp webapp python app.py
+```
+
+挂载主机目录:
+
+```bash
+docker run -d -P --name web --mount type=bind,source=/src/webapp,target=/opt/webapp,readonly webapp python app.py
+```
+
+### 列出已下载镜像
+
+```bash
+docker image ls [OPTIONS] [REPOSITORY[:TAG]]
+```
 
 ### 删除本地镜像
 
@@ -211,3 +223,53 @@ docker load [OPTIONS]
 ```
 
 **区别**： 导入容器快照将丢弃所有的历史记录和元数据信息，导入镜像存储文件将保存完整记录，体积也要大。从容器快照文件中导入可以重新指定标签等信息。
+
+## 数据卷
+
+### 创建
+
+```bash
+docker volume create [OPTIONS] [VOLUME]
+```
+
+### 查看
+
+查看所有：
+
+```bash
+docker volume ls [OPTIONS]
+```
+
+查看指定：
+
+```bash
+docker volume inspect [OPTIONS] VOLUME [VOLUME...]
+```
+
+### 删除
+
+```bash
+docker volume rm [OPTIONS] VOLUME [VOLUME...]
+```
+
+### 清理无用数据卷
+
+```bash
+docker volume prune [OPTIONS]
+```
+
+## 容器互联
+
+推荐使用自定义 Docker 网络来链接多个容器，而不是使用 `--link` 参数
+
+### 新建网络
+
+```bash
+docker network create [OPTIONS] NETWORK
+```
+
+eg:
+
+```bash
+docker network create -d bridge my-net
+```
