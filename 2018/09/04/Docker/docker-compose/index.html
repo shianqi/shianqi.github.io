@@ -6,21 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Tron Blog!">
-    <title>标签: Docker - Tron Blog!</title>
+    <title>Docker Compose 模板文件 - Tron Blog!</title>
     <meta name="author" content="Archie Shi">
     
     
     
-    <meta name="description" content="Archie&apos;s Blog">
+    <meta name="description" content="Docker Compose 模板文件简介默认的配置文件名为 docker-compose.yml，格式为 YAML 格式。 1234567version: &quot;3&quot;services:  webapp:    image: examples/web    posts: &quot;80:80&quot;    volumes: &quot;/data&quot; 每个服务都必须通过 image 指定镜像或者 build 指令（需要 Doc">
+<meta name="keywords" content="Docker">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Tron Blog!">
-<meta property="og:url" content="https://shianqi.github.io/tags/Docker/index.html">
+<meta property="og:title" content="Docker Compose 模板文件">
+<meta property="og:url" content="https://shianqi.github.io/2018/09/04/Docker/docker-compose/index.html">
 <meta property="og:site_name" content="Tron Blog!">
-<meta property="og:description" content="Archie&apos;s Blog">
+<meta property="og:description" content="Docker Compose 模板文件简介默认的配置文件名为 docker-compose.yml，格式为 YAML 格式。 1234567version: &quot;3&quot;services:  webapp:    image: examples/web    posts: &quot;80:80&quot;    volumes: &quot;/data&quot; 每个服务都必须通过 image 指定镜像或者 build 指令（需要 Doc">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-09-04T11:51:47.833Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tron Blog!">
-<meta name="twitter:description" content="Archie&apos;s Blog">
+<meta name="twitter:title" content="Docker Compose 模板文件">
+<meta name="twitter:description" content="Docker Compose 模板文件简介默认的配置文件名为 docker-compose.yml，格式为 YAML 格式。 1234567version: &quot;3&quot;services:  webapp:    image: examples/web    posts: &quot;80:80&quot;    volumes: &quot;/data&quot; 每个服务都必须通过 image 指定镜像或者 build 指令（需要 Doc">
     
     
         
@@ -43,7 +45,7 @@
             <!-- Define author's picture -->
 
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Tron Blog!</a>
@@ -67,7 +69,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -181,26 +183,22 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
+            <div id="main" data-behavior="4"
                  class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2018/09/04/Docker/docker-compose/">
-                            Docker Compose 模板文件
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            Docker Compose 模板文件
+        </h1>
+    
+    
+        <div class="post-meta">
     <time itemprop="datePublished" datetime="2018-09-04T18:14:36+08:00">
 	
 		    9月 04, 2018
@@ -209,10 +207,12 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="Docker-Compose-模板文件"><a href="#Docker-Compose-模板文件" class="headerlink" title="Docker Compose 模板文件"></a>Docker Compose 模板文件</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>默认的配置文件名为 <code>docker-compose.yml</code>，格式为 YAML 格式。</p>
+    
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <h1 id="Docker-Compose-模板文件"><a href="#Docker-Compose-模板文件" class="headerlink" title="Docker Compose 模板文件"></a>Docker Compose 模板文件</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>默认的配置文件名为 <code>docker-compose.yml</code>，格式为 YAML 格式。</p>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  webapp:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">examples/web</span></span><br><span class="line"><span class="attr">    posts:</span> <span class="string">"80:80"</span></span><br><span class="line"><span class="attr">    volumes:</span> <span class="string">"/data"</span></span><br></pre></td></tr></table></figure>
 <p>每个服务都必须通过 <code>image</code> 指定镜像或者 <code>build</code> 指令（需要 Dockerfile）等来自动构建生成镜像，如果使用 <code>build</code> 指令，在 <code>Dockerfile</code> 中的选项会自动获取，无需再次设置。</p>
 <h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="build"><a href="#build" class="headerlink" title="build"></a><code>build</code></h3><p>指定 <code>Dockerfile</code> 的路径（绝对路径或相对路径）</p>
@@ -268,327 +268,90 @@
 <h2 id="读取变量"><a href="#读取变量" class="headerlink" title="读取变量"></a>读取变量</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  db:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">"mongo:$&#123;MONGO_VERSION&#125;"</span></span><br></pre></td></tr></table></figure>
 <p><code>MONGO_VERSION=3.2 docker-compose up</code>, 会启动一个 <code>mongo:3.2</code> 镜像容器<br><code>MONGO_VERSION=2.8 docker-compose up</code>, 会启动一个 <code>mongo:2.8</code> 镜像容器</p>
 
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2018/09/04/Docker/docker-compose/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
             
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2018/09/04/Docker/compose/">
-                            Docker Compose 使用
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2018-09-04T11:14:36+08:00">
-	
-		    9月 04, 2018
-    	
-    </time>
-    
-</div>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Docker/">Docker</a>
 
             </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="Docker-Compose-使用"><a href="#Docker-Compose-使用" class="headerlink" title="Docker Compose 使用"></a>Docker Compose 使用</h1><p>定义和运行多个 Docker 容器的应用，它允许用户通过一个单独的 <code>docker-compose.yml</code> 模板文件（<code>YAML</code>格式）来定义一组相关联的应用容器为一个项目（project）。</p>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose [-f &lt;arg&gt;...] [options] [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure>
-<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build [options] [--build-arg key=val...] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="验证配置文件"><a href="#验证配置文件" class="headerlink" title="验证配置文件"></a>验证配置文件</h3><p>验证 Compose 文件格式是否正确，正确则显示配置文件，错误显示原因</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose config [options]</span><br></pre></td></tr></table></figure>
-<h3 id="自动构建并启动服务"><a href="#自动构建并启动服务" class="headerlink" title="自动构建并启动服务"></a>自动构建并启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<p>自动尝试完成构建镜像，创建服务，启动服务，并关联服务相关容器。</p>
-<p>链接的服务都将会被自动启动，除非已经处于运行状态。</p>
-<p>默认 <code>docker-compose up</code> 启动容器在前台，<code>Ctrl-c</code> 会导致所有容器停止。</p>
-<p>如果服务已经存在，<code>docker-compose up</code> 将会尝试停止容器，然后重新创建（保持使用 <code>volumes-from</code> 挂载的卷）。</p>
-<p><code>docker-compose up -d</code> 后台启动并运行所有容器。</p>
-<p><code>docker-compose up --no-recreate</code> 启动处于停止状态的容器，忽略已经运行的。</p>
-<p><code>docker-compose up --no-deps -d SERVICE</code> 只重启部署服务</p>
-<h3 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h3><p>停止 <code>up</code> 命令所启动的容器，并移除网络</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down [options]</span><br></pre></td></tr></table></figure>
-<h3 id="进入"><a href="#进入" class="headerlink" title="进入"></a>进入</h3><p>进入指定容器</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="built_in">exec</span> [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]</span><br></pre></td></tr></table></figure>
-<h3 id="列出-Compose-包含的镜像"><a href="#列出-Compose-包含的镜像" class="headerlink" title="列出 Compose 包含的镜像"></a>列出 Compose 包含的镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose images [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="强制停止服务容器"><a href="#强制停止服务容器" class="headerlink" title="强制停止服务容器"></a>强制停止服务容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="built_in">kill</span> [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="查看服务器的输出"><a href="#查看服务器的输出" class="headerlink" title="查看服务器的输出"></a>查看服务器的输出</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose logs [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="暂停一个服务"><a href="#暂停一个服务" class="headerlink" title="暂停一个服务"></a>暂停一个服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose pause [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="恢复一个暂停的服务"><a href="#恢复一个暂停的服务" class="headerlink" title="恢复一个暂停的服务"></a>恢复一个暂停的服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose unpause [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="查看某个容器的端口"><a href="#查看某个容器的端口" class="headerlink" title="查看某个容器的端口"></a>查看某个容器的端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose port [options] SERVICE PRIVATE_PORT</span><br></pre></td></tr></table></figure>
-<h3 id="列出项目中的所有容器"><a href="#列出项目中的所有容器" class="headerlink" title="列出项目中的所有容器"></a>列出项目中的所有容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose ps [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="拉取项目所需镜像"><a href="#拉取项目所需镜像" class="headerlink" title="拉取项目所需镜像"></a>拉取项目所需镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose pull [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="推送服务依赖的镜像到-Docker-镜像仓库"><a href="#推送服务依赖的镜像到-Docker-镜像仓库" class="headerlink" title="推送服务依赖的镜像到 Docker 镜像仓库"></a>推送服务依赖的镜像到 Docker 镜像仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose push [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="重启项目中的服务"><a href="#重启项目中的服务" class="headerlink" title="重启项目中的服务"></a>重启项目中的服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose restart [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="删除所有停止状态的服务容器"><a href="#删除所有停止状态的服务容器" class="headerlink" title="删除所有停止状态的服务容器"></a>删除所有停止状态的服务容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose rm [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="在指定服务上执行一个命令"><a href="#在指定服务上执行一个命令" class="headerlink" title="在指定服务上执行一个命令"></a>在指定服务上执行一个命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...] SERVICE [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure>
-<h3 id="设置指定服务器运行的容器个数"><a href="#设置指定服务器运行的容器个数" class="headerlink" title="设置指定服务器运行的容器个数"></a>设置指定服务器运行的容器个数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose scale [options] [SERVICE=NUM...]</span><br></pre></td></tr></table></figure>
-<p>eg: 启动三个容器运行 web 服务，启动 2 个容器运行 db 服务</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose scale web=3 db=2</span><br></pre></td></tr></table></figure>
-<p>当指定数目多于该服务实际运行容器，将创建新容器；反之将停止容器。</p>
-<h3 id="启动已经存在的服务容器"><a href="#启动已经存在的服务容器" class="headerlink" title="启动已经存在的服务容器"></a>启动已经存在的服务容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose start [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="停止已经运行的容器"><a href="#停止已经运行的容器" class="headerlink" title="停止已经运行的容器"></a>停止已经运行的容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose stop [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
-<h3 id="查看各个服务容器内运行的进程"><a href="#查看各个服务容器内运行的进程" class="headerlink" title="查看各个服务容器内运行的进程"></a>查看各个服务容器内运行的进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose top [SERVICE...]</span><br></pre></td></tr></table></figure>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2018/09/04/Docker/compose/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2018/09/03/Docker/dockerfile/">
-                            使用 Dockerfile 定制镜像
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2018-09-03T22:25:36+08:00">
-	
-		    9月 03, 2018
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="使用-Dockerfile-定制镜像"><a href="#使用-Dockerfile-定制镜像" class="headerlink" title="使用 Dockerfile 定制镜像"></a>使用 Dockerfile 定制镜像</h1>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2018/09/03/Docker/dockerfile/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2018/09/03/Docker/docker/">
-                            Docker 基本命令
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2018-09-03T14:20:36+08:00">
-	
-		    9月 03, 2018
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="Docker-基本命令"><a href="#Docker-基本命令" class="headerlink" title="Docker 基本命令"></a>Docker 基本命令</h1><h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search [OPTIONS] TERM</span><br></pre></td></tr></table></figure>
-<h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span><br></pre></td></tr></table></figure>
-<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
-<p>常用OPTIONS：<br>|option|描述|<br>|—|—|<br>|<code>-i -t</code>|两个参数，<code>-i</code> 交互式操作，<code>-t</code>终端|<br>|<code>-p</code>|指定端口|<br>|<code>-d</code>|在后台运行容器并打印容器ID|<br>|<code>--name</code>|为容器指定名称|<br>|<code>--rm</code>|退出容器后将其删除|</p>
-<p>挂载数据卷：</p>
-<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> -d -P --name web --mount <span class="built_in">source</span>=my-vol,target=/webapp webapp python app.py</span></span><br></pre></td></tr></table></figure>
-<p>挂载主机目录:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -P --name web --mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/src/webapp,target=/opt/webapp,<span class="built_in">readonly</span> webapp python app.py</span><br></pre></td></tr></table></figure>
-<h3 id="列出已下载镜像"><a href="#列出已下载镜像" class="headerlink" title="列出已下载镜像"></a>列出已下载镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image ls [OPTIONS] [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
-<h3 id="删除本地镜像"><a href="#删除本地镜像" class="headerlink" title="删除本地镜像"></a>删除本地镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image rm [OPTIONS] IMAGE [IMAGE...]</span><br></pre></td></tr></table></figure>
-<h3 id="列出虚悬镜像"><a href="#列出虚悬镜像" class="headerlink" title="列出虚悬镜像"></a>列出虚悬镜像</h3><p>由于同名镜像更新产生</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image ls -f dangling=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
-<p>删除虚悬镜像</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image prune</span><br></pre></td></tr></table></figure>
-<h3 id="占用磁盘空间"><a href="#占用磁盘空间" class="headerlink" title="占用磁盘空间"></a>占用磁盘空间</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker system df [OPTIONS]</span><br></pre></td></tr></table></figure>
-<h3 id="查看历史"><a href="#查看历史" class="headerlink" title="查看历史"></a>查看历史</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">history</span> [OPTIONS] IMAGE</span><br></pre></td></tr></table></figure>
-<h3 id="推送镜像"><a href="#推送镜像" class="headerlink" title="推送镜像"></a>推送镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push [OPTIONS] NAME[:TAG]</span><br></pre></td></tr></table></figure>
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="启动已终止容器"><a href="#启动已终止容器" class="headerlink" title="启动已终止容器"></a>启动已终止容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container start [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
-<h3 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container logs [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
-<h3 id="终止容器"><a href="#终止容器" class="headerlink" title="终止容器"></a>终止容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container stop [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
-<h3 id="重启容器"><a href="#重启容器" class="headerlink" title="重启容器"></a>重启容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container restart [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
-<h3 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container rm [OPTIONS] CONTAINER [CONTAINER...]</span><br></pre></td></tr></table></figure>
-<h3 id="清理所有终止状态容器"><a href="#清理所有终止状态容器" class="headerlink" title="清理所有终止状态容器"></a>清理所有终止状态容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker container prune [OPTIONS]</span><br></pre></td></tr></table></figure>
-<h3 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h3><h4 id="exec-命令-（推荐）"><a href="#exec-命令-（推荐）" class="headerlink" title="exec 命令 （推荐）"></a>exec 命令 （推荐）</h4><p>从这个 stdin 中 exit 不会导致容器停止</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> [OPTIONS] CONTAINER COMMAND [ARG...]</span><br></pre></td></tr></table></figure>
-<p>常用OPTIONS：<br>|option|描述|<br>|—|—|<br>|<code>-i -t</code>|两个参数，<code>-i</code> 交互式操作，<code>-t</code>终端|<br>|<code>-w</code>|容器的工作目录|<br>|<code>-e</code>|设置 ENV|</p>
-<h4 id="attach-命令"><a href="#attach-命令" class="headerlink" title="attach 命令"></a>attach 命令</h4><p>注意: <strong>如果从这个 stdin 中 exit，会导致容器停止</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
-<h3 id="查看存储层变化"><a href="#查看存储层变化" class="headerlink" title="查看存储层变化"></a>查看存储层变化</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker diff CONTAINER</span><br></pre></td></tr></table></figure>
-<h3 id="提交变更"><a href="#提交变更" class="headerlink" title="提交变更"></a>提交变更</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
-<p>eg:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit --author <span class="string">"mail@shianqi.com"</span> --message <span class="string">"Change index.html"</span> webserver nginx:v2</span><br></pre></td></tr></table></figure>
-<p>常用于学习，还可以在被入侵后保存现场。不要使用 <code>docker commit</code> 定制镜像，应该用 <code>Dockerfile</code></p>
-<h3 id="容器和本机文件传输"><a href="#容器和本机文件传输" class="headerlink" title="容器和本机文件传输"></a>容器和本机文件传输</h3><p>docker cp [OPTIONS] CONTAINER:SRC_PATH DEST_PATH|-</p>
-<h2 id="导入导出"><a href="#导入导出" class="headerlink" title="导入导出"></a>导入导出</h2><h3 id="导出容器快照"><a href="#导出容器快照" class="headerlink" title="导出容器快照"></a>导出容器快照</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
-<p>eg:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">export</span> 329a2e380 &gt; ubuntu.tar</span><br></pre></td></tr></table></figure>
-<h3 id="导入容器"><a href="#导入容器" class="headerlink" title="导入容器"></a>导入容器</h3><h4 id="docker-import"><a href="#docker-import" class="headerlink" title="docker import"></a>docker import</h4><p>导入容器快照</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import [OPTIONS] file|URL|- [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
-<p>eg: 导入容器快照</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ubuntu.tar | docker import - <span class="built_in">test</span>/ubuntu:v1.0</span><br></pre></td></tr></table></figure>
-<p>eg: 指定url或目录导入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker import http://shianqi.com/exampleimage.tgz shianqi/imagerepo</span><br></pre></td></tr></table></figure>
-<h4 id="docker-load"><a href="#docker-load" class="headerlink" title="docker load"></a>docker load</h4><p>导入镜像存储文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load [OPTIONS]</span><br></pre></td></tr></table></figure>
-<p><strong>区别</strong>： 导入容器快照将丢弃所有的历史记录和元数据信息，导入镜像存储文件将保存完整记录，体积也要大。从容器快照文件中导入可以重新指定标签等信息。</p>
-<h2 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume create [OPTIONS] [VOLUME]</span><br></pre></td></tr></table></figure>
-<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><p>查看所有：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume ls [OPTIONS]</span><br></pre></td></tr></table></figure>
-<p>查看指定：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume inspect [OPTIONS] VOLUME [VOLUME...]</span><br></pre></td></tr></table></figure>
-<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume rm [OPTIONS] VOLUME [VOLUME...]</span><br></pre></td></tr></table></figure>
-<h3 id="清理无用数据卷"><a href="#清理无用数据卷" class="headerlink" title="清理无用数据卷"></a>清理无用数据卷</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume prune [OPTIONS]</span><br></pre></td></tr></table></figure>
-<h2 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h2><p>推荐使用自定义 Docker 网络来链接多个容器，而不是使用 <code>--link</code> 参数</p>
-<h3 id="新建网络"><a href="#新建网络" class="headerlink" title="新建网络"></a>新建网络</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create [OPTIONS] NETWORK</span><br></pre></td></tr></table></figure>
-<p>eg:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d bridge my-net</span><br></pre></td></tr></table></figure>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2018/09/03/Docker/docker/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2018/09/03/Docker/introduce/">
-                            Docker
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2018-09-03T14:15:36+08:00">
-	
-		    9月 03, 2018
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>传统虚拟机是虚拟出一套硬件后，在其上运行一套完整的操作系统，再之上运行所需的应用进程。而容器内的应用进程直接运行于宿主机的内核，容器没有自己的内核，也没有进行硬件虚拟。因此容器比传统虚拟机更方便。</p>
-<p>传统虚拟机：</p>
-<p><img src="http://cdn.shianqi.com/20180903144605_O4W8uZ_Screenshot.png" alt="传统虚拟机"></p>
-<p>容器：</p>
-<p><img src="http://cdn.shianqi.com/20180903144626_tpANiO_Screenshot.png" alt="容器"></p>
-<table>
-<thead>
-<tr>
-<th>特性</th>
-<th>容器</th>
-<th>虚拟机</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>启动</td>
-<td>秒级</td>
-<td>分钟级</td>
-</tr>
-<tr>
-<td>硬盘使用</td>
-<td>一般为MB</td>
-<td>一般为GB</td>
-</tr>
-<tr>
-<td>性能</td>
-<td>接近原生</td>
-<td>弱于</td>
-</tr>
-<tr>
-<td>系统支持量</td>
-<td>单机支持上千个容器</td>
-<td>一般几十个</td>
-</tr>
-</tbody>
-</table>
-<h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><p>Docker 采用<code>分层存储</code>的架构，构建时会一层一层构建，前一层是后一层的的基础。每一层构建完就不会发生改变，后一层上的任何改变只发生在自己这一层。<strong>在构建镜像的时候要额外小心，每一层尽量只包含需要的东西，任何额外的东西应该在该层构建结束前清理掉</strong></p>
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><p><code>镜像</code>和<code>容器</code>的关系，就像<code>类</code>和<code>对象</code>，镜像是静态的定义，容器是镜像运行时的实体。</p>
-<p>容器不应该向其存储层内写入任何数据，容器存储层要保持无状态化。所有的文件写入操作，都应该使用<code>数据卷（Volume）</code>、或者绑定宿主目录，在这些 位置的读写会跳过容器存储层，直接对宿主（或网络存储）发生读写，其性能和稳定性更高。</p>
-<p>数据卷的生存周期独立于容器，容器消亡，数据卷不会消亡。因此，使用数据卷后，容器删除或者重新运行之后，数据却不会丢失。</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2018/09/03/Docker/introduce/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
         
         
-        <li class="pagination-number">第 1 页 共 1 页</li>
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/04/Docker/compose/" data-tooltip="Docker Compose 使用">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/09/04/Docker/docker-compose/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/09/04/Docker/docker-compose/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/09/04/Docker/docker-compose/">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </li>
+        
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+        
+    </div>
+</article>
+
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -598,6 +361,104 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/04/Docker/compose/" data-tooltip="Docker Compose 使用">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/09/04/Docker/docker-compose/">
+                    <i class="fa fa-facebook-official"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/09/04/Docker/docker-compose/">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/09/04/Docker/docker-compose/">
+                    <i class="fa fa-google-plus"></i>
+                </a>
+            </li>
+        
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+    <i id="btn-close-shareoptions" class="fa fa-close"></i>
+    <ul class="share-options">
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/09/04/Docker/docker-compose/">
+                    <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/09/04/Docker/docker-compose/">
+                    <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
+                </a>
+            </li>
+        
+            
+            
+            <li class="share-option">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/09/04/Docker/docker-compose/">
+                    <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
+                </a>
+            </li>
+        
+    </ul>
+</div>
+
             
         </div>
         
@@ -859,6 +720,8 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-lh5udltchpsfcjgzpmme11bbmvj4k4srd99grgzo0845ualxoy17enpqvhko.min.js"></script>
 <!--SCRIPTS END-->
+
+    
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>

@@ -195,6 +195,65 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/04/24/NodeJs/node-canvas/">
+                            Node-Canvas 将 Canvas 异步保存成图片
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-04-24T13:30:44+08:00">
+	
+		    4月 24, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p><img src="http://cdn.shianqi.com/20171110092850_LcT0rC_hbq.png" alt="黑白棋"></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>在开发<a href="https://github.com/shianqi/Reversi_process" target="_blank" rel="external">Reversi_process</a><br>（ 用Node.js 将黑白棋对局的每一步保存成本地图片的）的时候，遇到这样的需求：<br>先在 Node-Canvas 画出每一步的图片，然后保存下来。<br>在绘制下一张图片的时候，要保证前一张图片被保存下来。不然保存的图片可能会乱。</p>
+<p>但是如果用同步的方法保存，整个过程下来是相当的费时。<br>生成一个有60步的对局大约需要 12000ms 。于是有了下面这个解决办法。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>Node.js: v7.9.0</li>
+<li>node-canvas: 1.6.5</li>
+</ul>
+<p>阅读前需要对 Promise 和 async/await 有一定了解 </p>
+<h2 id="异步进行-Canvas-保存成图片"><a href="#异步进行-Canvas-保存成图片" class="headerlink" title="异步进行 Canvas 保存成图片"></a>异步进行 Canvas 保存成图片</h2><p>首先，将异步 fs.writeFile 封装成一个 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise" target="_blank" rel="external">Promise</a> 方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将buffer数据保存到指定的文件夹下</span></span><br><span class="line"><span class="comment"> * @param name 新图片的名字</span></span><br><span class="line"><span class="comment"> * @param dataBuffer 图片数据</span></span><br><span class="line"><span class="comment"> * @returns &#123;Promise&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">DrawChessboard.prototype.saveImg = <span class="function"><span class="keyword">function</span>(<span class="params">name, dataBuffer</span>)</span>&#123;</span><br><span class="line"><span class="meta">	"use strict"</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span>&#123;</span><br><span class="line">		fs.writeFile(<span class="keyword">this</span>.path + <span class="string">'/'</span> + name + <span class="string">".png"</span>,dataBuffer, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(err) reject(err);</span><br><span class="line">			resolve();</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>之后，我们用一个数组来存每一步的 Promise 对象，在保存每一步 Canvas 图像的时候<br>我们创建一个当前 Canvas 的副本。如果直接传入当前 Canvas 的时候，会导致保存后的图片乱掉。</p>
+<p>在这里我们使用了 <code>toDataURL()</code> 的异步使用方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">canvas.toDataURL(&apos;image/png&apos;, function(err, png)&#123; &#125;);</span><br></pre></td></tr></table></figure>
+<p>因为 <code>toDataURL()</code> 将非常耗时，在本例中，平均保存一步对局需要 600ms</p>
+<p>在 <code>toDataURL()</code> 回调中，我们调用上面封装成 Promise 方法的 <code>saveImg(name, dataBuffer)</code><br>方法，并将返回的 Promise 对象添加到 promises 数组中。</p>
+<p>之后我们只要保证 promises 中的 Promise 全部执行完成就可以了。</p>
+<p>只要调用 <code>Promise.all( iterable )</code>; 将 promises 传入即可，等待 promises 方法全部执行完后<br>返回一个新的 Promise 对象，处理之后便可以进行之后的工作了。</p>
+<p>代码如下（使用了 async/await 新特性，NodeJs v7.4.0 后正式加入）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">DrawChessboard.prototype.draw = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"><span class="regexp">/*string*/</span>chessString</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//---</span></span><br><span class="line">    <span class="comment">//省略若干步</span></span><br><span class="line">    <span class="comment">//---</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//保存每一步的Promise对象</span></span><br><span class="line">    <span class="keyword">let</span> promises = [];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i=<span class="number">0</span>;i&lt;length;i++)&#123;</span><br><span class="line">        <span class="comment">//计算这一步的棋局</span></span><br><span class="line">        <span class="keyword">this</span>.computeChess(chessArray[i*<span class="number">2</span>],chessArray[i*<span class="number">2</span>+<span class="number">1</span>]);</span><br><span class="line">        <span class="comment">//在Canvas上绘制这一步棋局</span></span><br><span class="line">        <span class="keyword">this</span>.drawChess();</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//为了在异步操作不导致两次 toDataURl() 有影响，这里创建了一个当前 canvas 副本。</span></span><br><span class="line">        <span class="keyword">let</span> newCanvas = <span class="keyword">new</span> Canvas(<span class="keyword">this</span>.size_x, <span class="keyword">this</span>.size_y);</span><br><span class="line">        <span class="keyword">let</span> newCtx = newCanvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">        <span class="keyword">let</span> imageDate = <span class="keyword">this</span>.ctx.getImageData(<span class="number">0</span>,<span class="number">0</span>,<span class="keyword">this</span>.size_x,<span class="keyword">this</span>.size_y);</span><br><span class="line">        newCtx.putImageData(imageDate,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">        <span class="comment">//此处 toDataURL() 为异步操作，如果同步操作则非常耗时，此处约600ms执行完成。</span></span><br><span class="line">        newCanvas.toDataURL(<span class="string">"image/png"</span>,(err,png)=&gt;&#123;</span><br><span class="line">            <span class="keyword">let</span> base64Data = png.replace(<span class="regexp">/^data:image\/\w+;base64,/</span>, <span class="string">""</span>);</span><br><span class="line">            <span class="keyword">let</span> dataBuffer = <span class="keyword">new</span> Buffer(base64Data, <span class="string">'base64'</span>);</span><br><span class="line">            promises.push(<span class="keyword">this</span>.saveImg(i,dataBuffer));</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">await</span> <span class="built_in">Promise</span>.all(promises);</span><br><span class="line">    &#125;<span class="keyword">catch</span> (err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.canvas.toDataURL();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/04/24/NodeJs/node-canvas/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/04/24/NodeJs/fs/">
                             NodeJs fs 模块基本使用方法
                         </a>
@@ -1078,224 +1137,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/12/28/Network/dataLinkLayer/">
-                            计算机网络——数据链路层基本概念
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-12-28T20:46:41+08:00">
-	
-		    12月 28, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h1><blockquote>
-<p><font color="#000000"><strong>目的</strong>：</font>设计数据链路层的主要目的就是在原始的、有差错的物理线路的基础上，采取差错检测、差错控制与流量控制等方法，将有差错的物理线路改进成逻辑上无差错的数据链路，以便向它的上一层——网络层提供高质量的服务。</p>
-<p><font color="#000000"><strong>要点</strong>：</font>：数据链路层的链路管理、数据帧封装、差错控制、流量控制这几项功能的实现原理，BSC、SDLC、HDLC和PPP这几种典型的数据链路层协议及二交换原理。</p>
-</blockquote>
-<h2 id="数据链路层基础"><a href="#数据链路层基础" class="headerlink" title="数据链路层基础"></a>数据链路层基础</h2><p>数据链路层和它下面的网络层其实作用一样，都是用来构建进行网络通信、访问的通道，只不过物理层构建的是一条物理通道，而数据链路层构建的是真正用于数据传输的逻辑通道。</p>
-<h3 id="主要功能和实现原理"><a href="#主要功能和实现原理" class="headerlink" title="主要功能和实现原理"></a>主要功能和实现原理</h3><p>向网络层提供透明、可靠的数据传输服务。<br>数据链路管理、封装成帧、透明传输、差错控制。</p>
-<ul>
-<li><p>数据链路层提供的服务类型</p>
-<ul>
-<li><p>有确认的面向链接服务<br>在提供服务时，必须先建立好双方通信链接，在提供服务时，必须要求对方确认后才进行。<br>存在三个阶段：数据链路建立，数据传输，数据链路释放等阶段。<br>占用一条专门的通信链路，是非常可靠的链接服务。<br>例如：SLIP（串行线路协议）、PPP（点对点协议）、PPPoE（基于以太网的点对点协议）、HDLC（高级数据链路控制协议）</p>
-</li>
-<li><p>有确认的无连接服务<br>接收端接收到每一个数据帧时都向发送端确认，进行数据传输前不需要建立专门的数据链路的。（实际上是因为数据链路已近建立起来，永久存在）<br>虽然不用建立专门的链接，但是可以保证数据可靠传输。<br>例如：令牌环网，令牌总线网，各种无线通信系统。</p>
-</li>
-<li><p>无确认的无连接服务<br>接收端结束到数据帧不需要进行确认，也不需要建立链接。<br>看似不可靠，但是是建立在可靠通信线路基础上，数据传输仍十分可靠。<br>例如：以太网。</p>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="数据封装成帧和透明传输"><a href="#数据封装成帧和透明传输" class="headerlink" title="数据封装成帧和透明传输"></a>数据封装成帧和透明传输</h3><ul>
-<li><p>网络层传输的包（packet,又称分组），在数据链路层中传输的是“帧”（frame）。数据包到达数据链路层后加上数据链路层的协议头和协议尾就构成了一个完整的帧。</p>
-</li>
-<li><p>由数据包封装的数据帧其大小是受对应的数据链路层协议的MTU（最大传输单元）限制的。例如以太网数据链路层封装网络层IP包的MTU值为1500字节（数据部分不超过1500）还有最小限制，例如以太网封装的IP包最小值为46字节，如果小于，则用特殊字符填充。</p>
-</li>
-</ul>
-<h3 id="比特流的帧组装及透明传输原理"><a href="#比特流的帧组装及透明传输原理" class="headerlink" title="比特流的帧组装及透明传输原理"></a>比特流的帧组装及透明传输原理</h3><p>在发送端数据链路层中的帧到达物理层后就会以比特位为单位进行传输，而不是以帧。 接收端物理层把比特流向数据链路层传输，到达后又要将比特流封装成数据帧，这就是帧同步问题。</p>
-<ul>
-<li><p>字节计数法<br>以一个特殊字符代表一个帧的起始，并以一个专门的字段标识当前帧长度。</p>
-</li>
-<li><p>字符填充收尾界定法<br>用特定的字符界定一个帧的起始与结束。为了防止与相同字符被误判成帧头和帧尾，可以在帧头填充一个转义控制字符。</p>
-</li>
-<li><p>比特填充的收尾界定法<br>在收尾插入特定的比特串（例如：01111110），为了防止误判，传输的数据如果连续出现五个“1”则在后面插入一个“0”。<br>例如：0110111111011111001 变为：01111110 011011111010111110001 01111110<br>很容易由硬件实现，性能优于字符填充方式。</p>
-</li>
-<li><p>违法编码法<br>只适用于采用冗余编码的特殊编码环境。<br>例如：曼切斯特编码中利用“高-高”电平和“低-低”电平来界定帧的起始与终止。</p>
-</li>
-</ul>
-<h2 id="差错控制"><a href="#差错控制" class="headerlink" title="差错控制"></a>差错控制</h2><ul>
-<li><p>差错检测<br>一般通过对差错编码进行校验，常见的校验方法有奇偶校验码（Parity Check Code，PCC）、循环冗余校验（Cyclic Redundancy Check，CRC）两种。</p>
-<ul>
-<li>奇偶校验法：在传输的二进制最后专门设置一个奇偶校验位，来记录代码中的“1”的个数是基数还是偶数。</li>
-<li>循环冗余校验：是在数据后加上一段通过该数据生成的固定位数的校验法。</li>
-</ul>
-</li>
-<li><p>差错纠正<br>针对不同的传输类型采取了不同的纠错方法。<br>对于面向字符的，一般采用“反馈检测”的方法来进行纠错。接收端收到后向发送端发送一个相同的帧，发送端判断是否正确，如果正确则不发消息，如果错误，则发送DEL字符，提示接收端删除对应的帧。<br>但是这种传输方法效率低。所以，一般采用“自动重发请求”（ARQ法）。先发送带冗余检测码的数据，接收端对数据帧进行错误检测，如果错误，则返回请求重发的响应（不用返回全部帧）。</p>
-<ul>
-<li><p>连续重发请求方案：发送端可以连续发送一些列数据帧，不同等前一帧被确认。</p>
-</li>
-<li><p>海明码纠错：对错误位进行取反。 </p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h2><ul>
-<li><p>基于反馈的流量控制方案<br>接收端收到一个数据帧后，要向发送端发送确认帧，发送端继续发送数据。发送端启动定时器，规定时间内没有确认帧则重发。</p>
-</li>
-<li><p>基于流速的流量控制方案<br>限制发送端一次可以发送多少个数据帧，从而控制流量。</p>
-</li>
-<li><p>XON/XOFF流量控制方案<br>当接收端认为不能继续接收数据时，会向发送端发送一个XOFF控制字符，当可以继续接收时，发送XON控制字符。</p>
-</li>
-<li><p>滑动窗口机制<br>当一个处于缓存中的帧收到了确认帧，则将这个帧删掉，将空间给其他帧。</p>
-</li>
-</ul>
-<h2 id="面向字符的PPP同步协议"><a href="#面向字符的PPP同步协议" class="headerlink" title="面向字符的PPP同步协议"></a>面向字符的PPP同步协议</h2><ul>
-<li>BSC，SDLC，HDLC都属于局域网中的数据链路层协议，而PPP（Point-to-Point Protocol，点对点协议）是一种应用非常广泛的局域网数据链路协议。</li>
-<li>在链接速率上可以远高于SLIP，最高128kbps</li>
-<li>提供了协议类型字段和帧校验序列（FCS）字段。<ul>
-<li>地址：为固定的11111111（0xFF）标准广播地址。</li>
-<li>控制：只有一种帧类型，UI（无编号信息）帧，无需接收端收到进行确认，固定为00000011（0x03）。</li>
-<li>协议：除了可以封装IP（0x0021）协议，还可以封装其他多种协议包，例如IPX、AppleTalk等。</li>
-<li>FCS：使用16位的循环冗余校验计算信息字段中的校验和。</li>
-</ul>
-</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>8</th>
-<th>8</th>
-<th>8</th>
-<th>16</th>
-<th>可变</th>
-<th>16~32</th>
-<th>8</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>标志起始</td>
-<td>地址</td>
-<td>控制</td>
-<td>协议</td>
-<td>信息</td>
-<td>FCS</td>
-<td>标志结束</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><p>提供了一整套方案来解决数据链路建立、维护、拆除、上层协议协商、认证等问题：</p>
-<ul>
-<li>链路控制协议（LCP）：用于建立，测试，配置和管理数据连接。</li>
-<li>网络控制协议（NCP）：协商该链路上所传输的数据包格式与类型，建立、配置不同的网络层协议。</li>
-<li>口令认证协议（PAP）：为PPP提供用户认证功能，可以确保PPP链接的安全性。</li>
-<li>质询握手认证协议（CHAP）：为PPP提供用户认证功能，可以确保PPP链接的安全性。</li>
-</ul>
-</li>
-<li><p>PPP协议也衍生出新的应用，例如ADSL（Asymmetrical Digital Subscriber Loop，非对称数据用户环境），还有与其他的协议共同派生出了符合宽带接入要求的新协议：PPPoE（PPP over Ethernet），PPPoA（PPP over ATM）。</p>
-</li>
-<li>利用以太网（Ethernet）资源，在以太网上运行PPP来进行用户认证。完成了ADSL的接入要求。</li>
-<li>在ATM（异步传输模式）网络上运行PPP协议来管理用户认证的方式。不同在于它在ATM网络上运行，而PPPoE在以太网上运行。</li>
-</ul>
-<h3 id="PPP的PAP-CHAP身份认证"><a href="#PPP的PAP-CHAP身份认证" class="headerlink" title="PPP的PAP/CHAP身份认证"></a>PPP的PAP/CHAP身份认证</h3><ul>
-<li>PPP身份认证<br>（单向认证）用明文认证，认证包括两次握手，客户端向服务器发送一个认证请求，PAP服务器端收到后和数据库匹配，返回认证结果（Y/N，ACK/NAK）。如果不成功会多次尝试，最多4次。</li>
-<li>CHAP身份认证<br>采用三次握手机制：认证方要求被认证方提供认证信息-&gt;被认证方提供认证信息-&gt;认证方给出结果。<br>不是明文密码，而是进过MD5之类的摘要加密产生的密钥。</li>
-</ul>
-<h2 id="数据链路层主要网络设备"><a href="#数据链路层主要网络设备" class="headerlink" title="数据链路层主要网络设备"></a>数据链路层主要网络设备</h2><h3 id="计算机网卡"><a href="#计算机网卡" class="headerlink" title="计算机网卡"></a>计算机网卡</h3><p>以太网卡：</p>
-<ul>
-<li>接口划分：<ul>
-<li>PCI（最常见的）接口</li>
-<li>微型PCI（PCMCIA）接口</li>
-<li>PCI-X，PCI-E（常用于服务器）</li>
-</ul>
-</li>
-<li>主机接口方面：<ul>
-<li>RJ-45类型（水晶头）（双绞线）</li>
-<li>ST，SC，FC，LC四种，SC和LC使用最广（光纤）</li>
-</ul>
-</li>
-</ul>
-<p>WLAN网卡：</p>
-<ul>
-<li>接口：PCI，USB</li>
-</ul>
-<h2 id="网桥及其工作原理"><a href="#网桥及其工作原理" class="headerlink" title="网桥及其工作原理"></a>网桥及其工作原理</h2><h3 id="网桥的含义"><a href="#网桥的含义" class="headerlink" title="网桥的含义"></a>网桥的含义</h3><p>用来链接不同网段的计算机网络设备，比集线器性（Hub）能更好后来被交换机（Switch）取代。<br>可链接不同网段的二层网络设备，不只可以类似中继器一样将信号进行放大，而且可以隔离MAC冲突。</p>
-<ul>
-<li><p>作用：</p>
-<ul>
-<li>可基于物理网段的MAC地址进行学习</li>
-<li>可以隔离冲突域</li>
-</ul>
-</li>
-<li><p>工作原理：</p>
-<ul>
-<li>起初网桥缓存中没有任何MAC地址</li>
-<li>当收到广播和数据帧被某个PC接收后，也会把相应的MAC地址记录在缓存中</li>
-<li>当源MAC和目的MAC都有时，进行判断是否通过网桥。</li>
-</ul>
-</li>
-</ul>
-<h2 id="二层交换机"><a href="#二层交换机" class="headerlink" title="二层交换机"></a>二层交换机</h2><p>交换机，可以说是集线器和网桥的升级换代产品，因为既能有集线器的集中链接功能，又有网桥的数据交换功能。</p>
-<ul>
-<li><p>特点：</p>
-<ul>
-<li>具有多个交换端口</li>
-<li>数据转发效率更高</li>
-<li>更强的MAC地址自动学习能力</li>
-<li>每个端口都有独立的背板信道带宽，可以实现全双工谁传输</li>
-</ul>
-</li>
-<li><p>分类：</p>
-<ul>
-<li>网络类型划分：标准（10Mbps），快速（100Mbps），千兆（1000Mbps），十千兆（10000Mbps）</li>
-<li>结构划分：固定端口式的和模块化式的</li>
-<li>是否支持网管功能：支持（有Console控制端口），不支持（傻瓜式）</li>
-</ul>
-</li>
-<li><p>原理</p>
-<ul>
-<li>CAM表（MAC地址与端口映射表）可以通过多种途径获得<ul>
-<li>静态配置</li>
-<li>动态学习</li>
-<li>可以通过多种协议，如IGMP嗅探，GMRP协议等方式</li>
-</ul>
-</li>
-<li>CAM表不是一成不变的，由定时器控制，定时器为0时删除，每次转发恢复定时器初始值。</li>
-</ul>
-</li>
-</ul>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/12/28/Network/dataLinkLayer/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1581,7 +1422,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 112 篇文章
+                找到 113 篇文章
             </p>
         </div>
     </div>

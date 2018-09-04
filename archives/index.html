@@ -195,6 +195,102 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2018/09/04/Docker/docker-compose/">
+                            Docker Compose 模板文件
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2018-09-04T18:14:36+08:00">
+	
+		    9月 04, 2018
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="Docker-Compose-模板文件"><a href="#Docker-Compose-模板文件" class="headerlink" title="Docker Compose 模板文件"></a>Docker Compose 模板文件</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>默认的配置文件名为 <code>docker-compose.yml</code>，格式为 YAML 格式。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  webapp:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">examples/web</span></span><br><span class="line"><span class="attr">    posts:</span> <span class="string">"80:80"</span></span><br><span class="line"><span class="attr">    volumes:</span> <span class="string">"/data"</span></span><br></pre></td></tr></table></figure>
+<p>每个服务都必须通过 <code>image</code> 指定镜像或者 <code>build</code> 指令（需要 Dockerfile）等来自动构建生成镜像，如果使用 <code>build</code> 指令，在 <code>Dockerfile</code> 中的选项会自动获取，无需再次设置。</p>
+<h2 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h2><h3 id="build"><a href="#build" class="headerlink" title="build"></a><code>build</code></h3><p>指定 <code>Dockerfile</code> 的路径（绝对路径或相对路径）</p>
+<p>可以使用 <code>context</code> 指令指定位置，<code>dockerfile</code> 指令指定 <code>Dockerfile</code> 文件名， <code>arg</code> 指令指定构建时的变量。</p>
+<p>eg:</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  webapp:</span></span><br><span class="line"><span class="attr">    bulid:</span></span><br><span class="line"><span class="attr">      context:</span> <span class="string">./div</span></span><br><span class="line"><span class="attr">      dockerfile:</span> <span class="string">Dockerfile-alternate</span></span><br><span class="line"><span class="attr">      args:</span></span><br><span class="line"><span class="attr">        buildno:</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h3 id="cap-add-cap-drop"><a href="#cap-add-cap-drop" class="headerlink" title="cap_add, cap_drop"></a><code>cap_add</code>, <code>cap_drop</code></h3><p>指定容器的内核能力</p>
+<p>eg: 拥有所有能力：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cap_add:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">ALL</span></span><br></pre></td></tr></table></figure>
+<p>eg: 去掉 NET_ADMIN 能力</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">cap_drop:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">NET_ADMIN</span></span><br></pre></td></tr></table></figure>
+<h3 id="command"><a href="#command" class="headerlink" title="command"></a><code>command</code></h3><p>覆盖容器启动的命令</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">command:</span> <span class="string">echo</span> <span class="string">"hello world"</span></span><br></pre></td></tr></table></figure>
+<h3 id="configs"><a href="#configs" class="headerlink" title="configs"></a><code>configs</code></h3><h3 id="cgroup-parent"><a href="#cgroup-parent" class="headerlink" title="cgroup_parent"></a><code>cgroup_parent</code></h3><p>指定父 <code>cgroup</code> 组，继承该组的资源限制。</p>
+<h3 id="container-name"><a href="#container-name" class="headerlink" title="container_name"></a><code>container_name</code></h3><p>指定容器名称，默认使用 <code>项目名称_服务名称_序号</code>格式。</p>
+<h3 id="deploy"><a href="#deploy" class="headerlink" title="deploy"></a><code>deploy</code></h3><h3 id="devices"><a href="#devices" class="headerlink" title="devices"></a><code>devices</code></h3><p>指定设备映射关系</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">devices:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">"/dev/ttyUSB1:/dev/ttyUSB0"</span></span><br></pre></td></tr></table></figure>
+<h3 id="depends-on"><a href="#depends-on" class="headerlink" title="depends_on"></a>depends_on</h3><p>解决容器依赖，启动先后问题。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">'3'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"><span class="attr">  web:</span></span><br><span class="line"><span class="attr">    build:</span></span><br><span class="line"><span class="attr">    depends_on:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">db</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">redis</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  redis:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">redis</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  db:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">mongo</span></span><br></pre></td></tr></table></figure>
+<h3 id="dns"><a href="#dns" class="headerlink" title="dns"></a><code>dns</code></h3><p>自定义 <code>DNS</code> 服务器，可以是一个值，也可以是一个列表。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">dns:</span> <span class="number">8.8</span><span class="number">.8</span><span class="number">.8</span></span><br><span class="line"></span><br><span class="line"><span class="attr">dns:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="number">8.8</span><span class="number">.8</span><span class="number">.8</span></span><br><span class="line"><span class="bullet">  -</span> <span class="number">114.114</span><span class="number">.114</span><span class="number">.114</span></span><br></pre></td></tr></table></figure>
+<h3 id="dns-search"><a href="#dns-search" class="headerlink" title="dns_search"></a><code>dns_search</code></h3><p>配置 <code>DNS</code> 搜索域。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">dns_search:</span> <span class="string">example.com</span></span><br><span class="line"></span><br><span class="line"><span class="attr">dns_search:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">domain1.example.com</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">domain2.example.com</span></span><br></pre></td></tr></table></figure>
+<h3 id="tmpfs"><a href="#tmpfs" class="headerlink" title="tmpfs"></a><code>tmpfs</code></h3><p>挂载一个 tmpfs 文件系统到容器。</p>
+<h3 id="env-file"><a href="#env-file" class="headerlink" title="env_file"></a><code>env_file</code></h3><p>从文件中获取环境变量</p>
+<p>环境变量格式如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PROG_ENV=development</span><br></pre></td></tr></table></figure>
+<h3 id="environment"><a href="#environment" class="headerlink" title="environment"></a><code>environment</code></h3><p>设置环境变量，可以使用数据或者字典两种格式，只给定变量名会自动获取主机上的变量值，避免数据泄漏。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">environment:</span></span><br><span class="line"><span class="attr">  RACK_ENV:</span> <span class="string">development</span></span><br><span class="line"><span class="attr">  SESSION_SECRET:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">environment:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">RACK_ENV=development</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">SESSION_SECRET</span></span><br></pre></td></tr></table></figure>
+<p>如果变量名称用到 <code>true</code> | <code>false</code>, <code>yes</code> | <code>no</code> 等表达布尔含义的值，最好放到引号里。</p>
+<h3 id="expose"><a href="#expose" class="headerlink" title="expose"></a><code>expose</code></h3><p>暴露端口，但不映射到宿主机，仅可以指定内部端口为参数</p>
+<h3 id="external-links"><a href="#external-links" class="headerlink" title="external_links"></a>external_links</h3><p><strong>不建议使用</strong>： 链接 <code>docker-compose</code> 外部容器，甚至非 <code>Compose</code> 管理的外部容器</p>
+<h3 id="extra-hosts"><a href="#extra-hosts" class="headerlink" title="extra_hosts"></a>extra_hosts</h3><p>指定额外的 host 映射</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">extra_hosts:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">"googledns:8.8.8.8"</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">"dockerhub:52.1.157.61"</span></span><br></pre></td></tr></table></figure>
+<h3 id="healthcheck"><a href="#healthcheck" class="headerlink" title="healthcheck"></a>healthcheck</h3><p>检查容器是否正常</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">healthcheck:</span></span><br><span class="line"><span class="attr">  test:</span> <span class="string">["CMD",</span> <span class="string">"curl"</span><span class="string">,</span> <span class="string">"-f"</span><span class="string">,</span> <span class="string">"http://localhost"</span><span class="string">]</span></span><br><span class="line"><span class="attr">  interval:</span> <span class="number">1</span><span class="string">m30s</span></span><br><span class="line"><span class="attr">  timeout:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line"><span class="attr">  retries:</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<h3 id="image"><a href="#image" class="headerlink" title="image"></a>image</h3><p>指定镜像名称或ID，如果本地不存在会尝试拉取这个镜像</p>
+<h3 id="labels"><a href="#labels" class="headerlink" title="labels"></a>labels</h3><p>为容器添加元数据</p>
+<h3 id="logging"><a href="#logging" class="headerlink" title="logging"></a>logging</h3><p>配置日志选项</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">logging:</span></span><br><span class="line"><span class="attr">  driver:</span> <span class="string">syslog</span></span><br><span class="line"><span class="attr">  options:</span></span><br><span class="line"><span class="attr">    syslog-address:</span> <span class="string">"tcp://192.168.0.42:123"</span></span><br></pre></td></tr></table></figure>
+<h3 id="network-mode"><a href="#network-mode" class="headerlink" title="network_mode"></a>network_mode</h3><p>设置网络模式</p>
+<h3 id="networks"><a href="#networks" class="headerlink" title="networks"></a>networks</h3><p>配置容器链接的网络</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  some-service:</span></span><br><span class="line"><span class="attr">    networks:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">some-network</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">other-network</span></span><br><span class="line"><span class="attr">network:</span></span><br><span class="line"><span class="attr">  some-network:</span></span><br><span class="line"><span class="attr">  other-network:</span></span><br></pre></td></tr></table></figure>
+<h3 id="pid"><a href="#pid" class="headerlink" title="pid"></a>pid</h3><p>和主机进程共享命名空间</p>
+<h3 id="ports"><a href="#ports" class="headerlink" title="ports"></a>ports</h3><p>暴露端口信息，<code>宿主机端口:容器端口</code>，或仅指定容器端口（宿主机随机分配）</p>
+<h3 id="secrets"><a href="#secrets" class="headerlink" title="secrets"></a>secrets</h3><p>储存敏感数据，例如 <code>mysql</code> 密码</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  mysql:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">mysql</span></span><br><span class="line"><span class="attr">    secrets:</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">db_root_password</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">my_other_secret</span></span><br><span class="line"></span><br><span class="line"><span class="attr">secrets:</span></span><br><span class="line"><span class="attr">  my_secret:</span></span><br><span class="line"><span class="attr">    file:</span> <span class="string">./my_secret.txt</span></span><br><span class="line"><span class="attr">  my_other_secret:</span></span><br><span class="line"><span class="attr">    external:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h3 id="sysctls"><a href="#sysctls" class="headerlink" title="sysctls"></a>sysctls</h3><p>配置容器内核参数</p>
+<h3 id="ulimits"><a href="#ulimits" class="headerlink" title="ulimits"></a>ulimits</h3><p>指定容器大小限制</p>
+<p>nproc: 进程数<br>nofile：文件句柄数（软限制和硬限制）</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ulimits:</span></span><br><span class="line"><span class="attr">  nproc:</span> <span class="number">65535</span></span><br><span class="line"><span class="attr">  nofile:</span></span><br><span class="line"><span class="attr">    soft:</span> <span class="number">20000</span></span><br><span class="line"><span class="attr">    hard:</span> <span class="number">40000</span></span><br></pre></td></tr></table></figure>
+<h3 id="volumes"><a href="#volumes" class="headerlink" title="volumes"></a>volumes</h3><p>数据卷所挂载路径设置</p>
+<h2 id="读取变量"><a href="#读取变量" class="headerlink" title="读取变量"></a>读取变量</h2><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">"3"</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line"></span><br><span class="line"><span class="attr">  db:</span></span><br><span class="line"><span class="attr">    image:</span> <span class="string">"mongo:$&#123;MONGO_VERSION&#125;"</span></span><br></pre></td></tr></table></figure>
+<p><code>MONGO_VERSION=3.2 docker-compose up</code>, 会启动一个 <code>mongo:3.2</code> 镜像容器<br><code>MONGO_VERSION=2.8 docker-compose up</code>, 会启动一个 <code>mongo:2.8</code> 镜像容器</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2018/09/04/Docker/docker-compose/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2018/09/04/Docker/compose/">
                             Docker Compose 使用
                         </a>
@@ -746,60 +842,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/11/27/JavaScript/OperatingMechanism/">
-                            JavaScript 运行机制
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-11-27T12:54:16+08:00">
-	
-		    11月 27, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="JavaScript-运行机制"><a href="#JavaScript-运行机制" class="headerlink" title="JavaScript 运行机制"></a>JavaScript 运行机制</h1><h2 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h2><p><img src="http://cdn.shianqi.com/20171126230612_rKQKQd_Screenshot.png" alt="事件循环"></p>
-<ul>
-<li>同步和异步任务分别进入不同的执行”场所”，同步的进入主线程，异步的进入 <code>Event Table</code> 并注册函数。</li>
-<li>当指定的事情完成时，<code>Event Table</code> 会将这个函数移入 <code>Event Queue</code>。</li>
-<li>主线程内的任务执行完毕为空，会去 <code>Event Queue</code> 读取对应的函数，进入主线程执行。</li>
-<li>上述过程会不断重复，也就是常说的 <code>Event Loop</code> (事件循环)。</li>
-</ul>
-<h2 id="宏任务与微任务"><a href="#宏任务与微任务" class="headerlink" title="宏任务与微任务"></a>宏任务与微任务</h2><ul>
-<li><code>macro-task</code> (宏任务)：包括整体代码 <code>script</code>，<code>setTimeout</code>，<code>setInterval</code></li>
-<li><code>micro-task</code>(微任务)：<code>Promise</code>，<code>process.nextTick</code></li>
-</ul>
-<p>不同类型的任务会进入对应的 <code>Event Queue</code>，比如 <code>setTimeout</code> 和 <code>setInterval</code> 会进入相同的 <code>Event Queue</code>。</p>
-<p><img src="http://cdn.shianqi.com/20171126231323_oeLxNy_Screenshot.png" alt="宏任务与微任务"></p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/11/27/JavaScript/OperatingMechanism/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1076,7 +1118,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 112 篇文章
+                找到 113 篇文章
             </p>
         </div>
     </div>
