@@ -256,8 +256,12 @@
                     <h1 id="Docker-基本命令"><a href="#Docker-基本命令" class="headerlink" title="Docker 基本命令"></a>Docker 基本命令</h1><h2 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h2><h3 id="搜索"><a href="#搜索" class="headerlink" title="搜索"></a>搜索</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search [OPTIONS] TERM</span><br></pre></td></tr></table></figure>
 <h3 id="获取"><a href="#获取" class="headerlink" title="获取"></a>获取</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull [OPTIONS] NAME[:TAG|@DIGEST]</span><br></pre></td></tr></table></figure>
 <h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run [OPTIONS] IMAGE [COMMAND] [ARG...]</span><br></pre></td></tr></table></figure>
-<h3 id="列出已下载镜像"><a href="#列出已下载镜像" class="headerlink" title="列出已下载镜像"></a>列出已下载镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image ls [OPTIONS] [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
 <p>常用OPTIONS：<br>|option|描述|<br>|—|—|<br>|<code>-i -t</code>|两个参数，<code>-i</code> 交互式操作，<code>-t</code>终端|<br>|<code>-p</code>|指定端口|<br>|<code>-d</code>|在后台运行容器并打印容器ID|<br>|<code>--name</code>|为容器指定名称|<br>|<code>--rm</code>|退出容器后将其删除|</p>
+<p>挂载数据卷：</p>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="keyword">run</span><span class="bash"> -d -P --name web --mount <span class="built_in">source</span>=my-vol,target=/webapp webapp python app.py</span></span><br></pre></td></tr></table></figure>
+<p>挂载主机目录:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -P --name web --mount <span class="built_in">type</span>=<span class="built_in">bind</span>,<span class="built_in">source</span>=/src/webapp,target=/opt/webapp,<span class="built_in">readonly</span> webapp python app.py</span><br></pre></td></tr></table></figure>
+<h3 id="列出已下载镜像"><a href="#列出已下载镜像" class="headerlink" title="列出已下载镜像"></a>列出已下载镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image ls [OPTIONS] [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
 <h3 id="删除本地镜像"><a href="#删除本地镜像" class="headerlink" title="删除本地镜像"></a>删除本地镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image rm [OPTIONS] IMAGE [IMAGE...]</span><br></pre></td></tr></table></figure>
 <h3 id="列出虚悬镜像"><a href="#列出虚悬镜像" class="headerlink" title="列出虚悬镜像"></a>列出虚悬镜像</h3><p>由于同名镜像更新产生</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker image ls -f dangling=<span class="literal">true</span></span><br></pre></td></tr></table></figure>
@@ -295,7 +299,17 @@
 <h4 id="docker-load"><a href="#docker-load" class="headerlink" title="docker load"></a>docker load</h4><p>导入镜像存储文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load [OPTIONS]</span><br></pre></td></tr></table></figure>
 <p><strong>区别</strong>： 导入容器快照将丢弃所有的历史记录和元数据信息，导入镜像存储文件将保存完整记录，体积也要大。从容器快照文件中导入可以重新指定标签等信息。</p>
-
+<h2 id="数据卷"><a href="#数据卷" class="headerlink" title="数据卷"></a>数据卷</h2><h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume create [OPTIONS] [VOLUME]</span><br></pre></td></tr></table></figure>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><p>查看所有：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume ls [OPTIONS]</span><br></pre></td></tr></table></figure>
+<p>查看指定：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume inspect [OPTIONS] VOLUME [VOLUME...]</span><br></pre></td></tr></table></figure>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume rm [OPTIONS] VOLUME [VOLUME...]</span><br></pre></td></tr></table></figure>
+<h3 id="清理无用数据卷"><a href="#清理无用数据卷" class="headerlink" title="清理无用数据卷"></a>清理无用数据卷</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker volume prune [OPTIONS]</span><br></pre></td></tr></table></figure>
+<h2 id="容器互联"><a href="#容器互联" class="headerlink" title="容器互联"></a>容器互联</h2><p>推荐使用自定义 Docker 网络来链接多个容器，而不是使用 <code>--link</code> 参数</p>
+<h3 id="新建网络"><a href="#新建网络" class="headerlink" title="新建网络"></a>新建网络</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create [OPTIONS] NETWORK</span><br></pre></td></tr></table></figure>
+<p>eg:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d bridge my-net</span><br></pre></td></tr></table></figure>
                     
                         
                     
