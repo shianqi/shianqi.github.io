@@ -384,7 +384,19 @@
             </div>
             
                 <div class="postShorten-content" itemprop="articleBody">
-                    <h1 id="使用-Dockerfile-定制镜像"><a href="#使用-Dockerfile-定制镜像" class="headerlink" title="使用 Dockerfile 定制镜像"></a>使用 Dockerfile 定制镜像</h1>
+                    <h1 id="使用-Dockerfile-定制镜像"><a href="#使用-Dockerfile-定制镜像" class="headerlink" title="使用 Dockerfile 定制镜像"></a>使用 Dockerfile 定制镜像</h1><p><code>Dockerfile</code> 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。</p>
+<h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><h3 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h3><p>指定基础镜像，必须是第一条</p>
+<h3 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h3><p>用于执行命令行命令的，有两种格式：</p>
+<ul>
+<li><p><code>shell</code> 格式：<code>RUN &lt;COMMAND&gt;</code></p>
+</li>
+<li><p><code>exec</code> 格式：<code>RUN [&quot;&lt;COMMAND&gt;&quot;, &quot;&lt;args1&gt;&quot;, &quot;&lt;args2&gt;&quot;, ...]</code></p>
+</li>
+</ul>
+<p>每一个 <code>RUN</code> 命令都会创建一层镜像，如果每一个命令都使用一个 <code>RUN</code> 命令，那么整个项目变得臃肿，易出错。正确写法应该如下：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian:jessie</span><br><span class="line"><span class="keyword">RUN</span> buildDeps='gcc libc6-dev make' \</span><br><span class="line">    &amp;&amp; apt-get update \</span><br><span class="line">    &amp;&amp; apt-get install -y $buildDeps \</span><br><span class="line">    ...</span><br><span class="line">    # 清理为了编译构建需要的软件</span><br><span class="line">    &amp;&amp; rm -rf /var/lib/apt/lists/* \</span><br><span class="line">    # 清理下载文件</span><br><span class="line">    &amp;&amp; rm redis.tar.gz \</span><br><span class="line">    # 清理展开文件</span><br><span class="line">    &amp;&amp; rm -r /usr/src/redis \</span><br><span class="line">    # 清理 apt 缓存</span><br><span class="line">    &amp;&amp; apt-get purge -y --auto-remove $buildDeps</span><br></pre></td></tr></table></figure>
+<p>每一层构建后要清理无关文件。</p>
+
                     
                         
                     
