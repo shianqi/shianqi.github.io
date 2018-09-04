@@ -194,6 +194,194 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/12/26/Network/physicalLayer/">
+                            计算机网络——物理路层基本概念
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-12-26T21:51:32+08:00">
+	
+		    12月 26, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h1><blockquote>
+<p>关键词：数据通信的模型，数据传输速率，数据传输类型，数据输入方式，数据传输模式，数据通信方式，信号类型，信号编码，信号调制与解调，数据抽样，信道复用，传输介质和主要物理接口规程。<br>两大公式：<br>奈奎斯特准则，香农公式。</p>
+</blockquote>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><ul>
+<li>构建数据通路</li>
+<li>透明传输</li>
+<li>传输数据</li>
+<li>数据编码</li>
+<li>数据传输管理</li>
+</ul>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ul>
+<li><h4 id="机械特性"><a href="#机械特性" class="headerlink" title="机械特性"></a>机械特性</h4></li>
+<li><h4 id="电器特性"><a href="#电器特性" class="headerlink" title="电器特性"></a>电器特性</h4><ul>
+<li>非平衡型</li>
+<li>差分接收器的非平衡型</li>
+<li>平衡型</li>
+</ul>
+<p>这里所说的“平衡”是根据发送器或接收器是由单根线的电平值决定，还是由双根线之间的电平差决定。<br><br>平衡：采用一<font color="#ff0000">对</font>线，非平衡：采用一<font color="#ff0000">根</font>线。<br><br>差分信号：两个物理信号间存在电平差，又称“差模信号”。差分传输是在两根线上同时传输信号，振幅相等，方向相反。（<font color="#ffc300">注: 在线路板上，差分信号的两条导线必须是等长、等宽、紧密靠近。尽可能使其同幅、反向、同步传输</font>）优点是干扰会同时作用两条线，且效果一样。</p>
+<ul>
+<li><p>非平衡型：信号发送器和信号接收器均采用非平衡方式工作。即每路信号仅使用一根导线传输。然后所有信号公用一根地线。（一般采用的信号电平比较高，为了减少干扰信号），串扰也比较严重，所以信号的传输速率也比较低。<br></p>
+</li>
+<li><p>差分接收器的非平衡型：是由“非平衡型”改进而来。接口中的发送器和“非平衡型相同”，但接收器采用“差分”工作方式。并且发送器和接收器不是共用一条地线。接收信号的最终电平是由信号线和地线的差值决定。（因为使用差分接收方式，所以电平信号可以比较低，一般+4V~+6v表示二进制“0”，-4V~-6V表示二进制“1”，传输速率受距离影响较大。）</p>
+</li>
+<li><p>平衡型：发送器采用双线平衡发送方式，接收器采用差分处理方式，不共用地线。（具有超强的传输速率，电平同“差分接收器的非平衡型”，10m内速率可达10Mbps）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据通信基础"><a href="#数据通信基础" class="headerlink" title="数据通信基础"></a>数据通信基础</h2><h3 id="通信子网与资源子网"><a href="#通信子网与资源子网" class="headerlink" title="通信子网与资源子网"></a>通信子网与资源子网</h3><ul>
+<li><p>资源子网是由计算机系统，终端系统，联网的外围设备，各种软件资源与信息资源组成。</p>
+</li>
+<li><p>通信子网负责网络通信线路建立和通信处理，为网络哟凝固提供数据传输，转发，加工和转换等通信处理工作，是整个网络通信的基础结构。</p>
+</li>
+</ul>
+<h3 id="数据传输的类型"><a href="#数据传输的类型" class="headerlink" title="数据传输的类型"></a>数据传输的类型</h3><ul>
+<li><p>基带与频带</p>
+<ul>
+<li>基带：信源发出的，没有进过调制的原始电信号固有的频带。</li>
+<li>频带：低基带信号调制后所占用的频率带宽。</li>
+</ul>
+</li>
+<li><p>基带传输与频带传输</p>
+<ul>
+<li>基带传输：直接传输基带信号，适合传输距离比较近，例如局域网，以太网，令牌环。</li>
+<li>频带传输：广泛用于局域网中，因为在这种网络通信中，需要发送多种信号。可以用高频率的信号调制低频率的信号，提高信道的利用率。</li>
+<li>宽带传输：（属于频带传输）采用比“音频”更宽的频带，该频带包括了大部分电磁波频谱。将信道分成多个子通道，分别传输音频、视频和数字信号。并且所有子通道都可以同时发送信号。（例如：有线电视，无线广播）</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据传输方式"><a href="#数据传输方式" class="headerlink" title="数据传输方式"></a>数据传输方式</h3><ul>
+<li>串行传输<br>只需要一条传输信道，传输速度较慢，易于实现，低费用。</li>
+<li>并行传输<br>数据以一组或者整个字符的方式在多条并行信道上同时传输。不存在字符同步问题，但是必须有并行信道。（例如：打印机的并口，磁盘ATA几口，主板上的接口）</li>
+</ul>
+<h3 id="数据传输模式"><a href="#数据传输模式" class="headerlink" title="数据传输模式"></a>数据传输模式</h3><p>（是根据字符同步方式的不同划分，针对串行传输）</p>
+<ul>
+<li>同步传输：通信双方在传输过程中是同步进行的，双方必须要有相同的时钟参考，能同时开始数据的发送和接收。数据块的开始和结束部分都有一个用于数据同步的特殊字符，特定的字符或特定帧。</li>
+<li>异步传输：不需要对每个字符加单独的“起始”和“停止”比特，只需要在检测到帧同步字符时接收它们即可。（是以帧为传输单位，传输效率高）数据传输速率同步，是以字符为单位进行传输的，字符开始加“起始位”，结束加“停止位”。</li>
+</ul>
+<h3 id="数据的通信方式"><a href="#数据的通信方式" class="headerlink" title="数据的通信方式"></a>数据的通信方式</h3><ul>
+<li>单工通信</li>
+<li>半双工通信</li>
+<li>全双工通信</li>
+</ul>
+<h2 id="数据传输速率与信道带宽"><a href="#数据传输速率与信道带宽" class="headerlink" title="数据传输速率与信道带宽"></a>数据传输速率与信道带宽</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li><p>比特率<br>单位时间内传输的二进制代码的有效位数。常用单位有bit/s（b/s或bps,每秒比特数），kbit/s（kb/s或kbps，每秒千比特数）,Mbit/s（Mb/s或Mbps，每秒兆比特数）<font color="#ffc300">注意：这里的k和M分别表示1000和1000000，而不是2^10，2^20</font></p>
+</li>
+<li><p>波特率<br>一个数字信号在被调试后，数字信号对载波的调制速率，单位时间内载波参数变化的次数，单位为B。<br><br>比特率和波特率的换算公式为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rb = RB*log2M(b/s)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>M为符号的进制数</p>
+<ul>
+<li>传输带宽<br>“带宽”是指信道中每秒传输的最大信息量，也就是一个信道的最大数据传输率。</li>
+</ul>
+<h3 id="数字信号不失真传输的最大传输速率限制"><a href="#数字信号不失真传输的最大传输速率限制" class="headerlink" title="数字信号不失真传输的最大传输速率限制"></a>数字信号不失真传输的最大传输速率限制</h3><ul>
+<li><p>奈奎斯特准则<br>为了确保数字信号不失真传输，在理想低通信道下实际的最高码元传输速率必须在下式计算结果之内。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最高码元传输速率（MaxRB） = 2W</span><br></pre></td></tr></table></figure>
+<p>W是理想低通信道的带宽，单位为赫兹（Hz）。<br>MaxRB为最高码元传输速率，单位为Raud（波特）。</p>
+</li>
+<li><p>香农公式<br>在有随机热噪声的信道上传输数据时，最大数据传输速率Rmax与信道带宽B、信噪比S/N的关系如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Rmax=B*log2(1+S/N)</span><br></pre></td></tr></table></figure>
+<p>Rmax 的单位为 bps<br>信道带宽的单位为 Hz<br>信噪比 S/N 通常用 dB（分贝）</p>
+</li>
+</ul>
+<h3 id="模拟信号不失真还原的最小采用频率限制"><a href="#模拟信号不失真还原的最小采用频率限制" class="headerlink" title="模拟信号不失真还原的最小采用频率限制"></a>模拟信号不失真还原的最小采用频率限制</h3><ul>
+<li><p>时域采样定理<br>频带为F的连续信号f(t)可用一系列离散的采样值f(t1)，f(t1±Δt)，f(t1±2Δt)，…来表示，只要这些采样点的时间间隔Δt≤1/2F，便可根据各采样值完全恢复原来的信号f(t)。 </p>
+<p>一般实际应用中保证采样频率为信号最高频率的5~10倍。</p>
+</li>
+</ul>
+<h2 id="数字基带信号编码"><a href="#数字基带信号编码" class="headerlink" title="数字基带信号编码"></a>数字基带信号编码</h2><h3 id="矩形脉冲数字信号基本波形"><a href="#矩形脉冲数字信号基本波形" class="headerlink" title="矩形脉冲数字信号基本波形"></a>矩形脉冲数字信号基本波形</h3><ul>
+<li><p>单极性<br>用正(或者负)电平来表示“1”，用0电平表示“0”。低于1/2则为“0”，高于1/2则为“1”。</p>
+</li>
+<li><p>双极性<br>分别用正负电平表示“1”和“0”。</p>
+</li>
+<li><p>归零码<br>归零是指信号电平在一个码元宽度内，（通常是在1/2个码元时）信号脉冲电平必须回归为零电平，直到该码元宽度结束。</p>
+</li>
+<li><p>非归零码<br>不对脉冲信号波进行任何编码。</p>
+</li>
+</ul>
+<h3 id="数字基带信号的传输码型"><a href="#数字基带信号的传输码型" class="headerlink" title="数字基带信号的传输码型"></a>数字基带信号的传输码型</h3><ul>
+<li><p>传输码<br>信息码在进行传输之前，必须进过码型变换，变换为适用于信道传输的码型，这就是传输码。</p>
+</li>
+<li><p>传输码的选择原则</p>
+<ul>
+<li>能从基带信号中提取定时信息（位同步脉冲信息），所以要求含有时钟频率分量（不能出现0电平）</li>
+<li>编码转换后不能出现过多的连续“0”码或“1”码，否则提取的时钟信号就会很不稳定，引起同步偏移。</li>
+<li>无直流分量了，低频成分少，否则影响信号在信道中的传输。</li>
+<li>信号中高频分量要尽量少，以节省传输频带并减少码间串扰。</li>
+</ul>
+</li>
+</ul>
+<p>常见的传输码型有：</p>
+<ul>
+<li><p>传号反转交替码（AMI码）<br>是对单极性非归零码的变形。<br>将单极性非归零码中的“1”码元交替变为+1，-1其余不变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> 10  1 1  10 00  10  1 1</span><br><span class="line">+10 -1+1 -10 00 +10 -1+1</span><br></pre></td></tr></table></figure>
+<p>缺点：会出现连续的0</p>
+</li>
+<li><p>HDB3码<br>是对AMI码的变形。（可以确保信号波形中连续零电平的码元数不超过3个）<br>先把基带信号变换成AMI码，然后检查AMI码中的连续“0”的个数，将AMI码中连续4个“0”分为一组，连续“0”码元的第4个“0”转换成非0脉冲，记为+V或-V 称为“破坏脉冲”。<br>转换成+V或-V码，决定于：①V码必须与前一个信码B极性相同。②相邻V码的极性必须相反。<br>如果变换V后，得到的波形还不能同时满足以上两个原则，则将4个连续的“0”码第一个“0”码转换为补信码，B’码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  1000 0 1 10 00 0 1</span><br><span class="line">  1000+V-1+10 00-V-1</span><br><span class="line">  1000+V-1+1B&apos;00-V-1</span><br><span class="line">  ``` </span><br><span class="line"></span><br><span class="line">* CMI码</span><br><span class="line">  双极性二电平非归零码，又称1B2B码（一位信息码用二位表示）。</span><br><span class="line">  把基带中“1”码交替用正，负表示。而“0”用“01”表示。</span><br></pre></td></tr></table></figure>
+<p>1  1  0  0  0  1  1  1  0<br>11 00 01 01 01 11 00 11 01</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 曼切斯特编码</span><br><span class="line">  双极性二电平非归零码</span><br><span class="line">  “1”用“10”表示，“0”用“01”表示</span><br></pre></td></tr></table></figure>
+<p>1  1  0  0  0  1  1  1  0<br>10 10 01 01 01 10 10 10 01</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  极性反转时可能会引起译码错误。</span><br><span class="line"></span><br><span class="line">* 差分曼切斯特编码</span><br><span class="line">  解决曼切斯特编码引起译码错误。</span><br><span class="line">  对于第一个码元，与曼切斯特码相同，后面的根据下面的规则跳变。</span><br><span class="line">  * 如果本码为1，开始处的电平不跳变。</span><br><span class="line">  * 如果本码为0，开始处的电平必须跳变。</span><br></pre></td></tr></table></figure>
+<p>1  1  0  0  0  1  1  1  0<br>10 10 01 01 01 10 10 10 01<br>10 01 01 01 01 10 01 10 10<br>```</p>
+</li>
+</ul>
+<h2 id="信号调制与解调"><a href="#信号调制与解调" class="headerlink" title="信号调制与解调"></a>信号调制与解调</h2><h3 id="关键术语"><a href="#关键术语" class="headerlink" title="关键术语"></a>关键术语</h3><ul>
+<li><p>调制<br>一种“能量大”的信号承载另一种“能量小”的信号进行传播，传输。<br>在对数字信号进行载波调制时，采用的也是调幅，调频，调相这三种技术，但他们对应着另外的名字：ASK（Amplitude Shift Keying，幅度键控）、FSK（Frequency Shift Keying，频率键控）、PSK（Phase Shift Keying，相位键控）</p>
+</li>
+<li><p>解调<br>是调制的反向作用。</p>
+</li>
+<li><p>载波信号<br>载送有低频调制信号的信号波，通常是高频信号。</p>
+</li>
+<li><p>已调信号<br>解调操作生成的新信号。</p>
+</li>
+</ul>
+<h3 id="信道的复用"><a href="#信道的复用" class="headerlink" title="信道的复用"></a>信道的复用</h3><p>我们可以把一条高带宽的信道划分成多条小带宽的子信道（逻辑信道），提高原来这条信道的利用率。</p>
+<ul>
+<li><p>频分复用<br>按照信道频带宽度进行信道复用，把一条高带宽的信道按照一定的频带宽度划分成若干个低带宽的子频带。<br>原理： 使用不同频带的载波进行调制，然后在同一个信道中的不同子信道传输。</p>
+</li>
+<li><p>时分复用<br>原理：把整个数据通信过程划分成一个个小的时间段，在这些时间段又划分成更小的时间间隙，每个间隙可以用于一个用户信号的传输。</p>
+</li>
+<li><p>波分复用<br>原理同频分复用，只不过是对于光纤的。</p>
+</li>
+<li><p>码分复用</p>
+</li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/12/26/Network/physicalLayer/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/12/22/PenetrationTest/KaliDisplayDriver/">
                             Kali-Linux 安装显卡驱动
                         </a>
@@ -581,6 +769,115 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2016/09/04/MongoDB/基本语法/">
+                            MongoDB 基本语法
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
+	
+		    9月 04, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h5 id="开启服务："><a href="#开启服务：" class="headerlink" title="开启服务："></a><strong>开启服务：</strong></h5><ul>
+<li><figure class="highlight plain"><figcaption><span>--dbpath D:\mongodb\db```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **Shell 启动：**</span><br><span class="line">- ```mongo</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="查看集合："><a href="#查看集合：" class="headerlink" title="查看集合："></a><strong>查看集合：</strong></h5><ul>
+<li><figure class="highlight plain"><figcaption><span>dbs```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **删除集合：**</span><br><span class="line">- ```db.rumoob.drop()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="选择集合："><a href="#选择集合：" class="headerlink" title="选择集合："></a><strong>选择集合：</strong></h5><ul>
+<li><figure class="highlight plain"><figcaption><span>test```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##### **查看文档：**</span><br><span class="line">- ```show collections</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="删除文档："><a href="#删除文档：" class="headerlink" title="删除文档："></a><strong>删除文档：</strong></h5><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##### **插入元组：**</span><br><span class="line">- ```db.mydb.insert(&#123;&apos;name&apos;:&apos;killer&apos;&#125;,&#123;&apos;password&apos;:&apos;121021&apos;&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="查找元组："><a href="#查找元组：" class="headerlink" title="查找元组："></a><strong>查找元组：</strong></h5><ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- ```db.mydb.find().pretty()    //整齐排列</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **修改元组：**</span><br><span class="line">- ```db.col.update(&#123;&apos;title&apos;:&apos;test&apos;&#125;,&#123;$set:&#123;&apos;likes&apos;:100&#125;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight plain"><figcaption><span>"_id" : ObjectId("56064f89ade2f21f36b03136","name":"kill master")&#125;);```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **删除元组：**</span><br><span class="line">- ```db.col.remove(&#123;&apos;name&apos;:&apos;killer&apos;&#125;)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/09/04/MongoDB/基本语法/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
+                        <a class="link-unstyled" href="/2016/09/04/BrowserSync/BrowserSync/">
+                            BrowserSync 使用手册
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
+	
+		    9月 04, 2016
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <p></p><h2 id="1">全局安装</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g browser-sync</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h2 id="2">项目中安装</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev browser-sync</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h2 id="3">启动 BrowserSync</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//监听一个文件</span><br><span class="line">browser-sync start --server --files &quot;css/*.css&quot;</span><br><span class="line"></span><br><span class="line">//监听多个文件</span><br><span class="line">// 如果你的文件层级比较深，您可以考虑使用 **（表示任意目录）匹配，任意目录下任意.css 或 .html文件。 </span><br><span class="line">browser-sync start --server --files &quot;**/*.css, **/*.html&quot;</span><br><span class="line"></span><br><span class="line">//指定端口</span><br><span class="line">browser-sync start --server --port &quot;3031&quot; --files &quot;**/*.css, **/*.html&quot;</span><br></pre></td></tr></table></figure><p></p>
+<p></p><h2 id="4">中文官网文档</h2><br><a href="http://www.browsersync.cn/docs/" target="_blank">www.browsersync.cn<a><p></p>
+</a></a>
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2016/09/04/BrowserSync/BrowserSync/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2016/09/04/JavaScript/Event/">
                             JavaScript 事件捕获和冒泡
                         </a>
@@ -729,167 +1026,6 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/04/MongoDB/基本语法/">
-                            MongoDB 基本语法
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
-	
-		    9月 04, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h5 id="开启服务："><a href="#开启服务：" class="headerlink" title="开启服务："></a><strong>开启服务：</strong></h5><ul>
-<li><figure class="highlight plain"><figcaption><span>--dbpath D:\mongodb\db```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **Shell 启动：**</span><br><span class="line">- ```mongo</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="查看集合："><a href="#查看集合：" class="headerlink" title="查看集合："></a><strong>查看集合：</strong></h5><ul>
-<li><figure class="highlight plain"><figcaption><span>dbs```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **删除集合：**</span><br><span class="line">- ```db.rumoob.drop()</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="选择集合："><a href="#选择集合：" class="headerlink" title="选择集合："></a><strong>选择集合：</strong></h5><ul>
-<li><figure class="highlight plain"><figcaption><span>test```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##### **查看文档：**</span><br><span class="line">- ```show collections</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="删除文档："><a href="#删除文档：" class="headerlink" title="删除文档："></a><strong>删除文档：</strong></h5><ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">##### **插入元组：**</span><br><span class="line">- ```db.mydb.insert(&#123;&apos;name&apos;:&apos;killer&apos;&#125;,&#123;&apos;password&apos;:&apos;121021&apos;&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="查找元组："><a href="#查找元组：" class="headerlink" title="查找元组："></a><strong>查找元组：</strong></h5><ul>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">- ```db.mydb.find().pretty()    //整齐排列</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **修改元组：**</span><br><span class="line">- ```db.col.update(&#123;&apos;title&apos;:&apos;test&apos;&#125;,&#123;$set:&#123;&apos;likes&apos;:100&#125;&#125;);</span><br></pre></td></tr></table></figure>
-</li>
-<li><figure class="highlight plain"><figcaption><span>"_id" : ObjectId("56064f89ade2f21f36b03136","name":"kill master")&#125;);```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### **删除元组：**</span><br><span class="line">- ```db.col.remove(&#123;&apos;name&apos;:&apos;killer&apos;&#125;)</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/09/04/MongoDB/基本语法/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/04/Windows/CMD快速配置IP/">
-                            CMD快速配置IP地址和DNS
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
-	
-		    9月 04, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p>将IP和DNS配置为静态</p>
-<ul>
-<li><code>netsh interface ip set address 以太网 static 123.123.123.123 255.255.255.192  123.123.123.1</code></li>
-<li><code>netsh interface ip set dns &quot;以太网&quot; static 202.207.0.1</code></li>
-</ul>
-<p>将IP和DNS配置为动态</p>
-<ul>
-<li><code>netsh interface ip set address &quot;以太网&quot; dhcp</code></li>
-<li><code>netsh interface ip set dns &quot;以太网&quot; dhcp</code></li>
-</ul>
-<p>也可以写入到 <code>.bat</code> 批处理脚本中</p>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/09/04/Windows/CMD快速配置IP/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2016/09/04/BrowserSync/BrowserSync/">
-                            BrowserSync 使用手册
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2016-09-04T13:30:44+08:00">
-	
-		    9月 04, 2016
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <p></p><h2 id="1">全局安装</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g browser-sync</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h2 id="2">项目中安装</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save-dev browser-sync</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h2 id="3">启动 BrowserSync</h2><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//监听一个文件</span><br><span class="line">browser-sync start --server --files &quot;css/*.css&quot;</span><br><span class="line"></span><br><span class="line">//监听多个文件</span><br><span class="line">// 如果你的文件层级比较深，您可以考虑使用 **（表示任意目录）匹配，任意目录下任意.css 或 .html文件。 </span><br><span class="line">browser-sync start --server --files &quot;**/*.css, **/*.html&quot;</span><br><span class="line"></span><br><span class="line">//指定端口</span><br><span class="line">browser-sync start --server --port &quot;3031&quot; --files &quot;**/*.css, **/*.html&quot;</span><br></pre></td></tr></table></figure><p></p>
-<p></p><h2 id="4">中文官网文档</h2><br><a href="http://www.browsersync.cn/docs/" target="_blank">www.browsersync.cn<a><p></p>
-</a></a>
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2016/09/04/BrowserSync/BrowserSync/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -1018,44 +1154,6 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
-                            <h3 class="media-heading">BrowserSync 使用手册</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
                             <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
@@ -1075,8 +1173,46 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 <div class="media">
                     
                     <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
+                            <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
                             <h3 class="media-heading">MongoDB 基本语法</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1174,7 +1310,7 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 111 篇文章
+                找到 112 篇文章
             </p>
         </div>
     </div>

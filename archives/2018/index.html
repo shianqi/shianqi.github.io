@@ -195,6 +195,83 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2018/09/04/Docker/compose/">
+                            Docker Compose 使用
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2018-09-04T11:14:36+08:00">
+	
+		    9月 04, 2018
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="Docker-Compose-使用"><a href="#Docker-Compose-使用" class="headerlink" title="Docker Compose 使用"></a>Docker Compose 使用</h1><p>定义和运行多个 Docker 容器的应用，它允许用户通过一个单独的 <code>docker-compose.yml</code> 模板文件（<code>YAML</code>格式）来定义一组相关联的应用容器为一个项目（project）。</p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose [-f &lt;arg&gt;...] [options] [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure>
+<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build [options] [--build-arg key=val...] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="验证配置文件"><a href="#验证配置文件" class="headerlink" title="验证配置文件"></a>验证配置文件</h3><p>验证 Compose 文件格式是否正确，正确则显示配置文件，错误显示原因</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose config [options]</span><br></pre></td></tr></table></figure>
+<h3 id="自动构建并启动服务"><a href="#自动构建并启动服务" class="headerlink" title="自动构建并启动服务"></a>自动构建并启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<p>自动尝试完成构建镜像，创建服务，启动服务，并关联服务相关容器。</p>
+<p>链接的服务都将会被自动启动，除非已经处于运行状态。</p>
+<p>默认 <code>docker-compose up</code> 启动容器在前台，<code>Ctrl-c</code> 会导致所有容器停止。</p>
+<p>如果服务已经存在，<code>docker-compose up</code> 将会尝试停止容器，然后重新创建（保持使用 <code>volumes-from</code> 挂载的卷）。</p>
+<p><code>docker-compose up -d</code> 后台启动并运行所有容器。</p>
+<p><code>docker-compose up --no-recreate</code> 启动处于停止状态的容器，忽略已经运行的。</p>
+<p><code>docker-compose up --no-deps -d SERVICE</code> 只重启部署服务</p>
+<h3 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h3><p>停止 <code>up</code> 命令所启动的容器，并移除网络</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down [options]</span><br></pre></td></tr></table></figure>
+<h3 id="进入"><a href="#进入" class="headerlink" title="进入"></a>进入</h3><p>进入指定容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="built_in">exec</span> [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]</span><br></pre></td></tr></table></figure>
+<h3 id="列出-Compose-包含的镜像"><a href="#列出-Compose-包含的镜像" class="headerlink" title="列出 Compose 包含的镜像"></a>列出 Compose 包含的镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose images [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="强制停止服务容器"><a href="#强制停止服务容器" class="headerlink" title="强制停止服务容器"></a>强制停止服务容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="built_in">kill</span> [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="查看服务器的输出"><a href="#查看服务器的输出" class="headerlink" title="查看服务器的输出"></a>查看服务器的输出</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose logs [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="暂停一个服务"><a href="#暂停一个服务" class="headerlink" title="暂停一个服务"></a>暂停一个服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose pause [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="恢复一个暂停的服务"><a href="#恢复一个暂停的服务" class="headerlink" title="恢复一个暂停的服务"></a>恢复一个暂停的服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose unpause [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="查看某个容器的端口"><a href="#查看某个容器的端口" class="headerlink" title="查看某个容器的端口"></a>查看某个容器的端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose port [options] SERVICE PRIVATE_PORT</span><br></pre></td></tr></table></figure>
+<h3 id="列出项目中的所有容器"><a href="#列出项目中的所有容器" class="headerlink" title="列出项目中的所有容器"></a>列出项目中的所有容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose ps [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="拉取项目所需镜像"><a href="#拉取项目所需镜像" class="headerlink" title="拉取项目所需镜像"></a>拉取项目所需镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose pull [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="推送服务依赖的镜像到-Docker-镜像仓库"><a href="#推送服务依赖的镜像到-Docker-镜像仓库" class="headerlink" title="推送服务依赖的镜像到 Docker 镜像仓库"></a>推送服务依赖的镜像到 Docker 镜像仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose push [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="重启项目中的服务"><a href="#重启项目中的服务" class="headerlink" title="重启项目中的服务"></a>重启项目中的服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose restart [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="删除所有停止状态的服务容器"><a href="#删除所有停止状态的服务容器" class="headerlink" title="删除所有停止状态的服务容器"></a>删除所有停止状态的服务容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose rm [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="在指定服务上执行一个命令"><a href="#在指定服务上执行一个命令" class="headerlink" title="在指定服务上执行一个命令"></a>在指定服务上执行一个命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...] SERVICE [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure>
+<h3 id="设置指定服务器运行的容器个数"><a href="#设置指定服务器运行的容器个数" class="headerlink" title="设置指定服务器运行的容器个数"></a>设置指定服务器运行的容器个数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose scale [options] [SERVICE=NUM...]</span><br></pre></td></tr></table></figure>
+<p>eg: 启动三个容器运行 web 服务，启动 2 个容器运行 db 服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose scale web=3 db=2</span><br></pre></td></tr></table></figure>
+<p>当指定数目多于该服务实际运行容器，将创建新容器；反之将停止容器。</p>
+<h3 id="启动已经存在的服务容器"><a href="#启动已经存在的服务容器" class="headerlink" title="启动已经存在的服务容器"></a>启动已经存在的服务容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose start [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="停止已经运行的容器"><a href="#停止已经运行的容器" class="headerlink" title="停止已经运行的容器"></a>停止已经运行的容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose stop [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="查看各个服务容器内运行的进程"><a href="#查看各个服务容器内运行的进程" class="headerlink" title="查看各个服务容器内运行的进程"></a>查看各个服务容器内运行的进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose top [SERVICE...]</span><br></pre></td></tr></table></figure>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2018/09/04/Docker/compose/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2018/09/03/Docker/dockerfile/">
                             使用 Dockerfile 定制镜像
                         </a>
@@ -670,44 +747,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
-                            <h3 class="media-heading">BrowserSync 使用手册</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2016年9月4日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
                             <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
@@ -727,8 +766,46 @@
                 <div class="media">
                     
                     <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/BrowserSync/BrowserSync/">
+                            <h3 class="media-heading">BrowserSync 使用手册</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
                         <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
                             <h3 class="media-heading">MongoDB 基本语法</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2016年9月4日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -826,7 +903,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 111 篇文章
+                找到 112 篇文章
             </p>
         </div>
     </div>

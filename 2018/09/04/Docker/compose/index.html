@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Tron Blog!">
-    <title>用 Kali-Linux 进行 Wifi 破解 - Tron Blog!</title>
+    <title>Docker Compose 使用 - Tron Blog!</title>
     <meta name="author" content="Archie Shi">
     
     
     
-    <meta name="description" content="1.找一个字典文件这里用 Kali Linux 自带的rockyou字典，使用前先解压。1gzip -d /usr/share/wordlist/rockyou.txt.gz2.断开链接的WiFi1airmon-ng列出所有支持监控模式的网卡。3.监听网卡  1airmon-ng start wlan0 此时网卡就处于监听模式，被监听的网卡变为 wlan0mon。可使用ifconfig命令查看。">
-<meta name="keywords" content="Kali,网络安全,Wifi">
+    <meta name="description" content="Docker Compose 使用定义和运行多个 Docker 容器的应用，它允许用户通过一个单独的 docker-compose.yml 模板文件（YAML格式）来定义一组相关联的应用容器为一个项目（project）。 命令1docker-compose [-f &amp;lt;arg&amp;gt;...] [options] [COMMAND] [ARGS...] 构建1docker-compose bui">
+<meta name="keywords" content="Docker">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="用 Kali-Linux 进行 Wifi 破解">
-<meta property="og:url" content="https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/index.html">
+<meta property="og:title" content="Docker Compose 使用">
+<meta property="og:url" content="https://shianqi.github.io/2018/09/04/Docker/compose/index.html">
 <meta property="og:site_name" content="Tron Blog!">
-<meta property="og:description" content="1.找一个字典文件这里用 Kali Linux 自带的rockyou字典，使用前先解压。1gzip -d /usr/share/wordlist/rockyou.txt.gz2.断开链接的WiFi1airmon-ng列出所有支持监控模式的网卡。3.监听网卡  1airmon-ng start wlan0 此时网卡就处于监听模式，被监听的网卡变为 wlan0mon。可使用ifconfig命令查看。">
+<meta property="og:description" content="Docker Compose 使用定义和运行多个 Docker 容器的应用，它允许用户通过一个单独的 docker-compose.yml 模板文件（YAML格式）来定义一组相关联的应用容器为一个项目（project）。 命令1docker-compose [-f &amp;lt;arg&amp;gt;...] [options] [COMMAND] [ARGS...] 构建1docker-compose bui">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2017-06-18T05:51:00.000Z">
+<meta property="og:updated_time" content="2018-09-04T09:12:38.113Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用 Kali-Linux 进行 Wifi 破解">
-<meta name="twitter:description" content="1.找一个字典文件这里用 Kali Linux 自带的rockyou字典，使用前先解压。1gzip -d /usr/share/wordlist/rockyou.txt.gz2.断开链接的WiFi1airmon-ng列出所有支持监控模式的网卡。3.监听网卡  1airmon-ng start wlan0 此时网卡就处于监听模式，被监听的网卡变为 wlan0mon。可使用ifconfig命令查看。">
+<meta name="twitter:title" content="Docker Compose 使用">
+<meta name="twitter:description" content="Docker Compose 使用定义和运行多个 Docker 容器的应用，它允许用户通过一个单独的 docker-compose.yml 模板文件（YAML格式）来定义一组相关联的应用容器为一个项目（project）。 命令1docker-compose [-f &amp;lt;arg&amp;gt;...] [options] [COMMAND] [ARGS...] 构建1docker-compose bui">
     
     
         
@@ -194,14 +194,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            用 Kali-Linux 进行 Wifi 破解
+            Docker Compose 使用
         </h1>
     
     
         <div class="post-meta">
-    <time itemprop="datePublished" datetime="2016-12-20T09:43:12+08:00">
+    <time itemprop="datePublished" datetime="2018-09-04T11:14:36+08:00">
 	
-		    12月 20, 2016
+		    9月 04, 2018
     	
     </time>
     
@@ -212,20 +212,42 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <h3>1.找一个字典文件</h3><br>这里用 Kali Linux 自带的<code>rockyou</code>字典，<br>使用前先解压。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gzip -d /usr/share/wordlist/rockyou.txt.gz</span><br></pre></td></tr></table></figure><br><br><h3>2.断开链接的WiFi</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng</span><br></pre></td></tr></table></figure><br><br>列出所有支持监控模式的网卡。<br><br><h3>3.监听网卡</h3>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng start wlan0</span><br></pre></td></tr></table></figure>
-<p>此时网卡就处于监听模式，被监听的网卡变为 wlan0mon。<br><br>可使用<code>ifconfig</code>命令查看。</p>
-<p></p><h3>4.查看WiFi网络</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng wlan0mon</span><br></pre></td></tr></table></figure><p></p>
-<p>可以看到周围WiFi的详细信息，包括信号强度、加密类型、频道(CH)等。<br><br>要记住破解WIFI的频道号和BSSID。</p>
-<p></p><h3>5.抓取握手包</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng -c 6 --bssid C8:3A:35:30:3E:C8 -w ~/ wlan0mon</span><br></pre></td></tr></table></figure><p></p>
-<p><code>6</code> 频道号(CH)<br><br><code>C8:3A....</code> 目标BSSID号<br><br><code>-w</code> 抓取数据包保存位置<br></p>
-<p></p><h3>6.强制让设备重连WiFi</h3><br>原理：给链接到WiFi的一个设备发送一个deauth(反认证)包，让那个设备断开WiFi，<br>随后它自然会再次链接。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -0 2 -a C8:3A:35:60:3E:C8 -c B8:E8:56:09:CC:9C wlan0mon</span><br></pre></td></tr></table></figure><p></p>
-<p><code>-0</code> 发送反认证包的个数 <br><br><code>-a</code> 指定路由器BSSID <br><br><code>-c</code> 指定强制断开的设备 <br></p>
-<p>成功监听到握手包后：<code>Ctrl+C</code> 结束抓包。<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airmon-ng stop wlan0mon</span><br></pre></td></tr></table></figure></p>
-<p>结束监听。</p>
-<p></p><h3>7.开始破解握手包密码</h3><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aircrack-ng -a2 -b C8:3A:35:60:3E:C8 -w /usr/share/wordlists/rockyou.txt ~/*.cap</span><br></pre></td></tr></table></figure><p></p>
-<p><code>-a2</code>代表握手包 <br><br><code>-b</code> 指定要破解的WiFi BSSID <br><br><code>-w</code> 指定字典文件 <br><br>最后是抓取的包 <br></p>
+            <h1 id="Docker-Compose-使用"><a href="#Docker-Compose-使用" class="headerlink" title="Docker Compose 使用"></a>Docker Compose 使用</h1><p>定义和运行多个 Docker 容器的应用，它允许用户通过一个单独的 <code>docker-compose.yml</code> 模板文件（<code>YAML</code>格式）来定义一组相关联的应用容器为一个项目（project）。</p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose [-f &lt;arg&gt;...] [options] [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure>
+<h3 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose build [options] [--build-arg key=val...] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="验证配置文件"><a href="#验证配置文件" class="headerlink" title="验证配置文件"></a>验证配置文件</h3><p>验证 Compose 文件格式是否正确，正确则显示配置文件，错误显示原因</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose config [options]</span><br></pre></td></tr></table></figure>
+<h3 id="自动构建并启动服务"><a href="#自动构建并启动服务" class="headerlink" title="自动构建并启动服务"></a>自动构建并启动服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up [options] [--scale SERVICE=NUM...] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<p>自动尝试完成构建镜像，创建服务，启动服务，并关联服务相关容器。</p>
+<p>链接的服务都将会被自动启动，除非已经处于运行状态。</p>
+<p>默认 <code>docker-compose up</code> 启动容器在前台，<code>Ctrl-c</code> 会导致所有容器停止。</p>
+<p>如果服务已经存在，<code>docker-compose up</code> 将会尝试停止容器，然后重新创建（保持使用 <code>volumes-from</code> 挂载的卷）。</p>
+<p><code>docker-compose up -d</code> 后台启动并运行所有容器。</p>
+<p><code>docker-compose up --no-recreate</code> 启动处于停止状态的容器，忽略已经运行的。</p>
+<p><code>docker-compose up --no-deps -d SERVICE</code> 只重启部署服务</p>
+<h3 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h3><p>停止 <code>up</code> 命令所启动的容器，并移除网络</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down [options]</span><br></pre></td></tr></table></figure>
+<h3 id="进入"><a href="#进入" class="headerlink" title="进入"></a>进入</h3><p>进入指定容器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="built_in">exec</span> [options] [-e KEY=VAL...] SERVICE COMMAND [ARGS...]</span><br></pre></td></tr></table></figure>
+<h3 id="列出-Compose-包含的镜像"><a href="#列出-Compose-包含的镜像" class="headerlink" title="列出 Compose 包含的镜像"></a>列出 Compose 包含的镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose images [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="强制停止服务容器"><a href="#强制停止服务容器" class="headerlink" title="强制停止服务容器"></a>强制停止服务容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose <span class="built_in">kill</span> [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="查看服务器的输出"><a href="#查看服务器的输出" class="headerlink" title="查看服务器的输出"></a>查看服务器的输出</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose logs [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="暂停一个服务"><a href="#暂停一个服务" class="headerlink" title="暂停一个服务"></a>暂停一个服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose pause [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="恢复一个暂停的服务"><a href="#恢复一个暂停的服务" class="headerlink" title="恢复一个暂停的服务"></a>恢复一个暂停的服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose unpause [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="查看某个容器的端口"><a href="#查看某个容器的端口" class="headerlink" title="查看某个容器的端口"></a>查看某个容器的端口</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose port [options] SERVICE PRIVATE_PORT</span><br></pre></td></tr></table></figure>
+<h3 id="列出项目中的所有容器"><a href="#列出项目中的所有容器" class="headerlink" title="列出项目中的所有容器"></a>列出项目中的所有容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose ps [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="拉取项目所需镜像"><a href="#拉取项目所需镜像" class="headerlink" title="拉取项目所需镜像"></a>拉取项目所需镜像</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose pull [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="推送服务依赖的镜像到-Docker-镜像仓库"><a href="#推送服务依赖的镜像到-Docker-镜像仓库" class="headerlink" title="推送服务依赖的镜像到 Docker 镜像仓库"></a>推送服务依赖的镜像到 Docker 镜像仓库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose push [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="重启项目中的服务"><a href="#重启项目中的服务" class="headerlink" title="重启项目中的服务"></a>重启项目中的服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose restart [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="删除所有停止状态的服务容器"><a href="#删除所有停止状态的服务容器" class="headerlink" title="删除所有停止状态的服务容器"></a>删除所有停止状态的服务容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose rm [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="在指定服务上执行一个命令"><a href="#在指定服务上执行一个命令" class="headerlink" title="在指定服务上执行一个命令"></a>在指定服务上执行一个命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose run [options] [-v VOLUME...] [-p PORT...] [-e KEY=VAL...] [-l KEY=VALUE...] SERVICE [COMMAND] [ARGS...]</span><br></pre></td></tr></table></figure>
+<h3 id="设置指定服务器运行的容器个数"><a href="#设置指定服务器运行的容器个数" class="headerlink" title="设置指定服务器运行的容器个数"></a>设置指定服务器运行的容器个数</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose scale [options] [SERVICE=NUM...]</span><br></pre></td></tr></table></figure>
+<p>eg: 启动三个容器运行 web 服务，启动 2 个容器运行 db 服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose scale web=3 db=2</span><br></pre></td></tr></table></figure>
+<p>当指定数目多于该服务实际运行容器，将创建新容器；反之将停止容器。</p>
+<h3 id="启动已经存在的服务容器"><a href="#启动已经存在的服务容器" class="headerlink" title="启动已经存在的服务容器"></a>启动已经存在的服务容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose start [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="停止已经运行的容器"><a href="#停止已经运行的容器" class="headerlink" title="停止已经运行的容器"></a>停止已经运行的容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose stop [options] [SERVICE...]</span><br></pre></td></tr></table></figure>
+<h3 id="查看各个服务容器内运行的进程"><a href="#查看各个服务容器内运行的进程" class="headerlink" title="查看各个服务容器内运行的进程"></a>查看各个服务容器内运行的进程</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose top [SERVICE...]</span><br></pre></td></tr></table></figure>
 
             
         </div>
@@ -235,7 +257,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/Kali/">Kali</a> <a class="tag tag--primary tag--small t-link" href="/tags/Wifi/">Wifi</a> <a class="tag tag--primary tag--small t-link" href="/tags/网络安全/">网络安全</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/Docker/">Docker</a>
 
             </div>
         
@@ -245,7 +267,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/22/PenetrationTest/KaliUpdata/"  data-tooltip="Kali-Linux 更新、环境配置">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -253,7 +275,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/10/PenetrationTest/ARP/ARP/" data-tooltip="嗅探，arp欺骗，会话劫持">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/03/Docker/dockerfile/" data-tooltip="使用 Dockerfile 定制镜像">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -271,7 +293,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/09/04/Docker/compose/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -279,7 +301,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/09/04/Docker/compose/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -287,7 +309,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/09/04/Docker/compose/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -327,7 +349,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/22/PenetrationTest/KaliUpdata/"  data-tooltip="Kali-Linux 更新、环境配置">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -335,7 +357,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/12/10/PenetrationTest/ARP/ARP/" data-tooltip="嗅探，arp欺骗，会话劫持">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/03/Docker/dockerfile/" data-tooltip="使用 Dockerfile 定制镜像">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -353,7 +375,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/09/04/Docker/compose/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -361,7 +383,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/09/04/Docker/compose/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -369,7 +391,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/09/04/Docker/compose/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -394,7 +416,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/09/04/Docker/compose/">
                     <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
                 </a>
             </li>
@@ -402,7 +424,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/09/04/Docker/compose/">
                     <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
                 </a>
             </li>
@@ -410,7 +432,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2016/12/20/PenetrationTest/WiFiCrack/WiFiCrack/">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/09/04/Docker/compose/">
                     <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
                 </a>
             </li>
