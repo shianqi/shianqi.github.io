@@ -89,12 +89,87 @@ COPY ["<COMMAND>", "<args1>", "<args2>", ...]
 
 推荐使用 `exec` 格式，`shell`格式实际的命令会被包装为 `sh -c` 的参数形式执行。
 
-```text
+```dockerfile
 CMD echo $HOME
 ```
 
 解释为：
 
-```text
+```dockerfile
 CMD ["sh", "-c", "echo $HOME"]
 ```
+
+### ENTRYPOINT
+
+### ENV
+
+配置环境变量：
+
+```dockerfile
+ENV VERSION=1.0 DEBUG=on \
+    NAME="Happy Feet"
+
+RUN rm "node-v$VERSION-linux-x64.tar.xz"
+```
+
+### ARG
+
+和 ENV 一样，都是设置环境变量，不同的是 ARG 所设置的环境变量，在将来运行时是不会存在这些环境变量的。但不要使用 ARG 保存密码，因为 docker history 可以看到所有值。
+
+### VOLUME 定义匿名卷
+
+```dockerfile
+VOLUME ["<路径1>", "<路径2>"...]
+VOLUME <路径>
+```
+
+为了保持容器存储层不发生写操作，对于数据库类需要保存动态数据的应用，为了防止运行时用户忘记挂载卷，可以先用 `VOLUME` 命令指定某些目录为匿名卷，防止向容器存储层写大量数据。
+
+```dockerfile
+VOLUME /data
+```
+
+运行时：
+
+```bash
+docker run -d -v mydata:/data xxx
+```
+
+### EXPOSE
+
+声明端口
+
+```dockerfile
+EXPOSE <端口1> [<端口2>]
+```
+
+`EXPOSE` 仅仅声明容器打算使用的端口，并不会自动在宿主进行端口映射。
+
+`-p` 是将容器的对应端口服务公开给外界访问。
+
+### WORKDIR
+
+指定工作目录，以后各层的当前目录就被改为指定目录。
+
+**错误**示例
+
+```dockerfile
+RUN cp /app
+RUN echo "hello" > world.txt
+```
+
+新手容易的错误：因为构建分层存储，所以第一层 `RUN cd /app` 的执行仅仅是当前进程的工作目录变更，一个内存上的变化而已，其结果不会造成任何文件变更。而到第二层的时候，启动的是一个全新的容器，跟第一层的容器更完全没关系，自然不可能继承前一层构建过程中的内存变化。
+
+### USER
+
+指定当前用户，和 `WORKDIR` 类似。
+
+### HEALTHCHECK
+
+告诉 `Docker` 应该如何判断容器的状态是否正常，防止程序进入死循环，无法通过退出判断。
+
+只可出现一次，多写只会生效最后一次。
+
+### ONBUILD
+
+`ONBUILD` 是一个特殊的指令，后面跟其他指令，这些指令在当前镜像构建时不会执行，只有以当前镜像为基础的镜像，去构建下一级镜像的时候才会被执行。
