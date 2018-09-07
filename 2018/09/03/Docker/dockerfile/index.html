@@ -11,18 +11,18 @@
     
     
     
-    <meta name="description" content="使用 Dockerfile 定制镜像Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。 指令FROM指定基础镜像，必须是第一条 RUN用于执行命令行命令的，有两种格式：  shell 格式：RUN &amp;lt;COMMAND&amp;gt;  exec 格式：RUN [&amp;quot;&amp;lt;COMMAND">
+    <meta name="description" content="使用 Dockerfile 定制镜像Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。 重要概念构建上下文docker 的构建命令： 1docker build [OPTIONS] PATH | URL | - 最后的参数是指上下文路径，而不是 Dockerfile 所在路径，docker">
 <meta name="keywords" content="Docker">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="使用 Dockerfile 定制镜像">
 <meta property="og:url" content="https://shianqi.github.io/2018/09/03/Docker/dockerfile/index.html">
 <meta property="og:site_name" content="Tron Blog!">
-<meta property="og:description" content="使用 Dockerfile 定制镜像Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。 指令FROM指定基础镜像，必须是第一条 RUN用于执行命令行命令的，有两种格式：  shell 格式：RUN &amp;lt;COMMAND&amp;gt;  exec 格式：RUN [&amp;quot;&amp;lt;COMMAND">
+<meta property="og:description" content="使用 Dockerfile 定制镜像Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。 重要概念构建上下文docker 的构建命令： 1docker build [OPTIONS] PATH | URL | - 最后的参数是指上下文路径，而不是 Dockerfile 所在路径，docker">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-09-04T17:07:12.175Z">
+<meta property="og:updated_time" content="2018-09-07T06:35:59.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用 Dockerfile 定制镜像">
-<meta name="twitter:description" content="使用 Dockerfile 定制镜像Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。 指令FROM指定基础镜像，必须是第一条 RUN用于执行命令行命令的，有两种格式：  shell 格式：RUN &amp;lt;COMMAND&amp;gt;  exec 格式：RUN [&amp;quot;&amp;lt;COMMAND">
+<meta name="twitter:description" content="使用 Dockerfile 定制镜像Dockerfile 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。 重要概念构建上下文docker 的构建命令： 1docker build [OPTIONS] PATH | URL | - 最后的参数是指上下文路径，而不是 Dockerfile 所在路径，docker">
     
     
         
@@ -213,6 +213,10 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <h1 id="使用-Dockerfile-定制镜像"><a href="#使用-Dockerfile-定制镜像" class="headerlink" title="使用 Dockerfile 定制镜像"></a>使用 Dockerfile 定制镜像</h1><p><code>Dockerfile</code> 是一个文本文件，其内包含了一条条的指令(Instruction)，每一条指令构建一层， 因此每一条指令的内容，就是描述该层应当如何构建。</p>
+<h2 id="重要概念"><a href="#重要概念" class="headerlink" title="重要概念"></a>重要概念</h2><h3 id="构建上下文"><a href="#构建上下文" class="headerlink" title="构建上下文"></a>构建上下文</h3><p><code>docker</code> 的构建命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build [OPTIONS] PATH | URL | -</span><br></pre></td></tr></table></figure>
+<p>最后的参数是指上下文路径，而不是 Dockerfile 所在路径，docker 在构建的时候，会将上下文路径下的所有内容打包，然后上传给 Docker 引擎，Docker 就有权限访问上下内的文件了。</p>
+<p>如果需要访问的文件路径超出上下文的范围，Docker 引擎就无法获得这些文件的位置，应该将这些文件复制到上下文目录中。更不应该把 Dockerfile 放到硬盘根目录去构建。如果目录中有些不希望在构建中传递给 Docker 的文件，可以放在 <code>.dockerignore</code> 文件夹中。</p>
 <h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><h3 id="FROM"><a href="#FROM" class="headerlink" title="FROM"></a>FROM</h3><p>指定基础镜像，必须是第一条</p>
 <h3 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h3><p>用于执行命令行命令的，有两种格式：</p>
 <ul>
@@ -222,8 +226,39 @@
 </li>
 </ul>
 <p>每一个 <code>RUN</code> 命令都会创建一层镜像，如果每一个命令都使用一个 <code>RUN</code> 命令，那么整个项目变得臃肿，易出错。正确写法应该如下：</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian:jessie</span><br><span class="line"><span class="keyword">RUN</span> buildDeps='gcc libc6-dev make' \</span><br><span class="line">    &amp;&amp; apt-get update \</span><br><span class="line">    &amp;&amp; apt-get install -y $buildDeps \</span><br><span class="line">    ...</span><br><span class="line">    # 清理为了编译构建需要的软件</span><br><span class="line">    &amp;&amp; rm -rf /var/lib/apt/lists/* \</span><br><span class="line">    # 清理下载文件</span><br><span class="line">    &amp;&amp; rm redis.tar.gz \</span><br><span class="line">    # 清理展开文件</span><br><span class="line">    &amp;&amp; rm -r /usr/src/redis \</span><br><span class="line">    # 清理 apt 缓存</span><br><span class="line">    &amp;&amp; apt-get purge -y --auto-remove $buildDeps</span><br></pre></td></tr></table></figure>
-<p>每一层构建后要清理无关文件。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> debian:jessie</span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> buildDeps=<span class="string">'gcc libc6-dev make'</span> \</span></span><br><span class="line"><span class="bash">    &amp;&amp; apt-get update \</span></span><br><span class="line"><span class="bash">    &amp;&amp; apt-get install -y <span class="variable">$buildDeps</span> \</span></span><br><span class="line"><span class="bash">    ...</span></span><br><span class="line"><span class="bash">    <span class="comment"># 清理为了编译构建需要的软件</span></span></span><br><span class="line"><span class="bash">    &amp;&amp; rm -rf /var/lib/apt/lists/* \</span></span><br><span class="line"><span class="bash">    <span class="comment"># 清理下载文件</span></span></span><br><span class="line"><span class="bash">    &amp;&amp; rm redis.tar.gz \</span></span><br><span class="line"><span class="bash">    <span class="comment"># 清理展开文件</span></span></span><br><span class="line"><span class="bash">    &amp;&amp; rm -r /usr/src/redis \</span></span><br><span class="line"><span class="bash">    <span class="comment"># 清理 apt 缓存</span></span></span><br><span class="line"><span class="bash">    &amp;&amp; apt-get purge -y --auto-remove <span class="variable">$buildDeps</span></span></span><br></pre></td></tr></table></figure>
+<p>每一层构建后要清理无关文件。可以使用 <code>docker diff</code> 命令查看文件变化。</p>
+<h3 id="COPY"><a href="#COPY" class="headerlink" title="COPY"></a>COPY</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">COPY &lt;源路径&gt;...&lt;目标路径&gt;</span><br><span class="line">COPY [&quot;&lt;源路径&gt;&quot;,... &quot;&lt;目标路径&gt;&quot;]</span><br></pre></td></tr></table></figure>
+<p>源路径可以是多个，甚至通配符，通配符要满足 Go 的 filepath.Match 规则，例如：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">COPY</span><span class="bash"> hom* /mydir/</span></span><br><span class="line"><span class="bash">COPY hom?.txt /mydir/</span></span><br></pre></td></tr></table></figure>
+<p><code>COPY</code> 命令会保留源文件的各种源数据属性</p>
+<h3 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h3><p>在 <code>COPY</code> 命令的基础上添加了自动解压的功能，推荐优先使用 <code>COPY</code> 命令</p>
+<h3 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h3><p>用于指定默认的容器主进程的启动命令，运行的时候可以指定新的命令来代替镜像设置中的这个默认命令</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># shell</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> &lt;COMMAND&gt;</span></span><br><span class="line"><span class="bash"><span class="comment"># exec</span></span></span><br><span class="line"><span class="bash">COPY [<span class="string">"&lt;COMMAND&gt;"</span>, <span class="string">"&lt;args1&gt;"</span>, <span class="string">"&lt;args2&gt;"</span>, ...]</span></span><br></pre></td></tr></table></figure>
+<p>推荐使用 <code>exec</code> 格式，<code>shell</code>格式实际的命令会被包装为 <code>sh -c</code> 的参数形式执行。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CMD</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$HOME</span></span></span><br></pre></td></tr></table></figure>
+<p>解释为：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"sh"</span>, <span class="string">"-c"</span>, <span class="string">"echo <span class="variable">$HOME</span>"</span>]</span></span><br></pre></td></tr></table></figure>
+<h3 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h3><h3 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h3><p>配置环境变量：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENV</span> VERSION=<span class="number">1.0</span> DEBUG=on \</span><br><span class="line">    NAME=<span class="string">"Happy Feet"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> rm <span class="string">"node-v<span class="variable">$VERSION</span>-linux-x64.tar.xz"</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="ARG"><a href="#ARG" class="headerlink" title="ARG"></a>ARG</h3><p>和 ENV 一样，都是设置环境变量，不同的是 ARG 所设置的环境变量，在将来运行时是不会存在这些环境变量的。但不要使用 ARG 保存密码，因为 docker history 可以看到所有值。</p>
+<h3 id="VOLUME-定义匿名卷"><a href="#VOLUME-定义匿名卷" class="headerlink" title="VOLUME 定义匿名卷"></a>VOLUME 定义匿名卷</h3><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">VOLUME</span><span class="bash"> [<span class="string">"&lt;路径1&gt;"</span>, <span class="string">"&lt;路径2&gt;"</span>...]</span></span><br><span class="line"><span class="bash">VOLUME &lt;路径&gt;</span></span><br></pre></td></tr></table></figure>
+<p>为了保持容器存储层不发生写操作，对于数据库类需要保存动态数据的应用，为了防止运行时用户忘记挂载卷，可以先用 <code>VOLUME</code> 命令指定某些目录为匿名卷，防止向容器存储层写大量数据。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">VOLUME</span><span class="bash"> /data</span></span><br></pre></td></tr></table></figure>
+<p>运行时：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -v mydata:/data xxx</span><br></pre></td></tr></table></figure>
+<h3 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h3><p>声明端口</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">EXPOSE</span> &lt;端口<span class="number">1</span>&gt; [&lt;端口<span class="number">2</span>&gt;]</span><br></pre></td></tr></table></figure>
+<p><code>EXPOSE</code> 仅仅声明容器打算使用的端口，并不会自动在宿主进行端口映射。</p>
+<p><code>-p</code> 是将容器的对应端口服务公开给外界访问。</p>
+<h3 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h3><p>指定工作目录，以后各层的当前目录就被改为指定目录。</p>
+<p><strong>错误</strong>示例</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span><span class="bash"> cp /app</span></span><br><span class="line"><span class="bash">RUN <span class="built_in">echo</span> <span class="string">"hello"</span> &gt; world.txt</span></span><br></pre></td></tr></table></figure>
+<p>新手容易的错误：因为构建分层存储，所以第一层 <code>RUN cd /app</code> 的执行仅仅是当前进程的工作目录变更，一个内存上的变化而已，其结果不会造成任何文件变更。而到第二层的时候，启动的是一个全新的容器，跟第一层的容器更完全没关系，自然不可能继承前一层构建过程中的内存变化。</p>
+<h3 id="USER"><a href="#USER" class="headerlink" title="USER"></a>USER</h3><p>指定当前用户，和 <code>WORKDIR</code> 类似。</p>
+<h3 id="HEALTHCHECK"><a href="#HEALTHCHECK" class="headerlink" title="HEALTHCHECK"></a>HEALTHCHECK</h3><p>告诉 <code>Docker</code> 应该如何判断容器的状态是否正常，防止程序进入死循环，无法通过退出判断。</p>
+<p>只可出现一次，多写只会生效最后一次。</p>
+<h3 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a>ONBUILD</h3><p><code>ONBUILD</code> 是一个特殊的指令，后面跟其他指令，这些指令在当前镜像构建时不会执行，只有以当前镜像为基础的镜像，去构建下一级镜像的时候才会被执行。</p>
 
             
         </div>
