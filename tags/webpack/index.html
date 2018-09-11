@@ -195,6 +195,64 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2018/09/11/Webpack/webpackJsonp/">
+                            Webpack v4 使用 Webpack低版本编译后的文件
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2018-09-11T13:23:00+08:00">
+	
+		    9月 11, 2018
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="Webpack-v4-使用-Webpack低版本编译后的文件"><a href="#Webpack-v4-使用-Webpack低版本编译后的文件" class="headerlink" title="Webpack v4 使用 Webpack低版本编译后的文件"></a>Webpack v4 使用 Webpack低版本编译后的文件</h1><h2 id="webpackJsonp"><a href="#webpackJsonp" class="headerlink" title="webpackJsonp"></a>webpackJsonp</h2><blockquote>
+<p>The JSONP function used by webpack for async loading of chunks.</p>
+</blockquote>
+<p><code>Webpack</code> 使用JSONP按需加载 <code>chunks</code>，这个函数的名字默认为 <code>webpackJsonp</code>。</p>
+<p>在之前版本的 <code>webpack</code> 中，<code>webpackJsonp</code> 是一个函数：</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在一个项目中如果同时需要同时运行 <code>Webpack v4</code> 和 <code>Webpack v1-3</code> 编译后的模块，会导致命名冲突。</p>
+<p><code>webpack v1</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/******/</span>(<span class="function"><span class="keyword">function</span>(<span class="params">modules</span>) </span>&#123; <span class="comment">// webpackBootstrap</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="comment">// install a JSONP callback for chunk loading</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="keyword">var</span> parentJsonpFunction = <span class="built_in">window</span>[<span class="string">"webpackJsonp"</span>];</span><br><span class="line"><span class="comment">/******/</span>  <span class="built_in">window</span>[<span class="string">"webpackJsonp"</span>] = <span class="function"><span class="keyword">function</span> <span class="title">webpackJsonpCallback</span>(<span class="params">chunkIds, moreModules</span>) </span>&#123;</span><br><span class="line"><span class="comment">/******/</span>    ...</span><br><span class="line"><span class="comment">/******/</span>  &#125;;</span><br><span class="line"><span class="comment">/******/</span>  ...</span><br><span class="line"><span class="comment">/******/</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p>但在 <code>webpack v4</code> 中变成了一个数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">window</span>.webpackJsonp=<span class="built_in">window</span>.webpackJsonp||[]).push([[<span class="number">16</span>],&#123;<span class="number">150</span>:<span class="function"><span class="keyword">function</span>(<span class="params">e,t,u</span>)</span>&#123;....</span><br></pre></td></tr></table></figure>
+<p>如果在同一网页上使用多个 webpack不同版本编译后的文件，就会产生冲突，导致异步 <code>chunks</code> 无法加载。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>正确的做法是使用 <code>output.jsonpFunction</code> 方法修改 JSONP 的默认名，解决冲突。</p>
+<h3 id="output-jsonpFunction"><a href="#output-jsonpFunction" class="headerlink" title="output.jsonpFunction "></a><code>output.jsonpFunction</code> <a href="https://webpack.js.org/configuration/output/#output-jsonpfunction" target="_blank" rel="external"></a></h3><p><code>string</code></p>
+<p>Only used when <a href="https://webpack.js.org/configuration/target" target="_blank" rel="external"><code>target</code></a> is web, which uses JSONP for loading on-demand chunks.</p>
+<p>A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin, AggressiveSplittingPlugin).</p>
+<p>This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.</p>
+<p>If using the <a href="https://webpack.js.org/configuration/output/#output-library" target="_blank" rel="external"><code>output.library</code></a> option, the library name is automatically appended.</p>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2018/09/11/Webpack/webpackJsonp/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/12/13/Webpack/SVG-sprite/">
                             优雅的使用 SVG ICON
                         </a>
@@ -651,8 +709,8 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -689,8 +747,8 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -708,8 +766,8 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -807,7 +865,7 @@ Babel其实可以完全在webpack.config.js中进行配置，但是考虑到babe
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 113 篇文章
+                找到 114 篇文章
             </p>
         </div>
     </div>

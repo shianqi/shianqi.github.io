@@ -6,23 +6,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Tron Blog!">
-    <title>实现一个简单的 Virtual DOM - Tron Blog!</title>
+    <title>Webpack v4 使用 Webpack低版本编译后的文件 - Tron Blog!</title>
     <meta name="author" content="Archie Shi">
     
     
     
-    <meta name="description" content="先占坑，稍候回来完成">
-<meta name="keywords" content="React,JavaScript">
+    <meta name="description" content="Webpack v4 使用 Webpack低版本编译后的文件webpackJsonp The JSONP function used by webpack for async loading of chunks.  Webpack 使用JSONP按需加载 chunks，这个函数的名字默认为 webpackJsonp。 在之前版本的 webpack 中，webpackJsonp 是一个函数： 问题在">
+<meta name="keywords" content="Webpack">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="实现一个简单的 Virtual DOM">
-<meta property="og:url" content="https://shianqi.github.io/2017/04/28/React/VirtualDom/index.html">
+<meta property="og:title" content="Webpack v4 使用 Webpack低版本编译后的文件">
+<meta property="og:url" content="https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/index.html">
 <meta property="og:site_name" content="Tron Blog!">
-<meta property="og:description" content="先占坑，稍候回来完成">
+<meta property="og:description" content="Webpack v4 使用 Webpack低版本编译后的文件webpackJsonp The JSONP function used by webpack for async loading of chunks.  Webpack 使用JSONP按需加载 chunks，这个函数的名字默认为 webpackJsonp。 在之前版本的 webpack 中，webpackJsonp 是一个函数： 问题在">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2017-06-18T05:51:00.000Z">
+<meta property="og:updated_time" content="2018-09-11T05:23:16.187Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="实现一个简单的 Virtual DOM">
-<meta name="twitter:description" content="先占坑，稍候回来完成">
+<meta name="twitter:title" content="Webpack v4 使用 Webpack低版本编译后的文件">
+<meta name="twitter:description" content="Webpack v4 使用 Webpack低版本编译后的文件webpackJsonp The JSONP function used by webpack for async loading of chunks.  Webpack 使用JSONP按需加载 chunks，这个函数的名字默认为 webpackJsonp。 在之前版本的 webpack 中，webpackJsonp 是一个函数： 问题在">
     
     
         
@@ -194,14 +194,14 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            实现一个简单的 Virtual DOM
+            Webpack v4 使用 Webpack低版本编译后的文件
         </h1>
     
     
         <div class="post-meta">
-    <time itemprop="datePublished" datetime="2017-04-28T15:28:36+08:00">
+    <time itemprop="datePublished" datetime="2018-09-11T13:23:00+08:00">
 	
-		    4月 28, 2017
+		    9月 11, 2018
     	
     </time>
     
@@ -212,7 +212,23 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>先占坑，稍候回来完成</p>
+            <h1 id="Webpack-v4-使用-Webpack低版本编译后的文件"><a href="#Webpack-v4-使用-Webpack低版本编译后的文件" class="headerlink" title="Webpack v4 使用 Webpack低版本编译后的文件"></a>Webpack v4 使用 Webpack低版本编译后的文件</h1><h2 id="webpackJsonp"><a href="#webpackJsonp" class="headerlink" title="webpackJsonp"></a>webpackJsonp</h2><blockquote>
+<p>The JSONP function used by webpack for async loading of chunks.</p>
+</blockquote>
+<p><code>Webpack</code> 使用JSONP按需加载 <code>chunks</code>，这个函数的名字默认为 <code>webpackJsonp</code>。</p>
+<p>在之前版本的 <code>webpack</code> 中，<code>webpackJsonp</code> 是一个函数：</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在一个项目中如果同时需要同时运行 <code>Webpack v4</code> 和 <code>Webpack v1-3</code> 编译后的模块，会导致命名冲突。</p>
+<p><code>webpack v1</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/******/</span>(<span class="function"><span class="keyword">function</span>(<span class="params">modules</span>) </span>&#123; <span class="comment">// webpackBootstrap</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="comment">// install a JSONP callback for chunk loading</span></span><br><span class="line"><span class="comment">/******/</span>  <span class="keyword">var</span> parentJsonpFunction = <span class="built_in">window</span>[<span class="string">"webpackJsonp"</span>];</span><br><span class="line"><span class="comment">/******/</span>  <span class="built_in">window</span>[<span class="string">"webpackJsonp"</span>] = <span class="function"><span class="keyword">function</span> <span class="title">webpackJsonpCallback</span>(<span class="params">chunkIds, moreModules</span>) </span>&#123;</span><br><span class="line"><span class="comment">/******/</span>    ...</span><br><span class="line"><span class="comment">/******/</span>  &#125;;</span><br><span class="line"><span class="comment">/******/</span>  ...</span><br><span class="line"><span class="comment">/******/</span> &#125;)</span><br></pre></td></tr></table></figure>
+<p>但在 <code>webpack v4</code> 中变成了一个数组</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">window</span>.webpackJsonp=<span class="built_in">window</span>.webpackJsonp||[]).push([[<span class="number">16</span>],&#123;<span class="number">150</span>:<span class="function"><span class="keyword">function</span>(<span class="params">e,t,u</span>)</span>&#123;....</span><br></pre></td></tr></table></figure>
+<p>如果在同一网页上使用多个 webpack不同版本编译后的文件，就会产生冲突，导致异步 <code>chunks</code> 无法加载。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>正确的做法是使用 <code>output.jsonpFunction</code> 方法修改 JSONP 的默认名，解决冲突。</p>
+<h3 id="output-jsonpFunction"><a href="#output-jsonpFunction" class="headerlink" title="output.jsonpFunction "></a><code>output.jsonpFunction</code> <a href="https://webpack.js.org/configuration/output/#output-jsonpfunction" target="_blank" rel="external"></a></h3><p><code>string</code></p>
+<p>Only used when <a href="https://webpack.js.org/configuration/target" target="_blank" rel="external"><code>target</code></a> is web, which uses JSONP for loading on-demand chunks.</p>
+<p>A JSONP function name used to asynchronously load chunks or join multiple initial chunks (CommonsChunkPlugin, AggressiveSplittingPlugin).</p>
+<p>This needs to be changed if multiple webpack runtimes (from different compilation) are used on the same webpage.</p>
+<p>If using the <a href="https://webpack.js.org/configuration/output/#output-library" target="_blank" rel="external"><code>output.library</code></a> option, the library name is automatically appended.</p>
 
             
         </div>
@@ -222,7 +238,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br/>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/JavaScript/">JavaScript</a> <a class="tag tag--primary tag--small t-link" href="/tags/React/">React</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/Webpack/">Webpack</a>
 
             </div>
         
@@ -232,7 +248,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/29/React/json-server/"  data-tooltip="json-server 30s 搭建 REST API">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -240,7 +256,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/26/Logic/三门问题/" data-tooltip="【经典逻辑题】彻底三门问题">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/04/Docker/docker-compose/" data-tooltip="Docker Compose 模板文件">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -258,7 +274,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/04/28/React/VirtualDom/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -266,7 +282,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/04/28/React/VirtualDom/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -274,7 +290,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/04/28/React/VirtualDom/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -314,7 +330,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/29/React/json-server/"  data-tooltip="json-server 30s 搭建 REST API">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -322,7 +338,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/04/26/Logic/三门问题/" data-tooltip="【经典逻辑题】彻底三门问题">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/04/Docker/docker-compose/" data-tooltip="Docker Compose 模板文件">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right"></i>
@@ -340,7 +356,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/04/28/React/VirtualDom/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/">
                     <i class="fa fa-facebook-official"></i>
                 </a>
             </li>
@@ -348,7 +364,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/04/28/React/VirtualDom/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/">
                     <i class="fa fa-twitter"></i>
                 </a>
             </li>
@@ -356,7 +372,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/04/28/React/VirtualDom/">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/">
                     <i class="fa fa-google-plus"></i>
                 </a>
             </li>
@@ -381,7 +397,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2017/04/28/React/VirtualDom/">
+                <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/">
                     <i class="fa fa-facebook-official"></i><span>分享到 Facebook</span>
                 </a>
             </li>
@@ -389,7 +405,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2017/04/28/React/VirtualDom/">
+                <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/">
                     <i class="fa fa-twitter"></i><span>分享到 Twitter</span>
                 </a>
             </li>
@@ -397,7 +413,7 @@
             
             
             <li class="share-option">
-                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2017/04/28/React/VirtualDom/">
+                <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https://shianqi.github.io/2018/09/11/Webpack/webpackJsonp/">
                     <i class="fa fa-google-plus"></i><span>分享到 Google+</span>
                 </a>
             </li>

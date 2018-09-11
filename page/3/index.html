@@ -194,6 +194,91 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
+                        <a class="link-unstyled" href="/2017/09/20/Koa/Koa/">
+                            Koa2 基本使用
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time itemprop="datePublished" datetime="2017-09-20T17:15:44+08:00">
+	
+		    9月 20, 2017
+    	
+    </time>
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content" itemprop="articleBody">
+                    <h1 id="Koa2-基本使用"><a href="#Koa2-基本使用" class="headerlink" title="Koa2 基本使用"></a>Koa2 基本使用</h1><h2 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Context-对象"><a href="#Context-对象" class="headerlink" title="Context 对象"></a>Context 对象</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line">app.use(<span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.response.body = <span class="string">'Hello World'</span>;</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>其中 <code>ctx</code> 就是 <code>Context</code> 对象</p>
+<h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><p>最基本的一个 <code>request</code> 对象如下</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"method"</span>: <span class="string">"GET"</span>,</span><br><span class="line">    <span class="attr">"url"</span>: <span class="string">"/index.json"</span>,</span><br><span class="line">    <span class="attr">"header"</span>: &#123;</span><br><span class="line">        <span class="attr">"host"</span>: <span class="string">"localhost:3000"</span>,</span><br><span class="line">        <span class="attr">"connection"</span>: <span class="string">"keep-alive"</span>,</span><br><span class="line">        <span class="attr">"cache-control"</span>: <span class="string">"max-age=0"</span>,</span><br><span class="line">        <span class="attr">"upgrade-insecure-requests"</span>: <span class="string">"1"</span>,</span><br><span class="line">        <span class="attr">"user-agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"</span>,</span><br><span class="line">        <span class="attr">"accept"</span>: <span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8"</span>,</span><br><span class="line">        <span class="attr">"accept-encoding"</span>: <span class="string">"gzip, deflate, br"</span>,</span><br><span class="line">        <span class="attr">"accept-language"</span>: <span class="string">"zh-CN,zh;q=0.8"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="request-accepts-‘xml’"><a href="#request-accepts-‘xml’" class="headerlink" title="request.accepts(‘xml’)"></a>request.accepts(‘xml’)</h4><p>这个函数用来判断客户端想要接受的数据类型，例如</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (ctx.request.accepts(<span class="string">'json'</span>)) &#123;</span><br><span class="line">    ctx.response.type = <span class="string">'json'</span>;</span><br><span class="line">    ctx.response.body = &#123; <span class="attr">data</span>: <span class="string">'Hello World'</span> &#125;;</span><br><span class="line">  &#125; <span class="keyword">else</span> (ctx.request.accepts(<span class="string">'html'</span>)) &#123;</span><br><span class="line">    ctx.response.type = <span class="string">'html'</span>;</span><br><span class="line">    ctx.response.body = <span class="string">'&lt;p&gt;Hello World&lt;/p&gt;'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3><h4 id="ctx-response-body"><a href="#ctx-response-body" class="headerlink" title="ctx.response.body"></a>ctx.response.body</h4><p>直接给 <code>response.body</code> 赋值即可返回给数据给客户端</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.response.type = <span class="string">'json'</span>;</span><br><span class="line">  ctx.response.body = <span class="built_in">JSON</span>.stringify(ctx.request)</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="网页模版"><a href="#网页模版" class="headerlink" title="网页模版"></a>网页模版</h3><p>先读取 <code>html</code> 页面，然后返回给客户端</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> main = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.response.type = <span class="string">'html'</span>;</span><br><span class="line">  ctx.response.body = fs.createReadStream(<span class="string">'./demos/template.html'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><h3 id="原生路由"><a href="#原生路由" class="headerlink" title="原生路由"></a>原生路由</h3><p>可以通过 <code>ctx.request.path</code> 获取到用户的请求</p>
+<h3 id="koa-route"><a href="#koa-route" class="headerlink" title="koa-route"></a>koa-route</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> route = <span class="built_in">require</span>(<span class="string">'koa-route'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> about = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.response.type = <span class="string">'html'</span>;</span><br><span class="line">  ctx.response.body = <span class="string">'&lt;a href="/"&gt;Index Page&lt;/a&gt;'</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> main = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.response.body = <span class="string">'Hello World'</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">app.use(route.get(<span class="string">'/'</span>, main));</span><br><span class="line">app.use(route.get(<span class="string">'/about'</span>, about));</span><br></pre></td></tr></table></figure>
+<h3 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h3><p>如果网站提供静态资源（图片、字体、样式表、脚本……），为它们一个个写路由就很麻烦，也没必要。<code>koa-static</code> 模块封装了这部分的请求</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> serve = <span class="built_in">require</span>(<span class="string">'koa-static'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> main = serve(path.join(__dirname));</span><br><span class="line">app.use(main);</span><br></pre></td></tr></table></figure>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><p><code>ctx.response.redirect(&#39;/&#39;);</code></p>
+<h2 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> logger = <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;<span class="built_in">Date</span>.now()&#125;</span> <span class="subst">$&#123;ctx.request.method&#125;</span> <span class="subst">$&#123;ctx.request.url&#125;</span>`</span>);</span><br><span class="line">  next();</span><br><span class="line">&#125;</span><br><span class="line">app.use(logger);</span><br></pre></td></tr></table></figure>
+<p>像上面代码中的 <code>logger</code> 函数就叫做”中间件” <code>（middleware）</code>，因为它处在 <code>HTTP Request</code> 和 <code>HTTP Response</code> 中间，用来实现某种中间功能。<code>app.use()</code> 用来加载中间件。</p>
+<p><strong>基本上，<code>Koa</code> 所有的功能都是通过中间件实现的，前面例子里面的 <code>main</code> 也是中间件。每个中间件默认接受两个参数，第一个参数是 <code>Context</code> 对象，第二个参数是 <code>next</code> 函数。只要调用 <code>next</code> 函数，就可以把执行权转交给下一个中间件。</strong></p>
+<h3 id="中间件栈"><a href="#中间件栈" class="headerlink" title="中间件栈"></a>中间件栈</h3><p>多个中间件会形成一个栈结构（<code>middle stack</code>），以”先进后出”（<code>first-in-last-out</code>）的顺序执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> one = <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&gt;&gt; one'</span>);</span><br><span class="line">  next();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&lt;&lt; one'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> two = <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&gt;&gt; two'</span>);</span><br><span class="line">  next();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&lt;&lt; two'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> three = <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&gt;&gt; three'</span>);</span><br><span class="line">  next();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&lt;&lt; three'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.use(one);</span><br><span class="line">app.use(two);</span><br><span class="line">app.use(three);</span><br></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; one</span><br><span class="line">&gt;&gt; two</span><br><span class="line">&gt;&gt; three</span><br><span class="line">&lt;&lt; three</span><br><span class="line">&lt;&lt; two</span><br><span class="line">&lt;&lt; one</span><br></pre></td></tr></table></figure>
+<p><strong>如果中间件内部没有调用 <code>next</code> 函数，那么执行权就不会传递下去</strong><br>去掉上面 <code>two</code> 函数中的 <code>next()</code> ，结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; one</span><br><span class="line">&gt;&gt; two</span><br><span class="line">&lt;&lt; two</span><br><span class="line">&lt;&lt; one</span><br></pre></td></tr></table></figure>
+<h3 id="异步中间件"><a href="#异步中间件" class="headerlink" title="异步中间件"></a>异步中间件</h3><p>如果有异步操作（比如读取数据库），中间件就必须写成 async 函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs.promised'</span>);</span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> main = <span class="keyword">async</span> (ctx, next)=&gt; &#123;</span><br><span class="line">  ctx.response.type = <span class="string">'html'</span>;</span><br><span class="line">  ctx.response.body = <span class="keyword">await</span> fs.readFile(<span class="string">'./demos/template.html'</span>, <span class="string">'utf8'</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">app.use(main);</span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+<p>上面代码中，<code>fs.readFile</code> 是一个异步操作，必须写成 <code>await fs.readFile()</code> ，然后中间件必须写成 <code>async</code> 函数。</p>
+<h3 id="中间件的合成"><a href="#中间件的合成" class="headerlink" title="中间件的合成"></a>中间件的合成</h3><p><code>koa-compose</code> 模块可以将多个中间件合成为一个。请看下面的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> compose = <span class="built_in">require</span>(<span class="string">'koa-compose'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> one = <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&gt;&gt; one'</span>);</span><br><span class="line">  next();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&lt;&lt; one'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> two = <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&gt;&gt; two'</span>);</span><br><span class="line">  next();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&lt;&lt; two'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> three = <span class="function">(<span class="params">ctx, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&gt;&gt; three'</span>);</span><br><span class="line">  next();</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'&lt;&lt; three'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> middlewares = compose([one, two, three]);</span><br><span class="line">app.use(middlewares);</span><br></pre></td></tr></table></figure>
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><h3 id="500-错误"><a href="#500-错误" class="headerlink" title="500 错误"></a>500 错误</h3><p><code>Koa</code> 提供了 <code>ctx.throw()</code> 方法，用来抛出错误，ctx.throw(500)就是抛出500错误</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.throw(<span class="number">500</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="处理错误中间件"><a href="#处理错误中间件" class="headerlink" title="处理错误中间件"></a>处理错误中间件</h3><p>为了方便处理错误，最好使用 <code>try...catch</code> 将其捕获。但是，为每个中间件都写 <code>try...catch</code> 太麻烦，我们可以让最外层的中间件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = <span class="keyword">async</span> (ctx, next) =&gt; &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">await</span> next();</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    ctx.response.status = err.statusCode || err.status || <span class="number">500</span>;</span><br><span class="line">    ctx.response.body = &#123;</span><br><span class="line">      message: err.message</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> main = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.throw(<span class="number">500</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">app.use(handler);</span><br><span class="line">app.use(main);</span><br></pre></td></tr></table></figure>
+<h3 id="error-事件的监听"><a href="#error-事件的监听" class="headerlink" title="error 事件的监听"></a>error 事件的监听</h3><p>运行过程中一旦出错，<code>Koa</code> 会触发一个 <code>error</code> 事件。监听这个事件，也可以处理错误</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="function"><span class="params">ctx</span> =&gt;</span> &#123;</span><br><span class="line">  ctx.throw(<span class="number">500</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">app.on(<span class="string">'error'</span>, (err, ctx) =&gt;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'server error'</span>, err);</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="释放-error-事件"><a href="#释放-error-事件" class="headerlink" title="释放 error 事件"></a>释放 error 事件</h3><p>如果错误被 <code>try...catch</code> 捕获，就不会触发 <code>error</code> 事件。这时，必须调用 <code>ctx.app.emit()</code>，手动释放<code>error</code>事件，才能让监听函数生效。</p>
+<h2 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h2><p><code>ctx.cookies</code> 用来读写 Cookie</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="function"><span class="keyword">function</span>(<span class="params">ctx</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> n = <span class="built_in">Number</span>(ctx.cookies.get(<span class="string">'view'</span>) || <span class="number">0</span>) + <span class="number">1</span>;</span><br><span class="line">  ctx.cookies.set(<span class="string">'view'</span>, n);</span><br><span class="line">  ctx.response.body = n + <span class="string">' views'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="表单"><a href="#表单" class="headerlink" title="表单"></a>表单</h2><p><code>koa-body</code> 模块可以用来从 POST 请求的数据体里面提取键值对</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> koaBody = <span class="built_in">require</span>(<span class="string">'koa-body'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> main = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">ctx</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name=<span class="string">''</span> &#125; = ctx.request.body;</span><br><span class="line">  ctx.body = &#123; name &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">app.use(koaBody());</span><br></pre></td></tr></table></figure>
+<h3 id="get-请求"><a href="#get-请求" class="headerlink" title="get 请求"></a>get 请求</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> main = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">ctx</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; name=<span class="string">''</span> &#125; = ctx.query;</span><br><span class="line">  ctx.body = &#123; name &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong><code>get</code> 请求不需要 <code>koa-body</code> 依赖，<code>post</code> 则需要</strong></p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> os = <span class="built_in">require</span>(<span class="string">'os'</span>);</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"><span class="keyword">const</span> koaBody = <span class="built_in">require</span>(<span class="string">'koa-body'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> main = <span class="keyword">async</span> <span class="function"><span class="keyword">function</span>(<span class="params">ctx</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> tmpdir = os.tmpdir();</span><br><span class="line">  <span class="keyword">const</span> filePaths = [];</span><br><span class="line">  <span class="keyword">const</span> files = ctx.request.body.files || &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> files) &#123;</span><br><span class="line">    <span class="keyword">const</span> file = files[key];</span><br><span class="line">    <span class="keyword">const</span> filePath = path.join(tmpdir, file.name);</span><br><span class="line">    <span class="keyword">const</span> reader = fs.createReadStream(file.path);</span><br><span class="line">    <span class="keyword">const</span> writer = fs.createWriteStream(filePath);</span><br><span class="line">    reader.pipe(writer);</span><br><span class="line">    filePaths.push(filePath);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  ctx.body = filePaths;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">app.use(koaBody(&#123; <span class="attr">multipart</span>: <span class="literal">true</span> &#125;));</span><br></pre></td></tr></table></figure>
+
+                    
+                        
+                    
+                    
+                        <p>
+                            <a href="/2017/09/20/Koa/Koa/#post-footer" class="postShorten-excerpt_link link">
+                                评论和共享
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title" itemprop="headline">
+                    
                         <a class="link-unstyled" href="/2017/09/14/React/props_children/">
                             this.props.children
                         </a>
@@ -713,54 +798,6 @@
         
     </article>
     
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title" itemprop="headline">
-                    
-                        <a class="link-unstyled" href="/2017/07/14/Interview/Interview/">
-                            面试知识点
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time itemprop="datePublished" datetime="2017-07-14T17:03:36+08:00">
-	
-		    7月 14, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-content" itemprop="articleBody">
-                    <h2 id="面试知识点汇总"><a href="#面试知识点汇总" class="headerlink" title="面试知识点汇总"></a>面试知识点汇总</h2><ul>
-<li>以太网 MAC 地址的长度是 <strong>48位</strong></li>
-<li>在Unix系统中进程由三部分组成，分别是进程控制块、正文段和数据段。Unix系统中把进程控制块分成proc结构和user结构两部分<br>proc存放的是系统经常要查询和修改的信息，需要快速访问，因此常将其装入内存</li>
-<li>段页式存储管理， <strong>段内</strong> 、 <strong>页面</strong> 地址是连续的，这种连续地址采用 <strong>一</strong> 维地址空间</li>
-<li>现代操作系统的基本特征是 <strong>程序的并发执行</strong></li>
-<li>在Java中 <strong>数组是一种对象</strong></li>
-</ul>
-
-                    
-                        
-                    
-                    
-                        <p>
-                            <a href="/2017/07/14/Interview/Interview/#post-footer" class="postShorten-excerpt_link link">
-                                评论和共享
-                            </a>
-                        </p>
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
     <div class="pagination-bar">
     <ul class="pagination">
         
@@ -889,8 +926,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
-                            <h3 class="media-heading">JavaScript 简介</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
+                            <h3 class="media-heading">MongoDB 基本语法</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -927,8 +964,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/MongoDB/基本语法/">
-                            <h3 class="media-heading">MongoDB 基本语法</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
+                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -946,8 +983,8 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/Windows/CMD快速配置IP/">
-                            <h3 class="media-heading">CMD快速配置IP地址和DNS</h3>
+                        <a class="link-unstyled" href="https://shianqi.github.io/2016/09/04/JavaScript/Javascript/">
+                            <h3 class="media-heading">JavaScript 简介</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -1045,7 +1082,7 @@
                 data-message-zero="没有找到文章"
                 data-message-one="找到 1 篇文章"
                 data-message-other="找到 {n} 篇文章">
-                找到 113 篇文章
+                找到 114 篇文章
             </p>
         </div>
     </div>
